@@ -18,10 +18,10 @@ When you use Ws B-I through Codex, Codex should:
 
 ## Recommended Order
 
-1. [Prepare Your Information](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/01-preparar-informacion.md)
-2. [Work With Codex](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/02-trabajar-con-codex.md)
-3. [See Your Frontend](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/03-ver-tu-frontend.md)
-4. [Founder FAQ](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/04-faq.md)
+1. [Prepare Your Information](01-preparar-informacion.md)
+2. [Work With Codex](02-trabajar-con-codex.md)
+3. [See Your Frontend](03-ver-tu-frontend.md)
+4. [Founder FAQ](04-faq.md)
 
 ## The Best First Message
 

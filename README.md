@@ -9,21 +9,21 @@ Its job is to help a business move from rough context to evidence, decisions, pl
 
 Start here:
 
-- [Founder Guide](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/README.md)
-- [Prepare Your Information](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/01-preparar-informacion.md)
-- [Work With Codex](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/02-trabajar-con-codex.md)
-- [See Your Frontend](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/03-ver-tu-frontend.md)
-- [Founder FAQ](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/04-faq.md)
+- [Founder Guide](docs/founder/README.md)
+- [Prepare Your Information](docs/founder/01-preparar-informacion.md)
+- [Work With Codex](docs/founder/02-trabajar-con-codex.md)
+- [See Your Frontend](docs/founder/03-ver-tu-frontend.md)
+- [Founder FAQ](docs/founder/04-faq.md)
 
 ### I am technical and want to modify the system
 
 Start here:
 
-- [Technical Guide](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/technical/README.md)
-- [Architecture](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/technical/01-arquitectura.md)
-- [Setup And Commands](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/technical/02-setup-y-comandos.md)
-- [How To Modify](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/technical/03-como-modificar.md)
-- [Validation](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/technical/04-validacion.md)
+- [Technical Guide](docs/technical/README.md)
+- [Architecture](docs/technical/01-arquitectura.md)
+- [Setup And Commands](docs/technical/02-setup-y-comandos.md)
+- [How To Modify](docs/technical/03-como-modificar.md)
+- [Validation](docs/technical/04-validacion.md)
 
 ## What Ws B-I Does
 
@@ -44,10 +44,10 @@ Corre Ws B-I para mi negocio y guíame paso a paso hasta que pueda ver mi inform
 
 ## Product Sources Of Truth
 
-- [CODEX_BUSINESS_OS_MX_PRD.md](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/product/CODEX_BUSINESS_OS_MX_PRD.md)
-- [PRD_MASTER.md](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/product/PRD_MASTER.md)
-- [APP_INFORMATION_ARCHITECTURE.md](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/product/APP_INFORMATION_ARCHITECTURE.md)
-- [program.md](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/program.md)
+- [CODEX_BUSINESS_OS_MX_PRD.md](product/CODEX_BUSINESS_OS_MX_PRD.md)
+- [PRD_MASTER.md](product/PRD_MASTER.md)
+- [APP_INFORMATION_ARCHITECTURE.md](product/APP_INFORMATION_ARCHITECTURE.md)
+- [program.md](program.md)
 
 ## Core Commands
 

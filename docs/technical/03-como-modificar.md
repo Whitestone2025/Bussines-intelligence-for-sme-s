@@ -34,6 +34,6 @@ Review:
 
 Update:
 
-- [program.md](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/program.md)
-- [docs/founder/README.md](/Users/pablomeneses/Documents/codex/Gta/InvestigaTRON%20copy/docs/founder/README.md)
+- [program.md](../../program.md)
+- [docs/founder/README.md](../founder/README.md)
 - onboarding copy in the frontend if needed
