@@ -1,0 +1,19 @@
+{
+  "company_id": "acme-mx",
+  "evidence_count": 6,
+  "source_count": 3,
+  "has_icp": true,
+  "has_offer": true,
+  "market_confidence": 0.72,
+  "pricing_confidence": 0.66,
+  "channel_confidence": 0.75,
+  "business_goal": "Improve conversion quality for founder-led service sales",
+  "evidence_refs": [
+    "2026-03-14-founder-clarity",
+    "2026-03-14-owner-proof"
+  ],
+  "source_refs": [
+    "2026-03-14-interview",
+    "2026-03-14-sales-notes"
+  ]
+}

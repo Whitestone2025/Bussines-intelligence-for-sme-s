@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ws B-I</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-brand">
+          <p id="project-eyebrow" class="eyebrow">Ws B-I / Mexico</p>
+          <h1 id="project-title">Business Intelligence de Estrategia</h1>
+        </div>
+
+        <div class="topbar-controls">
+          <label class="field field-inline">
+            <span>Empresa activa</span>
+            <select id="company-select" aria-label="Empresa activa"></select>
+          </label>
+
+          <div id="mode-switch" class="mode-switch" role="tablist" aria-label="Modo de lectura"></div>
+
+          <div class="action-row">
+            <a id="website-link" class="ghost-button" href="#" target="_blank" rel="noreferrer noopener">Abrir sitio</a>
+            <button id="refresh-button" class="solid-button" type="button">Actualizar</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" class="workspace-shell">
+      <section class="cover-sheet">
+        <div class="cover-kicker">
+          <p id="hero-kicker" class="eyebrow">Cargando caso</p>
+          <div id="hero-badges" class="cover-badges"></div>
+        </div>
+
+        <div class="cover-grid">
+          <div class="cover-title">
+            <p id="hero-title-label" class="cover-label">Caso activo</p>
+            <h2 id="hero-title">Ws B-I</h2>
+          </div>
+
+          <div class="cover-body">
+            <p id="hero-summary" class="cover-summary">Preparando la portada ejecutiva.</p>
+            <p id="hero-narrative" class="cover-narrative">Cargando tesis, riesgos y siguientes pasos.</p>
+          </div>
+
+          <div id="company-meta" class="cover-meta"></div>
+        </div>
+      </section>
+
+      <section id="status-banner" class="status-banner" role="status">Cargando caso...</section>
+
+      <div class="briefing-layout">
+        <aside class="briefing-index">
+          <div class="index-panel">
+            <p class="eyebrow">Indice</p>
+            <nav id="section-nav" class="index-nav" aria-label="Capitulos del briefing"></nav>
+          </div>
+
+          <div id="chapter-metrics" class="index-metrics"></div>
+        </aside>
+
+        <section class="briefing-main">
+          <div id="chapter-intro" class="chapter-intro"></div>
+          <div id="section-content" class="section-content"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

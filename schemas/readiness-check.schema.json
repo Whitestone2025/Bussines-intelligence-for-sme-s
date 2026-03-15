@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Readiness Check",
+  "type": "object",
+  "required": ["company_id", "score", "status", "blocking_reasons"],
+  "properties": {
+    "company_id": {"type": "string"},
+    "score": {"type": "number"},
+    "status": {"type": "string"},
+    "minimum_evidence_met": {"type": "boolean"},
+    "source_diversity_met": {"type": "boolean"},
+    "service_defined": {"type": "boolean"},
+    "icp_defined": {"type": "boolean"},
+    "channel_defined": {"type": "boolean"},
+    "insight_density": {"type": "boolean"},
+    "blocking_reasons": {"type": "array", "items": {"type": "string"}}
+  }
+}

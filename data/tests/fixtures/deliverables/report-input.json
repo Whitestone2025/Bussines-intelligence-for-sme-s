@@ -1,0 +1,134 @@
+{
+  "company": {
+    "company_id": "acme-mx",
+    "name": "Acme MX",
+    "seed_summary": "Founder-led service business focused on sales clarity."
+  },
+  "decision_question": "What is the best Mexico-first move to convert more qualified founder-led service buyers without adding operational complexity too early?",
+  "current_thesis": "Acme MX should lead with a tightly scoped sales clarity sprint because founder-led service buyers need proof, specificity, and a low-risk first engagement before they trust a broader advisory offer.",
+  "validated_facts": [
+    "Founder-led service businesses react negatively to generic agency language.",
+    "The offer already has two visible proof points: transparent process and specific deliverables.",
+    "The current market model points to a meaningful SMB sales enablement segment in Mexico."
+  ],
+  "inferences": [
+    "A focused first acquisition experiment is more likely to produce signal than broad-channel expansion.",
+    "The current target price can hold if scope and proof are made explicit in the sales conversation."
+  ],
+  "validation_gaps": [
+    "The team still needs to verify whether buyers respond better to WhatsApp-led outreach or referral-led outreach.",
+    "The recommended price should be tested against live objections before any scale decision."
+  ],
+  "contrary_evidence": [
+    "Some buyers may still see the sprint as too strategic unless the delivery mechanism is made concrete.",
+    "A competitor with more implementation proof could narrow differentiation quickly."
+  ],
+  "decision_criteria": [
+    "Fastest route to credible market signal.",
+    "Trust fit for Mexico-based founder operators.",
+    "Margin protection without overcomplicating delivery.",
+    "Execution simplicity in the first 90 days."
+  ],
+  "assumptions": [
+    "The founder can personally own the first 30 days of validation and sales feedback collection.",
+    "The initial channel test can be run without adding paid media complexity."
+  ],
+  "execution_realities": [
+    "The founder remains the primary seller and delivery lead during the first 90 days.",
+    "The system should favor sequential tests over parallel channel expansion."
+  ],
+  "options": [
+    {
+      "label": "Sales clarity sprint first",
+      "summary": "Lead with the focused sprint, validate price and buyer trust, then expand only after signal improves.",
+      "pros": [
+        "Fast path to market learning with low operational complexity.",
+        "Keeps the offer specific and easier to trust."
+      ],
+      "cons": [
+        "Requires disciplined scope control so the sprint does not become custom consulting."
+      ],
+      "recommended": true
+    },
+    {
+      "label": "Broader advisory package first",
+      "summary": "Sell a larger advisory engagement immediately to maximize revenue per client.",
+      "pros": [
+        "Could raise revenue per win if buyers already trust the operator."
+      ],
+      "cons": [
+        "Higher trust burden and more delivery complexity before enough proof exists."
+      ]
+    }
+  ],
+  "icp": {
+    "label": "Founder-led service businesses",
+    "pains": [
+      "Generic agency language creates distrust.",
+      "Buyers do not understand what gets done."
+    ],
+    "desired_outcomes": [
+      "Qualified conversations with the right buyers."
+    ]
+  },
+  "offer": {
+    "name": "Sales clarity sprint",
+    "core_promise": "Help founder-led service businesses avoid vague positioning and reach qualified conversations.",
+    "mechanism": "A founder-guided review of sales messaging, offer structure, and buyer objections.",
+    "proof_points": [
+      "Transparent process",
+      "Specific deliverables"
+    ]
+  },
+  "market_model": {
+    "segment_name": "SMB sales enablement services",
+    "blended_value": 1620000000,
+    "currency_code": "MXN",
+    "key_assumptions": [
+      "Annual price per customer assumed at MXN 36,000.",
+      "Target customer ratio set at 18% of the total addressable base."
+    ]
+  },
+  "pricing_model": {
+    "price_floor": 36842.11,
+    "price_target": 36842.11,
+    "price_ceiling": 49736.85,
+    "currency_code": "MXN"
+  },
+  "decision_memo": {
+    "recommended_action": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+    "why_now": "The system has enough evidence and confidence to recommend a focused next move.",
+    "key_risks": [
+      "Execution may still fail if the offer is not explained with enough specificity.",
+      "Channel assumptions should be validated with early conversion data."
+    ],
+    "next_steps": [
+      "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+      "Test the target pricing tier with explicit scope and proof.",
+      "Measure conversion quality, not just lead volume, for 30 days."
+    ],
+    "evidence_refs": [
+      "2026-03-14-founder-clarity",
+      "2026-03-14-owner-proof"
+    ]
+  },
+  "execution_plan": {
+    "milestones": [
+      {
+        "name": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+        "timeframe": "Days 1-30",
+        "success_metric": "First execution launched with a clear message and tracking in place."
+      },
+      {
+        "name": "Test the target pricing tier with explicit scope and proof.",
+        "timeframe": "Days 31-60",
+        "success_metric": "Offer, pricing, and objections updated from live feedback."
+      },
+      {
+        "name": "Measure conversion quality, not just lead volume, for 30 days.",
+        "timeframe": "Days 61-90",
+        "success_metric": "Conversion quality measured and the next repeatable channel decision documented."
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Corpus Entry",
+  "type": "object",
+  "required": ["entry_id", "company_id", "source_type", "date"],
+  "properties": {
+    "entry_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "company_id": {"type": "string"},
+    "service_id": {"type": "string"},
+    "icp_id": {"type": "string"},
+    "title": {"type": "string"},
+    "source_type": {"type": "string"},
+    "channel": {"type": "string"},
+    "date": {"type": "string"},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "summary": {"type": "string"},
+    "verbatim_quotes": {"type": "array", "items": {"type": "string"}},
+    "observations": {"type": "array", "items": {"type": "string"}},
+    "candidate_pains": {"type": "array", "items": {"type": "string"}},
+    "candidate_outcomes": {"type": "array", "items": {"type": "string"}},
+    "candidate_objections": {"type": "array", "items": {"type": "string"}},
+    "trust_signals": {"type": "array", "items": {"type": "string"}},
+    "raw_path": {"type": "string"}
+  }
+}

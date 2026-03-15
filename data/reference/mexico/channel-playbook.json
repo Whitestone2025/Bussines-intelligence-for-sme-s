@@ -1,0 +1,46 @@
+{
+  "default_currency": "MXN",
+  "default_geography": "Mexico",
+  "channels": [
+    {
+      "name": "WhatsApp",
+      "fit_for": ["service", "local-business", "high-trust-sales"],
+      "why": "Fast trust-building and low-friction replies for founder-led businesses."
+    },
+    {
+      "name": "Instagram",
+      "fit_for": ["personal-brand", "service", "visual-trust"],
+      "why": "Useful when buyers need visible proof, short education, and social trust."
+    },
+    {
+      "name": "Facebook",
+      "fit_for": ["local-business", "community", "broad-reach"],
+      "why": "Still relevant for local audiences, referrals, and social proof loops."
+    },
+    {
+      "name": "Google Maps",
+      "fit_for": ["local-business", "high-intent"],
+      "why": "Captures local intent when buyers already know the category they need."
+    },
+    {
+      "name": "Referrals",
+      "fit_for": ["service", "high-trust-sales", "local-business"],
+      "why": "Often the highest-trust path for small businesses in Mexico."
+    }
+  ],
+  "trust_signals": [
+    "transparent process",
+    "specific deliverables",
+    "before-after examples",
+    "real testimonials",
+    "clear pricing",
+    "invoice or payment clarity"
+  ],
+  "operating_realities": [
+    "Many founders start with low marketing budgets.",
+    "Trust often matters more than polished branding.",
+    "WhatsApp can be a primary sales and support channel.",
+    "Clarity around invoicing and payment methods can affect conversion.",
+    "Local references and word of mouth can outperform paid channels early."
+  ]
+}

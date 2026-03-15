@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Market Model",
+  "type": "object",
+  "required": [
+    "market_model_id",
+    "company_id",
+    "geography",
+    "currency_code",
+    "market_type",
+    "status",
+    "confidence",
+    "source_origin",
+    "evidence_refs",
+    "source_refs",
+    "assumption_refs",
+    "finding_refs",
+    "validated_fact_refs",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "market_model_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "company_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "geography": {"type": "array", "items": {"type": "string"}},
+    "currency_code": {"type": "string", "enum": ["MXN", "USD"]},
+    "market_type": {"type": "string", "enum": ["tam", "sam", "som", "attractiveness"]},
+    "segment_name": {"type": "string"},
+    "top_down_value": {"type": "number"},
+    "bottom_up_value": {"type": "number"},
+    "blended_value": {"type": "number"},
+    "growth_rate_assumption": {"type": "number"},
+    "methodology_summary": {"type": "string"},
+    "key_assumptions": {"type": "array", "items": {"type": "string"}},
+    "status": {
+      "type": "string",
+      "enum": ["draft", "inferred", "needs_validation", "validated", "confirmed", "stale", "rejected"]
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "source_origin": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "source_refs": {"type": "array", "items": {"type": "string"}},
+    "assumption_refs": {"type": "array", "items": {"type": "string"}},
+    "finding_refs": {"type": "array", "items": {"type": "string"}},
+    "validated_fact_refs": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": "string"}
+  }
+}

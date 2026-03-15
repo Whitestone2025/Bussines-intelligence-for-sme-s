@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Validation Question",
+  "type": "object",
+  "required": ["question_id", "company_id", "target_entity_type", "prompt", "status"],
+  "properties": {
+    "question_id": {"type": "string"},
+    "company_id": {"type": "string"},
+    "target_entity_type": {"type": "string"},
+    "prompt": {"type": "string"},
+    "question_type": {"type": "string"},
+    "candidate_options": {"type": "array", "items": {"type": "object"}},
+    "recommended_answer": {"type": "string"},
+    "status": {"type": "string"},
+    "answer": {"type": "string"},
+    "why_it_matters": {"type": "string"},
+    "resolution": {"type": "object"}
+  }
+}

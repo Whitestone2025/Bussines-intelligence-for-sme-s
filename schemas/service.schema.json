@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Service",
+  "type": "object",
+  "required": ["service_id", "company_id", "name"],
+  "properties": {
+    "service_id": {"type": "string"},
+    "company_id": {"type": "string"},
+    "name": {"type": "string"},
+    "one_sentence_description": {"type": "string"},
+    "core_outcome": {"type": "string"},
+    "pricing_model": {"type": "string"},
+    "sales_cycle": {"type": "string"},
+    "status": {"type": "string", "enum": ["draft", "inferred", "needs_validation", "validated", "confirmed", "stale"]},
+    "confidence": {"type": "number"},
+    "source_origin": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "supporting_quotes": {"type": "array", "items": {"type": "string"}},
+    "unresolved_questions": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,12 @@
+__pycache__/
+.DS_Store
+.venv/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.codex/
+.playwright-cli/
+output/
+tasks/ground-loop/*/last-message.txt
+tasks/ground-loop/*/prd.json

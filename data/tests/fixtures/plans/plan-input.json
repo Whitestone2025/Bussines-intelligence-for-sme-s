@@ -1,0 +1,17 @@
+{
+  "company_id": "acme-mx",
+  "decision_memo": {
+    "decision_id": "acme-mx-go-to-market-memo",
+    "recommended_action": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+    "decision_summary": "Improve conversion quality for founder-led service sales",
+    "key_risks": [
+      "Execution may still fail if the offer is not explained with enough specificity.",
+      "Channel assumptions should be validated with early conversion data."
+    ],
+    "next_steps": [
+      "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+      "Test the target pricing tier with explicit scope and proof.",
+      "Measure conversion quality, not just lead volume, for 30 days."
+    ]
+  }
+}

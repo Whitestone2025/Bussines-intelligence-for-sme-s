@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""Run the release gate checks and write a readiness report."""
+
+from __future__ import annotations
+
+import subprocess
+from datetime import datetime
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent.parent
+REPORT_DIR = ROOT / "data" / "reports" / "release-readiness"
+
+CHECKS = [
+    "python3 -m compileall scripts",
+    "python3 scripts/test_autoresearch_loop.py",
+    "python3 scripts/codex-ground-loop/autoresearch_loop.py audit tasks/ground-loop/autoresearch-mx-v1",
+    "python3 scripts/test_schema_contracts.py",
+    "python3 scripts/test_workspace_foundation.py",
+    "python3 scripts/test_intake_flow.py",
+    "python3 scripts/test_evidence_ingestion.py",
+    "python3 scripts/test_market_model.py",
+    "python3 scripts/test_competitor_engine.py",
+    "python3 scripts/test_customer_offer_engine.py",
+    "python3 scripts/test_pricing_financials.py",
+    "python3 scripts/test_mexico_context.py",
+    "python3 scripts/test_decision_engine.py",
+    "python3 scripts/test_execution_planner.py",
+    "python3 scripts/test_deliverable_generator.py",
+    "python3 scripts/test_ui_workspace_flow.py",
+    "python3 scripts/test_business_os_e2e.py",
+    "python3 scripts/test_discovery_flow.py",
+]
+
+
+def now_stamp() -> str:
+    return datetime.now().strftime("%Y-%m-%d-%H%M%S")
+
+
+def run_check(command: str) -> tuple[bool, str]:
+    result = subprocess.run(
+        command,
+        cwd=ROOT,
+        shell=True,
+        text=True,
+        capture_output=True,
+    )
+    output = (result.stdout or "") + (result.stderr or "")
+    return result.returncode == 0, output.strip()
+
+
+def detect_method_risks() -> list[str]:
+    risks: list[str] = []
+
+    render_report_path = ROOT / "scripts" / "render_report.py"
+    if render_report_path.exists():
+        render_report = render_report_path.read_text(encoding="utf-8").lower()
+        if "assumptions" not in render_report:
+            risks.append("Deliverable generator still lacks explicit assumptions sections in executive outputs.")
+        if "option" not in render_report:
+            risks.append("Deliverables still do not present credible alternative options for material decisions.")
+
+    rubric_path = ROOT / "rubrics" / "mexico-business-quality.md"
+    if rubric_path.exists():
+        rubric_text = rubric_path.read_text(encoding="utf-8").lower()
+        if "contrary evidence" not in rubric_text:
+            risks.append("Consulting rubric still does not require contrary evidence handling strongly enough.")
+
+    return risks
+
+
+def main() -> int:
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    results = []
+    for command in CHECKS:
+        ok, output = run_check(command)
+        results.append({"command": command, "ok": ok, "output": output})
+
+    passed = [item for item in results if item["ok"]]
+    failed = [item for item in results if not item["ok"]]
+
+    lines = [
+        "# Release Readiness",
+        "",
+        f"Generated: {datetime.now().replace(microsecond=0).isoformat()}",
+        "",
+        f"- Passed checks: {len(passed)}",
+        f"- Failed checks: {len(failed)}",
+        "",
+        "## Results",
+        "",
+    ]
+
+    for item in results:
+        status = "PASS" if item["ok"] else "FAIL"
+        lines.append(f"- [{status}] `{item['command']}`")
+        if item["output"]:
+            excerpt = item["output"].splitlines()[-1]
+            lines.append(f"  Output: {excerpt}")
+    lines.extend(["", "## Blockers", ""])
+    if failed:
+        for item in failed:
+            lines.append(f"- {item['command']}")
+    else:
+        lines.append("- No active blockers.")
+    lines.extend(["", "## Unresolved Risks", ""])
+    unresolved_risks = [
+        "UI composition is functional but still optimized for a local-first developer workflow.",
+        "Deliverables are deterministic markdown and TSV outputs; richer export formats can be added later.",
+        "Strategy engines now expose fact bases, assumptions, options, and risks, but they still rely on lightweight rule-based synthesis instead of live external benchmarking.",
+        *detect_method_risks(),
+    ]
+    for risk in unresolved_risks:
+        lines.append(f"- {risk}")
+    lines.append("")
+
+    report_path = REPORT_DIR / f"{now_stamp()}-release-readiness.md"
+    report_path.write_text("\n".join(lines), encoding="utf-8")
+    print(report_path)
+    return 0 if not failed else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,58 @@
+{
+  "company_id": "acme-mx",
+  "service_name": "Sales clarity sprint",
+  "mechanism_hint": "a founder-guided review of sales messaging, offer structure, and buyer objections",
+  "target_customer": "",
+  "evidence_items": [
+    {
+      "id": "2026-03-14-founder-clarity",
+      "source_id": "2026-03-14-interview",
+      "summary": "Founders want more qualified conversations and less generic agency language.",
+      "quotes": [
+        "I need to know exactly what gets done before I trust the process."
+      ],
+      "observations": [
+        "Trust depends on visible process."
+      ],
+      "candidate_pains": [
+        "Generic agency language creates distrust.",
+        "Buyers do not understand what gets done."
+      ],
+      "candidate_outcomes": [
+        "Qualified conversations with the right buyers.",
+        "Clarity before making promises."
+      ],
+      "candidate_objections": [
+        "Agencies sound polished but vague."
+      ],
+      "trust_signals": [
+        "Transparent process",
+        "Specific deliverables"
+      ]
+    },
+    {
+      "id": "2026-03-14-owner-proof",
+      "source_id": "2026-03-14-sales-notes",
+      "summary": "Owners want proof and real examples before they commit.",
+      "quotes": [
+        "Show me the process, not just the promise."
+      ],
+      "observations": [
+        "Specificity reduces skepticism."
+      ],
+      "candidate_pains": [
+        "Buyers are tired of vague promises."
+      ],
+      "candidate_outcomes": [
+        "Confidence to book a serious conversation."
+      ],
+      "candidate_objections": [
+        "They worry the work will be generic."
+      ],
+      "trust_signals": [
+        "Before-after examples",
+        "Visible proof"
+      ]
+    }
+  ]
+}

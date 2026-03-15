@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pricing Model",
+  "type": "object",
+  "required": [
+    "pricing_model_id",
+    "company_id",
+    "currency_code",
+    "pricing_strategy",
+    "status",
+    "confidence",
+    "source_origin",
+    "evidence_refs",
+    "source_refs",
+    "assumption_refs",
+    "finding_refs",
+    "validated_fact_refs",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "pricing_model_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "company_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "currency_code": {"type": "string", "enum": ["MXN", "USD"]},
+    "pricing_strategy": {"type": "string", "enum": ["value_based", "cost_plus", "competitive", "hybrid"]},
+    "target_segment": {"type": "string"},
+    "price_floor": {"type": "number"},
+    "price_target": {"type": "number"},
+    "price_ceiling": {"type": "number"},
+    "tier_summaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "price", "value_summary"],
+        "properties": {
+          "name": {"type": "string"},
+          "price": {"type": "number"},
+          "value_summary": {"type": "string"}
+        }
+      }
+    },
+    "margin_assumptions": {"type": "array", "items": {"type": "string"}},
+    "status": {
+      "type": "string",
+      "enum": ["draft", "inferred", "needs_validation", "validated", "confirmed", "stale", "rejected"]
+    },
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "source_origin": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "source_refs": {"type": "array", "items": {"type": "string"}},
+    "assumption_refs": {"type": "array", "items": {"type": "string"}},
+    "finding_refs": {"type": "array", "items": {"type": "string"}},
+    "validated_fact_refs": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": "string"}
+  }
+}

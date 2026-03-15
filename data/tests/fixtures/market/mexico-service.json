@@ -1,0 +1,19 @@
+{
+  "company_id": "acme-mx",
+  "segment_name": "SMB sales enablement services",
+  "geography": ["Mexico"],
+  "currency_code": "MXN",
+  "annual_price_per_customer": 36000,
+  "total_addressable_customers": 250000,
+  "target_customer_ratio": 0.18,
+  "serviceable_customer_ratio": 0.35,
+  "obtainable_customer_ratio": 0.04,
+  "known_reachable_customers": 1400,
+  "expected_close_rate": 0.22,
+  "competition_intensity": 6,
+  "urgency_score": 8,
+  "budget_fit_score": 7,
+  "channel_access_score": 8,
+  "evidence_refs": ["2026-03-14-founder-wants-clarity"],
+  "source_refs": ["2026-03-14-founder-interview"]
+}

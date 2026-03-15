@@ -1,0 +1,21 @@
+{
+  "company_id": "acme-mx",
+  "currency_code": "MXN",
+  "target_segment": "Founder-led service businesses",
+  "monthly_delivery_cost": 14000,
+  "desired_margin_ratio": 0.62,
+  "competitor_anchor_price": 28000,
+  "value_anchor_price": 34000,
+  "customer_lifetime_months": 7,
+  "average_monthly_revenue_per_customer": 32000,
+  "fixed_monthly_cost": 22000,
+  "estimated_cac": 9000,
+  "evidence_refs": [
+    "2026-03-14-founder-clarity",
+    "2026-03-14-owner-proof"
+  ],
+  "source_refs": [
+    "2026-03-14-interview",
+    "2026-03-14-sales-notes"
+  ]
+}

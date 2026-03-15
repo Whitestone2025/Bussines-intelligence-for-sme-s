@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Intake Session",
+  "type": "object",
+  "required": [
+    "session_id",
+    "company_id",
+    "company_name",
+    "intake_mode",
+    "primary_goal",
+    "seed_summary",
+    "geography_focus",
+    "currency_code",
+    "competitors",
+    "available_sources",
+    "known_constraints",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "session_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "company_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "company_name": {"type": "string"},
+    "intake_mode": {"type": "string", "enum": ["idea", "existing"]},
+    "primary_goal": {"type": "string"},
+    "industry": {"type": "string"},
+    "business_model": {"type": "string"},
+    "website": {"type": "string"},
+    "seed_summary": {"type": "string"},
+    "current_state_summary": {"type": "string"},
+    "geography_focus": {"type": "array", "items": {"type": "string"}},
+    "currency_code": {"type": "string", "enum": ["MXN", "USD"]},
+    "competitors": {"type": "array", "items": {"type": "string"}},
+    "available_sources": {"type": "array", "items": {"type": "string"}},
+    "known_constraints": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": "string"}
+  }
+}

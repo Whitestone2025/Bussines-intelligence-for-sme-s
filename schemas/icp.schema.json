@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ICP",
+  "type": "object",
+  "required": [
+    "icp_id",
+    "company_id",
+    "label",
+    "status",
+    "confidence",
+    "source_origin",
+    "evidence_refs",
+    "source_refs",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "icp_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "company_id": {"type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+    "label": {"type": "string"},
+    "pains": {"type": "array", "items": {"type": "string"}},
+    "desired_outcomes": {"type": "array", "items": {"type": "string"}},
+    "common_objections": {"type": "array", "items": {"type": "string"}},
+    "trust_signals": {"type": "array", "items": {"type": "string"}},
+    "status": {"type": "string", "enum": ["draft", "inferred", "needs_validation", "validated", "confirmed", "stale", "rejected"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "source_origin": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "source_refs": {"type": "array", "items": {"type": "string"}},
+    "supporting_quotes": {"type": "array", "items": {"type": "string"}},
+    "unresolved_questions": {"type": "array", "items": {"type": "string"}},
+    "created_at": {"type": "string"},
+    "updated_at": {"type": "string"}
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "company_id": "acme-mx",
+  "geography": ["Mexico"],
+  "segment_name": "SMB sales enablement services",
+  "target_whitespace": [
+    "transparent delivery process",
+    "operator-led implementation",
+    "whatsapp-first support"
+  ],
+  "evidence_refs": ["2026-03-14-founder-wants-clarity"],
+  "source_refs": ["2026-03-14-founder-interview"],
+  "competitors": [
+    {
+      "name": "Growth Norte",
+      "website": "https://growthnorte.example",
+      "competitor_type": "direct",
+      "positioning_summary": "Growth agency for SMBs that promises more qualified leads.",
+      "pricing_summary": "Monthly retainer from MXN 45,000.",
+      "channels": ["website", "linkedin", "sales calls"],
+      "strengths": ["strong sales language", "visible testimonials"],
+      "weaknesses": ["generic process description", "high entry price"],
+      "trust_signals": ["case studies", "client logos"]
+    },
+    {
+      "name": "Ventas Claras Studio",
+      "website": "https://ventasclaras.example",
+      "competitor_type": "direct",
+      "positioning_summary": "Messaging consultancy for founder-led service businesses.",
+      "pricing_summary": "Project packages around MXN 28,000.",
+      "channels": ["instagram", "whatsapp", "referrals"],
+      "strengths": ["strong niche fit", "accessible pricing"],
+      "weaknesses": ["limited proof depth", "no delivery roadmap"],
+      "trust_signals": ["before-after examples"]
+    },
+    {
+      "name": "Freelance Sales Scripts",
+      "website": "",
+      "competitor_type": "substitute",
+      "positioning_summary": "Low-cost script writing sold through referrals and freelance marketplaces.",
+      "pricing_summary": "One-off gigs between MXN 3,000 and MXN 8,000.",
+      "channels": ["marketplaces", "facebook", "referrals"],
+      "strengths": ["cheap entry", "fast turnaround"],
+      "weaknesses": ["no strategic depth", "no implementation support"],
+      "trust_signals": ["reviews"]
+    }
+  ]
+}

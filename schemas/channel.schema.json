@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Channel",
+  "type": "object",
+  "required": ["channel_id", "company_id", "name"],
+  "properties": {
+    "channel_id": {"type": "string"},
+    "company_id": {"type": "string"},
+    "name": {"type": "string"},
+    "asset_focus": {"type": "string"},
+    "primary_goal": {"type": "string"},
+    "status": {"type": "string", "enum": ["draft", "inferred", "needs_validation", "validated", "confirmed", "stale"]},
+    "confidence": {"type": "number"},
+    "source_origin": {"type": "string"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "unresolved_questions": {"type": "array", "items": {"type": "string"}}
+  }
+}

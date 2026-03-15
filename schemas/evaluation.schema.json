@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Experiment Evaluation",
+  "type": "object",
+  "required": ["experiment_id", "baseline_score", "variant_score", "winner", "decision"],
+  "properties": {
+    "experiment_id": {"type": "string"},
+    "company_id": {"type": "string"},
+    "service_id": {"type": "string"},
+    "asset_type": {"type": "string"},
+    "baseline_score": {"type": "integer"},
+    "variant_score": {"type": "integer"},
+    "winner": {"type": "string", "enum": ["baseline", "variant_a"]},
+    "decision": {"type": "string", "enum": ["keep", "discard"]},
+    "subscores": {"type": "object"},
+    "baseline_subscores": {"type": "object"},
+    "heuristic_signals": {"type": "object"},
+    "channel_notes": {"type": "array", "items": {"type": "string"}},
+    "reasoning": {"type": "array", "items": {"type": "string"}},
+    "evidence_ids": {"type": "array", "items": {"type": "string"}},
+    "final_judgment": {"type": "object"}
+  }
+}
