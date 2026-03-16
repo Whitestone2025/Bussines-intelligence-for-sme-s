@@ -4,10 +4,11 @@ This guide is for developers, operators, and advanced users who want to modify o
 
 ## Read In This Order
 
-1. [Architecture](01-arquitectura.md)
-2. [Setup And Commands](02-setup-y-comandos.md)
-3. [How To Modify](03-como-modificar.md)
-4. [Validation](04-validacion.md)
+1. [Clean Install Readiness](05-prueba-en-instalacion-limpia.md)
+2. [Architecture](01-arquitectura.md)
+3. [Setup And Commands](02-setup-y-comandos.md)
+4. [How To Modify](03-como-modificar.md)
+5. [Validation](04-validacion.md)
 
 ## Source Of Truth
 

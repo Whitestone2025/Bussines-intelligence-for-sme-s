@@ -826,6 +826,8 @@ function renderWelcomeChapter() {
   const onboarding = state.caseData?.onboarding || {};
   const starterPrompt = onboarding.starter_prompt || "Corre Ws B-I para mi negocio y guiame paso a paso hasta que pueda ver mi informacion en el frontend.";
   const steps = onboarding.steps || [];
+  const cleanInstallSteps = onboarding.clean_install_steps || [];
+  const githubRepoUrl = onboarding.github_repo_url || "";
   return `
     <section id="chapter-welcome" class="report-chapter">
       <div class="chapter-banner">
@@ -846,6 +848,13 @@ function renderWelcomeChapter() {
               "Habla con Codex"
             )}
             ${sheet(
+              "Repositorio",
+              githubRepoUrl
+                ? `<p><a href="${escapeHtml(githubRepoUrl)}" target="_blank" rel="noreferrer noopener">${escapeHtml(githubRepoUrl)}</a></p>`
+                : "<p class='empty-state'>Sin URL.</p>",
+              "GitHub"
+            )}
+            ${sheet(
               "Que debes compartir",
               listMarkup([
                 "Nombre de tu negocio",
@@ -858,6 +867,8 @@ function renderWelcomeChapter() {
           </div>
           <div class="spread-column spread-side">
             ${sheet("Que hara Codex", listMarkup(steps, "Sin pasos."), "Proceso guiado")}
+            ${sheet("Instalacion limpia", listMarkup(cleanInstallSteps, "Sin pasos."), "Desde otra computadora")}
+            ${sheet("Cuando esta listo", `<p>${escapeHtml(onboarding.success_state || "Tu caso debe verse en el frontend.")}</p>`, "Objetivo")}
           </div>
         </div>
       </section>

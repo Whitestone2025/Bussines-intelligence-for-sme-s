@@ -12,6 +12,8 @@ python3 scripts/serve_ui.py
 
 Then it should give you the local URL.
 
+On a clean installation, Codex should also explain that the repo setup is already done and that the frontend now corresponds to your own business case.
+
 ## What You Should Expect To See
 
 - your business as the active case,

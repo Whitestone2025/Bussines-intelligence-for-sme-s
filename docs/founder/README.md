@@ -18,13 +18,14 @@ When you use Ws B-I through Codex, Codex should:
 
 ## Recommended Order
 
-1. [Prepare Your Information](01-preparar-informacion.md)
-2. [Work With Codex](02-trabajar-con-codex.md)
-3. [See Your Frontend](03-ver-tu-frontend.md)
-4. [Founder FAQ](04-faq.md)
+1. [Clean Install On Another Computer](05-instalacion-limpia.md)
+2. [Prepare Your Information](01-preparar-informacion.md)
+3. [Work With Codex](02-trabajar-con-codex.md)
+4. [See Your Frontend](03-ver-tu-frontend.md)
+5. [Founder FAQ](04-faq.md)
 
 ## The Best First Message
 
 ```text
-Corre Ws B-I para mi negocio y guíame paso a paso hasta que pueda ver mi información en el frontend. No soy técnico, así que hazte cargo de los comandos y explícame solo lo necesario.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, prepáralo en una carpeta nueva, guíame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando esté listo. No soy técnico, así que hazte cargo de los comandos y explícame solo lo necesario.
 ```

@@ -7,7 +7,7 @@ This is the expected founder workflow.
 Tell Codex:
 
 ```text
-Corre Ws B-I para mi negocio y guíame paso a paso hasta que pueda ver mi información en el frontend. No soy técnico.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, prepáralo en una carpeta nueva, guíame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando esté listo. No soy técnico.
 ```
 
 ## Step 2
@@ -23,6 +23,7 @@ Codex should ask you for a small seed, usually:
 
 Codex should do the technical work for you:
 
+- get the repository into a clean folder if needed,
 - create the research seed,
 - add sources,
 - structure evidence,

@@ -1236,30 +1236,7 @@ def build_audit_index_payload(
 def build_case_payload(company_id: str = "") -> dict:
     selected_company_id = company_id or preferred_company_id()
     if not selected_company_id:
-        return {
-            "project": {
-                "name": "Ws B-I",
-                "tagline": "Business intelligence operativo para decisiones en Mexico.",
-            },
-            "company": {},
-            "companies": [],
-            "sections": {},
-            "summary": {},
-            "onboarding": {
-                "headline": "Workspace listo para iniciar",
-                "summary": "Pidele a Codex que corra Ws B-I para tu negocio y te guie paso a paso.",
-                "starter_prompt": (
-                    "Corre Ws B-I para mi negocio y guiame paso a paso hasta que pueda ver mi informacion en el frontend. "
-                    "No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario."
-                ),
-                "steps": [
-                    "Comparte el nombre de tu negocio y lo que vendes.",
-                    "Pega notas, chats, links o material real que ya tengas.",
-                    "Codex convertira eso en evidencia y cargara tu caso.",
-                    "Abre el frontend cuando Codex te diga que ya esta listo.",
-                ],
-            },
-        }
+        return empty_workspace_payload()
 
     refresh_company_knowledge(selected_company_id)
     companies = list_companies()
@@ -1423,6 +1400,45 @@ def build_case_payload(company_id: str = "") -> dict:
             "decisions": decision_records,
             "plans": plan_records,
             "deliverables": deliverables,
+        },
+    }
+
+
+def empty_workspace_payload() -> dict:
+    github_repo_url = "https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s"
+    return {
+        "project": {
+            "name": "Ws B-I",
+            "tagline": "Business intelligence operativo para decisiones en Mexico.",
+        },
+        "company": {},
+        "companies": [],
+        "sections": {},
+        "summary": {},
+        "onboarding": {
+            "headline": "Workspace listo para iniciar",
+            "summary": "Pidele a Codex que tome el repositorio desde GitHub, te haga solo las preguntas necesarias y cargue tu negocio hasta verlo en el frontend.",
+            "github_repo_url": github_repo_url,
+            "starter_prompt": (
+                "Quiero usar Ws B-I para mi negocio. Toma el repositorio desde "
+                f"{github_repo_url}, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias "
+                "sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo "
+                "de los comandos y explicame solo lo necesario."
+            ),
+            "steps": [
+                "Crea o usa una carpeta limpia para el proyecto.",
+                "Trae el repositorio desde GitHub a esa carpeta.",
+                "Comparte el nombre de tu negocio, lo que vendes y el material real que ya tengas.",
+                "Codex convertira eso en evidencia, cargara tu caso y abrira el frontend cuando este listo.",
+            ],
+            "clean_install_steps": [
+                "Abre una carpeta nueva en tu computadora.",
+                "Dale a Codex la URL del repositorio.",
+                "Pidele que prepare todo y te guie sin tecnicismos.",
+                "Responde solo las preguntas de negocio que Codex te haga.",
+                "Espera a que Codex te entregue la URL local del frontend.",
+            ],
+            "success_state": "Tu negocio debe aparecer como caso activo en el frontend, con tesis, decision, plan y documentos.",
         },
     }
 

@@ -35,12 +35,20 @@ When the user is a founder, owner, or nontechnical operator:
   - or their frontend is ready to open.
 - If the workspace is empty, guide them from zero without making them design the process.
 - If they say "correlo" or "guíame", treat that as a request for end-to-end operator guidance, not as a request for a technical explanation.
+- If they provide a GitHub URL or ask to start in a new folder, treat that as a founder bootstrap request:
+  - create or use a clean working folder,
+  - get the repository into that folder,
+  - start the interview from zero,
+  - load the business into the workspace,
+  - and open the frontend only when the case is visible.
+- In founder bootstrap mode, Codex should behave like an operator concierge, not like a repo tutor.
 
 ## Definition Of Done For Nontechnical Runs
 
 A nontechnical founder run is only successful when:
 
 - the founder has provided enough business context to start,
+- the founder did not need to figure out repository setup alone,
 - Codex has converted that context into repo-backed research state,
 - the founder understands the next business question in plain language,
 - and the founder can open the local frontend and see their own business case there.

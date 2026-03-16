@@ -11,27 +11,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REPORT_DIR = ROOT / "data" / "reports" / "release-readiness"
 
-CHECKS = [
-    "python3 -m compileall scripts",
-    "python3 scripts/test_autoresearch_loop.py",
-    "python3 scripts/codex-ground-loop/autoresearch_loop.py audit tasks/ground-loop/autoresearch-mx-v1",
-    "python3 scripts/test_schema_contracts.py",
-    "python3 scripts/test_workspace_foundation.py",
-    "python3 scripts/test_intake_flow.py",
-    "python3 scripts/test_evidence_ingestion.py",
-    "python3 scripts/test_market_model.py",
-    "python3 scripts/test_competitor_engine.py",
-    "python3 scripts/test_customer_offer_engine.py",
-    "python3 scripts/test_pricing_financials.py",
-    "python3 scripts/test_mexico_context.py",
-    "python3 scripts/test_decision_engine.py",
-    "python3 scripts/test_execution_planner.py",
-    "python3 scripts/test_deliverable_generator.py",
-    "python3 scripts/test_ui_workspace_flow.py",
-    "python3 scripts/test_business_os_e2e.py",
-    "python3 scripts/test_discovery_flow.py",
-]
-
 
 def now_stamp() -> str:
     return datetime.now().strftime("%Y-%m-%d-%H%M%S")
@@ -47,6 +26,34 @@ def run_check(command: str) -> tuple[bool, str]:
     )
     output = (result.stdout or "") + (result.stderr or "")
     return result.returncode == 0, output.strip()
+
+
+def build_checks() -> list[str]:
+    checks = [
+        "PYTHONPYCACHEPREFIX=.pycache python3 -m compileall scripts",
+        "python3 scripts/test_autoresearch_loop.py",
+        "python3 scripts/test_schema_contracts.py",
+        "python3 scripts/test_founder_bootstrap_flow.py",
+        "python3 scripts/test_case_view_model.py",
+        "python3 scripts/test_workspace_foundation.py",
+        "python3 scripts/test_intake_flow.py",
+        "python3 scripts/test_evidence_ingestion.py",
+        "python3 scripts/test_market_model.py",
+        "python3 scripts/test_competitor_engine.py",
+        "python3 scripts/test_customer_offer_engine.py",
+        "python3 scripts/test_pricing_financials.py",
+        "python3 scripts/test_mexico_context.py",
+        "python3 scripts/test_decision_engine.py",
+        "python3 scripts/test_execution_planner.py",
+        "python3 scripts/test_deliverable_generator.py",
+        "python3 scripts/test_ui_workspace_flow.py",
+        "python3 scripts/test_business_os_e2e.py",
+        "python3 scripts/test_discovery_flow.py",
+    ]
+    autoresearch_run = ROOT / "tasks" / "ground-loop" / "autoresearch-mx-v1"
+    if (autoresearch_run / "loop-config.json").exists() and (autoresearch_run / "last-message.txt").exists():
+        checks.insert(2, "python3 scripts/codex-ground-loop/autoresearch_loop.py audit tasks/ground-loop/autoresearch-mx-v1")
+    return checks
 
 
 def detect_method_risks() -> list[str]:
@@ -72,7 +79,7 @@ def detect_method_risks() -> list[str]:
 def main() -> int:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     results = []
-    for command in CHECKS:
+    for command in build_checks():
         ok, output = run_check(command)
         results.append({"command": command, "ok": ok, "output": output})
 

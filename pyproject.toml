@@ -1,7 +1,7 @@
 [project]
-name = "human-signal"
+name = "ws-bi"
 version = "0.1.0"
-description = "Evidence-first communication research system for service businesses"
+description = "Codex-native business intelligence system for small businesses in Mexico"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = []
