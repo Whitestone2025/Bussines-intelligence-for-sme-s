@@ -20,25 +20,29 @@ def main() -> int:
     first = render_bundle(bundle)
     second = render_bundle(bundle)
     assert first == second, "Render output must be deterministic"
-    assert "## Decision Question" in first["executive-memo"], "Executive memo should frame the decision explicitly"
-    assert "## Current Thesis" in first["executive-memo"], "Executive memo should surface the current thesis"
-    assert "## Key Assumptions" in first["executive-memo"], "Executive memo should expose assumptions"
-    assert "## Options Considered" in first["executive-memo"], "Executive memo should compare options"
+    assert "## Pregunta de decision" in first["executive-memo"], "Executive memo should frame the decision explicitly"
+    assert "## Tesis actual" in first["executive-memo"], "Executive memo should surface the current thesis"
+    assert "## Supuestos clave" in first["executive-memo"], "Executive memo should expose assumptions"
+    assert "## Opciones consideradas" in first["executive-memo"], "Executive memo should compare options"
     assert "2026-03-14-founder-clarity" in first["executive-memo"], "Traceability should include evidence refs"
-    assert "## What We Know" in first["business-diagnosis"], "Diagnosis should separate fact base"
-    assert "## What We Infer" in first["business-diagnosis"], "Diagnosis should separate inference"
-    assert "## What Still Needs Validation" in first["business-diagnosis"], "Diagnosis should show validation gaps"
-    assert "## Execution Realities" in first["business-diagnosis"], "Diagnosis should stay implementation-aware"
-    assert "Options Considered" in first["deck-outline"], "Deck should include strategic options"
-    assert "## Contrary Evidence And Watchouts" in first["risk-memo"], "Risk memo should include contrary evidence"
-    assert "## Risk Register" in first["risk-memo"], "Risk memo should include a risk register"
+    assert "## Lo que sabemos" in first["business-diagnosis"], "Diagnosis should separate fact base"
+    assert "## Lo que inferimos" in first["business-diagnosis"], "Diagnosis should separate inference"
+    assert "## Lo que aun necesita validacion" in first["business-diagnosis"], "Diagnosis should show validation gaps"
+    assert "## Realidades de ejecucion" in first["business-diagnosis"], "Diagnosis should stay implementation-aware"
+    assert "Opciones consideradas" in first["deck-outline"], "Deck should include strategic options"
+    assert "## Evidencia en contra y alertas" in first["risk-memo"], "Risk memo should include contrary evidence"
+    assert "## Registro de riesgos" in first["risk-memo"], "Risk memo should include a risk register"
+    for artifact in first.values():
+        assert "Recommended" not in artifact
+        assert "Alternative" not in artifact
+        assert "Tradeoff" not in artifact
 
     tables = render_tables(bundle)
     assert "price_target" in tables["pricing-options.tsv"]
-    assert "Sales clarity sprint first" in tables["decision-options.tsv"]
-    assert "Annual price per customer assumed" in tables["assumption-register.tsv"]
-    assert "Days 1-30" in tables["plan-milestones.tsv"]
-    assert "Founder" in tables["plan-milestones.tsv"]
+    assert "Sprint de claridad comercial primero" in tables["decision-options.tsv"]
+    assert "Se asume" in tables["assumption-register.tsv"]
+    assert "Dias 1-30" in tables["plan-milestones.tsv"]
+    assert "Fundador" in tables["plan-milestones.tsv"]
 
     with TemporaryDirectory() as temp_dir:
         outputs = persist_bundle(Path(temp_dir), bundle["company"]["company_id"], bundle)

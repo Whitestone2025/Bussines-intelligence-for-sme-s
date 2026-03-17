@@ -2,86 +2,86 @@
   "company": {
     "company_id": "acme-mx",
     "name": "Acme MX",
-    "seed_summary": "Founder-led service business focused on sales clarity."
+    "seed_summary": "Negocio de servicios liderado por el fundador y enfocado en claridad comercial."
   },
-  "decision_question": "What is the best Mexico-first move to convert more qualified founder-led service buyers without adding operational complexity too early?",
-  "current_thesis": "Acme MX should lead with a tightly scoped sales clarity sprint because founder-led service buyers need proof, specificity, and a low-risk first engagement before they trust a broader advisory offer.",
+  "decision_question": "Cual es el mejor movimiento Mexico-first para convertir mas compradores calificados sin agregar complejidad operativa demasiado pronto?",
+  "current_thesis": "Acme MX debe liderar con un sprint de claridad comercial de alcance acotado porque estos compradores necesitan prueba, especificidad y una primera interaccion de bajo riesgo antes de confiar en una asesoria mas amplia.",
   "validated_facts": [
-    "Founder-led service businesses react negatively to generic agency language.",
-    "The offer already has two visible proof points: transparent process and specific deliverables.",
-    "The current market model points to a meaningful SMB sales enablement segment in Mexico."
+    "Los negocios de servicios liderados por el fundador reaccionan mal al lenguaje generico de agencia.",
+    "La oferta ya tiene dos pruebas visibles: proceso transparente y entregables especificos.",
+    "El modelo actual de mercado apunta a un segmento relevante de habilitacion comercial PyME en Mexico."
   ],
   "inferences": [
-    "A focused first acquisition experiment is more likely to produce signal than broad-channel expansion.",
-    "The current target price can hold if scope and proof are made explicit in the sales conversation."
+    "Un primer experimento de adquisicion enfocado tiene mas probabilidad de generar senal que una expansion amplia de canales.",
+    "El precio objetivo actual puede sostenerse si alcance y prueba se vuelven explicitos durante la venta."
   ],
   "validation_gaps": [
-    "The team still needs to verify whether buyers respond better to WhatsApp-led outreach or referral-led outreach.",
-    "The recommended price should be tested against live objections before any scale decision."
+    "El equipo todavia necesita verificar si los compradores responden mejor a outreach por WhatsApp o por referidos.",
+    "El precio recomendado debe probarse contra objeciones reales antes de cualquier decision de escala."
   ],
   "contrary_evidence": [
-    "Some buyers may still see the sprint as too strategic unless the delivery mechanism is made concrete.",
-    "A competitor with more implementation proof could narrow differentiation quickly."
+    "Algunos compradores todavia pueden ver el sprint como demasiado estrategico si el mecanismo de entrega no se vuelve concreto.",
+    "Un competidor con mas prueba de implementacion podria cerrar la diferenciacion rapidamente."
   ],
   "decision_criteria": [
-    "Fastest route to credible market signal.",
-    "Trust fit for Mexico-based founder operators.",
-    "Margin protection without overcomplicating delivery.",
-    "Execution simplicity in the first 90 days."
+    "Ruta mas rapida hacia una senal creible de mercado.",
+    "Ajuste de confianza para operadores fundadores en Mexico.",
+    "Proteccion de margen sin sobrecomplicar la entrega.",
+    "Simplicidad de ejecucion en los primeros 90 dias."
   ],
   "assumptions": [
-    "The founder can personally own the first 30 days of validation and sales feedback collection.",
-    "The initial channel test can be run without adding paid media complexity."
+    "El fundador puede hacerse cargo personalmente de los primeros 30 dias de validacion y recoleccion de feedback comercial.",
+    "La prueba inicial de canal puede correrse sin agregar complejidad de medios pagados."
   ],
   "execution_realities": [
-    "The founder remains the primary seller and delivery lead during the first 90 days.",
-    "The system should favor sequential tests over parallel channel expansion."
+    "El fundador sigue siendo el vendedor principal y lider de entrega durante los primeros 90 dias.",
+    "El sistema debe favorecer pruebas secuenciales sobre expansion paralela de canales."
   ],
   "options": [
     {
-      "label": "Sales clarity sprint first",
-      "summary": "Lead with the focused sprint, validate price and buyer trust, then expand only after signal improves.",
+      "label": "Sprint de claridad comercial primero",
+      "summary": "Liderar con el sprint enfocado, validar precio y confianza del comprador, y expandir solo cuando la senal mejore.",
       "pros": [
-        "Fast path to market learning with low operational complexity.",
-        "Keeps the offer specific and easier to trust."
+        "Ruta rapida de aprendizaje de mercado con baja complejidad operativa.",
+        "Mantiene la oferta especifica y mas facil de confiar."
       ],
       "cons": [
-        "Requires disciplined scope control so the sprint does not become custom consulting."
+        "Exige control disciplinado del alcance para que el sprint no se convierta en consultoria a la medida."
       ],
       "recommended": true
     },
     {
-      "label": "Broader advisory package first",
-      "summary": "Sell a larger advisory engagement immediately to maximize revenue per client.",
+      "label": "Paquete amplio de asesoria primero",
+      "summary": "Vender una asesoria mas grande desde el inicio para maximizar ingreso por cliente.",
       "pros": [
-        "Could raise revenue per win if buyers already trust the operator."
+        "Podria elevar el ingreso por venta si los compradores ya confian en el operador."
       ],
       "cons": [
-        "Higher trust burden and more delivery complexity before enough proof exists."
+        "Mayor carga de confianza y mas complejidad de entrega antes de tener prueba suficiente."
       ]
     }
   ],
   "icp": {
-    "label": "Founder-led service businesses",
+    "label": "Negocios de servicios liderados por el fundador",
     "pains": [
-      "Generic agency language creates distrust.",
-      "Buyers do not understand what gets done."
+      "El lenguaje generico de agencia genera desconfianza.",
+      "Los compradores no entienden con claridad que se va a hacer."
     ],
     "desired_outcomes": [
-      "Qualified conversations with the right buyers."
+      "Conversaciones calificadas con los compradores correctos."
     ]
   },
   "offer": {
-    "name": "Sales clarity sprint",
-    "core_promise": "Help founder-led service businesses avoid vague positioning and reach qualified conversations.",
-    "mechanism": "A founder-guided review of sales messaging, offer structure, and buyer objections.",
+    "name": "Sprint de claridad comercial",
+    "core_promise": "Ayudar a negocios de servicios liderados por el fundador a evitar posicionamiento vago y llegar a conversaciones calificadas.",
+    "mechanism": "Una revision guiada por el fundador del mensaje comercial, la estructura de la oferta y las objeciones del comprador.",
     "proof_points": [
-      "Transparent process",
-      "Specific deliverables"
+      "Proceso transparente",
+      "Entregables especificos"
     ]
   },
   "market_model": {
-    "segment_name": "SMB sales enablement services",
+    "segment_name": "Servicios de habilitacion comercial para PyME",
     "blended_value": 1620000000,
     "currency_code": "MXN",
     "key_assumptions": [
@@ -96,16 +96,16 @@
     "currency_code": "MXN"
   },
   "decision_memo": {
-    "recommended_action": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
-    "why_now": "The system has enough evidence and confidence to recommend a focused next move.",
+    "recommended_action": "Lanzar el primer experimento Mexico-first de adquisicion en el canal de mejor ajuste.",
+    "why_now": "El sistema ya tiene suficiente evidencia y confianza para recomendar un siguiente movimiento enfocado.",
     "key_risks": [
-      "Execution may still fail if the offer is not explained with enough specificity.",
-      "Channel assumptions should be validated with early conversion data."
+      "La ejecucion todavia puede fallar si la oferta no se explica con suficiente especificidad.",
+      "Los supuestos del canal deben validarse con datos tempranos de conversion."
     ],
     "next_steps": [
-      "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
-      "Test the target pricing tier with explicit scope and proof.",
-      "Measure conversion quality, not just lead volume, for 30 days."
+      "Lanzar el primer experimento Mexico-first de adquisicion en el canal de mejor ajuste.",
+      "Probar el nivel de precio objetivo con alcance y prueba explicitos.",
+      "Medir calidad de conversion, no solo volumen de leads, durante 30 dias."
     ],
     "evidence_refs": [
       "2026-03-14-founder-clarity",
@@ -115,19 +115,19 @@
   "execution_plan": {
     "milestones": [
       {
-        "name": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
-        "timeframe": "Days 1-30",
-        "success_metric": "First execution launched with a clear message and tracking in place."
+        "name": "Lanzar el primer experimento Mexico-first de adquisicion en el canal de mejor ajuste.",
+        "timeframe": "Dias 1-30",
+        "success_metric": "Primera ejecucion lanzada con mensaje claro y seguimiento activo."
       },
       {
-        "name": "Test the target pricing tier with explicit scope and proof.",
-        "timeframe": "Days 31-60",
-        "success_metric": "Offer, pricing, and objections updated from live feedback."
+        "name": "Probar el nivel de precio objetivo con alcance y prueba explicitos.",
+        "timeframe": "Dias 31-60",
+        "success_metric": "Oferta, precio y objeciones actualizados con retroalimentacion real."
       },
       {
-        "name": "Measure conversion quality, not just lead volume, for 30 days.",
-        "timeframe": "Days 61-90",
-        "success_metric": "Conversion quality measured and the next repeatable channel decision documented."
+        "name": "Medir calidad de conversion, no solo volumen de leads, durante 30 dias.",
+        "timeframe": "Dias 61-90",
+        "success_metric": "Calidad de conversion medida y siguiente decision de canal documentada."
       }
     ]
   }

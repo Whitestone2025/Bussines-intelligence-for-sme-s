@@ -11,7 +11,7 @@ from workspace import WorkspaceLayout, slugify_id
 
 
 def bullet_lines(items: list[str]) -> str:
-    return "\n".join(f"- {item}" for item in items) if items else "- None"
+    return "\n".join(f"- {item}" for item in items) if items else "- Sin dato"
 
 
 def unique_preserve(items: list[str]) -> list[str]:
@@ -44,7 +44,7 @@ def decision_question(bundle: dict) -> str:
     return first_non_empty(
         bundle.get("decision_question", ""),
         decision.get("decision_summary", ""),
-        f"What is the highest-confidence next move for {company['name']} to validate and grow the {offer['name']} offer in Mexico?",
+        f"Cual es el siguiente movimiento de mayor confianza para que {company['name']} valide y haga crecer la oferta {offer['name']} en Mexico?",
     )
 
 
@@ -56,8 +56,8 @@ def current_thesis(bundle: dict) -> str:
     return first_non_empty(
         bundle.get("current_thesis", ""),
         (
-            f"{company['name']} should lead with {offer['name']} for {icp['label']} because buyers respond to "
-            "clarity, transparent delivery, and a focused first acquisition experiment."
+            f"{company['name']} debe liderar con {offer['name']} para {icp['label']} porque los compradores responden a "
+            "claridad, una entrega transparente y un primer experimento de adquisicion enfocado."
         ),
         decision.get("recommended_action", ""),
     )
@@ -76,16 +76,16 @@ def fact_base(bundle: dict) -> list[str]:
     facts.extend(
         [
             company.get("seed_summary", ""),
-            f"Primary ICP: {icp['label']}.",
-            f"Offer in focus: {offer['name']} with promise '{offer['core_promise']}'.",
-            f"Blended market estimate for {market['segment_name']}: {money(market['currency_code'], market['blended_value'])}.",
-            f"Target price currently points to {money(pricing['currency_code'], pricing['price_target'])}.",
+            f"ICP principal: {icp['label']}.",
+            f"Oferta en foco: {offer['name']} con la promesa '{offer['core_promise']}'.",
+            f"Estimacion combinada de mercado para {market['segment_name']}: {money(market['currency_code'], market['blended_value'])}.",
+            f"El precio objetivo hoy apunta a {money(pricing['currency_code'], pricing['price_target'])}.",
         ]
     )
     for proof_point in offer.get("proof_points", []):
-        facts.append(f"Visible proof point: {proof_point}.")
+        facts.append(f"Prueba visible: {proof_point}.")
     for evidence_ref in decision.get("evidence_refs", []):
-        facts.append(f"Evidence reference available: {evidence_ref}.")
+        facts.append(f"Referencia de evidencia disponible: {evidence_ref}.")
     return unique_preserve(facts)
 
 
@@ -96,7 +96,7 @@ def assumptions(bundle: dict) -> list[str]:
     assumption_lines.extend(str(item).strip() for item in market.get("key_assumptions", []) if str(item).strip())
     assumption_lines.extend(str(item).strip() for item in pricing.get("margin_assumptions", []) if str(item).strip())
     if not assumption_lines:
-        assumption_lines.append("The current recommendation assumes the first chosen channel can be validated quickly with founder-led execution.")
+        assumption_lines.append("La recomendacion actual asume que el primer canal elegido puede validarse rapido con ejecucion liderada por el fundador.")
     return unique_preserve(assumption_lines)
 
 
@@ -105,10 +105,10 @@ def decision_criteria(bundle: dict) -> list[str]:
     if criteria:
         return unique_preserve(criteria)
     return [
-        "Speed to real market signal in Mexico.",
-        "Trust fit for founder-led service buyers.",
-        "Economics that protect margin while keeping the offer credible.",
-        "Execution simplicity for a founder with limited bandwidth.",
+        "Velocidad para obtener una senal real de mercado en Mexico.",
+        "Ajuste de confianza para compradores de servicios liderados por el fundador.",
+        "Economia que proteja margen sin romper la credibilidad de la oferta.",
+        "Simplicidad de ejecucion para un fundador con ancho de banda limitado.",
     ]
 
 
@@ -123,7 +123,7 @@ def validation_gaps(bundle: dict) -> list[str]:
     items = [str(item).strip() for item in bundle.get("validation_gaps", []) if str(item).strip()]
     items.extend(contrary_evidence(bundle))
     if not items:
-        items.append("Validate early conversion quality before scaling channel spend or delivery scope.")
+        items.append("Valida primero la calidad de conversion antes de escalar gasto en canal o alcance de entrega.")
     return unique_preserve(items)
 
 
@@ -136,9 +136,9 @@ def inferred_points(bundle: dict) -> list[str]:
         return unique_preserve(inferences)
     inferences.extend(
         [
-            f"The market appears attractive enough to test because the current model estimates {money(market['currency_code'], market['blended_value'])} in blended value.",
-            f"The viable price corridor likely sits between {money(pricing['currency_code'], pricing['price_floor'])} and {money(pricing['currency_code'], pricing['price_ceiling'])}.",
-            f"The current recommendation remains a live hypothesis with {decision.get('confidence', 0):.0%} confidence.",
+            f"El mercado parece suficientemente atractivo para probarse porque el modelo actual estima {money(market['currency_code'], market['blended_value'])} de valor combinado.",
+            f"El corredor de precio viable hoy se mueve entre {money(pricing['currency_code'], pricing['price_floor'])} y {money(pricing['currency_code'], pricing['price_ceiling'])}.",
+            f"La recomendacion actual sigue siendo una hipotesis viva con {decision.get('confidence', 0):.0%} de confianza.",
         ]
     )
     return unique_preserve(inferences)
@@ -151,14 +151,13 @@ def execution_realities(bundle: dict) -> list[str]:
         return unique_preserve(realities)
     realities.extend(
         [
-            "The founder is the default owner for the first 90 days, so the plan must stay lightweight and sequential.",
-            "Each milestone depends on learning from the previous step before scaling scope or spend.",
+            "El fundador es el responsable por defecto durante los primeros 90 dias, asi que el plan debe mantenerse ligero y secuencial.",
+            "Cada hito depende del aprendizaje del paso anterior antes de ampliar alcance o gasto.",
         ]
     )
     for milestone in plan.get("milestones", []):
-        realities.append(
-            f"{milestone['timeframe']}: owner {milestone.get('owner', 'Founder')} must hit '{milestone['success_metric']}'."
-        )
+        owner = str(milestone.get("owner", "Fundador")).strip() or "Fundador"
+        realities.append(f"{milestone['timeframe']}: {owner} debe lograr '{milestone['success_metric']}'.")
     return unique_preserve(realities)
 
 
@@ -169,7 +168,7 @@ def build_options(bundle: dict) -> list[dict]:
         for index, option in enumerate(provided, start=1):
             normalized.append(
                 {
-                    "label": first_non_empty(option.get("label", ""), f"Option {index}"),
+                    "label": first_non_empty(option.get("label", ""), f"Opcion {index}"),
                     "summary": first_non_empty(option.get("summary", ""), option.get("action", "")),
                     "pros": [str(item).strip() for item in option.get("pros", []) if str(item).strip()],
                     "cons": [str(item).strip() for item in option.get("cons", []) if str(item).strip()],
@@ -184,11 +183,11 @@ def build_options(bundle: dict) -> list[dict]:
     criteria = decision_criteria(bundle)
     options = [
         {
-            "label": "Recommended path",
+            "label": "Ruta recomendada",
             "summary": decision["recommended_action"],
             "pros": [
-                f"Best fit against the current criteria: {criteria[0]}",
-                f"Supported by current why-now logic: {decision['why_now']}",
+                f"Mejor ajuste contra el criterio principal actual: {criteria[0]}",
+                f"Respaldada por la logica actual del por que ahora: {decision['why_now']}",
             ],
             "cons": contrary_evidence(bundle)[:2],
             "recommended": True,
@@ -197,13 +196,13 @@ def build_options(bundle: dict) -> list[dict]:
     for index, action in enumerate(decision.get("alternative_actions", []), start=1):
         options.append(
             {
-                "label": f"Alternative {index}",
+                "label": f"Alternativa {index}",
                 "summary": action,
                 "pros": [
-                    "Creates a credible fallback path if the main experiment underperforms.",
+                    "Crea una via creible de respaldo si el experimento principal rinde por debajo de lo esperado.",
                 ],
                 "cons": [
-                    "Slower path to signal than the recommended move.",
+                    "Es una via mas lenta para obtener senal que el movimiento recomendado.",
                 ],
                 "recommended": False,
             }
@@ -214,12 +213,12 @@ def build_options(bundle: dict) -> list[dict]:
 def option_lines(bundle: dict) -> list[str]:
     lines: list[str] = []
     for option in build_options(bundle):
-        prefix = "Recommended" if option["recommended"] else "Alternative"
+        prefix = "Recomendada" if option["recommended"] else "Alternativa"
         lines.append(f"{prefix}: {option['label']} -> {option['summary']}")
         for item in option.get("pros", []):
-            lines.append(f"  Pros: {item}")
+            lines.append(f"  Ventaja: {item}")
         for item in option.get("cons", []):
-            lines.append(f"  Tradeoff: {item}")
+            lines.append(f"  Compromiso: {item}")
     return lines
 
 
@@ -228,10 +227,10 @@ def traceability_lines(bundle: dict) -> list[str]:
     market = bundle["market_model"]
     pricing = bundle["pricing_model"]
     refs = []
-    refs.extend(f"Evidence: {item}" for item in decision.get("evidence_refs", []))
-    refs.extend(f"Assumption: {item}" for item in market.get("assumption_refs", []))
-    refs.extend(f"Assumption: {item}" for item in pricing.get("assumption_refs", []))
-    refs.extend(f"Decision assumption: {item}" for item in decision.get("assumption_refs", []))
+    refs.extend(f"Evidencia: {item}" for item in decision.get("evidence_refs", []))
+    refs.extend(f"Supuesto: {item}" for item in market.get("assumption_refs", []))
+    refs.extend(f"Supuesto: {item}" for item in pricing.get("assumption_refs", []))
+    refs.extend(f"Supuesto de decision: {item}" for item in decision.get("assumption_refs", []))
     return unique_preserve(refs)
 
 
@@ -240,45 +239,45 @@ def executive_memo(bundle: dict) -> str:
     decision = bundle["decision_memo"]
     return "\n".join(
         [
-            "# Executive Memo",
+            "# Memo Ejecutivo",
             "",
-            f"## Company",
+            "## Empresa",
             "",
             company["name"],
             "",
-            "## Decision Question",
+            "## Pregunta de decision",
             "",
             decision_question(bundle),
             "",
-            "## Current Thesis",
+            "## Tesis actual",
             "",
             current_thesis(bundle),
             "",
-            "## Fact Base",
+            "## Base de hechos",
             "",
             bullet_lines(fact_base(bundle)),
             "",
-            "## Key Assumptions",
+            "## Supuestos clave",
             "",
             bullet_lines(assumptions(bundle)),
             "",
-            "## Options Considered",
+            "## Opciones consideradas",
             "",
             bullet_lines(option_lines(bundle)),
             "",
-            "## Recommendation Criteria",
+            "## Criterios de recomendacion",
             "",
             bullet_lines(decision_criteria(bundle)),
             "",
-            "## Recommendation",
+            "## Recomendacion",
             "",
             decision["recommended_action"],
             "",
-            "## Why This Matters",
+            "## Por que importa",
             "",
             decision["why_now"],
             "",
-            "## Risks And Contrary Evidence",
+            "## Riesgos y evidencia en contra",
             "",
             bullet_lines(contrary_evidence(bundle)),
             "",
@@ -286,7 +285,7 @@ def executive_memo(bundle: dict) -> str:
             "",
             bullet_lines(traceability_lines(bundle)),
             "",
-            "## Immediate Next Actions",
+            "## Siguientes acciones inmediatas",
             "",
             bullet_lines(decision.get("next_steps", [])),
             "",
@@ -303,25 +302,25 @@ def business_diagnosis(bundle: dict) -> str:
     decision = bundle["decision_memo"]
     return "\n".join(
         [
-            "# Business Diagnosis",
+            "# Diagnostico de Negocio",
             "",
-            "## Core Problem",
+            "## Problema central",
             "",
             company["seed_summary"],
             "",
-            "## Current Thesis",
+            "## Tesis actual",
             "",
             current_thesis(bundle),
             "",
-            "## What We Know",
+            "## Lo que sabemos",
             "",
             bullet_lines(fact_base(bundle)),
             "",
-            "## What We Infer",
+            "## Lo que inferimos",
             "",
             bullet_lines(inferred_points(bundle)),
             "",
-            "## What Still Needs Validation",
+            "## Lo que aun necesita validacion",
             "",
             bullet_lines(validation_gaps(bundle)),
             "",
@@ -329,27 +328,27 @@ def business_diagnosis(bundle: dict) -> str:
             "",
             icp["label"],
             "",
-            "## Offer",
+            "## Oferta",
             "",
             f"{offer['name']}: {offer['core_promise']}",
             "",
-            "## Market",
+            "## Mercado",
             "",
-            f"{market['segment_name']} estimated blended size: {market['currency_code']} {market['blended_value']:,.2f}",
+            f"{market['segment_name']} con tamano combinado estimado de {market['currency_code']} {market['blended_value']:,.2f}",
             "",
-            "## Pricing",
+            "## Precio",
             "",
-            f"Target price: {pricing['currency_code']} {pricing['price_target']:,.2f}",
+            f"Precio objetivo: {pricing['currency_code']} {pricing['price_target']:,.2f}",
             "",
-            "## Strategic Options",
+            "## Opciones estrategicas",
             "",
             bullet_lines(option_lines(bundle)),
             "",
-            "## Execution Realities",
+            "## Realidades de ejecucion",
             "",
             bullet_lines(execution_realities(bundle)),
             "",
-            "## Risks",
+            "## Riesgos",
             "",
             bullet_lines(decision.get("key_risks", [])),
             "",
@@ -360,20 +359,20 @@ def business_diagnosis(bundle: dict) -> str:
 def deck_outline(bundle: dict) -> str:
     plan = bundle["execution_plan"]
     lines = [
-        "# Deck Outline",
+        "# Estructura de Presentacion",
         "",
-        "1. Thesis And Decision Question",
-        "2. Core Problem And Constraints",
-        "3. Fact Base",
-        "4. Market Size And Attractiveness",
-        "5. Pricing Logic And Economics",
-        "6. Options Considered",
-        "7. Recommendation Criteria",
-        "8. Recommendation And Risks",
-        "9. 30/60/90 Plan",
-        "10. Validation Agenda",
+        "1. Tesis y pregunta de decision",
+        "2. Problema central y restricciones",
+        "3. Base de hechos",
+        "4. Tamano y atractivo del mercado",
+        "5. Logica de precio y economia",
+        "6. Opciones consideradas",
+        "7. Criterios de recomendacion",
+        "8. Recomendacion y riesgos",
+        "9. Plan 30/60/90",
+        "10. Agenda de validacion",
         "",
-        "## 30/60/90 Milestones",
+        "## Hitos 30/60/90",
         "",
     ]
     for milestone in plan.get("milestones", []):
@@ -386,30 +385,30 @@ def risk_memo(bundle: dict) -> str:
     decision = bundle["decision_memo"]
     risk_lines = []
     for risk in decision.get("key_risks", []):
-        risk_lines.append(f"Risk: {risk}")
-        risk_lines.append("  Owner: Founder")
-        risk_lines.append("  Early signal: Watch objections, low conversion quality, or inability to explain scope quickly.")
+        risk_lines.append(f"Riesgo: {risk}")
+        risk_lines.append("  Responsable: Fundador")
+        risk_lines.append("  Senal temprana: observa objeciones, baja calidad de conversion o incapacidad de explicar alcance con rapidez.")
     mitigations = unique_preserve(
         [
-            "Use evidence-backed language and visible proof.",
-            "Validate channels with low-cost experiments before scaling.",
-            "Review pricing and objections every 30 days.",
+            "Usa lenguaje respaldado por evidencia y prueba visible.",
+            "Valida canales con experimentos de bajo costo antes de escalar.",
+            "Revisa precio y objeciones cada 30 dias.",
             *validation_gaps(bundle),
         ]
     )
     return "\n".join(
         [
-            "# Risk Memo",
+            "# Memo de Riesgos",
             "",
-            "## Contrary Evidence And Watchouts",
+            "## Evidencia en contra y alertas",
             "",
             bullet_lines(contrary_evidence(bundle)),
             "",
-            "## Risk Register",
+            "## Registro de riesgos",
             "",
             bullet_lines(risk_lines),
             "",
-            "## Mitigation Plan",
+            "## Plan de mitigacion",
             "",
             bullet_lines(mitigations),
             "",

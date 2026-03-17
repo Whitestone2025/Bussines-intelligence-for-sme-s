@@ -48,11 +48,39 @@ ICP_KEYWORDS = {
 }
 
 CHANNEL_OPTIONS = [
-    ("landing-page", "Landing Page"),
-    ("email", "Email"),
+    ("landing-page", "Pagina de aterrizaje"),
+    ("email", "Correo"),
     ("whatsapp", "WhatsApp"),
-    ("sales-call", "Sales Call"),
+    ("sales-call", "Llamada de venta"),
 ]
+
+ICP_LABEL_TRANSLATIONS = {
+    "Founders And Owners": "Fundadores y duenos",
+    "Marketing Leaders": "Lideres de marketing",
+    "Sales Leaders": "Lideres comerciales",
+    "Operations Leaders": "Lideres de operaciones",
+}
+
+CHANNEL_NAME_TRANSLATIONS = {
+    "Landing Page": "Pagina de aterrizaje",
+    "Email": "Correo",
+    "WhatsApp": "WhatsApp",
+    "Sales Call": "Llamada de venta",
+}
+
+CHANNEL_ASSET_TRANSLATIONS = {
+    "homepage hero": "mensaje principal de la pagina",
+    "outbound email": "correo inicial de prospeccion",
+    "direct message opener": "mensaje inicial directo",
+    "discovery call framing": "guion de llamada de descubrimiento",
+}
+
+CHANNEL_GOAL_TRANSLATIONS = {
+    "clarify the service before abstract promises": "aclarar el servicio antes de promesas abstractas",
+    "start a relevant conversation with low friction": "iniciar una conversacion relevante con poca friccion",
+    "sound human and easy to reply to": "sonar humano y facil de responder",
+    "reduce skepticism early in the conversation": "bajar el escepticismo desde el inicio de la conversacion",
+}
 
 
 def safe_path(raw_path: str) -> Path:
@@ -73,6 +101,22 @@ def now_iso() -> str:
 def slugify(value: str) -> str:
     cleaned = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
     return cleaned or "untitled"
+
+
+def translate_icp_label(label: str) -> str:
+    return ICP_LABEL_TRANSLATIONS.get(label, label)
+
+
+def translate_channel_name(name: str) -> str:
+    return CHANNEL_NAME_TRANSLATIONS.get(name, name)
+
+
+def translate_channel_asset_focus(value: str) -> str:
+    return CHANNEL_ASSET_TRANSLATIONS.get(value, value)
+
+
+def translate_channel_goal(value: str) -> str:
+    return CHANNEL_GOAL_TRANSLATIONS.get(value, value)
 
 
 def load_json(path: Path, default: dict | list | None = None):
@@ -273,7 +317,7 @@ def bootstrap_research_profile(company_id: str) -> dict:
         "source_refs": list(company.get("source_refs", [])),
         "readiness_score": 0,
         "open_questions_count": 0,
-        "next_step": "Add at least one source asset.",
+        "next_step": "Agrega al menos un activo fuente.",
         "created_at": now,
         "updated_at": now,
     }
@@ -285,9 +329,28 @@ def company_record(company_id: str) -> dict:
     ensure_company_structure(company_id)
     company = default_status_confidence(load_json(company_base(company_id) / "company.json", {"company_id": company_id, "name": company_id.replace("-", " ").title()}), "draft", 0.35)
     profile = bootstrap_research_profile(company_id)
-    services = [default_status_confidence(load_json(path, {}) | {"path": rel(path)}, "draft", 0.4) for path in sorted((company_base(company_id) / "services").glob("*.json"))]
-    icps = [default_status_confidence(load_json(path, {}) | {"path": rel(path)}, "draft", 0.4) for path in sorted((company_base(company_id) / "icps").glob("*.json"))]
-    channels = [default_status_confidence(load_json(path, {}) | {"path": rel(path)}, "draft", 0.4) for path in sorted((company_base(company_id) / "channels").glob("*.json"))]
+    services = []
+    for path in sorted((company_base(company_id) / "services").glob("*.json")):
+        service = default_status_confidence(load_json(path, {}) | {"path": rel(path)}, "draft", 0.4)
+        service["name"] = translate_preview_text(service.get("name", ""))
+        service["one_sentence_description"] = translate_preview_text(service.get("one_sentence_description", ""))
+        service["core_outcome"] = translate_preview_text(service.get("core_outcome", ""))
+        service["unresolved_questions"] = translate_preview_list(service.get("unresolved_questions", []))
+        services.append(service)
+    icps = []
+    for path in sorted((company_base(company_id) / "icps").glob("*.json")):
+        icp = default_status_confidence(load_json(path, {}) | {"path": rel(path)}, "draft", 0.4)
+        icp["label"] = translate_icp_label(icp.get("label", ""))
+        icp["unresolved_questions"] = translate_preview_list(icp.get("unresolved_questions", []))
+        icps.append(icp)
+    channels = []
+    for path in sorted((company_base(company_id) / "channels").glob("*.json")):
+        channel = default_status_confidence(load_json(path, {}) | {"path": rel(path)}, "draft", 0.4)
+        channel["name"] = translate_channel_name(channel.get("name", ""))
+        channel["asset_focus"] = translate_channel_asset_focus(channel.get("asset_focus", ""))
+        channel["primary_goal"] = translate_channel_goal(channel.get("primary_goal", ""))
+        channel["unresolved_questions"] = translate_preview_list(channel.get("unresolved_questions", []))
+        channels.append(channel)
     readiness = readiness_for_company(company_id)
     return company | {
         "company_id": company.get("company_id", company_id),
@@ -415,9 +478,9 @@ def list_insights(company_id: str = "", service_id: str = "") -> list[dict]:
         if not filter_match(current_service, service_id):
             continue
         text = read_text(path)
-        pattern = "\n".join(extract_section_list(text, "Pattern")).strip()
-        evidence_ids = extract_section_list(text, "Evidence")
-        why = "\n".join(extract_section_list(text, "Why It Matters")).strip()
+        pattern = "\n".join(extract_section_list(text, "Patron") or extract_section_list(text, "Pattern")).strip()
+        evidence_ids = extract_section_list(text, "Evidencia") or extract_section_list(text, "Evidence")
+        why = "\n".join(extract_section_list(text, "Por que importa") or extract_section_list(text, "Why It Matters")).strip()
         items.append(
             {
                 "id": path.stem,
@@ -522,7 +585,7 @@ def list_patterns(company_id: str = "") -> list[dict]:
         items.append(
             {
                 "id": path.stem,
-                "title": path.stem.replace("-", " ").replace("_", " ").title(),
+                "title": localized_deliverable_title(path.stem, path.stem.replace("-", " ").replace("_", " ").title()),
                 "company_id": current_company,
                 "path": rel(path),
                 "summary": section_summary(path),
@@ -544,7 +607,7 @@ def list_reports(company_id: str = "") -> list[dict]:
         items.append(
             {
                 "id": path.stem,
-                "title": path.stem.replace("-", " ").replace("_", " ").title(),
+                "title": localized_deliverable_title(path.stem, path.stem.replace("-", " ").replace("_", " ").title()),
                 "company_id": current_company,
                 "path": rel(path),
                 "summary": section_summary(path),
@@ -614,7 +677,7 @@ def list_deliverables(company_id: str = "") -> list[dict]:
         items.append(
             {
                 "id": path.stem,
-                "title": path.stem.replace("-", " ").replace("_", " ").title(),
+                "title": localized_deliverable_title(path.stem, path.stem.replace("-", " ").replace("_", " ").title()),
                 "company_id": current_company,
                 "path": rel(path),
                 "summary": section_summary(path),
@@ -818,9 +881,20 @@ def translate_preview_text(text: str) -> str:
     if not text:
         return text
     translations = {
+        "Likely Service Statement": "Servicio probable",
+        "Likely ICP": "ICP probable",
+        "Likely Channel": "Canal probable",
+        "The system needs a trustworthy service statement before experiments become useful.": "El sistema necesita una descripcion confiable del servicio antes de que los experimentos sean utiles.",
+        "A plausible ICP helps the system group pains, objections, and channels correctly.": "Un ICP plausible ayuda al sistema a ordenar bien dolores, objeciones y canales.",
+        "The first ready channel determines where the first experiments should focus.": "El primer canal listo define donde deben enfocarse los primeros experimentos.",
+        "Which of these statements is closest to what the business actually sells?": "Cual de estas descripciones se parece mas a lo que realmente vende el negocio?",
+        "Which buyer profile feels closest to the real customer right now?": "Que perfil de comprador se parece mas al cliente real en este momento?",
+        "Which channel should the system improve first?": "Que canal deberia mejorar primero el sistema?",
+        "How should this company sound when it communicates with buyers?": "Como debe sonar esta empresa cuando se comunica con compradores?",
+        "Readiness requirements are not met.": "Todavia no se cumple la preparacion necesaria.",
         "Wedding planners and event designers with premium visual events in Guadalajara and CDMX": "Wedding planners y disenadores de eventos con proyectos premium y altamente visuales en Guadalajara y CDMX",
         "Blended market model using top-down demand assumptions and bottom-up reachable-customer heuristics.": "Modelo de mercado combinado usando supuestos top-down de demanda y heuristicas bottom-up sobre clientes alcanzables.",
-        "Attractiveness score balances competitive pressure, urgency of the problem, budget fit, and channel accessibility.": "El score de atractivo balancea presion competitiva, urgencia del problema, encaje de presupuesto y facilidad de acceso al canal.",
+        "Attractiveness score balances competitive pressure, urgency of the problem, budget fit, and channel accessibility.": "El puntaje de atractivo balancea presion competitiva, urgencia del problema, encaje de presupuesto y facilidad de acceso al canal.",
         "Annual price per customer assumed at MXN 42,000.00.": "Se asume un ingreso anual por cliente de MXN 42,000.",
         "Target customer ratio set at 18% of the total addressable customer base.": "Se asume que el 18% del mercado total direccionable entra al segmento objetivo.",
         "Serviceable customer ratio set at 35% of target customers.": "Se asume que el 35% del segmento objetivo es realmente atendible.",
@@ -871,6 +945,31 @@ def translate_preview_text(text: str) -> str:
         "The service appears most defensible in visual or premium projects, not in every event.": "El servicio parece mas defendible en proyectos visuales o premium, no en cualquier evento.",
     }
     translated = translations.get(text, text)
+    translated = re.sub(
+        r"Annual price per customer assumed at (MXN [0-9,]+(?:\.[0-9]{2})?)\.",
+        r"Se asume un ingreso anual por cliente de \1.",
+        translated,
+    )
+    translated = re.sub(
+        r"Target customer ratio set at ([0-9]+%) of the total addressable customer base\.",
+        r"Se asume que el \1 del mercado total direccionable entra al segmento objetivo.",
+        translated,
+    )
+    translated = re.sub(
+        r"Serviceable customer ratio set at ([0-9]+%) of target customers\.",
+        r"Se asume que el \1 del segmento objetivo es realmente atendible.",
+        translated,
+    )
+    translated = re.sub(
+        r"Obtainable customer ratio set at ([0-9]+%) of serviceable customers\.",
+        r"Se asume que el \1 del segmento atendible es capturable en el corto plazo.",
+        translated,
+    )
+    translated = re.sub(
+        r"Bottom-up model uses ([0-9,]+) reachable customers and ([0-9]+%) expected close rate\.",
+        r"El modelo bottom-up usa \1 clientes alcanzables y una tasa de cierre esperada de \2.",
+        translated,
+    )
     replacements = (
         ("Core promise:", "Promesa central:"),
         ("Implicit objection:", "Objecion implicita:"),
@@ -878,6 +977,10 @@ def translate_preview_text(text: str) -> str:
         ("see the event before montaje", "ver el evento antes del montaje"),
         ("who pays for this", "quien paga esto"),
         ("Audit", "Trazabilidad"),
+        ("Founder", "Fundador"),
+        ("Sales Call", "Llamada de venta"),
+        ("Landing Page", "Pagina de aterrizaje"),
+        ("Email", "Correo"),
     )
     for source, target in replacements:
         translated = translated.replace(source, target)
@@ -1065,7 +1168,7 @@ def build_thesis_payload(company: dict, service: dict, icp: dict, offer: dict, m
         [
             f"Servicio: {service_statement}",
             f"ICP: {icp.get('label', 'Sin ICP validado')}",
-            f"Headline: {messaging.get('headline', 'Sin headline')}",
+            f"Mensaje principal: {messaging.get('headline', 'Sin mensaje principal')}",
             f"Mecanismo: {offer.get('mechanism', 'Sin mecanismo')}",
         ],
         service_statement=service_statement,
@@ -1141,7 +1244,7 @@ def build_viability_summary_payload(pricing: dict, financials: dict) -> dict:
     return block_payload(
         pricing.get("status") or financials.get("status") or "draft",
         confidence,
-        "Pricing y viabilidad",
+        "Precio y viabilidad",
         financials.get("viability_warning") or "Sin alerta de viabilidad registrada.",
         [
             f"Precio piso: {currency_display(pricing.get('price_floor'), pricing.get('currency_code', 'MXN'))}",
@@ -1363,7 +1466,7 @@ def build_case_payload(company_id: str = "") -> dict:
     return {
         "project": {
             "name": "Ws B-I",
-            "tagline": "Business intelligence operativo para decisiones en Mexico.",
+            "tagline": "Inteligencia de negocio operativa para decisiones en Mexico.",
         },
         "company": company,
         "companies": [
@@ -1409,14 +1512,14 @@ def empty_workspace_payload() -> dict:
     return {
         "project": {
             "name": "Ws B-I",
-            "tagline": "Business intelligence operativo para decisiones en Mexico.",
+            "tagline": "Inteligencia de negocio operativa para decisiones en Mexico.",
         },
         "company": {},
         "companies": [],
         "sections": {},
         "summary": {},
         "onboarding": {
-            "headline": "Workspace listo para iniciar",
+            "headline": "Espacio de trabajo listo para iniciar",
             "summary": "Pidele a Codex que tome el repositorio desde GitHub, te haga solo las preguntas necesarias y cargue tu negocio hasta verlo en el frontend.",
             "github_repo_url": github_repo_url,
             "starter_prompt": (
@@ -1499,8 +1602,8 @@ def infer_service_finding(company_id: str) -> dict | None:
         confidence,
         [],
         [],
-        title="Likely Service Statement",
-        suggested_action="Validate whether this describes the core offer accurately.",
+        title="Servicio probable",
+        suggested_action="Valida si esta descripcion refleja con precision la oferta central.",
     )
 
 
@@ -1521,12 +1624,12 @@ def infer_icp_findings(company_id: str, fragments: list[dict]) -> list[dict]:
             make_finding(
                 company_id,
                 "icp",
-                label,
+                translate_icp_label(label),
                 confidence,
                 [],
                 [],
-                title=f"Likely ICP: {label}",
-                suggested_action="Confirm whether this buyer profile matches reality.",
+                title=f"ICP probable: {translate_icp_label(label)}",
+                suggested_action="Confirma si este perfil comprador coincide con la realidad.",
             )
         )
     return findings
@@ -1537,13 +1640,13 @@ def infer_channel_findings(company_id: str, fragments: list[dict]) -> list[dict]
     combined = " ".join(fragment["text"].lower() for fragment in fragments)
     findings = []
     if profile.get("website"):
-        findings.append(make_finding(company_id, "channel", "Landing Page", 0.72, [], [], title="Likely Channel: Landing Page"))
+        findings.append(make_finding(company_id, "channel", "Pagina de aterrizaje", 0.72, [], [], title="Canal probable: Pagina de aterrizaje"))
     if "email" in combined:
-        findings.append(make_finding(company_id, "channel", "Email", 0.68, [], [], title="Likely Channel: Email"))
+        findings.append(make_finding(company_id, "channel", "Correo", 0.68, [], [], title="Canal probable: Correo"))
     if "whatsapp" in combined or "dm" in combined:
-        findings.append(make_finding(company_id, "channel", "WhatsApp", 0.66, [], [], title="Likely Channel: WhatsApp"))
+        findings.append(make_finding(company_id, "channel", "WhatsApp", 0.66, [], [], title="Canal probable: WhatsApp"))
     if "call" in combined or "sales call" in combined:
-        findings.append(make_finding(company_id, "channel", "Sales Call", 0.7, [], [], title="Likely Channel: Sales Call"))
+        findings.append(make_finding(company_id, "channel", "Llamada de venta", 0.7, [], [], title="Canal probable: Llamada de venta"))
     return unique_finding_records(findings)[:3]
 
 
@@ -1590,12 +1693,12 @@ def infer_market_claim_findings(company_id: str, fragments: list[dict]) -> list[
                     make_finding(
                         company_id,
                         "market_claim",
-                        f"The market around this company appears to lean on the phrase '{phrase}'.",
+                        f"El mercado alrededor de esta empresa parece apoyarse en la frase '{phrase}'.",
                         0.62,
                         fragment["evidence_refs"],
                         fragment["source_refs"],
-                        title=f"Category cliche: {phrase}",
-                        suggested_action="Avoid repeating this category cliche unless evidence proves it matters.",
+                        title=f"Cliche de categoria: {phrase}",
+                        suggested_action="Evita repetir este cliche de categoria salvo que la evidencia pruebe que importa.",
                     )
                 )
     return unique_finding_records(findings)[:4]
@@ -1621,10 +1724,10 @@ def derive_findings(company_id: str) -> list[dict]:
         findings.append(service)
     findings.extend(infer_icp_findings(company_id, fragments))
     findings.extend(infer_channel_findings(company_id, fragments))
-    findings.extend(infer_signal_findings(company_id, fragments, "pain", PAIN_CUES, "Pain", "Confirm whether this pain repeats often enough to matter."))
-    findings.extend(infer_signal_findings(company_id, fragments, "outcome", OUTCOME_CUES, "Outcome", "Validate whether this outcome matters most in buying decisions."))
-    findings.extend(infer_signal_findings(company_id, fragments, "objection", OBJECTION_CUES, "Objection", "Confirm whether this objection blocks deals repeatedly."))
-    findings.extend(infer_signal_findings(company_id, fragments, "trust_signal", TRUST_CUES, "Trust Signal", "Promote this if it repeatedly lowers skepticism."))
+    findings.extend(infer_signal_findings(company_id, fragments, "pain", PAIN_CUES, "Dolor", "Confirma si este dolor se repite lo suficiente como para importar."))
+    findings.extend(infer_signal_findings(company_id, fragments, "outcome", OUTCOME_CUES, "Resultado esperado", "Valida si este resultado pesa de verdad en la compra."))
+    findings.extend(infer_signal_findings(company_id, fragments, "objection", OBJECTION_CUES, "Objecion", "Confirma si esta objecion bloquea ventas de forma repetida."))
+    findings.extend(infer_signal_findings(company_id, fragments, "trust_signal", TRUST_CUES, "Senal de confianza", "Promociona esto si repetidamente baja el escepticismo."))
     findings.extend(infer_market_claim_findings(company_id, fragments))
     return unique_finding_records(findings)
 
@@ -1632,7 +1735,10 @@ def derive_findings(company_id: str) -> list[dict]:
 def write_auto_records(base: Path, prefix: str, records: list[dict], key: str) -> None:
     base.mkdir(parents=True, exist_ok=True)
     for path in base.glob(f"{prefix}*.json"):
-        path.unlink()
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            continue
     for record in records:
         identifier = record.get(key, slugify(record.get("title", "record")))
         write_json(base / f"{identifier}.json", record)
@@ -1696,16 +1802,22 @@ def upsert_channel(company_id: str, name: str, status: str, confidence: float, e
     channel_id = slugify(name)
     path = company_base(company_id) / "channels" / f"{channel_id}.json"
     asset_focus_map = {
-        "Landing Page": "homepage hero",
-        "Email": "outbound email",
+        "Landing Page": "mensaje principal de la pagina",
+        "Pagina de aterrizaje": "mensaje principal de la pagina",
+        "Email": "correo inicial de prospeccion",
+        "Correo": "correo inicial de prospeccion",
         "WhatsApp": "direct message opener",
-        "Sales Call": "discovery call framing",
+        "Llamada de venta": "guion de llamada de descubrimiento",
+        "Sales Call": "guion de llamada de descubrimiento",
     }
     goal_map = {
-        "Landing Page": "clarify the service before abstract promises",
-        "Email": "start a relevant conversation with low friction",
-        "WhatsApp": "sound human and easy to reply to",
-        "Sales Call": "reduce skepticism early in the conversation",
+        "Landing Page": "aclarar el servicio antes de promesas abstractas",
+        "Pagina de aterrizaje": "aclarar el servicio antes de promesas abstractas",
+        "Email": "iniciar una conversacion relevante con poca friccion",
+        "Correo": "iniciar una conversacion relevante con poca friccion",
+        "WhatsApp": "sonar humano y facil de responder",
+        "Llamada de venta": "bajar el escepticismo desde el inicio de la conversacion",
+        "Sales Call": "bajar el escepticismo desde el inicio de la conversacion",
     }
     current = load_json(path, {"channel_id": channel_id, "company_id": company_id})
     current.update(
@@ -1763,11 +1875,11 @@ def generate_validation_questions(company_id: str) -> list[dict]:
                 company_id,
                 "auto-service-confirmation",
                 "service",
-                "Which of these statements is closest to what the business actually sells?",
+                "Cual de estas descripciones se parece mas a lo que realmente vende el negocio?",
                 "single_select",
                 options,
                 options[0]["value"],
-                "The system needs a trustworthy service statement before experiments become useful.",
+                "El sistema necesita una descripcion confiable del servicio antes de que los experimentos sean utiles.",
                 {"action": "upsert_service", "evidence_refs": service_findings[0].get("evidence_refs", [])},
             )
         )
@@ -1782,11 +1894,11 @@ def generate_validation_questions(company_id: str) -> list[dict]:
                 company_id,
                 "auto-icp-confirmation",
                 "icp",
-                "Which buyer profile feels closest to the real customer right now?",
+                "Que perfil de comprador se parece mas al cliente real en este momento?",
                 "single_select",
                 options,
                 options[0]["value"],
-                "A plausible ICP helps the system group pains, objections, and channels correctly.",
+                "Un ICP plausible ayuda al sistema a ordenar bien dolores, objeciones y canales.",
                 {"action": "upsert_icp"},
             )
         )
@@ -1797,17 +1909,17 @@ def generate_validation_questions(company_id: str) -> list[dict]:
             recommended = options[0]["value"]
         else:
             options = [{"label": label, "value": label} for _, label in CHANNEL_OPTIONS]
-            recommended = "Landing Page"
+            recommended = "Pagina de aterrizaje"
         questions.append(
             create_validation_question(
                 company_id,
                 "auto-channel-priority",
                 "channel",
-                "Which channel should the system improve first?",
+                "Que canal deberia mejorar primero el sistema?",
                 "single_select",
                 options,
                 recommended,
-                "The first ready channel determines where the first experiments should focus.",
+                "El primer canal listo define donde deben enfocarse los primeros experimentos.",
                 {"action": "upsert_channel"},
             )
         )
@@ -1819,11 +1931,11 @@ def generate_validation_questions(company_id: str) -> list[dict]:
                 company_id,
                 "auto-tone-constraint",
                 "company",
-                "How should this company sound when it communicates with buyers?",
+                "Como debe sonar esta empresa cuando se comunica con compradores?",
                 "free_text",
                 [],
-                "clear\nhuman\ndirect",
-                "Tone constraints help the evaluator and future experiments avoid generic marketing language.",
+                "claro\nhumano\ndirecto",
+                "Las reglas de tono ayudan al evaluador y a los experimentos a evitar lenguaje generico de marketing.",
                 {"action": "update_tone_constraints"},
             )
         )
@@ -1870,7 +1982,10 @@ def write_validation_questions(company_id: str, questions: list[dict]) -> None:
     base.mkdir(parents=True, exist_ok=True)
     answered = {path.name: load_json(path, {}) for path in base.glob("*.json") if load_json(path, {}).get("status") == "answered"}
     for path in base.glob("auto-*.json"):
-        path.unlink()
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            continue
     for question in questions:
         existing_name = f"{question['question_id']}.json"
         if existing_name in answered:
@@ -1898,14 +2013,14 @@ def next_step_for_company(company_id: str) -> str:
     readiness = readiness_for_company(company_id)
     open_questions = len(list_validation_questions(company_id=company_id, status="open"))
     if readiness["status"] == "ready":
-        return "Run the first experiment."
+        return "Corre el primer experimento."
     if open_questions:
-        return "Answer the next validation question."
+        return "Responde la siguiente pregunta de validacion."
     if not list_sources(company_id=company_id):
-        return "Add at least one source asset."
+        return "Agrega al menos un activo fuente."
     if len(list_evidence(company_id=company_id)) < 5:
-        return "Add more normalized evidence."
-    return "Refresh findings and review readiness blockers."
+        return "Agrega mas evidencia normalizada."
+    return "Actualiza los hallazgos y revisa los bloqueadores de preparacion."
 
 
 def refresh_company_knowledge(company_id: str) -> dict:
@@ -1952,17 +2067,17 @@ def readiness_for_company(company_id: str) -> dict:
     score = round(sum(1 for item in checks if item) / len(checks) * 100, 1)
     blocking_reasons = []
     if not minimum_evidence_met:
-        blocking_reasons.append("Add at least 5 evidence entries before running experiments.")
+        blocking_reasons.append("Agrega al menos 5 evidencias antes de correr experimentos.")
     if not source_diversity_met:
-        blocking_reasons.append("Add at least 2 source assets or 2 distinct source kinds.")
+        blocking_reasons.append("Agrega al menos 2 activos fuente o 2 tipos de fuente distintos.")
     if not service_defined:
-        blocking_reasons.append("Validate or strengthen the primary service statement.")
+        blocking_reasons.append("Valida o fortalece la descripcion principal del servicio.")
     if not icp_defined:
-        blocking_reasons.append("Validate or strengthen the primary ICP.")
+        blocking_reasons.append("Valida o fortalece el ICP principal.")
     if not channel_defined:
-        blocking_reasons.append("Validate the first channel to improve.")
+        blocking_reasons.append("Valida el primer canal a mejorar.")
     if not insight_density:
-        blocking_reasons.append("Collect more pains, outcomes, or objections from evidence.")
+        blocking_reasons.append("Recolecta mas dolores, resultados esperados u objeciones desde la evidencia.")
 
     status = "ready" if all(checks) else "partially_ready" if score >= 50 else "not_ready"
     return {
@@ -2108,30 +2223,30 @@ def build_workspace() -> dict:
     return {
         "project": {
             "name": "Ws B-I",
-            "tagline": "Business intelligence operativo para decisiones en Mexico.",
+            "tagline": "Inteligencia de negocio operativa para decisiones en Mexico.",
         },
         "overview": overview,
         "companies": companies,
         "contexts": build_context_options(companies),
         "views": [
-            {"id": "overview", "label": "Overview", "count": 0},
-            {"id": "research", "label": "Research", "count": len(list_research_profiles())},
-            {"id": "sources", "label": "Sources", "count": len(list_sources())},
-            {"id": "evidence", "label": "Evidence", "count": len(list_evidence())},
-            {"id": "findings", "label": "Findings", "count": len(list_findings())},
-            {"id": "validation", "label": "Validation", "count": len(list_validation_questions(status="open"))},
-            {"id": "knowledge", "label": "Knowledge", "count": len(build_knowledge_items())},
-            {"id": "market", "label": "Market", "count": len(list_json_domain("market"))},
-            {"id": "competitors", "label": "Competitors", "count": len(list_json_domain("competitors"))},
-            {"id": "pricing", "label": "Pricing", "count": len(list_json_domain("pricing"))},
-            {"id": "financials", "label": "Financials", "count": len(list_json_domain("financials"))},
-            {"id": "decisions", "label": "Decisions", "count": len(list_json_domain("decisions"))},
-            {"id": "plans", "label": "Plans", "count": len(list_json_domain("plans"))},
-            {"id": "experiments", "label": "Experiments", "count": len(experiment_folder_records())},
-            {"id": "deliverables", "label": "Deliverables", "count": len(list_deliverables())},
-            {"id": "patterns", "label": "Patterns", "count": len(list_patterns())},
-            {"id": "reports", "label": "Reports", "count": len(list_reports())},
-            {"id": "files", "label": "Files", "count": len(list_files())},
+            {"id": "overview", "label": "Resumen", "count": 0},
+            {"id": "research", "label": "Investigacion", "count": len(list_research_profiles())},
+            {"id": "sources", "label": "Fuentes", "count": len(list_sources())},
+            {"id": "evidence", "label": "Evidencia", "count": len(list_evidence())},
+            {"id": "findings", "label": "Hallazgos", "count": len(list_findings())},
+            {"id": "validation", "label": "Validacion", "count": len(list_validation_questions(status="open"))},
+            {"id": "knowledge", "label": "Conocimiento", "count": len(build_knowledge_items())},
+            {"id": "market", "label": "Mercado", "count": len(list_json_domain("market"))},
+            {"id": "competitors", "label": "Competencia", "count": len(list_json_domain("competitors"))},
+            {"id": "pricing", "label": "Precio", "count": len(list_json_domain("pricing"))},
+            {"id": "financials", "label": "Finanzas", "count": len(list_json_domain("financials"))},
+            {"id": "decisions", "label": "Decisiones", "count": len(list_json_domain("decisions"))},
+            {"id": "plans", "label": "Planes", "count": len(list_json_domain("plans"))},
+            {"id": "experiments", "label": "Experimentos", "count": len(experiment_folder_records())},
+            {"id": "deliverables", "label": "Entregables", "count": len(list_deliverables())},
+            {"id": "patterns", "label": "Patrones", "count": len(list_patterns())},
+            {"id": "reports", "label": "Reportes", "count": len(list_reports())},
+            {"id": "files", "label": "Archivos", "count": len(list_files())},
         ],
     }
 
@@ -2230,16 +2345,16 @@ def create_insight(payload: dict) -> dict:
     lines = [
         "# Insight",
         "",
-        "## Pattern",
+        "## Patron",
         "",
         str(payload.get("pattern", "")).strip(),
         "",
-        "## Evidence",
+        "## Evidencia",
         "",
     ]
     for evidence_id in evidence_ids:
         lines.append(f"- {evidence_id}")
-    lines.extend(["", "## Why It Matters", "", str(payload.get("why_it_matters", "")).strip(), ""])
+    lines.extend(["", "## Por que importa", "", str(payload.get("why_it_matters", "")).strip(), ""])
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines), encoding="utf-8")
     return {"insight_id": insight_id, "path": rel(path)}
@@ -2257,22 +2372,22 @@ def next_experiment_id(company_id: str, service_id: str, asset_type: str) -> str
 
 def create_result_markdown(payload: dict) -> str:
     lines = [
-        "# Result",
+        "# Resultado",
         "",
         f"Decision: {payload.get('decision', 'discard')}",
         "",
-        "## Why It Won" if payload.get("decision") == "keep" else "## Why It Lost",
+        "## Por que gano" if payload.get("decision") == "keep" else "## Por que perdio",
         "",
     ]
     for reason in payload.get("reasoning", [])[:5]:
         lines.append(f"- {reason}")
-    lines.extend(["", "## What We Learned", ""])
+    lines.extend(["", "## Lo que aprendimos", ""])
     for key, value in payload.get("subscores", {}).items():
         baseline_value = payload.get("baseline_subscores", {}).get(key, 0)
         if value > baseline_value:
-            lines.append(f"- {key.replace('_', ' ').title()} improved from {baseline_value} to {value}.")
+            lines.append(f"- {key.replace('_', ' ').title()} mejoro de {baseline_value} a {value}.")
     if lines[-1] == "":
-        lines.append("- No strong learning was captured.")
+        lines.append("- No se capturo un aprendizaje fuerte.")
     lines.append("")
     return "\n".join(lines)
 
@@ -2280,7 +2395,7 @@ def create_result_markdown(payload: dict) -> str:
 def ensure_experiment_ready(company_id: str) -> dict:
     readiness = readiness_for_company(company_id)
     if readiness["status"] != "ready":
-        reasons = " ".join(readiness["blocking_reasons"]) or "Readiness requirements are not met."
+        reasons = " ".join(readiness["blocking_reasons"]) or "Todavia no se cumple la preparacion necesaria."
         raise ValueError(reasons)
     return readiness
 
@@ -2381,29 +2496,29 @@ def create_report(payload: dict) -> dict:
     experiments = experiment_folder_records(company_id=company_id)
     kept = [item for item in experiments if item.get("evaluation", {}).get("decision") == "keep"]
     lines = [
-        "# Experiment Summary",
+        "# Resumen de Experimentos",
         "",
-        f"Company: {company_id}",
-        f"Readiness: {readiness['status']} ({readiness['score']})",
+        f"Empresa: {company_id}",
+        f"Preparacion: {readiness['status']} ({readiness['score']})",
         "",
-        "## Strongest Learnings",
+        "## Aprendizajes mas fuertes",
         "",
     ]
     if kept:
         for item in kept[:5]:
             lines.append(f"- {item['id']}: {item['evaluation'].get('final_judgment', {}).get('summary', '')}")
     else:
-        lines.append("- No kept experiments yet.")
-    lines.extend(["", "## Readiness Blockers", ""])
+        lines.append("- Aun no hay experimentos ganadores.")
+    lines.extend(["", "## Bloqueadores de preparacion", ""])
     if readiness["blocking_reasons"]:
         for blocker in readiness["blocking_reasons"]:
             lines.append(f"- {blocker}")
     else:
-        lines.append("- No active blockers.")
-    lines.extend(["", "## Recommended Next Steps", ""])
+        lines.append("- No hay bloqueadores activos.")
+    lines.extend(["", "## Siguientes pasos recomendados", ""])
     if experiments:
         for item in experiments[:3]:
-            lines.append(f"- Revisit {item['asset_type']} messaging for `{item['service_id']}` with one tighter hypothesis.")
+            lines.append(f"- Revisa el mensaje de {item['asset_type']} para `{item['service_id']}` con una hipotesis mas cerrada.")
     else:
         lines.append(f"- {next_step_for_company(company_id)}")
     lines.append("")

@@ -1,50 +1,50 @@
-# Work With Codex
+# Trabaja con Codex
 
-This is the expected founder workflow.
+Este es el flujo esperado para un founder.
 
-## Step 1
+## Paso 1
 
-Tell Codex:
+Dile a Codex:
 
 ```text
-Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, prepáralo en una carpeta nueva, guíame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando esté listo. No soy técnico.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico.
 ```
 
-## Step 2
+## Paso 2
 
-Codex should ask you for a small seed, usually:
+Codex debe pedirte un seed pequeno, normalmente:
 
-- your business name,
-- what you sell,
-- where you sell,
-- and what material you already have.
+- nombre del negocio,
+- que vendes,
+- donde vendes,
+- y que material real ya tienes.
 
-## Step 3
+## Paso 3
 
-Codex should do the technical work for you:
+Codex debe encargarse del trabajo tecnico:
 
-- get the repository into a clean folder if needed,
-- create the research seed,
-- add sources,
-- structure evidence,
-- explain what is still missing,
-- and move your case forward.
+- traer el repositorio a una carpeta limpia si hace falta,
+- crear la semilla de investigacion,
+- agregar fuentes,
+- estructurar evidencia,
+- explicarte que sigue faltando,
+- y avanzar tu caso sin que tengas que tocar archivos.
 
-## Step 4
+## Paso 4
 
-When Codex needs more input, it should ask in plain language, for example:
+Cuando Codex necesite mas contexto, debe preguntarte en lenguaje simple. Ejemplos:
 
-- “What do customers usually ask before buying?”
-- “What do they hesitate about?”
-- “Which competitors do people compare you against?”
+- "Que suelen preguntar tus clientes antes de comprar?"
+- "En que suelen dudar?"
+- "Contra quien te comparan?"
 
-## Step 5
+## Paso 5
 
-Codex should then tell you when your case is ready to review and open the frontend path for you.
+Despues debe decirte cuando tu caso ya esta listo para revisarse y abrirte el frontend.
 
-## What Codex Should Not Do
+## Lo que Codex no debe hacer
 
-- ask you to edit repo files manually,
-- ask you to understand JSON or folder structure,
-- dump technical logs without context,
-- stop early at analysis when your case is not yet visible.
+- pedirte editar archivos del repo manualmente,
+- pedirte entender JSON o carpetas,
+- aventarte logs tecnicos sin contexto,
+- frenarse antes de que tu negocio sea visible en el frontend.

@@ -1,31 +1,31 @@
-# Founder Guide
+# Guia para founders
 
-This guide is for owners, founders, and small business operators who want Codex to run Ws B-I for them.
+Esta guia es para duenos, founders y operadores de PyME que quieren que Codex corra Ws B-I por ellos.
 
-You do not need to be technical.
-You do not need to know the repo structure.
-You do not need to run the workflow manually.
+No necesitas ser tecnico.
+No necesitas entender la estructura del repo.
+No necesitas correr el flujo manualmente.
 
-## What Codex Should Do For You
+## Lo que Codex debe hacer por ti
 
-When you use Ws B-I through Codex, Codex should:
+Cuando uses Ws B-I a traves de Codex, Codex debe:
 
-1. ask you for the minimum useful business context,
-2. turn that into research state inside the repo,
-3. guide you through missing evidence in plain language,
-4. build your case step by step,
-5. and stop only once you can review your business in the frontend.
+1. pedirte el minimo contexto util del negocio,
+2. convertir eso en investigacion dentro del repo,
+3. guiarte en lenguaje simple cuando falte evidencia,
+4. construir tu caso paso a paso,
+5. y detenerse solo cuando puedas revisar tu negocio en el frontend.
 
-## Recommended Order
+## Orden recomendado
 
-1. [Clean Install On Another Computer](05-instalacion-limpia.md)
-2. [Prepare Your Information](01-preparar-informacion.md)
-3. [Work With Codex](02-trabajar-con-codex.md)
-4. [See Your Frontend](03-ver-tu-frontend.md)
-5. [Founder FAQ](04-faq.md)
+1. [Instalacion limpia en otra computadora](05-instalacion-limpia.md)
+2. [Prepara tu informacion](01-preparar-informacion.md)
+3. [Trabaja con Codex](02-trabajar-con-codex.md)
+4. [Ve tu frontend](03-ver-tu-frontend.md)
+5. [Preguntas frecuentes](04-faq.md)
 
-## The Best First Message
+## Mejor primer mensaje
 
 ```text
-Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, prepáralo en una carpeta nueva, guíame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando esté listo. No soy técnico, así que hazte cargo de los comandos y explícame solo lo necesario.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
 ```

@@ -226,7 +226,7 @@ function renderCompanySelect() {
 function renderProjectBranding() {
   const project = state.caseData?.project || {};
   const name = project.name || "Ws B-I";
-  const tagline = project.tagline || "Business intelligence operativo para decisiones en Mexico.";
+  const tagline = project.tagline || "Inteligencia de negocio operativa para decisiones en Mexico.";
   document.title = name;
   projectEyebrow.textContent = name;
   projectTitle.textContent = tagline;
@@ -234,7 +234,7 @@ function renderProjectBranding() {
 
 function renderModeSwitch() {
   modeSwitch.innerHTML = [
-    {id: "executive", label: "Briefing"},
+    {id: "executive", label: "Ejecutivo"},
     {id: "audit", label: "Auditoria"},
   ]
     .map(
@@ -280,9 +280,9 @@ function renderHero() {
   if (!hasActiveCase()) {
     const onboarding = state.caseData?.onboarding || {};
     heroKicker.textContent = "Inicio guiado";
-    heroTitleLabel.textContent = "Workspace";
+    heroTitleLabel.textContent = "Espacio de trabajo";
     heroTitle.textContent = "Ws B-I";
-    heroSummary.textContent = onboarding.headline || "Workspace listo para iniciar.";
+    heroSummary.textContent = onboarding.headline || "Espacio de trabajo listo para iniciar.";
     heroNarrative.textContent = onboarding.summary || "Pidele a Codex que cargue tu negocio y te guie paso a paso.";
     heroBadges.innerHTML = [badge("sin caso activo", "warn"), badge("guiado por Codex", "neutral")].join("");
     companyMeta.innerHTML = `
@@ -369,7 +369,7 @@ function renderChapterIntro() {
 function renderChapterMetrics() {
   if (!hasActiveCase()) {
     chapterMetrics.innerHTML = [
-      metricBlock("Estado", "Workspace vacio"),
+      metricBlock("Estado", "Espacio de trabajo vacio"),
       metricBlock("Siguiente paso", "Pidele a Codex que inicie tu caso"),
       metricBlock("Meta", "Ver tu negocio en el frontend"),
     ].join("");
@@ -467,7 +467,7 @@ function renderCoverChapter() {
           <div><dt>Techo</dt><dd>${escapeHtml(formatMoney(snapshot.price_ceiling, snapshot.currency_code || "MXN"))}</dd></div>
         </dl>
       `,
-      "Pricing"
+      "Precio"
     )}
     ${sheet("Riesgos principales", listMarkup(warRoom.risks, "Sin riesgos."), "Lo que puede romper la tesis")}
     ${sheet(
@@ -520,7 +520,7 @@ function renderThesisChapter() {
         ${sheet("Oferta", `<p>${escapeHtml(offer.mechanism || "Sin mecanismo definido.")}</p>${listMarkup(offer.proof_points, "Sin pruebas.")}`, "Mecanismo")}
       `,
       `
-        ${sheet("Headline", `<p class="big-statement">${escapeHtml(messaging.headline || "Sin headline.")}</p><p>${escapeHtml(messaging.subheadline || "Sin subheadline.")}</p>`, "Narrativa")}
+        ${sheet("Mensaje principal", `<p class="big-statement">${escapeHtml(messaging.headline || "Sin mensaje principal.")}</p><p>${escapeHtml(messaging.subheadline || "Sin subtitulo.")}</p>`, "Narrativa")}
         ${sheet("Pruebas comerciales", listMarkup(messaging.proof_points, "Sin pruebas."), "Sustento")}
       `
     )
@@ -540,7 +540,7 @@ function renderCustomerChapter() {
     "A quien perseguir, por que compra y que frena la decision.",
     spread(
       "Comprador real",
-      "Buyer truths, objeciones y guion comercial.",
+      "Verdades del comprador, objeciones y guion comercial.",
       `
         ${sheet(
           "ICP",
@@ -554,7 +554,7 @@ function renderCustomerChapter() {
           "Segmento"
         )}
         ${sheet("Dolores", listMarkup(truths.pains, "Sin dolores."), "Friccion")}
-        ${sheet("Resultados que busca", listMarkup(truths.outcomes, "Sin resultados."), "Outcomes")}
+        ${sheet("Resultados que busca", listMarkup(truths.outcomes, "Sin resultados."), "Metas")}
       `,
       `
         ${sheet("Objeciones reales", listMarkup(truths.objections, "Sin objeciones."), "Lo que bloquea")}
@@ -643,7 +643,7 @@ function renderCompetitionChapter() {
           </tbody>
         </table>
       `,
-      sheet("Whitespace", listMarkup(competition.whitespace, "Sin whitespace."), "Donde ganar")
+      sheet("Espacio libre", listMarkup(competition.whitespace, "Sin espacios libres detectados."), "Donde ganar")
     )
   );
 }
@@ -656,11 +656,11 @@ function renderViabilityChapter() {
   return chapterWrapper(
     "viability",
     "Viabilidad",
-    viability.headline || "Pricing y viabilidad",
-    viability.summary || "Lo que sostienen hoy precio, margen y supuestos.",
+    viability.headline || "Precio y viabilidad",
+    viability.summary || "Lo que hoy sostienen el precio, el margen y los supuestos.",
     spread(
       "Economia del caso",
-      "Pricing y viabilidad en formato de memo operativo.",
+      "Precio y viabilidad en formato de memo operativo.",
       `
         ${sheet(
           "Escalera de precio",
@@ -674,7 +674,7 @@ function renderViabilityChapter() {
           "Precio"
         )}
         ${sheet(
-          "Tiers",
+          "Niveles",
           (pricing.tier_summaries || [])
             .map(
               (tier) => `
@@ -697,8 +697,8 @@ function renderViabilityChapter() {
               <div><dt>LTV</dt><dd>${escapeHtml(formatMoney(financials.estimated_ltv, financials.currency_code || "MXN"))}</dd></div>
               <div><dt>CAC</dt><dd>${escapeHtml(formatMoney(financials.estimated_cac, financials.currency_code || "MXN"))}</dd></div>
               <div><dt>LTV:CAC</dt><dd>${escapeHtml(formatNumber(financials.ltv_cac_ratio, 2))}</dd></div>
-              <div><dt>Payback</dt><dd>${escapeHtml(financials.payback_months ? `${formatNumber(financials.payback_months, 1)} meses` : "Sin dato")}</dd></div>
-              <div><dt>Break-even</dt><dd>${escapeHtml(formatNumber(financials.break_even_customers, 1))}</dd></div>
+              <div><dt>Recuperacion CAC</dt><dd>${escapeHtml(financials.payback_months ? `${formatNumber(financials.payback_months, 1)} meses` : "Sin dato")}</dd></div>
+              <div><dt>Punto de equilibrio</dt><dd>${escapeHtml(formatNumber(financials.break_even_customers, 1))}</dd></div>
               <div><dt>Margen</dt><dd>${escapeHtml(financials.gross_margin_ratio ? `${formatNumber(financials.gross_margin_ratio * 100, 1)}%` : "Sin dato")}</dd></div>
             </dl>
           `,
@@ -832,7 +832,7 @@ function renderWelcomeChapter() {
     <section id="chapter-welcome" class="report-chapter">
       <div class="chapter-banner">
         <p class="eyebrow">Inicio</p>
-        <h3>${escapeHtml(onboarding.headline || "Workspace listo para iniciar")}</h3>
+        <h3>${escapeHtml(onboarding.headline || "Espacio de trabajo listo para iniciar")}</h3>
         <p>${escapeHtml(onboarding.summary || "Pidele a Codex que inicie tu caso de negocio.")}</p>
       </div>
       <section class="report-spread">
@@ -894,7 +894,7 @@ function renderAuditPage() {
             <dl class="definition-list">
               <div><dt>Fuentes</dt><dd>${escapeHtml(formatNumber(counts.sources || 0))}</dd></div>
               <div><dt>Evidencias</dt><dd>${escapeHtml(formatNumber(counts.evidence || 0))}</dd></div>
-              <div><dt>Findings</dt><dd>${escapeHtml(formatNumber(counts.findings || 0))}</dd></div>
+              <div><dt>Hallazgos</dt><dd>${escapeHtml(formatNumber(counts.findings || 0))}</dd></div>
               <div><dt>Validacion</dt><dd>${escapeHtml(formatNumber(counts.validation || 0))}</dd></div>
             </dl>
           `,
@@ -906,7 +906,7 @@ function renderAuditPage() {
             <div class="trace-columns">
               <div><h5>Decision</h5>${listMarkup((traceability.decision || []).map((item) => item.title), "Sin refs.")}</div>
               <div><h5>Oferta</h5>${listMarkup((traceability.offer || []).map((item) => item.title), "Sin refs.")}</div>
-              <div><h5>Pricing</h5>${listMarkup((traceability.pricing || []).map((item) => item.title), "Sin refs.")}</div>
+              <div><h5>Precio</h5>${listMarkup((traceability.pricing || []).map((item) => item.title), "Sin refs.")}</div>
               <div><h5>Mercado</h5>${listMarkup((traceability.market || []).map((item) => item.title), "Sin refs.")}</div>
             </div>
           `,
@@ -1038,7 +1038,7 @@ async function loadCase(companyId = "", announce = false) {
   ensureValidState();
   renderApp();
   if (!payload.company?.name) {
-    setStatus("Workspace listo para iniciar. Pidele a Codex que cargue tu negocio.", "neutral");
+    setStatus("Espacio de trabajo listo para iniciar. Pidele a Codex que cargue tu negocio.", "neutral");
     return;
   }
   setStatus(`${announce ? "Caso actualizado" : "Caso cargado"} para ${payload.company?.name || state.activeCompanyId}.`, announce ? "success" : "neutral");
@@ -1064,7 +1064,7 @@ async function boot() {
   ensureValidState();
   renderApp();
   if (!payload.company?.name) {
-    setStatus("Workspace listo para iniciar. Pidele a Codex que cargue tu negocio.", "neutral");
+    setStatus("Espacio de trabajo listo para iniciar. Pidele a Codex que cargue tu negocio.", "neutral");
     return;
   }
   setStatus(`Caso cargado para ${payload.company?.name || state.activeCompanyId}.`, "neutral");

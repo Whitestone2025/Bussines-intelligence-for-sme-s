@@ -21,9 +21,9 @@ def round_money(value: float) -> float:
 
 def pricing_fact_base(currency_code: str, monthly_cost: float, competitor_anchor: float, value_anchor: float) -> list[str]:
     return [
-        f"Monthly delivery cost anchor: {currency_code} {monthly_cost:,.2f}.",
-        f"Competitor price anchor: {currency_code} {competitor_anchor:,.2f}.",
-        f"Value anchor: {currency_code} {value_anchor:,.2f}.",
+        f"Ancla de costo mensual de entrega: {currency_code} {monthly_cost:,.2f}.",
+        f"Ancla de precio de competidores: {currency_code} {competitor_anchor:,.2f}.",
+        f"Ancla de valor percibido: {currency_code} {value_anchor:,.2f}.",
     ]
 
 
@@ -37,7 +37,7 @@ def build_pricing_model(payload: dict) -> dict:
     desired_margin = float(payload.get("desired_margin_ratio", 0.6) or 0.6)
     competitor_anchor = float(payload.get("competitor_anchor_price", 0) or 0)
     value_anchor = float(payload.get("value_anchor_price", 0) or 0)
-    target_segment = str(payload.get("target_segment", "")).strip() or "Founder-led service businesses"
+    target_segment = str(payload.get("target_segment", "")).strip() or "Negocios de servicios liderados por el fundador"
     evidence_refs = [str(item).strip() for item in payload.get("evidence_refs", []) if str(item).strip()]
     source_refs = [str(item).strip() for item in payload.get("source_refs", []) if str(item).strip()]
 
@@ -51,30 +51,30 @@ def build_pricing_model(payload: dict) -> dict:
     fact_base = pricing_fact_base(currency_code, monthly_cost, competitor_anchor, value_anchor)
     pricing_options = [
         {
-            "name": "Starter",
+            "name": "Inicial",
             "price": round_money(target * 0.75),
-            "fit": "Fast validation with lower scope and lower trust burden.",
-            "tradeoff": "Lower revenue per win and less room for hands-on support.",
+            "fit": "Validacion rapida con menor alcance y menor carga de confianza.",
+            "tradeoff": "Menor ingreso por cliente y menos margen para acompanamiento cercano.",
             "recommended": False,
         },
         {
-            "name": "Core",
+            "name": "Base",
             "price": round_money(target),
-            "fit": "Best balance of trust, margin, and clarity for the first Mexico-first offer.",
-            "tradeoff": "Still needs explicit scope so it does not feel abstract.",
+            "fit": "Mejor balance de confianza, margen y claridad para la primera oferta en Mexico.",
+            "tradeoff": "Todavia necesita un alcance explicito para no sentirse abstracta.",
             "recommended": True,
         },
         {
-            "name": "Growth",
+            "name": "Expandido",
             "price": round_money(ceiling),
-            "fit": "Useful once proof and implementation demand are both strong.",
-            "tradeoff": "Higher trust requirement and more delivery complexity.",
+            "fit": "Util cuando ya existen pruebas y demanda suficiente por una implementacion mas amplia.",
+            "tradeoff": "Exige mas confianza y mas complejidad operativa.",
             "recommended": False,
         },
     ]
     implementation_risks = [
-        "The target tier can fail if scope is not made concrete during the sales conversation.",
-        "A price anchored above visible proof can create trust friction even if the economics look strong.",
+        "El nivel objetivo puede fallar si el alcance no se vuelve concreto durante la venta.",
+        "Un precio por encima de la prueba visible puede generar friccion de confianza aunque la economia se vea fuerte.",
     ]
 
     return {
@@ -89,29 +89,29 @@ def build_pricing_model(payload: dict) -> dict:
         "price_ceiling": round_money(ceiling),
         "tier_summaries": [
             {
-                "name": "Starter",
+                "name": "Inicial",
                 "price": round_money(target * 0.75),
-                "value_summary": "Focused diagnostics and fast implementation guidance."
+                "value_summary": "Diagnostico enfocado y guia rapida de implementacion."
             },
             {
-                "name": "Core",
+                "name": "Base",
                 "price": round_money(target),
-                "value_summary": "Full core offer with process clarity and buyer messaging support."
+                "value_summary": "Oferta central completa con claridad de proceso y apoyo en mensaje comercial."
             },
             {
-                "name": "Growth",
+                "name": "Expandido",
                 "price": round_money(ceiling),
-                "value_summary": "Higher-touch support with implementation and optimization."
+                "value_summary": "Acompanamiento mas cercano con implementacion y optimizacion."
             }
         ],
         "pricing_options": pricing_options,
-        "recommended_tier": "Core",
-        "recommendation_logic": "Recommend the Core tier first because it balances trust, delivery scope, and margin protection better than the lower-risk Starter tier or the heavier Growth tier.",
+        "recommended_tier": "Base",
+        "recommendation_logic": "Se recomienda empezar por Base porque balancea mejor confianza, alcance de entrega y proteccion de margen que Inicial o Expandido.",
         "margin_assumptions": [
-            f"Monthly delivery cost assumed at {currency_code} {monthly_cost:,.2f}.",
-            f"Desired gross margin ratio assumed at {desired_margin:.0%}.",
-            f"Competitor anchor price assumed at {currency_code} {competitor_anchor:,.2f}.",
-            f"Value anchor assumed at {currency_code} {value_anchor:,.2f}."
+            f"Se asume un costo mensual de entrega de {currency_code} {monthly_cost:,.2f}.",
+            f"Se asume un margen bruto deseado de {desired_margin:.0%}.",
+            f"Se asume un precio ancla de competidores de {currency_code} {competitor_anchor:,.2f}.",
+            f"Se asume un ancla de valor de {currency_code} {value_anchor:,.2f}."
         ],
         "implementation_risks": implementation_risks,
         "status": "inferred",

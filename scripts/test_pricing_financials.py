@@ -24,7 +24,7 @@ def main() -> int:
     assert len(pricing_model["tier_summaries"]) == 3
     assert pricing_model["fact_base"], "Expected explicit pricing fact base"
     assert pricing_model["pricing_options"], "Expected pricing options"
-    assert pricing_model["recommended_tier"] == "Core"
+    assert pricing_model["recommended_tier"] == "Base"
     assert pricing_model["recommendation_logic"], "Expected recommendation logic"
     assert pricing_model["implementation_risks"], "Expected implementation risks"
 

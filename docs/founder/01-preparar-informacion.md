@@ -1,32 +1,32 @@
-# Prepare Your Information
+# Prepara tu informacion
 
-Ws B-I can start with rough information.
-You do not need a perfect brief.
+Ws B-I puede empezar con informacion incompleta.
+No necesitas un brief perfecto.
 
-## Best Inputs To Gather
+## Lo mejor para reunir
 
-- business name,
-- what you sell in one or two sentences,
-- your city or region in Mexico,
-- website, Instagram, Facebook page, Google Maps listing, or WhatsApp link if you have one,
-- screenshots or copied text from customer chats,
-- notes about objections people give you,
-- prices you charge now or think you want to charge,
-- known competitors or alternatives,
-- any existing proposal, brochure, quote, or PDF.
+- nombre del negocio,
+- lo que vendes en una o dos frases,
+- ciudad o region en Mexico,
+- sitio web, Instagram, Facebook, Google Maps o WhatsApp si ya tienes alguno,
+- capturas o texto copiado de chats con clientes,
+- notas sobre objeciones que te ponen,
+- precios actuales o el rango que te gustaria cobrar,
+- competidores o alternativas que ya conozcas,
+- cualquier propuesta, brochure, cotizacion o PDF que ya exista.
 
-## If You Do Not Have Everything
+## Si no tienes todo
 
-That is normal.
-Start anyway if you have at least:
+Es normal.
+Puedes empezar si al menos tienes:
 
-- business name,
-- what you sell,
-- one real example of what customers ask or worry about.
+- nombre del negocio,
+- lo que vendes,
+- un ejemplo real de lo que preguntan o temen tus clientes.
 
-## What Not To Worry About
+## De que no te preocupes
 
-- You do not need a full business plan.
-- You do not need TAM/SAM/SOM numbers.
-- You do not need consultant language.
-- You do not need to classify your ICP before starting.
+- no necesitas un plan de negocios completo,
+- no necesitas numeros TAM, SAM o SOM,
+- no necesitas lenguaje de consultoria,
+- no necesitas definir tu ICP antes de empezar.

@@ -1,35 +1,35 @@
-# See Your Frontend
+# Ve tu frontend
 
-Your frontend is the local review surface where you inspect your case.
+Tu frontend es la superficie local donde revisas tu caso.
 
-## How It Should Work
+## Como deberia funcionar
 
-Once Codex has loaded your business, it should run:
+Cuando Codex ya cargo tu negocio, debe correr:
 
 ```bash
 python3 scripts/serve_ui.py
 ```
 
-Then it should give you the local URL.
+Despues debe darte la URL local.
 
-On a clean installation, Codex should also explain that the repo setup is already done and that the frontend now corresponds to your own business case.
+En una instalacion limpia, Codex tambien debe explicarte que el setup ya quedo listo y que el frontend ahora corresponde a tu negocio.
 
-## What You Should Expect To See
+## Que deberias ver
 
-- your business as the active case,
-- thesis and recommendation,
-- customer and market summary,
-- viability and pricing view,
-- decision and plan,
-- in-app document reader,
-- and audit mode if you want to inspect traceability.
+- tu negocio como caso activo,
+- tesis y recomendacion,
+- resumen de cliente y mercado,
+- vista de precio y viabilidad,
+- decision y plan,
+- lector de documentos,
+- y modo de trazabilidad si quieres revisar el soporte.
 
-## If The Frontend Is Empty
+## Si el frontend esta vacio
 
-That means your business has not been loaded yet.
-Tell Codex to continue the onboarding instead of trying to fix the repo yourself.
+Eso significa que tu negocio todavia no se ha cargado.
+Dile a Codex que continue el onboarding en lugar de intentar arreglar el repo tu mismo.
 
-Example:
+Ejemplo:
 
 ```text
 Sigue con Ws B-I y no te detengas hasta que mi negocio aparezca en el frontend.

@@ -33,7 +33,7 @@ def build_execution_plan(payload: dict) -> dict:
 
     decision_memo = payload.get("decision_memo", {})
     decision_id = str(decision_memo.get("decision_id", "")).strip()
-    objective = str(decision_memo.get("decision_summary", "")).strip() or "Execute the next best validated move."
+    objective = str(decision_memo.get("decision_summary", "")).strip() or "Ejecutar el siguiente movimiento validado con mejor perfil."
     next_steps = [str(item).strip() for item in decision_memo.get("next_steps", []) if str(item).strip()]
     risks = [str(item).strip() for item in decision_memo.get("key_risks", []) if str(item).strip()]
     validation_gaps = [str(item).strip() for item in decision_memo.get("validation_gaps", []) if str(item).strip()]
@@ -43,56 +43,56 @@ def build_execution_plan(payload: dict) -> dict:
     milestones = [
         {
             "milestone_id": "day-30",
-            "name": next_steps[0] if len(next_steps) >= 1 else "Launch the first validated experiment.",
-            "timeframe": "Days 1-30",
-            "owner": "Founder",
+            "name": next_steps[0] if len(next_steps) >= 1 else "Lanzar el primer experimento validado.",
+            "timeframe": "Dias 1-30",
+            "owner": "Fundador",
             "dependencies": [decision_id] if decision_id else [],
-            "success_metric": "First execution launched with a clear message and tracking in place.",
-            "learning_goal": "Learn whether the recommended entry move produces credible buyer signal quickly.",
+            "success_metric": "Primera ejecucion lanzada con mensaje claro y seguimiento activo.",
+            "learning_goal": "Aprender si el movimiento de entrada recomendado produce senal creible del comprador con rapidez.",
             "risk_watchouts": validation_gaps[:1] or risks[:1],
         },
         {
             "milestone_id": "day-60",
-            "name": next_steps[1] if len(next_steps) >= 2 else "Refine pricing and offer based on early data.",
-            "timeframe": "Days 31-60",
-            "owner": "Founder",
+            "name": next_steps[1] if len(next_steps) >= 2 else "Refinar precio y oferta con base en datos tempranos.",
+            "timeframe": "Dias 31-60",
+            "owner": "Fundador",
             "dependencies": ["day-30"],
-            "success_metric": "Offer, pricing, and objections updated from live feedback.",
-            "learning_goal": "Use early objections and wins to sharpen scope, proof, and pricing logic.",
+            "success_metric": "Oferta, precio y objeciones actualizados con retroalimentacion real.",
+            "learning_goal": "Usar objeciones y primeras victorias para afinar alcance, prueba y logica de precio.",
             "risk_watchouts": validation_gaps[1:2] or risks[1:2],
         },
         {
             "milestone_id": "day-90",
-            "name": next_steps[2] if len(next_steps) >= 3 else "Consolidate a repeatable operating playbook.",
-            "timeframe": "Days 61-90",
-            "owner": "Founder",
+            "name": next_steps[2] if len(next_steps) >= 3 else "Consolidar una guia operativa repetible.",
+            "timeframe": "Dias 61-90",
+            "owner": "Fundador",
             "dependencies": ["day-60"],
-            "success_metric": "Conversion quality measured and the next repeatable channel decision documented.",
-            "learning_goal": "Decide whether to scale, refine, or discard the current motion.",
+            "success_metric": "Calidad de conversion medida y siguiente decision de canal documentada.",
+            "learning_goal": "Decidir si conviene escalar, refinar o descartar la jugada actual.",
             "risk_watchouts": validation_gaps[2:3] or risks[:1],
         }
     ]
     workstreams = [
         {
-            "name": "Demand validation",
+            "name": "Validacion de demanda",
             "focus": milestones[0]["name"],
-            "owner": "Founder",
+            "owner": "Fundador",
         },
         {
-            "name": "Offer and pricing refinement",
+            "name": "Refinamiento de oferta y precio",
             "focus": milestones[1]["name"],
-            "owner": "Founder",
+            "owner": "Fundador",
         },
         {
-            "name": "Decision review",
+            "name": "Revision de decision",
             "focus": milestones[2]["name"],
-            "owner": "Founder",
+            "owner": "Fundador",
         },
     ]
     sequence_rationale = [
-        "Start with the highest-confidence action before expanding scope.",
-        "Use live market feedback to refine pricing and delivery promises.",
-        "Only scale once conversion quality and implementation friction are understood.",
+        "Empieza por la accion de mayor confianza antes de ampliar alcance.",
+        "Usa retroalimentacion real del mercado para afinar precio y promesa de entrega.",
+        "Escala solo cuando entiendas la calidad de conversion y la friccion de implementacion.",
     ]
 
     return {

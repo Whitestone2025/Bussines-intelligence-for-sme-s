@@ -1,35 +1,35 @@
-# Clean Install On Another Computer
+# Instalacion limpia en otra computadora
 
-This is the exact founder scenario for a new machine.
+Este es el escenario exacto para probar Ws B-I en una maquina nueva.
 
-## Goal
+## Objetivo
 
-Start from a clean folder, give Codex the GitHub URL, answer only business questions, and end with your own company visible in the frontend.
+Empezar desde una carpeta limpia, darle a Codex la URL de GitHub, responder solo preguntas de negocio y terminar con tu empresa visible en el frontend.
 
-## What You Should Do
+## Lo que debes hacer
 
-1. Open a new clean folder on the other computer.
-2. Start Codex in that folder.
-3. Send this message:
+1. Abre una carpeta nueva en la otra computadora.
+2. Inicia Codex en esa carpeta.
+3. Envia este mensaje:
 
 ```text
-Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, prepáralo en una carpeta nueva, guíame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando esté listo. No soy técnico, así que hazte cargo de los comandos y explícame solo lo necesario.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
 ```
 
-## What Codex Should Do
+## Lo que Codex debe hacer
 
-- bring the repository into the clean folder,
-- prepare the local project,
-- ask for your company name, what you sell, where you sell, and any real material you already have,
-- load your business into Ws B-I,
-- tell you when the frontend is ready,
-- and explain the resulting thesis, decision, plan, and documents in plain language.
+- traer el repositorio a la carpeta limpia,
+- preparar el proyecto local,
+- pedirte nombre del negocio, lo que vendes, donde vendes y el material real que ya tengas,
+- cargar tu negocio en Ws B-I,
+- decirte cuando el frontend ya esta listo,
+- y explicarte tesis, decision, plan y documentos en lenguaje de negocio.
 
-## Success Criteria
+## Criterios de exito
 
-The test is successful only if:
+La prueba solo cuenta como exitosa si:
 
-- you did not need to perform technical setup manually,
-- your business appears as the active case,
-- Codex explains what it found in interactive business language,
-- and you can keep asking follow-up questions after the frontend is open.
+- no tuviste que hacer setup tecnico manual,
+- tu negocio aparece como caso activo,
+- Codex te explica lo que encontro en modo conversacional,
+- y puedes seguir haciendo preguntas despues de abrir el frontend.

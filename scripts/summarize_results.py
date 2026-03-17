@@ -20,16 +20,16 @@ def strongest_learnings(evaluations: list[dict]) -> list[str]:
 def next_steps(evaluations: list[dict]) -> list[str]:
     steps: list[str] = []
     if not evaluations:
-        return ["Run the first experiment for this company."]
+        return ["Corre el primer experimento para esta empresa."]
     kept = [item for item in evaluations if item.get("decision") == "keep"]
     discarded = [item for item in evaluations if item.get("decision") == "discard"]
     if kept:
-        steps.append("Turn the strongest kept variants into reusable patterns.")
+        steps.append("Convierte las variantes ganadoras mas fuertes en patrones reutilizables.")
     if discarded:
-        steps.append("Revisit losing variants and tighten one variable at a time.")
+        steps.append("Revisa las variantes perdedoras y ajusta una variable a la vez.")
     asset_types = sorted({item.get("asset_type", "") for item in evaluations if item.get("asset_type")})
     for asset in asset_types[:3]:
-        steps.append(f"Run another focused experiment for `{asset}` with a narrower hypothesis.")
+        steps.append(f"Corre otro experimento enfocado para `{asset}` con una hipotesis mas cerrada.")
     return steps[:5]
 
 
@@ -46,22 +46,22 @@ def main() -> int:
         for path in sorted(experiments_dir.rglob("evaluation.json"))
     ]
 
-    lines = ["# Experiment Summary", ""]
+    lines = ["# Resumen de Experimentos", ""]
     if not evaluations:
-        lines.append("No evaluations found.")
+        lines.append("No se encontraron evaluaciones.")
     else:
         lines.extend(
             [
-                "## Strongest Learnings",
+                "## Aprendizajes mas fuertes",
                 "",
             ]
         )
         for item in strongest_learnings(evaluations):
             lines.append(f"- {item}")
-        lines.extend(["", "## Recommended Next Steps", ""])
+        lines.extend(["", "## Siguientes pasos recomendados", ""])
         for item in next_steps(evaluations):
             lines.append(f"- {item}")
-        lines.extend(["", "## Experiment Log", ""])
+        lines.extend(["", "## Bitacora de experimentos", ""])
 
     for data in evaluations:
         lines.extend(
@@ -69,17 +69,17 @@ def main() -> int:
                 f"### {data.get('experiment_id', 'unknown-experiment')}",
                 "",
                 f"- Decision: {data.get('decision', 'unknown')}",
-                f"- Winner: {data.get('winner', 'unknown')}",
-                f"- Asset type: {data.get('asset_type', 'unknown')}",
-                f"- Baseline score: {data.get('baseline_score', 0)}",
-                f"- Variant score: {data.get('variant_score', 0)}",
-                f"- Evidence IDs: {', '.join(data.get('evidence_ids', [])) or 'none'}",
+                f"- Ganador: {data.get('winner', 'unknown')}",
+                f"- Tipo de activo: {data.get('asset_type', 'unknown')}",
+                f"- Puntaje base: {data.get('baseline_score', 0)}",
+                f"- Puntaje variante: {data.get('variant_score', 0)}",
+                f"- IDs de evidencia: {', '.join(data.get('evidence_ids', [])) or 'ninguno'}",
                 "",
             ]
         )
         reasoning = data.get("reasoning", [])
         if reasoning:
-            lines.append("Reasoning:")
+            lines.append("Razonamiento:")
             for item in reasoning:
                 lines.append(f"- {item}")
             lines.append("")

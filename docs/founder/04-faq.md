@@ -1,26 +1,27 @@
-# Founder FAQ
+# Preguntas frecuentes
 
-## I do not have a website
+## No tengo sitio web
 
-That is fine.
-You can start with WhatsApp chats, Instagram text, notes, PDFs, quotes, and voice-note transcripts.
+No pasa nada.
+Puedes empezar con chats de WhatsApp, texto de Instagram, notas, PDFs, cotizaciones y transcripciones de notas de voz.
 
-## I already have a business, not just an idea
+## Ya tengo negocio, no solo una idea
 
-That is a good fit.
-Ws B-I can work with existing offers, objections, prices, and competitor reality.
+Perfecto.
+Ws B-I tambien sirve para negocios existentes con oferta, objeciones, precio y competencia real.
 
-## I only sell through WhatsApp
+## Solo vendo por WhatsApp
 
-That is normal for many businesses in Mexico.
-Share your chats, objections, and examples of how customers ask to buy.
+Es normal en muchas PyME en Mexico.
+Comparte tus chats, objeciones y ejemplos de como te compran.
 
-## I am not sure who my ideal customer is
+## No tengo claro quien es mi cliente ideal
 
-That is one of the things Ws B-I is supposed to help infer and validate.
+Justo para eso tambien sirve Ws B-I.
+El sistema te ayuda a inferirlo y validarlo.
 
-## Do I need to understand the frontend technically
+## Tengo que entender el frontend tecnicamente
 
 No.
-The frontend is just your review surface.
-Codex should guide you to it and explain what matters there.
+El frontend es tu superficie de revision.
+Codex debe llevarte ahi y explicarte que importa.
