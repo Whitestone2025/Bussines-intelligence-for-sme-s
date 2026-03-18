@@ -29,8 +29,10 @@ En una instalacion limpia, Codex tambien debe explicarte que el setup ya quedo l
 Eso significa que tu negocio todavia no se ha cargado.
 Dile a Codex que continue el onboarding en lugar de intentar arreglar el repo tu mismo.
 
+Si ya habias dejado archivos de tu negocio en la carpeta, recuerda decirle que revise esos archivos antes de volver a preguntarte cosas.
+
 Ejemplo:
 
 ```text
-Sigue con Ws B-I y no te detengas hasta que mi negocio aparezca en el frontend.
+Sigue con Ws B-I, revisa la informacion que ya deje en esta carpeta y no te detengas hasta que mi negocio aparezca en el frontend.
 ```

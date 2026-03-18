@@ -858,9 +858,9 @@ function renderWelcomeChapter() {
               "Que debes compartir",
               listMarkup([
                 "Nombre de tu negocio",
-                "Que vendes en una o dos frases",
+                "Que vendes en una o dos frases si no aparece claro en tus archivos",
                 "Ciudad o region",
-                "Chats, notas, links, PDFs o material real",
+                "La carpeta actual o cualquier chat, nota, link, PDF o material real ya existente",
               ]),
               "Informacion minima"
             )}

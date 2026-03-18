@@ -30,6 +30,7 @@
     "website": {"type": "string"},
     "seed_summary": {"type": "string"},
     "current_state_summary": {"type": "string"},
+    "workspace_mode": {"type": "string", "enum": ["clean_bootstrap", "in_place_business_folder"]},
     "known_constraints": {"type": "array", "items": {"type": "string"}},
     "tone_constraints": {"type": "array", "items": {"type": "string"}},
     "forbidden_phrases": {"type": "array", "items": {"type": "string"}},

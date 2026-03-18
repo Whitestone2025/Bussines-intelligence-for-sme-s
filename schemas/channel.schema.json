@@ -13,6 +13,7 @@
     "confidence": {"type": "number"},
     "source_origin": {"type": "string"},
     "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "source_refs": {"type": "array", "items": {"type": "string"}},
     "unresolved_questions": {"type": "array", "items": {"type": "string"}}
   }
 }

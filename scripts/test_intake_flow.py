@@ -23,6 +23,7 @@ def main() -> int:
         {
             "company_name": "Acme MX",
             "intake_mode": "existing",
+            "workspace_mode": "in_place_business_folder",
             "industry": "Professional services",
             "business_model": "Service business",
             "website": "https://example.mx",
@@ -32,11 +33,14 @@ def main() -> int:
             "available_sources": ["sales notes", "landing page"],
             "competitors": ["Competidor Uno", "Competidor Dos"],
             "known_constraints": ["Low marketing budget"],
+            "existing_material_summary": "Shared folder already includes notes and a landing page draft.",
+            "existing_file_manifest": ["notes.md", "landing.txt"],
         }
     )
 
     assert session["company_id"] == "acme-mx"
     assert session["intake_mode"] == "existing"
+    assert session["workspace_mode"] == "in_place_business_folder"
     assert session["currency_code"] == "MXN"
 
     company = company_seed_record(session)
@@ -51,6 +55,7 @@ def main() -> int:
     assert "Acme MX" in summary
     assert "Monterrey, Nuevo Leon" in summary
     assert "sales notes" in summary
+    assert "in_place_business_folder" in summary
 
     print("Intake flow checks passed.")
     return 0

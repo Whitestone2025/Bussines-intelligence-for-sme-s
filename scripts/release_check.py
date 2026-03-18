@@ -34,6 +34,7 @@ def build_checks() -> list[str]:
         "python3 scripts/test_autoresearch_loop.py",
         "python3 scripts/test_schema_contracts.py",
         "python3 scripts/test_founder_bootstrap_flow.py",
+        "python3 scripts/test_reasoning_quality.py",
         "python3 scripts/test_case_view_model.py",
         "python3 scripts/test_workspace_foundation.py",
         "python3 scripts/test_intake_flow.py",

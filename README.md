@@ -41,7 +41,13 @@ Empieza aqui:
 Si vas a usar Codex como dueno de negocio, empieza con este mensaje:
 
 ```text
-Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s. Si esta carpeta ya tiene informacion de mi negocio, analizala detenidamente antes de preguntarme cosas. Si no, prepara el repo en una carpeta nueva. Guiame paso a paso, hazme solo las preguntas necesarias despues de revisar lo que ya exista, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
+```
+
+Tambien puedes usar una variante mas corta si ya estas parado dentro de una carpeta con material real:
+
+```text
+Quiero usar Ws B-I para mi negocio. En esta carpeta esta toda la informacion de mi negocio. Analiza cada archivo antes de hacerme preguntas, hazme solo las preguntas necesarias, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
 ```
 
 ## Fuentes de verdad del producto

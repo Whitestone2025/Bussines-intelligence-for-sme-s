@@ -36,9 +36,11 @@ When the user is a founder, owner, or nontechnical operator:
 - If the workspace is empty, guide them from zero without making them design the process.
 - If they say "correlo" or "guíame", treat that as a request for end-to-end operator guidance, not as a request for a technical explanation.
 - If they provide a GitHub URL or ask to start in a new folder, treat that as a founder bootstrap request:
-  - create or use a clean working folder,
-  - get the repository into that folder,
-  - start the interview from zero,
+  - first detect whether the current folder already contains business files, notes, decks, PDFs, transcripts, or source material,
+  - if business material already exists, inspect it before asking questions and treat the current folder as the business workspace,
+  - if business material does not exist yet, create or use a clean working folder and get the repository into that folder,
+  - summarize what was understood from the files before asking follow-up questions,
+  - ask only the smallest set of questions needed to resolve blockers,
   - load the business into the workspace,
   - and open the frontend only when the case is visible.
 - In founder bootstrap mode, Codex should behave like an operator concierge, not like a repo tutor.

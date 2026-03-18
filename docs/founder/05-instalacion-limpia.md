@@ -13,14 +13,16 @@ Empezar desde una carpeta limpia, darle a Codex la URL de GitHub, responder solo
 3. Envia este mensaje:
 
 ```text
-Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s. Si esta carpeta ya tiene informacion de mi negocio, analizala detenidamente antes de preguntarme cosas. Si no, prepara el repo en una carpeta nueva. Guiame paso a paso, hazme solo las preguntas necesarias despues de revisar lo que ya exista, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
 ```
 
 ## Lo que Codex debe hacer
 
 - traer el repositorio a la carpeta limpia,
 - preparar el proyecto local,
-- pedirte nombre del negocio, lo que vendes, donde vendes y el material real que ya tengas,
+- revisar primero si la carpeta ya contiene material de negocio,
+- analizar cualquier archivo real antes de entrevistarte,
+- pedirte nombre del negocio, lo que vendes, donde vendes y el material real que ya tengas solo si sigue faltando,
 - cargar tu negocio en Ws B-I,
 - decirte cuando el frontend ya esta listo,
 - y explicarte tesis, decision, plan y documentos en lenguaje de negocio.

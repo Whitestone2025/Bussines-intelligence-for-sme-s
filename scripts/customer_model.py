@@ -47,20 +47,26 @@ def unique_preserve(items: list[str]) -> list[str]:
     return result
 
 
-def infer_icp_label(target_customer: str, evidence_items: list[dict]) -> str:
-    if target_customer.strip():
-        return target_customer.strip()
-    haystack = " ".join(
+def evidence_haystack(evidence_items: list[dict]) -> str:
+    return " ".join(
         [
             str(item.get("summary", "")) + " " + " ".join(item.get("quotes", [])) + " " + " ".join(item.get("observations", []))
             for item in evidence_items
         ]
     ).lower()
+
+
+def infer_icp_label(target_customer: str, evidence_items: list[dict]) -> tuple[str, int]:
+    if target_customer.strip():
+        return target_customer.strip(), 4
+    haystack = evidence_haystack(evidence_items)
     scores = {}
     for label, keywords in ICP_KEYWORDS.items():
         scores[label] = sum(1 for keyword in keywords if keyword in haystack)
     best = max(scores.items(), key=lambda item: item[1])
-    return best[0] if best[1] else "Founder-led service businesses"
+    if best[1]:
+        return best[0], best[1]
+    return "Primary buyer still needs validation", 0
 
 
 def top_phrases(values: list[str], limit: int = 3) -> list[str]:
@@ -83,9 +89,11 @@ def build_customer_outputs(payload: dict) -> dict:
     source_refs = unique_preserve([evidence.get("source_id", "") for evidence in evidence_items if evidence.get("source_id")])[:6]
     timestamp = now_iso()
 
-    label = infer_icp_label(str(payload.get("target_customer", "")), evidence_items)
+    label, icp_signal_score = infer_icp_label(str(payload.get("target_customer", "")), evidence_items)
     icp_id = slugify_id(label)
-    confidence = round(min(0.9, 0.45 + 0.06 * len(evidence_refs) + 0.03 * len(source_refs)), 2)
+    uncertain_icp = label == "Primary buyer still needs validation"
+    confidence = round(min(0.92, 0.28 + 0.06 * len(evidence_refs) + 0.03 * len(source_refs) + 0.05 * icp_signal_score), 2)
+    icp_status = "needs_validation" if uncertain_icp or confidence < 0.65 else "inferred"
 
     service_name = str(payload.get("service_name", "")).strip() or "Core Offer"
     core_outcome = outcomes[0] if outcomes else "buy with more confidence"
@@ -100,7 +108,7 @@ def build_customer_outputs(payload: dict) -> dict:
         "desired_outcomes": outcomes,
         "common_objections": objections,
         "trust_signals": trust_signals,
-        "status": "inferred",
+        "status": icp_status,
         "confidence": confidence,
         "source_origin": "customer_model_engine",
         "evidence_refs": evidence_refs,
@@ -112,16 +120,19 @@ def build_customer_outputs(payload: dict) -> dict:
     }
 
     offer_id = f"{company_id}-{slugify_id(service_name)}-offer"
+    audience_phrase = label.lower() if not uncertain_icp else "the current buyer profile"
+    offer_status = "needs_validation" if uncertain_icp else "inferred"
+
     offer_record = {
         "offer_id": offer_id,
         "company_id": company_id,
         "service_id": slugify_id(service_name),
         "name": service_name,
-        "core_promise": f"Help {label.lower()} avoid {main_pain.lower()} and reach {core_outcome.lower()}.",
+        "core_promise": f"Help {audience_phrase} avoid {main_pain.lower()} and reach {core_outcome.lower()}.",
         "mechanism": mechanism,
         "proof_points": trust_signals or ["clear process", "specific deliverables"],
         "anti_claims": sorted(FORBIDDEN_PHRASES),
-        "status": "inferred",
+        "status": offer_status,
         "confidence": confidence,
         "source_origin": "customer_model_engine",
         "evidence_refs": evidence_refs,
@@ -130,7 +141,11 @@ def build_customer_outputs(payload: dict) -> dict:
         "updated_at": timestamp,
     }
 
-    headline = f"Clarity-first support for {label.lower()} who are tired of vague promises."
+    headline = (
+        f"Clarity-first support for {label.lower()} who are tired of vague promises."
+        if not uncertain_icp
+        else "Clarity-first support built around the buyer signals we have so far."
+    )
     subheadline = f"We use {mechanism} so buyers understand the work before they are asked to trust the result."
     messaging_record = {
         "brief_id": f"{offer_id}-messaging",
@@ -142,7 +157,7 @@ def build_customer_outputs(payload: dict) -> dict:
         "proof_points": trust_signals or ["Specific process", "Visible proof", "Human language"],
         "objection_handlers": objections or ["Explain what gets done before promising outcomes."],
         "forbidden_phrases": sorted(FORBIDDEN_PHRASES),
-        "status": "inferred",
+        "status": offer_status,
         "confidence": confidence,
         "source_origin": "customer_model_engine",
         "evidence_refs": evidence_refs,

@@ -1,0 +1,20 @@
+Initialized run wsbi-founder-reasoning-v1.
+Dirty worktree detected from untracked data/evidence/ fixtures. Using no-commit policy and leaving user data untouched.
+Completed story: S1
+- Unified founder prompt surfaces across README, founder docs, program protocol, and empty-workspace onboarding.
+- Added explicit support for both clean-folder bootstrap and in-place business-folder bootstrap.
+Completed story: S2
+- Added workspace_mode, existing material summary, and existing file manifest to intake normalization and research profile seed records.
+- Updated founder protocol to require file analysis before questions when business material already exists.
+Completed story: S3
+- Strengthened inference confidence with traceability bonuses and genericity penalties in scripts/serve_ui.py.
+- Made customer_model fall back to a validation-needed buyer label instead of a forced generic ICP default.
+Completed story: S4
+- Tightened validation question generation to prefer clarification when evidence is thin.
+- Tightened readiness so inferred records need stronger grounding before experiments unlock.
+Completed story: S5
+- Expanded founder bootstrap assertions and added scripts/test_reasoning_quality.py for sparse-input caution and cross-company divergence.
+- Updated discovery and intake tests to cover the new discovery-first founder flow state.
+Completed story: S6
+- Passed compile checks, schema/intake/founder/discovery/reasoning tests, and the full release gate via scripts/release_check.py.
+- Release readiness report written to data/reports/release-readiness/2026-03-18-144424-release-readiness.md.
