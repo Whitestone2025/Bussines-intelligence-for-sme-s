@@ -173,8 +173,16 @@ def main() -> int:
             assert key in case_payload, f"Missing executive case block: {key}"
         assert case_payload["hero"]["title"] == "UI Workspace Lab", "Expected executive hero title"
         assert case_payload["war_room"]["headline"], "Expected war room headline"
+        assert case_payload["war_room"]["recommendation_label"], "Expected route label in war room"
+        assert case_payload["war_room"]["next_validation_step"], "Expected next validation step in war room"
+        assert case_payload["war_room"]["evidence_limits"], "Expected visible evidence limits in war room"
         assert case_payload["deliverable_index"], "Expected executive deliverable index"
         assert case_payload["audit_index"]["counts"]["sources"] == 0 or case_payload["audit_index"]["counts"]["sources"] >= 0
+        assert "te ayuda" in case_payload["hero"]["narrative"].lower() or "te sirve" in case_payload["hero"]["narrative"].lower()
+        assert "sirve" in case_payload["market_summary"]["summary"].lower() or "te ayuda" in case_payload["market_summary"]["summary"].lower()
+        assert "te dice" in case_payload["decision_summary"]["summary"].lower() or "te" in case_payload["decision_summary"]["summary"].lower()
+        assert case_payload["decision_summary"]["evidence_limits"], "Expected visible limits in decision summary"
+        assert case_payload["decision_summary"]["confidence_note"], "Expected confidence note in decision summary"
 
         assert request(f"/api/market?company_id={COMPANY_ID}")["items"], "Expected market items"
         assert request(f"/api/competitors?company_id={COMPANY_ID}")["items"], "Expected competitor items"

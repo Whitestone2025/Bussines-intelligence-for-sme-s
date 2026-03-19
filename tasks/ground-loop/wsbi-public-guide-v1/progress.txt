@@ -1,0 +1,159 @@
+Initialized run wsbi-public-guide-v1.
+Context:
+- El sistema ya tiene un caso real de validacion (`wsc-lat`) y una logica founder mucho mas fuerte.
+- Ahora toca convertir ese trabajo en una guia publica entendible para no tecnicos, en PDF y en Markdown para Reddit.
+- La guia debe mantener la historia y las ideas del texto original del usuario sin rebajarlas a copy generico.
+
+Execution intent:
+- Crear una guia larga con screenshots y explicacion paso a paso.
+- Crear una version mas corta para Reddit.
+- Explicar para que sirve cada paso y cada bloque del sistema.
+- Cerrar actualizando el repositorio publico con un enlace visible al PDF final.
+
+Open risks:
+- El texto base puede perder fuerza si se simplifica demasiado.
+- Una guia demasiado tecnica puede espantar a la audiencia founder.
+- Una guia demasiado comercial puede traicionar la intencion open source y educativa.
+- Las capturas pueden quedar bonitas pero poco utiles si no se explican bien.
+
+Completed story: G1 | Reconstruccion Del Texto Fuente Y Mapa Editorial
+
+Editorial decision:
+- La guia nueva no debe escribir "sobre" el texto del usuario como si fuera una idea suelta.
+- Debe reconstruirlo y acomodarlo sin bajar su intensidad ni volverlo copy de lanzamiento.
+- El objetivo editorial es que una persona no tecnica entienda por que existe Ws B-I, como prepararlo, que obtiene al usarlo y como aprovechar el razonamiento posterior con Codex.
+
+Ideas no negociables que deben preservarse:
+- La historia de origen: conocer McKinsey y BCG en pandemia, trabajando en arbitraje de commodities desde Espana hacia Latam, y notar la ventaja de tener informacion estructurada e interpretada.
+- La tesis central: en Latam la brecha no es talento ni ganas; es conocimiento y estructura.
+- La anecdota de la solopreneur de eventos: su negocio estaba en WhatsApp, correos, notas, tickets, facturas, capturas y audios; no faltaban datos, faltaba una forma mejor de pedirlos y organizarlos.
+- La conclusion fundacional: ella si sabia que hacer con la informacion y el AI Lab encontro una mejor manera de pedirla.
+- La definicion de Ws B-I como herramienta open source y local que convierte desorden, evidencia, hallazgos y decisiones en un dashboard revisable en el navegador.
+- La explicacion de que instalarlo localmente lo vuelve tuyo.
+- La instruccion practica de instalar Codex, iniciar sesion con cuenta de ChatGPT y dejar que el agente se haga cargo de los comandos.
+- La preparacion de una carpeta con la informacion real del negocio y la idea clave del "desorden organizado que tienes en tu cabeza".
+- El prompt exacto de arranque, visible y completo.
+- La explicacion de que hay que conceder permisos cuando Codex los pida.
+- El cierre fuerte: el trabajo realmente importante empieza cuando pones Codex a un lado y el reporte al otro, preguntas como razono, de donde saco la informacion y usas eso para aprender a pensar mejor.
+- El cierre comunitario: estrella en GitHub, feedback, mejoras, versiones propias y aprendizaje compartido.
+
+Secciones que deben quedar casi literales:
+- La historia de pandemia, arbitraje y descubrimiento de la ventaja McKinsey/BCG.
+- La tesis de Latam sobre conocimiento y estructura.
+- La anecdota de la solopreneur de eventos.
+- La frase y sentido de "desorden organizado que tienes en tu cabeza".
+- El prompt de arranque.
+- El cierre sobre aprender a razonar como un consultor caro apoyandote en lo que ya sabes hacer.
+- El cierre comunitario y de compartir mejoras.
+
+Secciones que si requieren reescritura ligera para claridad:
+- La explicacion de que hace Ws B-I de verdad: debe aterrizarse a resultados concretos, no a etiquetas internas.
+- El paso de instalacion: debe explicarse en lenguaje simple y sin asumir que el lector sabe que es un repo o un frontend.
+- La preparacion de carpetas: debe convertirse en una lista guiada y amable.
+- La explicacion de permisos: debe decir para que sirven y por que no deberian asustar.
+- La explicacion del frontend: cada bloque debe responder "que muestra", "para que sirve" y "que no debes asumir todavia".
+
+Mapa editorial aprobado para G2:
+- Portada y promesa de la guia
+- Historia de origen
+- Momento que vuelve obvio el problema
+- Que hace Ws B-I de verdad
+- Que necesitas instalar
+- Como preparar la carpeta de tu empresa
+- El prompt exacto
+- Que pasa despues de dar Enter
+- Como leer el frontend y para que sirve cada bloque
+- Como usar Codex despues del reporte para aprender y mejorar
+- Cierre comunitario
+
+Reglas de escritura fijadas para el resto del loop:
+- No disminuir ideas del texto original.
+- No convertirlo en marketing generico ni en tono de agencia.
+- No asumir conocimiento tecnico previo.
+- Explicar siempre "para que sirve" cada paso, pantalla y bloque.
+- Mantener voz humana, fundadora y educativa.
+- Corregir ortografia, puntuacion y orden, pero no domesticar el texto hasta quitarle caracter.
+- Si hay que simplificar algo, simplificar la forma, no la idea.
+
+Validation note after G1:
+- `python3 scripts/test_founder_usefulness.py` no paso por una razon estructural ajena al texto fuente: el test sigue apuntando a `output/pdf/wsbi-founder-guide-understanding.md`, archivo legado que no existe hoy en este repo.
+- Esto se debe corregir en el tramo de arquitectura y escritura de la guia nueva para que la suite valide los entregables reales de `wsbi-public-guide-v1` y no una guia historica inexistente.
+
+Completed story: G2-G4 | Arquitectura, Master Draft Largo Y Version Reddit
+
+Deliverables created:
+- `output/pdf/wsbi-public-guide-master.md`
+- `output/pdf/wsbi-reddit-post.md`
+
+Editorial result:
+- La guia larga ya conserva la historia de origen, la tesis sobre estructura en LatAm, la anecdota de la solopreneur, el prompt exacto y el cierre sobre aprender a razonar con Codex.
+- La version Reddit conserva la misma logica en formato mas corto y sin tecnicismos innecesarios.
+- Ambas piezas explican para que sirve cada paso y cada bloque del sistema en lenguaje founder.
+
+Completed story: G5 | Capturas Reales Del Flujo Y Del Frontend
+
+Artifacts captured:
+- `output/playwright/wsbi-guide-codex-install.png`
+- `output/playwright/wsbi-guide-codex-session.png`
+- `output/playwright/wsbi-guide-folder-structure.png`
+- `output/playwright/wsbi-guide-prompt.png`
+- `output/playwright/wsbi-guide-permissions.png`
+- `output/playwright/wsbi-guide-frontend-overview.png`
+- `output/playwright/wsbi-guide-frontend-customer.png`
+- `output/playwright/wsbi-guide-frontend-market.png`
+- `output/playwright/wsbi-guide-frontend-decision.png`
+- `output/playwright/wsbi-guide-frontend-documents.png`
+- `output/playwright/wsbi-guide-frontend-audit.png`
+
+Capture note:
+- Las capturas del frontend usan `wsc-lat` como caso real de validacion.
+- Las capturas de instalacion, prompt, permisos y estructura se resolvieron con assets locales porque la captura OS estaba bloqueada por permisos de Screen Recording y `chatgpt.com/codex` devolvia una pantalla intermedia no apta para guia publica.
+
+Completed story: G6 | PDF Final Con Explicacion Paso A Paso
+
+Deliverables created:
+- `output/pdf/wsbi-public-guide.html`
+- `output/pdf/wsbi-public-guide.pdf`
+
+Render note:
+- El PDF final se genero desde un HTML intermedio con las capturas reales ya embebidas.
+- Revision rapida: 17 paginas, 3038564 bytes.
+
+Completed story: G7 | QA Visual, Editorial Y De Utilidad
+
+Corrections made:
+- La guia nueva usa `WS Capital` como caso real levantado solo desde informacion publica para las vistas del frontend.
+- Se alinearon los tests de lenguaje, utilidad y guia publica para que dejaran de apuntar a la guia historica inexistente `wsbi-founder-guide-understanding.md`.
+- La suite ahora protege tambien que README y guia founder apunten al PDF final.
+
+Completed story: G8 | Actualizacion Del Repositorio Publico Y Enlace Al PDF
+
+Docs updated:
+- `README.md`
+- `docs/founder/README.md`
+- `docs/founder/02-trabajar-con-codex.md`
+- `docs/founder/03-ver-tu-frontend.md`
+
+Published copies for GitHub:
+- `docs/founder/wsbi-public-guide.md`
+- `docs/founder/wsbi-reddit-post.md`
+- `docs/founder/assets/wsbi-public-guide.pdf`
+- `docs/founder/assets/wsbi-guide-*.png`
+
+Validation after G2-G8:
+- `python3 -m compileall scripts`
+- `node --check ui/app.js`
+- `python3 scripts/codex-ground-loop/build_prd.py tasks/ground-loop/wsbi-public-guide-v1/plan.md tasks/ground-loop/wsbi-public-guide-v1/prd.json`
+- `python3 scripts/test_language_purity.py`
+- `python3 scripts/test_founder_usefulness.py`
+- `python3 scripts/test_public_guide_quality.py`
+- `python3 scripts/test_public_case_specificity.py`
+- `python3 scripts/test_case_view_model.py`
+- `python3 scripts/test_ui_workspace_flow.py`
+- `python3 scripts/release_check.py`
+
+Release gate:
+- `data/reports/release-readiness/2026-03-18-230914-release-readiness.md`
+
+Current status:
+- Ralph loop `wsbi-public-guide-v1` ready to close as completed.

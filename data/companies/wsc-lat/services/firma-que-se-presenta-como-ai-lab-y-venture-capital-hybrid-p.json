@@ -1,0 +1,23 @@
+{
+  "service_id": "firma-que-se-presenta-como-ai-lab-y-venture-capital-hybrid-p",
+  "company_id": "wsc-lat",
+  "name": "Firma que se presenta como AI Lab y Venture Capital Hybrid para Latinoamerica, c",
+  "one_sentence_description": "Firma que se presenta como AI Lab y Venture Capital Hybrid para Latinoamerica, con foco en infraestructura agentic e inteligencia abierta.",
+  "core_outcome": "",
+  "status": "inferred",
+  "confidence": 0.78,
+  "evidence_refs": [
+    "2026-03-18-wsc-active-units",
+    "2026-03-18-wsc-agentic-ratio",
+    "2026-03-18-wsc-open-intel-platform",
+    "2026-03-18-wsc-positioning-hybrid",
+    "2026-03-18-wsc-problem-latam"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Revise el material disponible, pero la descripcion del servicio sigue poco clara. Como explicarias en una o dos frases lo que realmente haces?"
+  ]
+}

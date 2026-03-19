@@ -1,0 +1,47 @@
+{
+  "entry_id": "2026-03-18-wsc-positioning-hybrid",
+  "evidence_id": "2026-03-18-wsc-positioning-hybrid",
+  "source_id": "2026-03-18-ws-capital-homepage",
+  "company_id": "wsc-lat",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Posicionamiento visible: AI Lab y Venture Capital Hybrid",
+  "evidence_type": "claim",
+  "source_type": "website",
+  "channel": "website",
+  "date": "2026-03-18",
+  "tags": [
+    "positioning",
+    "manifesto",
+    "homepage"
+  ],
+  "summary": "La portada presenta a WS Capital como una mezcla de AI Lab y Venture Capital Hybrid enfocada en construir herramientas, infraestructura e invertir en personas clave para escalar negocios en Latinoamerica.",
+  "verbatim_quotes": [
+    "\"The AI Lab & Venture Capital Hybrid.\"",
+    "\"We are an AI Lab and a Venture Capital Hybrid. We build the tools, create the infrastructure, and then we invest in the key people to scale businesses in Latin America.\""
+  ],
+  "quotes": [
+    "\"The AI Lab & Venture Capital Hybrid.\"",
+    "\"We are an AI Lab and a Venture Capital Hybrid. We build the tools, create the infrastructure, and then we invest in the key people to scale businesses in Latin America.\""
+  ],
+  "observations": [
+    "La propuesta visible mezcla al menos tres identidades: laboratorio de IA, infraestructura operativa y vehiculo de inversion.",
+    "La web hace una promesa regional explicita sobre Latinoamerica."
+  ],
+  "candidate_pains": [],
+  "candidate_outcomes": [],
+  "candidate_objections": [],
+  "trust_signals": [],
+  "status": "confirmed",
+  "confidence": 0.92,
+  "source_origin": "public_web_capture",
+  "evidence_refs": [
+    "2026-03-18-wsc-positioning-hybrid"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "created_at": "2026-03-18T20:11:02",
+  "updated_at": "2026-03-18T20:11:02",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/wsc-lat/2026-03-18-wsc-positioning-hybrid.md"
+}

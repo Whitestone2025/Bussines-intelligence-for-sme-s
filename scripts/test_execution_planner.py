@@ -24,8 +24,18 @@ def main() -> int:
     assert any(item["risk_watchouts"] for item in plan["milestones"]), "Milestones should include watchouts"
     assert plan["decision_refs"], "Plan should reference the decision memo"
     assert plan["workstreams"], "Plan should expose workstreams"
+    assert plan["initiative_roadmap"], "Plan should expose an initiative roadmap"
+    assert len(plan["initiative_roadmap"]) >= 4, "Roadmap should contain multiple initiatives"
+    assert plan["decision_checkpoints"], "Plan should expose decision checkpoints"
+    assert plan["no_regret_moves"] is not None, "Plan should expose no-regret moves even if empty"
     assert plan["validation_agenda"], "Plan should expose the validation agenda"
     assert plan["sequence_rationale"], "Plan should explain sequencing"
+    assert any(item["timeframe"] == "Dias 1-30" for item in plan["initiative_roadmap"]), "Roadmap should cover the first 30 days"
+    assert all(item["lagging_indicator"] for item in plan["initiative_roadmap"]), "Each initiative should expose lagging indicators"
+    assert all(item["key_risks"] for item in plan["initiative_roadmap"]), "Each initiative should expose initiative risks"
+    assert all(item["risk_mitigation"] for item in plan["initiative_roadmap"]), "Each initiative should expose mitigation actions"
+    assert all(item["decision_trigger"] for item in plan["initiative_roadmap"]), "Each initiative should expose a decision trigger"
+    assert all(item["exit_criteria"] for item in plan["initiative_roadmap"]), "Each initiative should expose exit criteria"
 
     with TemporaryDirectory() as temp_dir:
         path = persist_execution_plan(Path(temp_dir), payload)

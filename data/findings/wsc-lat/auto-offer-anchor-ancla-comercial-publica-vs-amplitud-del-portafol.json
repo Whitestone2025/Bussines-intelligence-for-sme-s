@@ -1,0 +1,20 @@
+{
+  "finding_id": "auto-offer-anchor-ancla-comercial-publica-vs-amplitud-del-portafol",
+  "company_id": "wsc-lat",
+  "category": "offer_anchor",
+  "title": "Ancla comercial publica vs amplitud del portafolio",
+  "statement": "La unica monetizacion publica concreta hoy es la suscripcion del AI Lab de 1,500 USD al mes por 6 meses, pero convive con un portafolio visible de unidades activas mucho mas amplio que esa oferta comercial.",
+  "status": "inferred",
+  "confidence": 0.86,
+  "evidence_refs": [
+    "2026-03-18-wsc-ai-lab-offer",
+    "2026-03-18-wsc-active-units"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Decide si el AI Lab es la punta de lanza comercial o solo una expresion parcial del negocio.",
+  "reasoning_kind": "web_only_case_specific",
+  "uncertainty_note": ""
+}

@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-show-me-the-process-not-just-",
+  "company_id": "guide-demo-lab",
+  "category": "trust_signal",
+  "title": "Senal de confianza: \"Show me the process, not just the promise.\"",
+  "statement": "\"Show me the process, not just the promise.\"",
+  "status": "needs_validation",
+  "confidence": 0.45,
+  "evidence_refs": [
+    "2026-03-18-buyer-asks-for-proof-and-examples"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

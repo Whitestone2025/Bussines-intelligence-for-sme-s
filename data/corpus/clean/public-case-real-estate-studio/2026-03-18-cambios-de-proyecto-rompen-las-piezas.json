@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+  "evidence_id": "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+  "source_id": "2026-03-18-founder-sales-notes",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Cambios de proyecto rompen las piezas",
+  "evidence_type": "artifact",
+  "source_type": "sales_notes",
+  "channel": "ops",
+  "date": "2026-03-18",
+  "tags": [
+    "operacion",
+    "rondas",
+    "entrega"
+  ],
+  "summary": "Cada cambio de metraje o amenidad deja varios dias sin material comercial actualizado y eso frena la preventa.",
+  "verbatim_quotes": [
+    "\"Cada cambio de metraje o amenidad nos deja varios dias sin piezas actualizadas.\""
+  ],
+  "quotes": [
+    "\"Cada cambio de metraje o amenidad nos deja varios dias sin piezas actualizadas.\""
+  ],
+  "observations": [
+    "La velocidad de actualizacion importa casi tanto como la calidad visual.",
+    "La objecion recurrente es cuantas rondas incluye el paquete y que tan rapido responde el estudio."
+  ],
+  "candidate_pains": [
+    "Cada cambio del proyecto deja dias sin material comercial actualizado."
+  ],
+  "candidate_outcomes": [
+    "Contar con actualizacion rapida cuando cambia una tipologia o amenidad."
+  ],
+  "candidate_objections": [
+    "Temen pagar extra por cada ronda o cambio menor."
+  ],
+  "trust_signals": [
+    "SLA visible y reglas de rondas claras."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-cambios-de-proyecto-rompen-las-piezas.md"
+}

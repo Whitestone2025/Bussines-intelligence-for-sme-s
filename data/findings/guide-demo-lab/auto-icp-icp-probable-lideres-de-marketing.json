@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-icp-icp-probable-lideres-de-marketing",
+  "company_id": "guide-demo-lab",
+  "category": "icp",
+  "title": "ICP probable: Lideres de marketing",
+  "statement": "Lideres de marketing",
+  "status": "needs_validation",
+  "confidence": 0.5,
+  "evidence_refs": [
+    "2026-03-18-founder-wants-qualified-conversations"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este perfil comprador coincide con la realidad.",
+  "reasoning_kind": "inference",
+  "uncertainty_note": "La evidencia apunta a este comprador, pero aun puede ser un proxy parcial."
+}

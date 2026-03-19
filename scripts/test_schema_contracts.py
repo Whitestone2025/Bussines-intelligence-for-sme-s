@@ -38,6 +38,11 @@ REFERENCE_SEPARATION_FIELDS = {
     "decision_memo": {"assumption_refs", "finding_refs", "validated_fact_refs"},
 }
 
+STRATEGIC_MODEL_FIELDS = {
+    "decision_memo": {"strategic_stack"},
+    "execution_plan": {"initiative_roadmap", "decision_checkpoints", "no_regret_moves", "strategic_alternatives"},
+}
+
 
 def load_schema(filename: str) -> dict:
     path = SCHEMA_DIR / filename
@@ -90,6 +95,18 @@ def assert_reference_separation(name: str, schema: dict) -> None:
     assert not required_missing, f"{name}: required separation fields missing: {', '.join(required_missing)}"
 
 
+def assert_strategic_model_fields(name: str, schema: dict) -> None:
+    expected_fields = STRATEGIC_MODEL_FIELDS.get(name)
+    if not expected_fields:
+        return
+    properties = schema["properties"]
+    required = set(schema["required"])
+    missing = sorted(expected_fields - properties.keys())
+    assert not missing, f"{name}: missing strategic model fields: {', '.join(missing)}"
+    required_missing = sorted(expected_fields - required)
+    assert not required_missing, f"{name}: required strategic model fields missing: {', '.join(required_missing)}"
+
+
 def main() -> int:
     for name, filename in SCHEMA_FILES.items():
         schema = load_schema(filename)
@@ -97,6 +114,7 @@ def main() -> int:
         assert_identifier_contract(name, schema)
         assert_truth_fields(name, schema)
         assert_reference_separation(name, schema)
+        assert_strategic_model_fields(name, schema)
     print("Schema contract checks passed.")
     return 0
 

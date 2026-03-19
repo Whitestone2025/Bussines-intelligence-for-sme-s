@@ -34,10 +34,88 @@ STATUS_VALUES = ["draft", "inferred", "needs_validation", "validated", "confirme
 READY_STATUSES = {"validated", "confirmed"}
 QUESTION_LIMIT = 4
 
-PAIN_CUES = ("problem", "pain", "struggle", "friction", "waste", "confus", "difficult", "hard", "slow", "unclear")
-OUTCOME_CUES = ("want", "need", "result", "outcome", "clarity", "trust", "predictable", "qualified", "booked", "confidence")
-OBJECTION_CUES = ("don't", "do not", "skeptic", "agency", "expensive", "risk", "worry", "trust", "before", "burned")
-TRUST_CUES = ("proof", "process", "transparent", "exact", "real", "specific", "show", "before launch", "example")
+PAIN_CUES = (
+    "problem",
+    "pain",
+    "struggle",
+    "friction",
+    "waste",
+    "confus",
+    "difficult",
+    "hard",
+    "slow",
+    "unclear",
+    "dolor",
+    "friccion",
+    "cuello de botella",
+    "retras",
+    "visitas improductivas",
+    "improvis",
+    "desorden",
+    "sin material",
+    "sin claridad",
+)
+OUTCOME_CUES = (
+    "want",
+    "need",
+    "result",
+    "outcome",
+    "clarity",
+    "trust",
+    "predictable",
+    "qualified",
+    "booked",
+    "confidence",
+    "quier",
+    "necesit",
+    "resultado",
+    "claridad",
+    "confianza",
+    "calificados",
+    "cerrar",
+    "filtrar",
+    "visitas utiles",
+)
+OBJECTION_CUES = (
+    "don't",
+    "do not",
+    "skeptic",
+    "agency",
+    "expensive",
+    "risk",
+    "worry",
+    "trust",
+    "before",
+    "burned",
+    "no quiero",
+    "no me sirve",
+    "caro",
+    "riesgo",
+    "rondas",
+    "alcance",
+    "otra vez",
+    "ya pagamos",
+)
+TRUST_CUES = (
+    "proof",
+    "process",
+    "transparent",
+    "exact",
+    "real",
+    "specific",
+    "show",
+    "before launch",
+    "example",
+    "prueba",
+    "proceso",
+    "transparente",
+    "ejemplo",
+    "tour 360",
+    "recorrido",
+    "rondas claras",
+    "sla",
+    "whatsapp",
+)
 GENERIC_MARKET_CUES = ("growth partner", "end-to-end solution", "scale to the next level", "results-driven", "full-service")
 GENERIC_SERVICE_CUES = ("business in mexico", "help businesses grow", "services company", "service business", "consulting support", "generic growth")
 
@@ -269,6 +347,81 @@ def traceability_bonus(evidence_refs: list[str], source_refs: list[str]) -> floa
     return min(0.24, len(unique_preserve(evidence_refs)) * 0.08 + len(unique_preserve(source_refs)) * 0.04)
 
 
+def is_web_only_case(profile: dict, source_items: list[dict], evidence_items: list[dict]) -> bool:
+    website = str(profile.get("website", "")).strip()
+    available_sources = {str(item).strip().lower() for item in profile.get("available_sources", []) if str(item).strip()}
+    if not website or not available_sources or not available_sources <= {"website"}:
+        return False
+    if source_items and any(item.get("source_kind") != "website" or item.get("origin") != "public_web" for item in source_items):
+        return False
+    if evidence_items and any(item.get("source_type") != "website" for item in evidence_items):
+        return False
+    return True
+
+
+def web_only_open_assumptions(findings: list[dict], evidence_items: list[dict]) -> list[str]:
+    assumptions = [
+        "La web publica por si sola no confirma quien compra realmente.",
+        "La web publica por si sola no confirma conversion, economia unitaria ni traccion comercial.",
+        "La oferta visible puede mezclar varias identidades del negocio y todavia requiere validacion.",
+    ]
+    if not any(item.get("category") == "service" and item.get("confidence", 0) >= 0.72 for item in findings):
+        assumptions.append("La oferta central sigue siendo tentativa y no basta para fijar una tesis comercial definitiva.")
+    if len(evidence_items) <= 6:
+        assumptions.append("Todavia falta evidencia externa o interna para distinguir narrativa, prueba operativa y capacidad real.")
+    return unique_preserve(assumptions)
+
+
+def materialization_thresholds(category: str, web_only: bool) -> tuple[float, int]:
+    if web_only:
+        thresholds = {
+            "service": (0.74, 3),
+            "icp": (0.8, 3),
+            "channel": (0.78, 2),
+        }
+    else:
+        thresholds = {
+            "service": (0.6, 1),
+            "icp": (0.62, 1),
+            "channel": (0.58, 1),
+        }
+    return thresholds.get(category, (0.62, 1))
+
+
+def should_materialize_finding(finding: dict | None, category: str, web_only: bool) -> bool:
+    if not finding:
+        return False
+    min_confidence, min_refs = materialization_thresholds(category, web_only)
+    refs = len(unique_preserve(finding.get("evidence_refs", []) + finding.get("source_refs", [])))
+    return finding.get("confidence", 0) >= min_confidence and refs >= min_refs
+
+
+def prune_weak_auto_knowledge(company_id: str, web_only: bool) -> None:
+    if not web_only:
+        return
+    targets = [
+        (company_base(company_id) / "services", "service"),
+        (company_base(company_id) / "icps", "icp"),
+        (company_base(company_id) / "channels", "channel"),
+    ]
+    for base, category in targets:
+        for path in sorted(base.glob("*.json")):
+            record = load_json(path, {})
+            if record.get("source_origin") != "finding":
+                continue
+            pseudo_finding = {
+                "confidence": record.get("confidence", 0),
+                "evidence_refs": record.get("evidence_refs", []),
+                "source_refs": record.get("source_refs", []),
+            }
+            if should_materialize_finding(pseudo_finding, category, web_only):
+                continue
+            try:
+                path.unlink()
+            except FileNotFoundError:
+                continue
+
+
 def default_status_confidence(record: dict, fallback_status: str = "draft", fallback_confidence: float = 0.3) -> dict:
     if record.get("status") not in STATUS_VALUES:
         record["status"] = fallback_status
@@ -437,9 +590,13 @@ def filter_match(value: str, expected: str) -> bool:
 
 def list_sources(company_id: str = "", source_kind: str = "", status: str = "") -> list[dict]:
     items: list[dict] = []
-    if not SOURCES_DIR.exists():
+    if company_id:
+        base = source_dir(company_id)
+    else:
+        base = SOURCES_DIR
+    if not base.exists():
         return items
-    for path in sorted(SOURCES_DIR.rglob("*.json")):
+    for path in sorted(base.rglob("*.json")):
         record = load_json(path, {})
         if not filter_match(record.get("company_id", ""), company_id):
             continue
@@ -910,6 +1067,11 @@ def localized_deliverable_title(item_id: str, fallback: str) -> str:
     mapping = {
         "executive-memo": "Memo Ejecutivo",
         "business-diagnosis": "Diagnostico de Negocio",
+        "problem-structuring-memo": "Memo de Problema Estructurado",
+        "strategic-options-memo": "Memo de Opciones Estrategicas",
+        "decision-document": "Documento de Decision",
+        "initiative-roadmap": "Roadmap de Iniciativas",
+        "founder-narrative": "Narrativa del Founder",
         "deck-outline": "Estructura de Presentacion",
         "risk-memo": "Memo de Riesgos",
     }
@@ -1114,8 +1276,11 @@ def build_hero_payload(
         ],
         eyebrow="Sala ejecutiva",
         title=company.get("name", "Caso activo"),
-        subtitle=decision.get("decision_summary") or company.get("seed_summary", ""),
-        narrative=offer_name,
+        subtitle=decision.get("decision_summary") or "Lectura ejecutiva del caso actual",
+        narrative=(
+            f"Esta portada te ayuda a ubicar rapido el estado del caso, el foco comercial actual y si ya hay suficiente sustento para actuar. "
+            f"Hoy la oferta en foco es: {offer_name}."
+        ),
         website=company.get("website", ""),
         badges=hero_badges,
         deliverable_count=len(deliverables),
@@ -1134,7 +1299,25 @@ def build_war_room_payload(
     evidence: list[dict],
 ) -> dict:
     confidence = max(safe_float(decision.get("confidence"), 0.0), safe_float(company.get("confidence"), 0.0))
+    strategic_stack = decision.get("strategic_stack", {}) if isinstance(decision, dict) else {}
+    recommended_route = strategic_stack.get("recommended_route", {}) if isinstance(strategic_stack, dict) else {}
     next_steps = decision.get("next_steps", []) or plan.get("milestones", [])
+    evidence_limits = unique_preserve(
+        [str(item).strip() for item in company.get("known_constraints", []) if str(item).strip()]
+        + [str(item).strip() for item in decision.get("validation_gaps", []) if str(item).strip()]
+    )[:5]
+    route_thesis = recommended_route.get("thesis", "") or decision.get("recommended_action", "") or company.get("seed_summary", "")
+    route_label = recommended_route.get("label", "") or (
+        "Ruta recomendada" if decision.get("status") in {"ready", "validated", "confirmed", "inferred"} else "Ruta provisional"
+    )
+    next_step_candidates = [str(item).strip() for item in decision.get("next_steps", []) if str(item).strip()]
+    next_validation_step = next_step_candidates[0] if next_step_candidates else ""
+    rationale = decision.get("why_now", "").strip()
+    if decision.get("status") in {"needs_validation", "blocked", "draft"}:
+        rationale = (
+            "Esta lectura sigue siendo provisional: te dice cual identidad parece mas defendible hoy, "
+            f"pero tambien deja claro que falta validar antes de ejecutar. {rationale}"
+        ).strip()
     featured_deliverables = [
         {
             "id": item["id"],
@@ -1166,16 +1349,20 @@ def build_war_room_payload(
     return block_payload(
         readiness.get("status", "draft"),
         confidence,
-        decision.get("recommended_action") or company.get("seed_summary", ""),
-        decision.get("why_now") or company.get("seed_summary", ""),
+        route_thesis,
+        (
+            "Este resumen te ayuda a distinguir la ruta provisional del caso, el siguiente paso de validacion "
+            f"y el nivel real de confianza disponible. {rationale}".strip()
+        ),
         [
+            f"{route_label}: {route_thesis}",
+            f"Siguiente validacion: {next_validation_step or 'Sin siguiente paso visible'}",
             f"Objecion principal: {signal_board.get('objections', ['Sin dato'])[0] if signal_board.get('objections') else 'Sin dato'}",
-            f"Confianza comercial: {signal_board.get('trust_signals', ['Sin dato'])[0] if signal_board.get('trust_signals') else 'Sin dato'}",
-            f"Precio objetivo: {currency_display(pricing.get('price_target'), pricing.get('currency_code', 'MXN'))}",
-            f"Riesgo clave: {decision.get('key_risks', ['Sin dato'])[0] if decision.get('key_risks') else 'Sin dato'}",
+            f"Limite principal: {evidence_limits[0] if evidence_limits else 'Sin limite visible'}",
         ],
-        recommendation=decision.get("recommended_action", ""),
-        rationale=decision.get("why_now", ""),
+        recommendation=route_thesis,
+        recommendation_label=route_label,
+        rationale=rationale,
         readiness=readiness,
         signal_clusters=[
             {"label": "Dolores", "items": signal_board.get("pains", [])[:4]},
@@ -1183,6 +1370,8 @@ def build_war_room_payload(
             {"label": "Confianza", "items": signal_board.get("trust_signals", [])[:4]},
         ],
         risks=decision.get("key_risks", [])[:4],
+        evidence_limits=evidence_limits,
+        next_validation_step=next_validation_step,
         next_steps=next_steps[:4] if isinstance(next_steps, list) else [],
         featured_deliverables=featured_deliverables,
         evidence_highlights=evidence_highlights,
@@ -1203,7 +1392,9 @@ def build_thesis_payload(company: dict, service: dict, icp: dict, offer: dict, m
         offer.get("status") or service.get("status") or "draft",
         confidence,
         offer_name,
-        offer.get("core_promise") or service_statement,
+        (
+            "La tesis resume lo que hoy parece mas cierto sobre el servicio, el comprador y el mensaje que conviene poner al frente."
+        ),
         [
             f"Servicio: {service_statement}",
             f"ICP: {icp.get('label', 'Sin ICP validado')}",
@@ -1246,7 +1437,7 @@ def build_market_summary_payload(market_records: list[dict]) -> dict:
         attractiveness.get("status", "draft"),
         attractiveness.get("confidence", 0.0),
         translate_preview_text(attractiveness.get("segment_name", "Mercado y atractivo")),
-        translate_preview_text(attractiveness.get("methodology_summary", "Sin resumen metodologico.")),
+        "Este bloque sirve para estimar si hay suficiente espacio comercial para probar la oferta y con que nivel de confianza conviene leer esos numeros.",
         [f"{item['label']}: {item['segment_name']}" for item in ordered if item.get("segment_name")][:4],
         records=ordered,
     )
@@ -1267,7 +1458,7 @@ def build_competition_summary_payload(competitor_records: list[dict]) -> dict:
         primary.get("status", "draft"),
         confidence,
         primary.get("positioning_summary", "Mapa competitivo"),
-        translate_preview_text(primary.get("summary", primary.get("positioning_summary", "Sin resumen competitivo"))),
+        "Este bloque te ayuda a entender contra que alternativas compite realmente tu negocio y donde todavia existe espacio para diferenciarte.",
         whitespace[:4],
         competitors=competitors,
         whitespace=whitespace,
@@ -1284,7 +1475,8 @@ def build_viability_summary_payload(pricing: dict, financials: dict) -> dict:
         pricing.get("status") or financials.get("status") or "draft",
         confidence,
         "Precio y viabilidad",
-        financials.get("viability_warning") or "Sin alerta de viabilidad registrada.",
+        financials.get("viability_warning")
+        or "Este bloque sirve para leer si el rango de precio actual parece defendible y si la economia del caso aguanta una prueba comercial razonable.",
         [
             f"Precio piso: {currency_display(pricing.get('price_floor'), pricing.get('currency_code', 'MXN'))}",
             f"Precio objetivo: {currency_display(pricing.get('price_target'), pricing.get('currency_code', 'MXN'))}",
@@ -1299,16 +1491,92 @@ def build_viability_summary_payload(pricing: dict, financials: dict) -> dict:
 
 def build_decision_summary_payload(decision: dict, plan: dict, validation: list[dict]) -> dict:
     milestones = plan.get("milestones", []) if isinstance(plan, dict) else []
+    strategic_stack = decision.get("strategic_stack", {}) if isinstance(decision, dict) else {}
+    problem = strategic_stack.get("problem_statement", {}) if isinstance(strategic_stack, dict) else {}
+    case_for_change = strategic_stack.get("case_for_change", {}) if isinstance(strategic_stack, dict) else {}
+    alternatives = strategic_stack.get("strategic_alternatives", []) if isinstance(strategic_stack, dict) else []
+    recommended_route = strategic_stack.get("recommended_route", {}) if isinstance(strategic_stack, dict) else {}
+    initiative_roadmap = plan.get("initiative_roadmap", []) if isinstance(plan, dict) else []
+    problem_structuring = {
+        "headline": problem.get("headline", decision.get("decision_summary", "Decision actual")),
+        "situation": problem.get("situation", ""),
+        "complication": problem.get("complication", ""),
+        "decision_tension": problem.get("decision_tension", ""),
+        "facts": unique_preserve([str(item).strip() for item in decision.get("fact_base", []) if str(item).strip()])[:5],
+        "assumptions": unique_preserve([str(item).strip() for item in decision.get("assumptions", []) if str(item).strip()])[:5],
+        "recommendation": decision.get("recommended_action", ""),
+        "what_must_be_true": unique_preserve(
+            [str(item).strip() for item in strategic_stack.get("what_must_be_true", []) if str(item).strip()]
+            + [str(item).strip() for item in decision.get("validation_gaps", []) if str(item).strip()]
+        )[:5],
+        "case_for_change": unique_preserve(
+            [
+                f"Por que cambiar: {case_for_change.get('why_change', '')}" if case_for_change.get("why_change") else "",
+                f"Costo de no hacer nada: {case_for_change.get('cost_of_inaction', '')}" if case_for_change.get("cost_of_inaction") else "",
+            ]
+        )[:3],
+    }
+    evidence_limits = unique_preserve([str(item).strip() for item in decision.get("validation_gaps", []) if str(item).strip()])[:5]
+    confidence_note = (
+        "La decision ya esta suficientemente apoyada como para orientar ejecucion."
+        if decision.get("status") in {"ready", "validated", "confirmed", "inferred"}
+        else "La decision sigue siendo provisional: todavia sirve para orientar preguntas y comparar rutas, no para ejecutar con certeza alta."
+    )
+    summary = decision.get("why_now", "").strip()
+    if summary:
+        summary = (
+            "Este bloque te dice por que hoy conviene esta ruta frente a las alternativas, "
+            f"que tendria que ser cierto para sostenerla y que habria que validar despues. {summary} {confidence_note}"
+        )
+    else:
+        summary = (
+            "Este bloque te dice cual es la ruta sugerida, por que conviene ahora y que faltaria validar antes de escalar. "
+            f"{confidence_note}"
+        )
     return block_payload(
         decision.get("status", "draft"),
         decision.get("confidence", 0.0),
         decision.get("decision_summary", "Decision actual"),
-        decision.get("why_now", "Sin fundamento capturado."),
+        summary,
         decision.get("next_steps", [])[:4],
         memo=decision,
         plan=plan,
         milestones=milestones,
         validation=validation,
+        problem_structuring=problem_structuring,
+        evidence_limits=evidence_limits,
+        confidence_note=confidence_note,
+        decision_readout={
+            "criteria": unique_preserve([str(item).strip() for item in decision.get("decision_criteria", []) if str(item).strip()])[:5],
+            "alternatives": alternatives[:4],
+            "recommended_route": {
+                "label": recommended_route.get("label", ""),
+                "thesis": recommended_route.get("thesis", decision.get("recommended_action", "")),
+                "why_this_route_wins": recommended_route.get("why_this_route_wins", decision.get("why_now", "")),
+                "invalidation_conditions": unique_preserve(
+                    [str(item).strip() for item in recommended_route.get("invalidation_conditions", []) if str(item).strip()]
+                    + [str(item).strip() for item in decision.get("key_risks", []) if str(item).strip()]
+                )[:5],
+            },
+            "decision_checkpoints": unique_preserve([str(item).strip() for item in plan.get("decision_checkpoints", []) if str(item).strip()])[:5],
+        },
+        roadmap_readout={
+            "initiatives": [
+                {
+                    "initiative_id": item.get("initiative_id", ""),
+                    "name": item.get("name", ""),
+                    "workstream": item.get("workstream", ""),
+                    "timeframe": item.get("timeframe", ""),
+                    "stage_gate": item.get("stage_gate", ""),
+                    "stage_gate_question": item.get("stage_gate_question", ""),
+                    "leading_indicator": item.get("leading_indicator", ""),
+                    "decision_trigger": item.get("decision_trigger", ""),
+                    "key_risks": item.get("key_risks", [])[:3],
+                }
+                for item in initiative_roadmap[:4]
+            ],
+            "decision_checkpoints": unique_preserve([str(item).strip() for item in plan.get("decision_checkpoints", []) if str(item).strip()])[:5],
+        },
     )
 
 
@@ -1337,7 +1605,7 @@ def build_audit_index_payload(
         "ready",
         1.0,
         f"Auditoria de {company.get('name', company_id)}",
-        "Inspeccion completa de fuentes, evidencias, findings y trazabilidad del caso.",
+        "La auditoria te permite revisar de donde sale cada conclusion y cuanto sustento real tiene el caso antes de confiar demasiado en la recomendacion.",
         [
             f"{len(sources)} fuentes",
             f"{len(evidence)} evidencias",
@@ -1593,21 +1861,25 @@ def text_fragments_for_company(company_id: str) -> list[dict]:
     profile = bootstrap_research_profile(company_id)
     fragments: list[dict] = []
     if profile.get("seed_summary"):
-        fragments.append({"text": str(profile["seed_summary"]), "source_refs": [], "evidence_refs": []})
+        fragments.append({"text": str(profile["seed_summary"]), "source_refs": [], "evidence_refs": [], "text_kind": "seed"})
     if company.get("notes"):
-        fragments.append({"text": str(company["notes"]), "source_refs": [], "evidence_refs": []})
+        fragments.append({"text": str(company["notes"]), "source_refs": [], "evidence_refs": [], "text_kind": "notes"})
     for source in list_sources(company_id=company_id):
         body_parts = [source.get("title", ""), source.get("summary", ""), source.get("body", "")]
         text = " ".join(part for part in body_parts if part)
         if text.strip():
-            fragments.append({"text": text, "source_refs": [source["source_id"]], "evidence_refs": []})
+            fragments.append({"text": text, "source_refs": [source["source_id"]], "evidence_refs": [], "text_kind": "source"})
     for evidence in list_evidence(company_id=company_id):
-        text_parts = [evidence.get("title", ""), evidence.get("summary", "")]
-        text_parts.extend(evidence.get("quotes", []))
-        text_parts.extend(evidence.get("observations", []))
-        text = " ".join(part for part in text_parts if part)
-        if text.strip():
-            fragments.append({"text": text, "source_refs": [evidence.get("source_id", "")] if evidence.get("source_id") else [], "evidence_refs": [evidence["id"]]})
+        common = {"source_refs": [evidence.get("source_id", "")] if evidence.get("source_id") else [], "evidence_refs": [evidence["id"]]}
+        title_text = " ".join(part for part in [evidence.get("title", ""), evidence.get("summary", "")] if part)
+        if title_text.strip():
+            fragments.append({"text": title_text, "text_kind": "summary", **common})
+        for quote in evidence.get("quotes", []):
+            if str(quote).strip():
+                fragments.append({"text": str(quote).strip(), "text_kind": "quote", **common})
+        for observation in evidence.get("observations", []):
+            if str(observation).strip():
+                fragments.append({"text": str(observation).strip(), "text_kind": "observation", **common})
     return fragments
 
 
@@ -1646,6 +1918,7 @@ def make_finding(
 
 def infer_service_finding(company_id: str, fragments: list[dict]) -> dict | None:
     profile = bootstrap_research_profile(company_id)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
     seed_summary = str(profile.get("seed_summary", "")).strip()
     if not seed_summary:
         return None
@@ -1654,6 +1927,8 @@ def infer_service_finding(company_id: str, fragments: list[dict]) -> dict | None
     confidence = 0.46 + traceability_bonus(evidence_refs, source_refs) - genericity_penalty(statement)
     if len(normalized_words(statement)) >= 7:
         confidence += 0.08
+    if web_only and not evidence_refs:
+        confidence -= 0.08
     return make_finding(
         company_id,
         "service",
@@ -1664,12 +1939,15 @@ def infer_service_finding(company_id: str, fragments: list[dict]) -> dict | None
         title="Servicio probable",
         suggested_action="Valida si esta descripcion refleja con precision la oferta central.",
         reasoning_kind="seed_plus_support",
-        uncertainty_note="La descripcion del servicio sigue siendo tentativa hasta contrastarla con mas evidencia." if not evidence_refs and not source_refs else "",
+        uncertainty_note="La descripcion del servicio sigue siendo tentativa hasta contrastarla con mas evidencia." if web_only or (not evidence_refs and not source_refs) else "",
     )
 
 
 def infer_icp_findings(company_id: str, fragments: list[dict]) -> list[dict]:
-    combined = " ".join(fragment["text"].lower() for fragment in fragments)
+    profile = bootstrap_research_profile(company_id)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
+    icp_fragments = [fragment for fragment in fragments if not web_only or fragment.get("text_kind") in {"quote", "source"}]
+    combined = " ".join(fragment["text"].lower() for fragment in icp_fragments)
     findings = []
     scored = []
     for label, keywords in ICP_KEYWORDS.items():
@@ -1677,12 +1955,16 @@ def infer_icp_findings(company_id: str, fragments: list[dict]) -> list[dict]:
         if score:
             evidence_refs: list[str] = []
             source_refs: list[str] = []
-            for fragment in fragments:
+            for fragment in icp_fragments:
                 lower = fragment["text"].lower()
                 if any(keyword in lower for keyword in keywords):
                     evidence_refs.extend(fragment.get("evidence_refs", []))
                     source_refs.extend(fragment.get("source_refs", []))
-            scored.append((score, label, unique_preserve(evidence_refs), unique_preserve(source_refs)))
+            unique_evidence = unique_preserve(evidence_refs)
+            unique_sources = unique_preserve(source_refs)
+            if web_only and (score < 2 or len(unique_evidence) < 2):
+                continue
+            scored.append((score, label, unique_evidence, unique_sources))
     scored.sort(key=lambda item: item[0], reverse=True)
     if not scored:
         return findings
@@ -1706,9 +1988,10 @@ def infer_icp_findings(company_id: str, fragments: list[dict]) -> list[dict]:
 
 def infer_channel_findings(company_id: str, fragments: list[dict]) -> list[dict]:
     profile = bootstrap_research_profile(company_id)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
     combined = " ".join(fragment["text"].lower() for fragment in fragments)
     findings = []
-    if profile.get("website"):
+    if profile.get("website") and not web_only:
         findings.append(
             make_finding(
                 company_id,
@@ -1721,14 +2004,14 @@ def infer_channel_findings(company_id: str, fragments: list[dict]) -> list[dict]
                 uncertainty_note="Tener sitio web solo sugiere este canal; no lo confirma por si mismo.",
             )
         )
-    if "email" in combined:
-        refs = [fragment for fragment in fragments if "email" in fragment["text"].lower()]
+    if re.search(r"\bemail\b", combined):
+        refs = [fragment for fragment in fragments if re.search(r"\bemail\b", fragment["text"].lower())]
         findings.append(make_finding(company_id, "channel", "Correo", 0.55 + traceability_bonus([item for frag in refs for item in frag.get("evidence_refs", [])], [item for frag in refs for item in frag.get("source_refs", [])]), [item for frag in refs for item in frag.get("evidence_refs", [])], [item for frag in refs for item in frag.get("source_refs", [])], title="Canal probable: Correo"))
-    if "whatsapp" in combined or "dm" in combined:
-        refs = [fragment for fragment in fragments if "whatsapp" in fragment["text"].lower() or "dm" in fragment["text"].lower()]
+    if re.search(r"\bwhatsapp\b", combined) or re.search(r"\bdm\b", combined):
+        refs = [fragment for fragment in fragments if re.search(r"\bwhatsapp\b", fragment["text"].lower()) or re.search(r"\bdm\b", fragment["text"].lower())]
         findings.append(make_finding(company_id, "channel", "WhatsApp", 0.55 + traceability_bonus([item for frag in refs for item in frag.get("evidence_refs", [])], [item for frag in refs for item in frag.get("source_refs", [])]), [item for frag in refs for item in frag.get("evidence_refs", [])], [item for frag in refs for item in frag.get("source_refs", [])], title="Canal probable: WhatsApp"))
-    if "call" in combined or "sales call" in combined:
-        refs = [fragment for fragment in fragments if "call" in fragment["text"].lower() or "sales call" in fragment["text"].lower()]
+    if re.search(r"\bsales call\b", combined) or re.search(r"\bcall\b", combined):
+        refs = [fragment for fragment in fragments if re.search(r"\bsales call\b", fragment["text"].lower()) or re.search(r"\bcall\b", fragment["text"].lower())]
         findings.append(make_finding(company_id, "channel", "Llamada de venta", 0.56 + traceability_bonus([item for frag in refs for item in frag.get("evidence_refs", [])], [item for frag in refs for item in frag.get("source_refs", [])]), [item for frag in refs for item in frag.get("evidence_refs", [])], [item for frag in refs for item in frag.get("source_refs", [])], title="Canal probable: Llamada de venta"))
     return unique_finding_records(findings)[:3]
 
@@ -1789,6 +2072,71 @@ def infer_market_claim_findings(company_id: str, fragments: list[dict]) -> list[
     return unique_finding_records(findings)[:4]
 
 
+def infer_web_strategy_findings(company_id: str) -> list[dict]:
+    profile = bootstrap_research_profile(company_id)
+    source_items = list_sources(company_id=company_id)
+    evidence_items = list_evidence(company_id=company_id)
+    if not is_web_only_case(profile, source_items, evidence_items):
+        return []
+
+    evidence_map = {item["id"]: item for item in evidence_items}
+    findings: list[dict] = []
+
+    hybrid = evidence_map.get("2026-03-18-wsc-positioning-hybrid")
+    open_intel = evidence_map.get("2026-03-18-wsc-open-intel-platform")
+    active_units = evidence_map.get("2026-03-18-wsc-active-units")
+    ai_lab_offer = evidence_map.get("2026-03-18-wsc-ai-lab-offer")
+    agentic_ratio = evidence_map.get("2026-03-18-wsc-agentic-ratio")
+    problem = evidence_map.get("2026-03-18-wsc-problem-latam")
+
+    if hybrid and open_intel and active_units:
+        findings.append(
+            make_finding(
+                company_id,
+                "strategic_tension",
+                "La web mezcla al menos tres identidades visibles: AI Lab operativo, plataforma abierta de inteligencia y vehiculo de venture capital, sin dejar claro cual es la cuña comercial dominante hoy.",
+                0.84,
+                [hybrid["id"], open_intel["id"], active_units["id"]],
+                ["2026-03-18-ws-capital-homepage"],
+                title="Tension de identidad comercial visible",
+                suggested_action="Aclara si el negocio quiere vender primero un servicio, una plataforma o una tesis de venture hybrid.",
+                reasoning_kind="web_only_case_specific",
+            )
+        )
+
+    if ai_lab_offer and active_units:
+        findings.append(
+            make_finding(
+                company_id,
+                "offer_anchor",
+                "La unica monetizacion publica concreta hoy es la suscripcion del AI Lab de 1,500 USD al mes por 6 meses, pero convive con un portafolio visible de unidades activas mucho mas amplio que esa oferta comercial.",
+                0.86,
+                [ai_lab_offer["id"], active_units["id"]],
+                ["2026-03-18-ws-capital-homepage"],
+                title="Ancla comercial publica vs amplitud del portafolio",
+                suggested_action="Decide si el AI Lab es la punta de lanza comercial o solo una expresion parcial del negocio.",
+                reasoning_kind="web_only_case_specific",
+            )
+        )
+
+    if ai_lab_offer and agentic_ratio and problem:
+        findings.append(
+            make_finding(
+                company_id,
+                "proof_gap",
+                "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa.",
+                0.82,
+                [ai_lab_offer["id"], agentic_ratio["id"], problem["id"]],
+                ["2026-03-18-ws-capital-homepage"],
+                title="Brecha entre promesa operativa y prueba visible",
+                suggested_action="Antes de escalar narrativa, muestra evidencia concreta de implementacion, resultados o casos.",
+                reasoning_kind="web_only_case_specific",
+            )
+        )
+
+    return findings
+
+
 def unique_finding_records(findings: list[dict]) -> list[dict]:
     seen = set()
     output = []
@@ -1814,6 +2162,7 @@ def derive_findings(company_id: str) -> list[dict]:
     findings.extend(infer_signal_findings(company_id, fragments, "objection", OBJECTION_CUES, "Objecion", "Confirma si esta objecion bloquea ventas de forma repetida."))
     findings.extend(infer_signal_findings(company_id, fragments, "trust_signal", TRUST_CUES, "Senal de confianza", "Promociona esto si repetidamente baja el escepticismo."))
     findings.extend(infer_market_claim_findings(company_id, fragments))
+    findings.extend(infer_web_strategy_findings(company_id))
     return unique_finding_records(findings)
 
 
@@ -1982,13 +2331,15 @@ def generate_validation_questions(company_id: str) -> list[dict]:
     questions: list[dict] = []
     companies = {company["company_id"]: company for company in list_companies()}
     company = companies.get(company_id, company_record(company_id))
+    profile = bootstrap_research_profile(company_id)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
     service_findings = top_findings(company_id, "service")
     icp_findings = top_findings(company_id, "icp")
     channel_findings = top_findings(company_id, "channel")
 
     if not any(item.get("status") in READY_STATUSES for item in company.get("services", [])) and service_findings:
         strongest = service_findings[0]
-        if strongest.get("confidence", 0) >= 0.72 and (strongest.get("evidence_refs") or strongest.get("source_refs")):
+        if not web_only and strongest.get("confidence", 0) >= 0.72 and (strongest.get("evidence_refs") or strongest.get("source_refs")):
             options = [{"label": finding["statement"], "value": finding["statement"]} for finding in service_findings[:3]]
             questions.append(
                 create_validation_question(
@@ -2021,7 +2372,7 @@ def generate_validation_questions(company_id: str) -> list[dict]:
     if not any(item.get("status") in READY_STATUSES for item in company.get("icps", [])):
         if icp_findings:
             strongest = icp_findings[0]
-            if strongest.get("confidence", 0) >= 0.7 and (strongest.get("evidence_refs") or strongest.get("source_refs")):
+            if not web_only and strongest.get("confidence", 0) >= 0.7 and (strongest.get("evidence_refs") or strongest.get("source_refs")):
                 options = [{"label": finding["statement"], "value": finding["statement"]} for finding in icp_findings[:4]]
                 questions.append(
                     create_validation_question(
@@ -2066,7 +2417,7 @@ def generate_validation_questions(company_id: str) -> list[dict]:
             )
 
     if not any(item.get("status") in READY_STATUSES for item in company.get("channels", [])):
-        if channel_findings:
+        if channel_findings and not web_only:
             options = [{"label": finding["statement"], "value": finding["statement"]} for finding in channel_findings[:4]]
             recommended = options[0]["value"]
         else:
@@ -2109,6 +2460,8 @@ def assemble_knowledge(company_id: str) -> None:
     company = load_json(company_base(company_id) / "company.json", {"company_id": company_id, "name": company_id.replace("-", " ").title()})
     findings = list_findings(company_id=company_id)
     questions = list_validation_questions(company_id=company_id, status="open")
+    profile = bootstrap_research_profile(company_id)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
 
     company["status"] = "validated" if not questions and list_evidence(company_id=company_id) else "needs_validation" if questions else company.get("status", "draft")
     company["confidence"] = round(min(0.95, 0.35 + len(list_evidence(company_id=company_id)) * 0.08 + len(list_sources(company_id=company_id)) * 0.04), 2)
@@ -2118,12 +2471,12 @@ def assemble_knowledge(company_id: str) -> None:
 
     if not any(path for path in (company_base(company_id) / "services").glob("*.json")):
         service_finding = next((item for item in findings if item.get("category") == "service"), None)
-        if service_finding:
+        if should_materialize_finding(service_finding, "service", web_only):
             upsert_service(company_id, service_finding["statement"], service_finding["status"], service_finding["confidence"], service_finding.get("evidence_refs", []), "finding", [question["prompt"] for question in questions if question["target_entity_type"] == "service"], service_finding.get("source_refs", []))
 
     if not any(path for path in (company_base(company_id) / "icps").glob("*.json")):
         icp_finding = next((item for item in findings if item.get("category") == "icp"), None)
-        if icp_finding:
+        if should_materialize_finding(icp_finding, "icp", web_only):
             pains = [item["statement"] for item in findings if item.get("category") == "pain"][:3]
             outcomes = [item["statement"] for item in findings if item.get("category") == "outcome"][:3]
             objections = [item["statement"] for item in findings if item.get("category") == "objection"][:3]
@@ -2131,7 +2484,7 @@ def assemble_knowledge(company_id: str) -> None:
 
     if not any(path for path in (company_base(company_id) / "channels").glob("*.json")):
         channel_finding = next((item for item in findings if item.get("category") == "channel"), None)
-        if channel_finding:
+        if should_materialize_finding(channel_finding, "channel", web_only):
             upsert_channel(company_id, channel_finding["statement"], channel_finding["status"], channel_finding["confidence"], channel_finding.get("evidence_refs", []), "finding", [question["prompt"] for question in questions if question["target_entity_type"] == "channel"], channel_finding.get("source_refs", []))
 
 
@@ -2172,12 +2525,16 @@ def research_stage_for_company(company_id: str) -> str:
 
 
 def next_step_for_company(company_id: str) -> str:
+    profile = bootstrap_research_profile(company_id)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
     readiness = readiness_for_company(company_id)
     open_questions = len(list_validation_questions(company_id=company_id, status="open"))
     if readiness["status"] == "ready":
         return "Corre el primer experimento."
     if open_questions:
         return "Responde la siguiente pregunta de validacion."
+    if web_only:
+        return "Agrega evidencia adicional o valida comprador, canal y economia antes de recomendar una ruta."
     if not list_sources(company_id=company_id):
         return "Agrega al menos un activo fuente."
     if len(list_evidence(company_id=company_id)) < 5:
@@ -2190,6 +2547,8 @@ def refresh_company_knowledge(company_id: str) -> dict:
     profile = bootstrap_research_profile(company_id)
     findings = derive_findings(company_id)
     write_findings(company_id, findings)
+    web_only = is_web_only_case(profile, list_sources(company_id=company_id), list_evidence(company_id=company_id))
+    prune_weak_auto_knowledge(company_id, web_only)
     questions = generate_validation_questions(company_id)
     write_validation_questions(company_id, questions)
     assemble_knowledge(company_id)
@@ -2197,6 +2556,7 @@ def refresh_company_knowledge(company_id: str) -> dict:
     profile["research_stage"] = research_stage_for_company(company_id)
     profile["readiness_score"] = readiness["score"]
     profile["open_questions_count"] = len(list_validation_questions(company_id=company_id, status="open"))
+    profile["open_assumptions"] = web_only_open_assumptions(findings, list_evidence(company_id=company_id)) if web_only else []
     profile["next_step"] = next_step_for_company(company_id)
     write_json(research_profile_path(company_id), profile)
     return {"company_id": company_id, "readiness": readiness, "open_questions": profile["open_questions_count"], "stage": profile["research_stage"]}

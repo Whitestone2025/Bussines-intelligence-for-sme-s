@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-todavia-no-se-muestra-evidenc",
+  "company_id": "wsc-lat",
+  "category": "trust_signal",
+  "title": "Senal de confianza: Todavia no se muestra evidencia publica de como se imp",
+  "statement": "Todavia no se muestra evidencia publica de como se implementa esa operacion en clientes reales.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-wsc-problem-latam"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

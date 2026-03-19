@@ -1,0 +1,143 @@
+Initialized run wsbi-corporate-deliverables-v1.
+Context:
+- El sistema actual todavia colapsa demasiado pronto en una sola recomendacion tactica.
+- El usuario quiere elevar la calidad del pensamiento y de los entregables a un nivel mas cercano a consultoria corporativa seria.
+- La correccion debe apoyarse tanto en auditoria interna del flujo como en marcos publicos y oficiales de consultoria hypothesis-driven.
+
+Execution intent:
+- Auditar donde el pipeline pierde riqueza entre evidencia, decision y deliverables.
+- Incorporar marcos de problem structuring, alternativas estrategicas, criterios de decision, roadmap e implicaciones.
+- Usar el caso publico como prueba final para validar que el nuevo sistema piensa mejor y explica mejor.
+
+Open risks:
+- Se puede sobrecorregir y volver el sistema demasiado complejo para el founder si la capa ejecutiva no queda bien resumida.
+- Los benchmarks de McKinsey y BCG deben usarse como inspiracion metodologica, no como imitacion cosmetica.
+- Si el modelo canonico no se define bien, la app puede terminar con mas bloques pero no con mejores decisiones.
+
+Completed story: C1
+- Auditado el flujo actual desde `scripts/decision_engine.py`, `scripts/planner.py`, `scripts/render_report.py` y `scripts/serve_ui.py`.
+- Se confirmo que el colapso principal ocurre en `rank_next_actions()` de `scripts/decision_engine.py`: la logica convierte el caso en una lista corta de acciones y usa la primera como recomendacion principal.
+- Se confirmo que `build_decision_memo()` no construye alternativas estrategicas reales; reutiliza esas mismas acciones como opciones y por eso la salida termina en una sola jugada dominante.
+- Se confirmo que `scripts/planner.py` hereda sin filtro `next_steps[0..2]` para construir el 30/60/90, de modo que el planner deja de ser roadmap y se vuelve eco de la recomendacion.
+- Se confirmo que `scripts/render_report.py` refuerza ese colapso al convertir la recomendacion en tesis central, mientras que los deliverables no separan bien problema, opciones, supuestos, what-must-be-true y ruta de implementacion.
+- Se confirmo que la UI en `scripts/serve_ui.py` muestra una sala ejecutiva mas rica en apariencia que en arquitectura: resume mejor la jugada elegida que el arbol de decision que la justifica.
+
+Completed story: C2
+- Contrastado el flujo actual contra referencias oficiales y publicas de McKinsey y BCG.
+- McKinsey Academy se tomo como referencia para `7-step problem solving`, `problem structuring`, `hypothesis driven approach` e `issue tree design`, porque obliga a pasar por estructura del problema antes de recomendar accion.
+- McKinsey se tomo tambien como referencia para `transformation story`: la recomendacion necesita una narrativa del cambio, no solo una accion tactica.
+- BCG se tomo como referencia para `where to play`, `how to win`, `right to win`, `size of the prize` y `path to success`, porque esos marcos obligan a convertir una recomendacion en una tesis estrategica evaluable.
+- BCG TIP se tomo como referencia para initiative roadmaps con hitos, ownership, interdependencias, disciplina de ejecucion y foco en problemas relevantes en lugar de solo status updates.
+- Principios adoptados para el rediseño:
+  - no recomendar una sola accion sin presentar primero problema, tesis y alternativas;
+  - separar hechos, inferencias, supuestos y decisiones;
+  - forzar 2 a 4 rutas estrategicas reales por caso;
+  - explicar `por que esta opcion gana`, `que tendria que ser cierto`, `que riesgos la invalidan` y `que hitos la convierten en ejecucion`;
+  - convertir el planner en roadmap de iniciativas y no en lista lineal de tareas.
+
+Completed story: C3
+- Redefinido el modelo canonico de estrategia dentro de `scripts/decision_engine.py` con una nueva capa `strategic_stack` que ahora acompana al memo de decision.
+- El nuevo `strategic_stack` contiene: `problem_statement`, `case_for_change`, `where_to_play`, `how_to_win`, `right_to_win`, `strategic_alternatives`, `what_must_be_true`, `no_regret_moves` y `recommended_route`.
+- `problem_statement` ahora resume la tension central del caso en vez de saltar directo a una accion. `case_for_change` explicita costo de inaccion y urgencia. `where_to_play` y `how_to_win` separan espacio de juego y mecanismo de ventaja.
+- `strategic_alternatives` obliga a construir 2 a 4 rutas con nombre, tesis, upside, riesgo y senal lider, para que la decision se tome entre opciones reales y no entre variaciones cosmeticas del mismo paso.
+- `what_must_be_true` y `no_regret_moves` convierten la recomendacion en una tesis falsable y ejecutable; eso prepara el terreno para que C4 y C6 dejen de depender de `next_steps` como columna vertebral.
+- `scripts/planner.py` se adapto para consumir el nuevo modelo y exponer `initiative_roadmap`, `decision_checkpoints`, `no_regret_moves` y `strategic_alternatives`, manteniendo compatibilidad con datos previos.
+- `scripts/render_report.py` se adapto para renderizar el nuevo stack estrategico en el memo ejecutivo y el diagnostico, con fallback seguro para bundles viejos.
+- Los contratos se endurecieron en `schemas/decision-memo.schema.json` y `schemas/execution-plan.schema.json`, de modo que el sistema ya exige la presencia del modelo estrategico y del roadmap expandido.
+- Validacion corrida y aprobada tras el cambio:
+  - `python3 scripts/test_decision_engine.py`
+  - `python3 scripts/test_execution_planner.py`
+  - `python3 scripts/test_deliverable_generator.py`
+  - `python3 scripts/test_case_view_model.py`
+  - `python3 scripts/test_reasoning_quality.py`
+  - `python3 scripts/test_schema_contracts.py`
+
+Completed story: C4
+- Reescrita la capa visible de decision en `scripts/decision_engine.py` para que la recomendacion principal salga de `strategic_stack.recommended_route` y no de `rank_next_actions()`.
+- Las `strategic_alternatives` dejaron de expresarse como tareas imperativas y ahora se formulan como rutas estrategicas con tesis, razon de eleccion, riesgos y condiciones que tendrian que cumplirse.
+- `recommended_action` ahora representa la tesis de la ruta elegida, `why_now` explica por que gana esa ruta, y los `key_risks`/`validation_gaps` ya incorporan condiciones de invalidacion y `what_must_be_true`.
+- `options` y `alternative_actions` dejaron de reflejar una lista de tareas y ahora reflejan el set de rutas estrategicas evaluadas, lo que reduce el colapso de la decision a una sola accion suelta.
+- El contrato de `schemas/decision-memo.schema.json` se endurecio para exigir que `recommended_route` explicite `why_this_route_wins` e `invalidation_conditions`.
+- La vista ejecutiva en `scripts/serve_ui.py` se ajusto para traducir esta recomendacion mas abstracta a lenguaje util para founder sin volverla a simplificar como tarea unica.
+- Se agrego la prueba nueva `scripts/test_no_single_action_collapse.py` para bloquear regresiones donde la recomendacion vuelva a sonar como orden tactica unica.
+- Validacion corrida y aprobada tras el cambio:
+  - `python3 scripts/test_decision_engine.py`
+  - `python3 scripts/test_case_specific_decision.py`
+  - `python3 scripts/test_no_single_action_collapse.py`
+  - `python3 scripts/test_schema_contracts.py`
+  - `python3 scripts/test_execution_planner.py`
+  - `python3 scripts/test_deliverable_generator.py`
+  - `python3 scripts/test_case_view_model.py`
+
+Completed story: C5
+- `scripts/render_report.py` ahora expone problem structuring de forma explicita con una capa `problem_structuring_map()` que separa problema central, hechos validados, inferencias principales, supuestos de trabajo, evidencia en contra, recomendacion y condiciones `what-must-be-true`.
+- El `executive_memo()` se reordeno para que la lectura vaya de problema estructurado a hechos, inferencias, supuestos, caso para cambiar, opciones, recomendacion y condiciones de exito, en vez de saltar directo a la recomendacion.
+- El `business_diagnosis()` ahora separa tambien `Lo que sabemos`, `Lo que inferimos`, `Supuestos de trabajo`, `Recomendacion actual` y `Lo que tendria que ser cierto`, de modo que el diagnostico deja de ser una explicacion plana del caso.
+- `scripts/serve_ui.py` ahora construye un objeto `problem_structuring` dentro de `decision_summary`, con `headline`, `situation`, `complication`, `decision_tension`, `facts`, `assumptions`, `recommendation`, `what_must_be_true` y `case_for_change`.
+- `ui/app.js` actualizo el capitulo de decision para mostrar explicitamente `Problema estructurado`, `Hechos validados`, `Supuestos de trabajo` y `Lo que tendria que ser cierto`, evitando que la interfaz dependa solo de una recomendacion y unos proximos pasos.
+- Se agregaron pruebas nuevas:
+  - `scripts/test_problem_structuring_quality.py`
+  - `scripts/test_corporate_deliverables_quality.py`
+- Tambien se endurecio `scripts/test_deliverable_generator.py` para exigir que memo ejecutivo y diagnostico separen hechos, inferencias, supuestos y recomendacion.
+- Validacion corrida y aprobada tras el cambio:
+  - `python3 scripts/test_problem_structuring_quality.py`
+  - `python3 scripts/test_corporate_deliverables_quality.py`
+  - `python3 scripts/test_deliverable_generator.py`
+  - `node --check ui/app.js`
+  - `python3 scripts/test_case_view_model.py`
+  - `python3 scripts/test_ui_workspace_flow.py`
+
+Completed story: C6
+- `scripts/planner.py` dejo de construirse alrededor de `next_steps[0..2]` y ahora genera primero un `initiative_roadmap` con cuatro iniciativas canonicas: alineacion estrategica, validacion de demanda, economics/propuesta y gobierno de decision.
+- Cada iniciativa ahora declara `dependencies`, `leading_indicator`, `lagging_indicator`, `stage_gate`, `stage_gate_question`, `key_risks`, `risk_mitigation`, `decision_trigger` y `exit_criteria`, para que el plan deje de ser una lista lineal y pase a ser un roadmap con gates y condiciones de avance.
+- El 30/60/90 se reconstruyo como vista resumida del roadmap mediante `summarize_milestone()`, asi que los hitos ahora condensan iniciativas por fase en lugar de dictar el motor principal del plan.
+- `data/tests/fixtures/plans/plan-input.json` se actualizo con un memo mas cercano al modelo actual: recomendacion en espanol, `validation_gaps`, `options` y `strategic_stack` completos.
+- `schemas/execution-plan.schema.json` se endurecio para exigir que cada iniciativa del roadmap tenga tambien `lagging_indicator`, `key_risks`, `risk_mitigation`, `decision_trigger` y `exit_criteria`.
+- Se agrego la prueba nueva `scripts/test_initiative_roadmap_quality.py` para bloquear regresiones donde el planner vuelva a verse como una lista corta de tareas.
+- `scripts/test_execution_planner.py` ahora exige un roadmap mas rico, con multiples iniciativas y campos de gobierno por iniciativa.
+- Validacion corrida y aprobada tras el cambio:
+  - `python3 scripts/test_execution_planner.py`
+  - `python3 scripts/test_initiative_roadmap_quality.py`
+  - `python3 scripts/test_schema_contracts.py`
+  - `python3 scripts/test_case_view_model.py`
+  - `python3 scripts/test_ui_workspace_flow.py`
+
+Completed story: C7
+- `scripts/render_report.py` se amplio para producir una suite de entregables corporativos mas completa: `executive-memo`, `business-diagnosis`, `problem-structuring-memo`, `strategic-options-memo`, `decision-document`, `initiative-roadmap`, `founder-narrative`, `deck-outline` y `risk-memo`.
+- Cada documento ahora cumple una funcion directiva distinta:
+  - el `executive-memo` resume tesis, hechos, inferencias, supuestos y recomendacion;
+  - el `problem-structuring-memo` separa pregunta, situacion, complicacion y tension;
+  - el `strategic-options-memo` compara rutas con criterios, apuestas y riesgos;
+  - el `decision-document` deja la decision central, por que gana y como se invalida;
+  - el `initiative-roadmap` baja la tesis a gates, indicadores y criterios de salida;
+  - el `founder-narrative` traduce la tesis a lenguaje usable en conversaciones;
+  - el `risk-memo` preserva la lectura de alertas y mitigaciones.
+- `scripts/serve_ui.py` actualizo `localized_deliverable_title()` para que la UI nombre correctamente la nueva familia de entregables y no los muestre como slugs tecnicos.
+- Se endurecio `scripts/test_deliverable_generator.py` para exigir la presencia y secciones clave de todos los entregables nuevos.
+- Se amplio `scripts/test_corporate_deliverables_quality.py` para validar no solo la capa UI de decision sino tambien la presencia de los nuevos documentos corporativos.
+- Se agrego `scripts/test_founder_narrative_quality.py` para asegurar que la narrativa del founder sea especifica, prudente y util, y no vuelva a caer en una instruccion tactica generica.
+- Validacion corrida y aprobada tras el cambio:
+  - `python3 scripts/test_deliverable_generator.py`
+  - `python3 scripts/test_corporate_deliverables_quality.py`
+  - `python3 scripts/test_founder_narrative_quality.py`
+  - `python3 scripts/test_ui_workspace_flow.py`
+  - `python3 scripts/test_case_view_model.py`
+  - `python3 scripts/test_problem_structuring_quality.py`
+
+Completed story: C8
+- `scripts/serve_ui.py` enriquecio `decision_summary` con dos capas nuevas para lectura ejecutiva: `decision_readout` y `roadmap_readout`.
+- `decision_readout` ahora expone criterios de decision, alternativas estrategicas visibles, la ruta recomendada con su razon explicita y las condiciones que la invalidarian; esto evita que la UI vuelva a resumir la decision como una sola jugada con una lista corta de pasos.
+- `roadmap_readout` ahora expone una vista resumida del roadmap de iniciativas con `stage_gate`, `leading_indicator`, `decision_trigger` y riesgos por iniciativa, para que el founder pueda leer en pantalla no solo que hacer sino como gobernar la ruta.
+- `ui/app.js` rediseño el capitulo de decision para mostrar:
+  - la ruta recomendada como tesis,
+  - el problema estructurado,
+  - criterios de decision,
+  - condiciones de invalidez,
+  - checkpoints de decision,
+  - y una comparacion corta de alternativas estrategicas.
+- `ui/app.js` rediseño tambien el capitulo de plan para que combine la vista 30/60/90 con una lectura de `Roadmap de iniciativas`, `Triggers de decision` y `Riesgos por iniciativa`.
+- `scripts/test_case_view_model.py` se endurecio para exigir que el payload del caso incluya `problem_structuring`, `decision_readout` y `roadmap_readout` dentro de `decision_summary`.
+- Validacion corrida y aprobada tras el cambio:
+  - `node --check ui/app.js`
+  - `python3 scripts/test_case_view_model.py`
+  - `python3 scripts/test_ui_workspace_flow.py`

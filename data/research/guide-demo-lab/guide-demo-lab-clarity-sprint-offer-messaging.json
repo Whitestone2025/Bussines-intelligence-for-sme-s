@@ -1,0 +1,40 @@
+{
+  "brief_id": "guide-demo-lab-clarity-sprint-offer-messaging",
+  "company_id": "guide-demo-lab",
+  "offer_id": "guide-demo-lab-clarity-sprint-offer",
+  "audience_label": "Founder-led service businesses",
+  "headline": "Clarity-first support for founder-led service businesses who are tired of vague promises.",
+  "subheadline": "We use a structured commercial clarity sprint that turns real buyer language into a clear market narrative so buyers understand the work before they are asked to trust the result.",
+  "proof_points": [
+    "The buyer wants proof, examples and a transparent mechanism because they have already wasted money on agencies.",
+    "\"Show me the process, not just the promise.\"",
+    "Proof lowers skepticism.",
+    "Agency fatigue is real."
+  ],
+  "objection_handlers": [
+    "Proof lowers skepticism.",
+    "Agency fatigue is real.",
+    "A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+    "\"I do not want another agency that hides behind reports.\""
+  ],
+  "forbidden_phrases": [
+    "end-to-end solution",
+    "full-service",
+    "growth partner",
+    "results-driven",
+    "scale to the next level"
+  ],
+  "status": "inferred",
+  "confidence": 0.78,
+  "source_origin": "customer_model_engine",
+  "evidence_refs": [
+    "2026-03-18-buyer-asks-for-proof-and-examples",
+    "2026-03-18-founder-says-agencies-never-explain-the-service",
+    "2026-03-18-founder-wants-qualified-conversations",
+    "2026-03-18-prospect-wants-clarity-before-outcome-promises",
+    "2026-03-18-prospect-worries-about-sounding-generic"
+  ],
+  "source_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

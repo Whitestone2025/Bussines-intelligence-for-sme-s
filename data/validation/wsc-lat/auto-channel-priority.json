@@ -1,0 +1,33 @@
+{
+  "question_id": "auto-channel-priority",
+  "company_id": "wsc-lat",
+  "target_entity_type": "channel",
+  "prompt": "Que canal deberia mejorar primero el sistema?",
+  "question_type": "single_select",
+  "candidate_options": [
+    {
+      "label": "Pagina de aterrizaje",
+      "value": "Pagina de aterrizaje"
+    },
+    {
+      "label": "Correo",
+      "value": "Correo"
+    },
+    {
+      "label": "WhatsApp",
+      "value": "WhatsApp"
+    },
+    {
+      "label": "Llamada de venta",
+      "value": "Llamada de venta"
+    }
+  ],
+  "recommended_answer": "Pagina de aterrizaje",
+  "status": "open",
+  "answer": "",
+  "why_it_matters": "El primer canal listo define donde deben enfocarse los primeros experimentos.",
+  "resolution": {
+    "action": "upsert_channel"
+  },
+  "created_at": "2026-03-18T23:09:13"
+}

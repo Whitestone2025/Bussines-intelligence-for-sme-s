@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-icp-icp-probable-lideres-comerciales",
+  "company_id": "guide-demo-lab",
+  "category": "icp",
+  "title": "ICP probable: Lideres comerciales",
+  "statement": "Lideres comerciales",
+  "status": "needs_validation",
+  "confidence": 0.46,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-sales-friction-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este perfil comprador coincide con la realidad.",
+  "reasoning_kind": "inference",
+  "uncertainty_note": "La evidencia apunta a este comprador, pero aun puede ser un proxy parcial."
+}

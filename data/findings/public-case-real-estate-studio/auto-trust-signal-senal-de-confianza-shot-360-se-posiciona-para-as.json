@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-shot-360-se-posiciona-para-as",
+  "company_id": "public-case-real-estate-studio",
+  "category": "trust_signal",
+  "title": "Senal de confianza: Shot 360 se posiciona para asesores y desarrolladores ",
+  "statement": "Shot 360 se posiciona para asesores y desarrolladores con fotografia profesional, recorridos virtuales 360 y video inmobiliario de alto impacto.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-shot360-articulo"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

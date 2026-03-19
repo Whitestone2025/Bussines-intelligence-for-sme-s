@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-objecion-sobre-alcance-y-rondas",
+  "evidence_id": "2026-03-18-objecion-sobre-alcance-y-rondas",
+  "source_id": "2026-03-18-buyer-objections-board",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Objecion sobre alcance y rondas",
+  "evidence_type": "artifact",
+  "source_type": "buyer_notes",
+  "channel": "call",
+  "date": "2026-03-18",
+  "tags": [
+    "precio",
+    "rondas",
+    "alcance"
+  ],
+  "summary": "La objecion fuerte no es solo el precio; es no saber cuantas rondas incluye el paquete ni que pasa si cambia una tipologia o amenidad.",
+  "verbatim_quotes": [
+    "\"La objecion no es el render; es cuantas rondas incluye y que pasa si cambia una tipologia.\""
+  ],
+  "quotes": [
+    "\"La objecion no es el render; es cuantas rondas incluye y que pasa si cambia una tipologia.\""
+  ],
+  "observations": [
+    "La claridad de alcance baja mas objeciones que un descuento pequeno.",
+    "El buyer quiere un SLA visible y reglas de actualizacion."
+  ],
+  "candidate_pains": [
+    "La venta se frena cuando no queda claro cuantas rondas incluye el paquete."
+  ],
+  "candidate_outcomes": [
+    "Bajar objeciones con alcance, rondas y tiempos explicitados desde el inicio."
+  ],
+  "candidate_objections": [
+    "No saber que pasa si cambia una tipologia o amenidad."
+  ],
+  "trust_signals": [
+    "Alcance visible desde la propuesta."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-objecion-sobre-alcance-y-rondas.md"
+}

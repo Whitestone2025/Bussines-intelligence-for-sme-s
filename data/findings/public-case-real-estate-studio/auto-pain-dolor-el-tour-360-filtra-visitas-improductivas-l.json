@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-pain-dolor-el-tour-360-filtra-visitas-improductivas-l",
+  "company_id": "public-case-real-estate-studio",
+  "category": "pain",
+  "title": "Dolor: El tour 360 filtra visitas improductivas Los recorrido",
+  "statement": "El tour 360 filtra visitas improductivas Los recorridos virtuales ayudan a reducir visitas presenciales improductivas y dejan llegar mejor preparados a los prospectos con interes real.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-tour-360-filtra-visitas"
+  ],
+  "source_refs": [
+    "2026-03-18-tour360-recorridos"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este dolor se repite lo suficiente como para importar.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

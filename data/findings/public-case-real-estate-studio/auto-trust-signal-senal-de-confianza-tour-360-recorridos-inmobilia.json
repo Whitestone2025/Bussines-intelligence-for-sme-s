@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-tour-360-recorridos-inmobilia",
+  "company_id": "public-case-real-estate-studio",
+  "category": "trust_signal",
+  "title": "Senal de confianza: Tour 360 recorridos inmobiliarios Referencia publica d",
+  "statement": "Tour 360 recorridos inmobiliarios Referencia publica de categoria.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-tour360-recorridos"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

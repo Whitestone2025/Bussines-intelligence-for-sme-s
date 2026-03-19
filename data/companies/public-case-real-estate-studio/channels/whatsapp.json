@@ -1,0 +1,17 @@
+{
+  "channel_id": "whatsapp",
+  "company_id": "public-case-real-estate-studio",
+  "name": "WhatsApp",
+  "asset_focus": "direct message opener",
+  "primary_goal": "sonar humano y facil de responder",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Que canal deberia mejorar primero el sistema?"
+  ]
+}

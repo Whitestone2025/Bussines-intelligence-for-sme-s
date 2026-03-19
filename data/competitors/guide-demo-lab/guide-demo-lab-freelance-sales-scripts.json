@@ -1,0 +1,44 @@
+{
+  "competitor_id": "guide-demo-lab-freelance-sales-scripts",
+  "company_id": "guide-demo-lab",
+  "name": "Freelance Sales Scripts",
+  "website": "",
+  "competitor_type": "substitute",
+  "geography": [
+    "Mexico"
+  ],
+  "positioning_summary": "Low-cost script writing sold through referrals and freelance marketplaces.",
+  "pricing_summary": "One-off gigs between MXN 3,000 and MXN 8,000.",
+  "channels": [
+    "marketplaces",
+    "facebook",
+    "referrals"
+  ],
+  "strengths": [
+    "cheap entry",
+    "fast turnaround"
+  ],
+  "weaknesses": [
+    "no strategic depth",
+    "no implementation support"
+  ],
+  "trust_signals": [
+    "reviews"
+  ],
+  "status": "inferred",
+  "confidence": 0.58,
+  "source_origin": "competitor_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-wants-clarity"
+  ],
+  "source_refs": [
+    "2026-03-14-founder-interview"
+  ],
+  "assumption_refs": [
+    "guide-demo-lab-freelance-sales-scripts-assumption-pricing"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

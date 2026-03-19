@@ -1,0 +1,38 @@
+Initialized run wsbi-language-usefulness-v1.
+Context:
+- Founder-facing guide still contains visible english and spanglish.
+- Utility of each module is underexplained for non-technical entrepreneurs.
+- Core engines still generate some public outputs from english or overly generic templates.
+
+Execution intent:
+- Run C1 through C8 in order.
+- Keep no-commit policy unless explicitly changed later.
+- Treat language purity, founder usefulness, and non-generic reasoning as release criteria.
+
+Open risks:
+- Existing demo data may mask generic defaults if not regenerated after engine fixes.
+- Public guide and UI can drift apart if not verified together in the final pass.
+
+Completed story: C1
+- Se corrigieron superficies publicas visibles para reducir ingles y spanglish en README, guias founder, frontend y payloads de UI.
+
+Completed story: C2
+- Se refactorizo el motor de cliente y oferta para bajar defaults genericos, traducir salidas base y declarar mayor cautela cuando falta evidencia.
+
+Completed story: C3
+- Se reescribio el motor de decision en espanol y con mayor sensibilidad al contexto real del caso en lugar de repetir un playbook universal.
+
+Completed story: C4
+- Se tradujeron y aterrizaron mercado, precio y viabilidad para que funcionen como lectura ejecutiva de negocio y no como bloque tecnico.
+
+Completed story: C5
+- El frontend ahora explica para que sirve cada bloque desde la perspectiva del emprendedor y no solo muestra datos.
+
+Completed story: C6
+- Se reescribieron la guia founder y la guia corta para explicar utilidad real, entregables y limites de cada modulo.
+
+Completed story: C7
+- Se agrego una suite nueva de pruebas para pureza de idioma, utilidad founder, decisiones especificas al caso y control de genericidad.
+
+Completed story: C8
+- Se regenero la guia publica, se verifico el PDF final y se corrio la bateria completa de checks con resultado satisfactorio.

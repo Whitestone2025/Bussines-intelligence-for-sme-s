@@ -2,6 +2,8 @@
 
 Este es el flujo esperado para un founder.
 
+Si quieres ver el recorrido completo con ejemplos visuales antes de empezar, abre tambien la [guia publica paso a paso en PDF](assets/wsbi-public-guide.pdf).
+
 ## Paso 1
 
 Dile a Codex:

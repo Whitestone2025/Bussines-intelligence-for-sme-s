@@ -9,6 +9,7 @@ Su objetivo es tomar contexto real del negocio, convertirlo en evidencia, genera
 
 Empieza aqui:
 
+- [Guia publica paso a paso en PDF](docs/founder/assets/wsbi-public-guide.pdf)
 - [Guia para founders](docs/founder/README.md)
 - [Instalacion limpia en otra computadora](docs/founder/05-instalacion-limpia.md)
 - [Prepara tu informacion](docs/founder/01-preparar-informacion.md)
@@ -35,6 +36,19 @@ Empieza aqui:
 - valida los desconocidos importantes,
 - genera salidas de mercado, precio, decision, plan y entregables,
 - y sirve un frontend local para revisar el caso.
+
+## Como ayuda de verdad a un emprendedor
+
+Ws B-I no esta pensado como dashboard ornamental.
+Sirve para convertir informacion dispersa del negocio en una lectura mas util para decidir.
+
+En la practica, deberia ayudarte a:
+
+- entender que sabe hoy el sistema y que todavia no sabe,
+- ver si el problema comercial esta bien formulado,
+- revisar si la recomendacion actual tiene sustento o no,
+- discutir precio, mercado y siguiente movimiento con mas contexto,
+- y evitar actuar solo con intuicion parcial o mensajes demasiado genericos.
 
 ## Prompt recomendado para founders
 

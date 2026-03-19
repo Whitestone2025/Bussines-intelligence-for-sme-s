@@ -1,0 +1,60 @@
+{
+  "entry_id": "2026-03-18-founder-says-agencies-never-explain-the-service",
+  "evidence_id": "2026-03-18-founder-says-agencies-never-explain-the-service",
+  "source_id": [],
+  "company_id": "guide-demo-lab",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Founder says agencies never explain the service",
+  "evidence_type": "artifact",
+  "source_type": "sales_call",
+  "channel": "call",
+  "date": "2026-03-18",
+  "tags": [
+    "trust",
+    "clarity"
+  ],
+  "summary": "A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+  "verbatim_quotes": [
+    "\"I do not want another agency that hides behind reports.\"",
+    "\"I need to know exactly what will be done before I trust the process.\""
+  ],
+  "quotes": [
+    "\"I do not want another agency that hides behind reports.\"",
+    "\"I need to know exactly what will be done before I trust the process.\""
+  ],
+  "observations": [
+    "Trust depends on visible process.",
+    "Generic language triggers skepticism."
+  ],
+  "candidate_pains": [],
+  "candidate_outcomes": [
+    "A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+    "\"I do not want another agency that hides behind reports.\"",
+    "\"I need to know exactly what will be done before I trust the process.\"",
+    "Trust depends on visible process."
+  ],
+  "candidate_objections": [
+    "A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+    "\"I do not want another agency that hides behind reports.\"",
+    "\"I need to know exactly what will be done before I trust the process.\"",
+    "Trust depends on visible process.",
+    "Generic language triggers skepticism."
+  ],
+  "trust_signals": [
+    "\"I need to know exactly what will be done before I trust the process.\"",
+    "Trust depends on visible process."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "user_input",
+  "evidence_refs": [
+    "2026-03-18-founder-says-agencies-never-explain-the-service"
+  ],
+  "source_refs": [
+    "[]"
+  ],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/guide-demo-lab/2026-03-18-founder-says-agencies-never-explain-the-service.md"
+}

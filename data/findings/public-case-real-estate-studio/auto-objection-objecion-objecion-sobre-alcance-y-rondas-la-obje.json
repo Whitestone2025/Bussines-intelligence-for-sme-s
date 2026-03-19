@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-objection-objecion-objecion-sobre-alcance-y-rondas-la-obje",
+  "company_id": "public-case-real-estate-studio",
+  "category": "objection",
+  "title": "Objecion: Objecion sobre alcance y rondas La objecion fuerte no ",
+  "statement": "Objecion sobre alcance y rondas La objecion fuerte no es solo el precio; es no saber cuantas rondas incluye el paquete ni que pasa si cambia una tipologia o amenidad.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si esta objecion bloquea ventas de forma repetida.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

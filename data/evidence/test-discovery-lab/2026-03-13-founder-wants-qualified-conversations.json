@@ -1,0 +1,47 @@
+{
+  "entry_id": "2026-03-13-founder-wants-qualified-conversations",
+  "evidence_id": "2026-03-13-founder-wants-qualified-conversations",
+  "source_id": [],
+  "company_id": "test-discovery-lab",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Founder wants qualified conversations",
+  "evidence_type": "artifact",
+  "source_type": "sales_call",
+  "channel": "call",
+  "date": "2026-03-13",
+  "tags": [
+    "trust",
+    "clarity"
+  ],
+  "summary": "The founder wants more qualified conversations, not more noise, and they need messaging that attracts the right buyer.",
+  "verbatim_quotes": [
+    "\"I want qualified calls, not vanity leads.\""
+  ],
+  "quotes": [
+    "\"I want qualified calls, not vanity leads.\""
+  ],
+  "observations": [
+    "Desired outcome is qualified demand."
+  ],
+  "candidate_pains": [],
+  "candidate_outcomes": [
+    "The founder wants more qualified conversations, not more noise, and they need messaging that attracts the right buyer.",
+    "\"I want qualified calls, not vanity leads.\"",
+    "Desired outcome is qualified demand."
+  ],
+  "candidate_objections": [],
+  "trust_signals": [],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "user_input",
+  "evidence_refs": [
+    "2026-03-13-founder-wants-qualified-conversations"
+  ],
+  "source_refs": [
+    "[]"
+  ],
+  "created_at": "2026-03-18T23:09:12",
+  "updated_at": "2026-03-18T23:09:12",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/test-discovery-lab/2026-03-13-founder-wants-qualified-conversations.md"
+}

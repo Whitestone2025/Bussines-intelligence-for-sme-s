@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-outcome-resultado-esperado-el-comprador-quiere-un-paquet",
+  "company_id": "public-case-real-estate-studio",
+  "category": "outcome",
+  "title": "Resultado esperado: El comprador quiere un paquete unificado Cuando la lan",
+  "statement": "El comprador quiere un paquete unificado Cuando la landing, el video y el brochure salen de equipos distintos, el mensaje se rompe y ventas pierde confianza para cerrar.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-buyer-quiere-paquete-unificado"
+  ],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Valida si este resultado pesa de verdad en la compra.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

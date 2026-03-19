@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-objection-objecion-la-objecion-no-es-el-render-es-cuantas-",
+  "company_id": "public-case-real-estate-studio",
+  "category": "objection",
+  "title": "Objecion: \"La objecion no es el render; es cuantas rondas incluy",
+  "statement": "\"La objecion no es el render; es cuantas rondas incluye y que pasa si cambia una tipologia.\"",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si esta objecion bloquea ventas de forma repetida.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

@@ -1,0 +1,46 @@
+{
+  "icp_id": "founder-led-service-businesses",
+  "company_id": "guide-demo-lab",
+  "label": "Founder-led service businesses",
+  "pains": [
+    "The buyer wants proof, examples and a transparent mechanism because they have already wasted money on agencies."
+  ],
+  "desired_outcomes": [
+    "The buyer wants proof, examples and a transparent mechanism because they have already wasted money on agencies.",
+    "A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+    "\"I do not want another agency that hides behind reports.\"",
+    "\"I need to know exactly what will be done before I trust the process.\""
+  ],
+  "common_objections": [
+    "Proof lowers skepticism.",
+    "Agency fatigue is real.",
+    "A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+    "\"I do not want another agency that hides behind reports.\""
+  ],
+  "trust_signals": [
+    "The buyer wants proof, examples and a transparent mechanism because they have already wasted money on agencies.",
+    "\"Show me the process, not just the promise.\"",
+    "Proof lowers skepticism.",
+    "Agency fatigue is real."
+  ],
+  "status": "inferred",
+  "confidence": 0.78,
+  "source_origin": "customer_model_engine",
+  "evidence_refs": [
+    "2026-03-18-buyer-asks-for-proof-and-examples",
+    "2026-03-18-founder-says-agencies-never-explain-the-service",
+    "2026-03-18-founder-wants-qualified-conversations",
+    "2026-03-18-prospect-wants-clarity-before-outcome-promises",
+    "2026-03-18-prospect-worries-about-sounding-generic"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [
+    "\"Show me the process, not just the promise.\"",
+    "\"I do not want another agency that hides behind reports.\"",
+    "\"I need to know exactly what will be done before I trust the process.\"",
+    "\"I want qualified calls, not vanity leads.\""
+  ],
+  "unresolved_questions": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

@@ -121,18 +121,25 @@ def main() -> int:
         hero = payload["hero"]
         assert hero["title"] == "Case View Model Lab", "Expected hero title to match active company"
         assert hero["website"], "Expected hero website"
+        assert "te ayuda" in hero["narrative"].lower() or "te sirve" in hero["narrative"].lower()
 
         war_room = payload["war_room"]
         assert war_room["recommendation"], "Expected a war room recommendation"
+        assert war_room["recommendation_label"], "Expected route label in war room"
+        assert war_room["next_validation_step"], "Expected next validation step in war room"
+        assert war_room["evidence_limits"], "Expected visible evidence limits in war room"
         assert war_room["featured_deliverables"], "Expected featured deliverables"
+        assert "te ayuda" in war_room["summary"].lower() or "sirve" in war_room["summary"].lower()
 
         thesis = payload["thesis"]
         assert thesis["service_statement"], "Expected service statement"
         assert thesis["headline"], "Expected thesis headline"
         assert "buyer_truths" in thesis and "objections" in thesis["buyer_truths"], "Expected buyer truths structure"
+        assert "te" in thesis["summary"].lower(), "Thesis summary should explain utility"
 
         market = payload["market_summary"]
         assert len(market["records"]) == 4, "Expected TAM, SAM, SOM, and attractiveness"
+        assert "sirve" in market["summary"].lower() or "te ayuda" in market["summary"].lower()
 
         competition = payload["competition_summary"]
         assert competition["competitors"], "Expected competitor records"
@@ -140,14 +147,24 @@ def main() -> int:
 
         viability = payload["viability_summary"]
         assert viability["pricing"]["price_target"], "Expected target price"
+        assert "sirve" in viability["summary"].lower() or "te ayuda" in viability["summary"].lower()
 
         decision = payload["decision_summary"]
         assert decision["memo"]["recommended_action"], "Expected decision memo recommendation"
         assert decision["milestones"], "Expected execution milestones"
+        assert decision["problem_structuring"]["headline"], "Expected structured problem headline"
+        assert decision["evidence_limits"], "Expected visible evidence limits in decision summary"
+        assert decision["confidence_note"], "Expected confidence note in decision summary"
+        assert decision["decision_readout"]["criteria"], "Expected explicit decision criteria"
+        assert decision["decision_readout"]["alternatives"], "Expected visible strategic alternatives"
+        assert decision["decision_readout"]["recommended_route"]["why_this_route_wins"], "Expected explicit route rationale"
+        assert decision["roadmap_readout"]["initiatives"], "Expected initiative roadmap preview"
+        assert "te dice" in decision["summary"].lower() or "te" in decision["summary"].lower()
 
         audit = payload["audit_index"]
         assert audit["counts"]["sources"] >= 0, "Expected source count field"
         assert audit["counts"]["evidence"] >= 0, "Expected evidence count field"
+        assert "te permite" in audit["summary"].lower() or "te" in audit["summary"].lower()
 
         print("Case view-model contract checks passed.")
         return 0

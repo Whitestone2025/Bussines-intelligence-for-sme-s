@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-i-need-to-know-exactly-what-w",
+  "company_id": "guide-demo-lab",
+  "category": "trust_signal",
+  "title": "Senal de confianza: \"I need to know exactly what will be done before I tru",
+  "statement": "\"I need to know exactly what will be done before I trust the process.\"",
+  "status": "needs_validation",
+  "confidence": 0.55,
+  "evidence_refs": [
+    "2026-03-18-founder-says-agencies-never-explain-the-service"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

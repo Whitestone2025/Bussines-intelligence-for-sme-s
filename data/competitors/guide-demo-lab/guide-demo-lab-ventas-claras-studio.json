@@ -1,0 +1,44 @@
+{
+  "competitor_id": "guide-demo-lab-ventas-claras-studio",
+  "company_id": "guide-demo-lab",
+  "name": "Ventas Claras Studio",
+  "website": "https://ventasclaras.example",
+  "competitor_type": "direct",
+  "geography": [
+    "Mexico"
+  ],
+  "positioning_summary": "Messaging consultancy for founder-led service businesses.",
+  "pricing_summary": "Project packages around MXN 28,000.",
+  "channels": [
+    "instagram",
+    "whatsapp",
+    "referrals"
+  ],
+  "strengths": [
+    "strong niche fit",
+    "accessible pricing"
+  ],
+  "weaknesses": [
+    "limited proof depth",
+    "no delivery roadmap"
+  ],
+  "trust_signals": [
+    "before-after examples"
+  ],
+  "status": "inferred",
+  "confidence": 0.58,
+  "source_origin": "competitor_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-wants-clarity"
+  ],
+  "source_refs": [
+    "2026-03-14-founder-interview"
+  ],
+  "assumption_refs": [
+    "guide-demo-lab-ventas-claras-studio-assumption-positioning"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

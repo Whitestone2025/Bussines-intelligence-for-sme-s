@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-channel-canal-probable-llamada-de-venta",
+  "company_id": "guide-demo-lab",
+  "category": "channel",
+  "title": "Canal probable: Llamada de venta",
+  "statement": "Llamada de venta",
+  "status": "needs_validation",
+  "confidence": 0.64,
+  "evidence_refs": [
+    "2026-03-18-prospect-wants-clarity-before-outcome-promises"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "",
+  "reasoning_kind": "inference",
+  "uncertainty_note": ""
+}

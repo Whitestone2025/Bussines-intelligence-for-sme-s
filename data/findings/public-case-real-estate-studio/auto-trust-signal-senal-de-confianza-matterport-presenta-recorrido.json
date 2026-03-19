@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-matterport-presenta-recorrido",
+  "company_id": "public-case-real-estate-studio",
+  "category": "trust_signal",
+  "title": "Senal de confianza: Matterport presenta recorridos 3D para inmobiliario co",
+  "statement": "Matterport presenta recorridos 3D para inmobiliario como una forma de aumentar interacciones, generar confianza remota y crear activos como fotografia 2D, planos y experiencias 3D desde un mismo levantamiento.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-matterport-mx-inmobiliario"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

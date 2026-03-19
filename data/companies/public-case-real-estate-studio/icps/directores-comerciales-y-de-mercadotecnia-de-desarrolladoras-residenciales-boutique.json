@@ -1,0 +1,54 @@
+{
+  "icp_id": "directores-comerciales-y-de-mercadotecnia-de-desarrolladoras-residenciales-boutique",
+  "company_id": "public-case-real-estate-studio",
+  "label": "Directores comerciales y de mercadotecnia de desarrolladoras residenciales boutique",
+  "pains": [
+    "El material de preventa se ve bien pero no ayuda a filtrar prospectos ni a vender con menos friccion.",
+    "Cada cambio del proyecto rompe el material comercial y deja dias sin piezas actualizadas.",
+    "Landing, brochure, video y WhatsApp suelen vivir separados y el mensaje se rompe."
+  ],
+  "desired_outcomes": [
+    "Llegar a la visita con prospectos mejor preparados y con mas confianza.",
+    "Tener un paquete unificado que sirva para captacion, seguimiento y sala de ventas.",
+    "Comprar con claridad de alcance, rondas y tiempos de actualizacion."
+  ],
+  "common_objections": [
+    "Ya pagamos renders antes y ventas no los aprovecho para cerrar mejor.",
+    "No quiero pagar otro proveedor si luego hay que rehacer todo cuando cambia el proyecto.",
+    "No me sirve un video bonito si el flujo comercial sigue improvisado."
+  ],
+  "trust_signals": [
+    "Rondas y alcance visibles desde la propuesta.",
+    "Actualizacion rapida cuando cambia una tipologia o amenidad.",
+    "Recorrido 360 para filtrar visitas y aumentar confianza previa."
+  ],
+  "status": "validated",
+  "confidence": 0.86,
+  "source_origin": "customer_model_engine",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-tour360-recorridos",
+    "2026-03-18-matterport-mx-inmobiliario",
+    "2026-03-18-buyer-objections-board",
+    "2026-03-18-shot360-articulo"
+  ],
+  "supporting_quotes": [
+    "\"No necesito otro render bonito; necesito que el prospecto llegue entendiendo tipologias, amenidades y esquema de pago.\"",
+    "\"Cada cambio de metraje o amenidad nos deja varios dias sin piezas actualizadas.\"",
+    "\"Reduce tus visitas presenciales tan solo a aquellos clientes que ya conocen la propiedad de manera virtual.\"",
+    "\"Permita que los clientes se visualicen en el espacio, dandoles mayor confianza al tomar decisiones de compra.\""
+  ],
+  "unresolved_questions": [
+    "Definir si el comprador principal suele vivir en comercial, marketing o direccion general segun tamano del desarrollo."
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10"
+}

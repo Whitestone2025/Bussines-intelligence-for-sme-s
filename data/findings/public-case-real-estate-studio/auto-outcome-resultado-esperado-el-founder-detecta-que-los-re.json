@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-outcome-resultado-esperado-el-founder-detecta-que-los-re",
+  "company_id": "public-case-real-estate-studio",
+  "category": "outcome",
+  "title": "Resultado esperado: El founder detecta que los renders arquitectonicos se ",
+  "statement": "El founder detecta que los renders arquitectonicos se piden como pieza visual aislada, pero el comprador comercial quiere un paquete que tambien sirva para landing, WhatsApp, sala de ventas y seguimiento con brokers.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Valida si este resultado pesa de verdad en la compra.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

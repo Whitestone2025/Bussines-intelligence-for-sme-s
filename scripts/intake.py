@@ -31,6 +31,26 @@ def _normalize_workspace_mode(payload: dict) -> str:
     return "clean_bootstrap"
 
 
+def _is_website_only_seed(website: str, available_sources: list[str]) -> bool:
+    normalized = {item.strip().lower() for item in available_sources if item.strip()}
+    return bool(website.strip()) and bool(normalized) and normalized <= {"website"}
+
+
+def _web_only_constraints(existing: list[str]) -> list[str]:
+    marker = "Por ahora solo hay una web publica como fuente inicial; no confirma comprador, canal, economics ni traccion."
+    if any(item.strip().lower() == marker.lower() for item in existing):
+        return existing
+    return existing + [marker]
+
+
+def _web_only_open_assumptions() -> list[str]:
+    return [
+        "La web publica por si sola no confirma quien compra realmente.",
+        "La web publica por si sola no confirma traccion, economics ni conversion.",
+        "La identidad comercial puede seguir siendo ambigua hasta reunir evidencia adicional.",
+    ]
+
+
 def normalize_intake_payload(payload: dict) -> dict:
     company_name = str(payload.get("company_name", "")).strip()
     if not company_name:
@@ -48,6 +68,11 @@ def normalize_intake_payload(payload: dict) -> dict:
     existing_file_manifest = _normalize_list(payload.get("existing_file_manifest"))
     existing_material_summary = str(payload.get("existing_material_summary", "")).strip()
 
+    website = str(payload.get("website", "")).strip()
+    web_only_seed = _is_website_only_seed(website, available_sources)
+    if web_only_seed:
+        known_constraints = _web_only_constraints(known_constraints)
+
     primary_goal = str(payload.get("primary_goal", "")).strip()
     if not primary_goal:
         primary_goal = (
@@ -64,7 +89,7 @@ def normalize_intake_payload(payload: dict) -> dict:
         "primary_goal": primary_goal,
         "industry": str(payload.get("industry", "")).strip(),
         "business_model": str(payload.get("business_model", "")).strip(),
-        "website": str(payload.get("website", "")).strip(),
+        "website": website,
         "seed_summary": str(payload.get("seed_summary", "")).strip() or f"{company_name} business in Mexico.",
         "current_state_summary": str(payload.get("current_state_summary", "")).strip(),
         "geography_focus": geography_focus,
@@ -161,7 +186,7 @@ def research_profile_seed_record(session: dict) -> dict:
         "workspace_mode": session.get("workspace_mode", "clean_bootstrap"),
         "existing_material_summary": session.get("existing_material_summary", ""),
         "existing_file_manifest": session.get("existing_file_manifest", []),
-        "open_assumptions": [],
+        "open_assumptions": _web_only_open_assumptions() if _is_website_only_seed(session.get("website", ""), session.get("available_sources", [])) else [],
         "research_stage": "seeded",
         "status": "draft",
         "confidence": 0.35,
@@ -170,7 +195,13 @@ def research_profile_seed_record(session: dict) -> dict:
         "source_refs": [],
         "readiness_score": 0,
         "open_questions_count": 0,
-        "next_step": "Inspect the existing business files first." if session.get("workspace_mode") == "in_place_business_folder" else "Add at least one source asset.",
+        "next_step": (
+            "Registra evidencia adicional antes de fijar comprador, canal o economics."
+            if _is_website_only_seed(session.get("website", ""), session.get("available_sources", []))
+            else "Inspect the existing business files first."
+            if session.get("workspace_mode") == "in_place_business_folder"
+            else "Add at least one source asset."
+        ),
         "created_at": session["created_at"],
         "updated_at": session["updated_at"],
     }

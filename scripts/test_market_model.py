@@ -29,10 +29,12 @@ def main() -> int:
     assert tam["recommended_entry_posture"], "Expected an entry posture recommendation"
     assert tam["implementation_risks"], "Expected implementation risks"
     assert tam["confidence"] > 0
+    assert tam["fact_base"][0].startswith("Geografia analizada"), "Fact base should be in Spanish"
+    assert tam["key_assumptions"][0].startswith("Se asume"), "Assumptions should be in Spanish"
 
     attractiveness = next(model for model in models if model["market_type"] == "attractiveness")
     assert attractiveness["blended_value"] <= 10
-    assert "competition" in attractiveness["methodology_summary"].lower() or attractiveness["key_assumptions"]
+    assert "presion competitiva" in attractiveness["methodology_summary"].lower() or attractiveness["key_assumptions"]
 
     with TemporaryDirectory() as temp_dir:
         outputs = persist_market_models(Path(temp_dir), payload)

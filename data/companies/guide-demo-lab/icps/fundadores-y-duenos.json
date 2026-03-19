@@ -1,0 +1,16 @@
+{
+  "icp_id": "fundadores-y-duenos",
+  "company_id": "guide-demo-lab",
+  "label": "Fundadores y duenos",
+  "pains": [],
+  "desired_outcomes": [],
+  "common_objections": [],
+  "status": "needs_validation",
+  "confidence": 0.42,
+  "evidence_refs": [],
+  "source_refs": [],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Todavia no veo suficiente evidencia para fijar el comprador principal. Quien compra realmente hoy o quien quieres que compre primero?"
+  ]
+}

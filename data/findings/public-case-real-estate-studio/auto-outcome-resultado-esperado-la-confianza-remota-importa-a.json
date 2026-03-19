@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-outcome-resultado-esperado-la-confianza-remota-importa-a",
+  "company_id": "public-case-real-estate-studio",
+  "category": "outcome",
+  "title": "Resultado esperado: La confianza remota importa antes del showroom La cate",
+  "statement": "La confianza remota importa antes del showroom La categoria vende recorridos 3D y activos derivados porque ayudan a que el comprador se visualice en el espacio y llegue con mas confianza a la conversacion comercial.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-confianza-remota-antes-del-showroom"
+  ],
+  "source_refs": [
+    "2026-03-18-matterport-mx-inmobiliario"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Valida si este resultado pesa de verdad en la compra.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

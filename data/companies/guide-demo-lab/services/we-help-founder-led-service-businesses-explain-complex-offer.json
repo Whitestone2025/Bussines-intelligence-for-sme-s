@@ -1,0 +1,15 @@
+{
+  "service_id": "we-help-founder-led-service-businesses-explain-complex-offer",
+  "company_id": "guide-demo-lab",
+  "name": "We help founder-led service businesses explain complex offers clearly so buyers ",
+  "one_sentence_description": "We help founder-led service businesses explain complex offers clearly so buyers trust the service faster.",
+  "core_outcome": "",
+  "status": "needs_validation",
+  "confidence": 0.4,
+  "evidence_refs": [],
+  "source_refs": [],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Revise el material disponible, pero la descripcion del servicio sigue poco clara. Como explicarias en una o dos frases lo que realmente haces?"
+  ]
+}

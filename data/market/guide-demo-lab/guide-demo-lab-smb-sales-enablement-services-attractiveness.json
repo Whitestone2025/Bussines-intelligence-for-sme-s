@@ -1,0 +1,79 @@
+{
+  "company_id": "guide-demo-lab",
+  "geography": [
+    "Mexico"
+  ],
+  "currency_code": "MXN",
+  "segment_name": "SMB sales enablement services",
+  "fact_base": [
+    "Geography under analysis: Mexico.",
+    "Total addressable customers currently modeled: 250000.",
+    "Known reachable customers currently modeled: 1400.",
+    "Annual revenue per customer anchor: MXN 36,000.00."
+  ],
+  "growth_rate_assumption": 0.12,
+  "methodology_summary": "Attractiveness score balances competitive pressure, urgency of the problem, budget fit, and channel accessibility.",
+  "key_assumptions": [
+    "Annual price per customer assumed at MXN 36,000.00.",
+    "Target customer ratio set at 18% of the total addressable customer base.",
+    "Serviceable customer ratio set at 35% of target customers.",
+    "Obtainable customer ratio set at 4% of serviceable customers.",
+    "Bottom-up model uses 1400 reachable customers and 22% expected close rate.",
+    "Competition intensity scored at 6.0/10.",
+    "Urgency scored at 8.0/10, budget fit at 7.0/10, and channel access at 8.0/10."
+  ],
+  "assumptions": [
+    "Annual price per customer assumed at MXN 36,000.00.",
+    "Target customer ratio set at 18% of the total addressable customer base.",
+    "Serviceable customer ratio set at 35% of target customers.",
+    "Obtainable customer ratio set at 4% of serviceable customers.",
+    "Bottom-up model uses 1400 reachable customers and 22% expected close rate."
+  ],
+  "scenarios": [
+    {
+      "label": "conservative",
+      "customer_count": 441.0,
+      "value": 15876000.0
+    },
+    {
+      "label": "base",
+      "customer_count": 630.0,
+      "value": 22680000.0
+    },
+    {
+      "label": "upside",
+      "customer_count": 2835.0,
+      "value": 102060000.0
+    }
+  ],
+  "recommended_entry_posture": "focused pilot",
+  "implementation_risks": [
+    "Top-down demand may look larger than what a founder can actually reach in the first 90 days.",
+    "Market attractiveness can degrade quickly if trust-building channels underperform."
+  ],
+  "status": "inferred",
+  "confidence": 0.57,
+  "source_origin": "market_model_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-wants-clarity"
+  ],
+  "source_refs": [
+    "2026-03-14-founder-interview"
+  ],
+  "assumption_refs": [
+    "SMB sales enablement services-assumption-1",
+    "SMB sales enablement services-assumption-2",
+    "SMB sales enablement services-assumption-3",
+    "SMB sales enablement services-assumption-4",
+    "SMB sales enablement services-assumption-5"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03",
+  "market_model_id": "guide-demo-lab-smb-sales-enablement-services-attractiveness",
+  "market_type": "attractiveness",
+  "top_down_value": 7.0,
+  "bottom_up_value": 7.0,
+  "blended_value": 7.0
+}

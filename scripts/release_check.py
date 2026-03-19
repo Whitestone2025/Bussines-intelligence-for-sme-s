@@ -50,6 +50,12 @@ def build_checks() -> list[str]:
         "python3 scripts/test_ui_workspace_flow.py",
         "python3 scripts/test_business_os_e2e.py",
         "python3 scripts/test_discovery_flow.py",
+        "python3 scripts/test_language_purity.py",
+        "python3 scripts/test_founder_usefulness.py",
+        "python3 scripts/test_non_generic_outputs.py",
+        "python3 scripts/test_case_specific_decision.py",
+        "python3 scripts/test_public_guide_quality.py",
+        "python3 scripts/test_public_case_specificity.py",
     ]
     autoresearch_run = ROOT / "tasks" / "ground-loop" / "autoresearch-mx-v1"
     if (autoresearch_run / "loop-config.json").exists() and (autoresearch_run / "last-message.txt").exists():
@@ -72,7 +78,7 @@ def detect_method_risks() -> list[str]:
     if rubric_path.exists():
         rubric_text = rubric_path.read_text(encoding="utf-8").lower()
         if "contrary evidence" not in rubric_text:
-            risks.append("Consulting rubric still does not require contrary evidence handling strongly enough.")
+            risks.append("La rubrica aun no exige con suficiente fuerza el manejo explicito de evidencia en contra.")
 
     return risks
 
@@ -113,9 +119,9 @@ def main() -> int:
         lines.append("- No active blockers.")
     lines.extend(["", "## Unresolved Risks", ""])
     unresolved_risks = [
-        "UI composition is functional but still optimized for a local-first developer workflow.",
-        "Deliverables are deterministic markdown and TSV outputs; richer export formats can be added later.",
-        "Strategy engines now expose fact bases, assumptions, options, and risks, but they still rely on lightweight rule-based synthesis instead of live external benchmarking.",
+        "La composicion de la UI ya funciona, pero todavia conserva rasgos de un flujo local-first mas cercano a un operador tecnico que a un founder puro.",
+        "Los entregables siguen saliendo en markdown y TSV deterministas; formatos mas ricos pueden agregarse despues.",
+        "Los motores ya exponen hechos, supuestos, opciones y riesgos, pero siguen siendo sintetizadores por reglas y no una capa de benchmarking externo vivo.",
         *detect_method_risks(),
     ]
     for risk in unresolved_risks:

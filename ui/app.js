@@ -97,6 +97,8 @@ function humanStatus(status) {
     confirmed: "confirmado",
     ready: "listo",
     partially_ready: "parcial",
+    blocked: "bloqueado",
+    not_ready: "no listo",
     stale: "desactualizado",
     open: "abierto",
   };
@@ -309,10 +311,10 @@ function renderHero() {
   ].join("");
 
   companyMeta.innerHTML = `
-    <div class="meta-line"><span>Industria</span><strong>${escapeHtml(summary.industry || "Sin industria")}</strong></div>
-    <div class="meta-line"><span>Region</span><strong>${escapeHtml(summary.region || "Mexico")}</strong></div>
-    <div class="meta-line"><span>Canal</span><strong>${escapeHtml(summary.channel?.name || "Sin canal")}</strong></div>
-    <div class="meta-line"><span>Tesis actual</span><strong>${escapeHtml(warRoom.recommendation || "Sin decision")}</strong></div>
+      <div class="meta-line"><span>Industria</span><strong>${escapeHtml(summary.industry || "Sin industria")}</strong></div>
+      <div class="meta-line"><span>Region</span><strong>${escapeHtml(summary.region || "Mexico")}</strong></div>
+      <div class="meta-line"><span>Primer canal a revisar</span><strong>${escapeHtml(summary.channel?.name || "Sin canal definido")}</strong></div>
+      <div class="meta-line"><span>${escapeHtml(warRoom.recommendation_label || "Ruta actual")}</span><strong>${escapeHtml(warRoom.recommendation || "Sin decision")}</strong></div>
   `;
 
   if (hero.website) {
@@ -357,13 +359,13 @@ function renderChapterIntro() {
 
   const summary = currentSummary();
   const warRoom = state.caseData?.war_room || {};
-  chapterIntro.innerHTML = `
-    <section class="memo-strip">
-      <p class="eyebrow">Resumen ejecutivo</p>
-      <h3>${escapeHtml(warRoom.recommendation || "Sin recomendacion central")}</h3>
-      <p>${escapeHtml(warRoom.rationale || summary.seed_summary || "Sin resumen ejecutivo.")}</p>
-    </section>
-  `;
+    chapterIntro.innerHTML = `
+      <section class="memo-strip">
+        <p class="eyebrow">Resumen ejecutivo</p>
+        <h3>${escapeHtml(warRoom.recommendation || "Sin recomendacion central")}</h3>
+        <p>${escapeHtml(warRoom.rationale || "Este resumen te ayuda a ver rapido que hacer, por que hacerlo y que conviene revisar antes de moverte.")}</p>
+      </section>
+    `;
 }
 
 function renderChapterMetrics() {
@@ -440,10 +442,19 @@ function renderCoverChapter() {
     ${sheet(
       "La jugada que recomendamos",
       `
+        <p class="eyebrow">${escapeHtml(warRoom.recommendation_label || "Ruta actual")}</p>
         <p class="big-statement">${escapeHtml(warRoom.recommendation || "Sin recomendacion.")}</p>
         <p>${escapeHtml(warRoom.rationale || "Sin fundamento.")}</p>
       `,
       "Tesis central"
+    )}
+    ${sheet(
+      "Siguiente validacion",
+      `
+        <p class="big-statement">${escapeHtml(warRoom.next_validation_step || "Sin siguiente validacion visible.")}</p>
+        <p>Este paso te ayuda a no confundir una tesis provisional con una orden de ejecucion definitiva.</p>
+      `,
+      "Siguiente paso"
     )}
     ${sheet(
       "Lo que ya sabemos",
@@ -470,6 +481,7 @@ function renderCoverChapter() {
       "Precio"
     )}
     ${sheet("Riesgos principales", listMarkup(warRoom.risks, "Sin riesgos."), "Lo que puede romper la tesis")}
+    ${sheet("Limites de evidencia", listMarkup(warRoom.evidence_limits, "Sin limites visibles."), "Lo que aun no sabemos")}
     ${sheet(
       "Documentos listos",
       deliverables
@@ -537,7 +549,7 @@ function renderCustomerChapter() {
     "customer",
     "Cliente",
     "Cliente y momento de compra",
-    "A quien perseguir, por que compra y que frena la decision.",
+    "Este bloque sirve para entender a quien vale la pena perseguir, que objeciones frenan la compra y que prueba necesita ver el comprador.",
     spread(
       "Comprador real",
       "Verdades del comprador, objeciones y guion comercial.",
@@ -573,7 +585,7 @@ function renderMarketChapter() {
     "market",
     "Mercado",
     market.headline || "Mercado",
-    market.summary || "Tamano de oportunidad y confianza de los supuestos.",
+    market.summary || "Este bloque te ayuda a leer si hay espacio suficiente para probar la oferta y que tan confiables son los supuestos de mercado.",
     spread(
       "Mercado y supuestos",
       "Lectura del tamano de oportunidad, no solo numerica sino explicativa.",
@@ -611,7 +623,7 @@ function renderCompetitionChapter() {
     "competition",
     "Competencia",
     competition.headline || "Competencia",
-    competition.summary || "Mapa competitivo y whitespace actual.",
+    competition.summary || "Este bloque sirve para ver contra que alternativas compites realmente y donde todavia tienes margen para diferenciarte.",
     spread(
       "Alternativas del cliente",
       "Tabla comparativa enfocada en lectura estrategica, no en cards aisladas.",
@@ -657,7 +669,7 @@ function renderViabilityChapter() {
     "viability",
     "Viabilidad",
     viability.headline || "Precio y viabilidad",
-    viability.summary || "Lo que hoy sostienen el precio, el margen y los supuestos.",
+    viability.summary || "Este bloque te ayuda a leer si el precio actual parece defendible y si la economia del caso aguanta una prueba comercial razonable.",
     spread(
       "Economia del caso",
       "Precio y viabilidad en formato de memo operativo.",
@@ -713,31 +725,81 @@ function renderViabilityChapter() {
 function renderDecisionChapter() {
   const decisionSummary = state.caseData?.decision_summary || {};
   const memo = decisionSummary.memo || {};
+  const structuring = decisionSummary.problem_structuring || {};
+  const readout = decisionSummary.decision_readout || {};
+  const recommendedRoute = readout.recommended_route || {};
+  const alternatives = readout.alternatives || [];
+  const evidenceLimits = decisionSummary.evidence_limits || [];
+  const confidenceNote = decisionSummary.confidence_note || "";
 
   return chapterWrapper(
     "decision",
     "Decision",
     decisionSummary.headline || "Decision",
-    decisionSummary.summary || "La jugada y por que ahora.",
+    decisionSummary.summary || "Este bloque te dice cual es la jugada sugerida, por que tiene sentido ahora y que podria hacerte cambiar de opinion.",
     spread(
       "Decision actual",
       "La recomendacion, sus alternativas y los riesgos asociados.",
       `
         ${sheet(
-          "Recomendacion",
+          "Ruta recomendada",
           `
-            <p class="big-statement">${escapeHtml(memo.recommended_action || "Sin decision.")}</p>
-            <p>${escapeHtml(memo.why_now || "Sin fundamento.")}</p>
+            <p class="eyebrow">${escapeHtml(recommendedRoute.label || "Ruta actual")}</p>
+            <p class="big-statement">${escapeHtml(recommendedRoute.thesis || memo.recommended_action || "Sin decision.")}</p>
+            <p>${escapeHtml(recommendedRoute.why_this_route_wins || memo.why_now || "Sin fundamento.")}</p>
+            <p>${escapeHtml(confidenceNote || "Sin nota de confianza visible.")}</p>
           `,
-          "Accion principal"
+          "Recomendacion"
         )}
-        ${sheet("Alternativas", listMarkup(memo.alternative_actions, "Sin alternativas."), "Alternativas")}
+        ${sheet(
+          "Problema estructurado",
+          `
+            <p class="big-statement">${escapeHtml(structuring.headline || "Sin problema estructurado.")}</p>
+            <p>${escapeHtml(structuring.situation || "Sin situacion.")}</p>
+            <p>${escapeHtml(structuring.complication || "Sin complicacion.")}</p>
+            <p>${escapeHtml(structuring.decision_tension || "Sin tension de decision.")}</p>
+          `,
+          "Marco"
+        )}
+        ${sheet(
+          "Criterios de decision",
+          listMarkup(readout.criteria, "Sin criterios visibles."),
+          "Criterios"
+        )}
       `,
       `
-        ${sheet("Riesgos", listMarkup(memo.key_risks, "Sin riesgos."), "Riesgo")}
-        ${sheet("Proximos pasos", listMarkup(memo.next_steps, "Sin pasos."), "Activacion")}
+        ${sheet("Hechos validados", listMarkup(structuring.facts, "Sin hechos."), "Hechos")}
+        ${sheet("Supuestos de trabajo", listMarkup(structuring.assumptions, "Sin supuestos."), "Supuestos")}
+        ${sheet("Limites de evidencia", listMarkup(evidenceLimits, "Sin limites visibles."), "Lo que aun no sabemos")}
+        ${sheet("Lo que tendria que ser cierto", listMarkup(structuring.what_must_be_true, "Sin condiciones."), "Condiciones")}
+        ${sheet("Condiciones de invalidez", listMarkup(recommendedRoute.invalidation_conditions, "Sin condiciones de invalidez."), "Riesgo")}
+        ${sheet("Checkpoints de decision", listMarkup(readout.decision_checkpoints, "Sin checkpoints."), "Gobierno")}
       `
-    )
+    ) +
+      spread(
+        "Alternativas estrategicas",
+        "Comparacion corta de las rutas evaluadas antes de elegir la recomendacion.",
+        `
+          <div class="timeline-stack">
+            ${alternatives
+              .map(
+                (item) => `
+                  <article class="timeline-row">
+                    <span>${escapeHtml(item.recommended ? "Ruta recomendada" : item.route_type || "Alternativa")}</span>
+                    <strong>${escapeHtml(item.label || "Ruta")}</strong>
+                    <p>${escapeHtml(item.thesis || "Sin tesis.")}</p>
+                    <p>${escapeHtml(item.why_this_route || "Sin razon visible.")}</p>
+                  </article>
+                `
+              )
+              .join("")}
+          </div>
+        `,
+        `
+          ${sheet("Riesgos principales", listMarkup(memo.key_risks, "Sin riesgos."), "Riesgo")}
+          ${sheet("Proximos pasos", listMarkup(memo.next_steps, "Sin pasos."), "Activacion")}
+        `
+      )
   );
 }
 
@@ -745,12 +807,14 @@ function renderPlanChapter() {
   const decisionSummary = state.caseData?.decision_summary || {};
   const plan = decisionSummary.plan || {};
   const milestones = decisionSummary.milestones || [];
+  const roadmap = decisionSummary.roadmap_readout || {};
+  const initiatives = roadmap.initiatives || [];
 
   return chapterWrapper(
     "plan",
     "Plan",
     "Plan 30/60/90",
-    "Ruta de ejecucion para convertir la decision en pruebas y activos.",
+    "Este bloque baja la decision a pasos concretos para que no se quede en una recomendacion bonita pero inejecutable.",
     spread(
       "Ruta operativa",
       "Plan secuencial de 30, 60 y 90 dias.",
@@ -759,6 +823,11 @@ function renderPlanChapter() {
           "Objetivo del plan",
           `<p class="big-statement">${escapeHtml(plan.objective || "Sin objetivo del plan.")}</p>`,
           "Objetivo"
+        )}
+        ${sheet(
+          "Checkpoints de decision",
+          listMarkup(roadmap.decision_checkpoints, "Sin checkpoints."),
+          "Gobierno"
         )}
       `,
       `
@@ -776,7 +845,42 @@ function renderPlanChapter() {
             .join("")}
         </div>
       `
-    )
+    ) +
+      spread(
+        "Roadmap de iniciativas",
+        "La vista 30/60/90 resumida a partir de iniciativas, gates y senales de avance.",
+        `
+          <div class="timeline-stack">
+            ${initiatives
+              .map(
+                (item) => `
+                  <article class="timeline-row">
+                    <span>${escapeHtml(item.stage_gate || "Gate")}</span>
+                    <strong>${escapeHtml(item.name || "Iniciativa")}</strong>
+                    <p>${escapeHtml(item.workstream || "Sin workstream")} · ${escapeHtml(item.timeframe || "Sin periodo")}</p>
+                    <p>${escapeHtml(item.leading_indicator || "Sin indicador lider.")}</p>
+                  </article>
+                `
+              )
+              .join("")}
+          </div>
+        `,
+        `
+          ${sheet(
+            "Triggers de decision",
+            listMarkup(initiatives.map((item) => item.decision_trigger).filter(Boolean), "Sin triggers."),
+            "Trigger"
+          )}
+          ${sheet(
+            "Riesgos por iniciativa",
+            listMarkup(
+              initiatives.flatMap((item) => (item.key_risks || []).map((risk) => `${item.name}: ${risk}`)),
+              "Sin riesgos por iniciativa."
+            ),
+            "Riesgos"
+          )}
+        `
+      )
   );
 }
 
@@ -794,7 +898,7 @@ function renderDocumentsChapter() {
     "documents",
     "Documentos",
     "Lector de documentos",
-    "Memo, diagnostico, deck y riesgos en formato de lectura editorial.",
+    "Aqui puedes leer los entregables en formato largo para discutir el caso, compartirlo o revisarlo con mas calma.",
     `
       <div class="document-layout">
         <aside class="document-index">
@@ -885,7 +989,7 @@ function renderAuditPage() {
       <div class="chapter-banner">
         <p class="eyebrow">Auditoria</p>
         <h3>${escapeHtml(audit.headline || "Auditoria del caso")}</h3>
-        <p>${escapeHtml(audit.summary || "Inspeccion de trazabilidad y evidencia.")}</p>
+        <p>${escapeHtml(audit.summary || "Aqui revisas cuanta evidencia sostiene el caso y de donde sale cada conclusion importante.")}</p>
       </div>
       <div class="audit-ledger">
         ${sheet(

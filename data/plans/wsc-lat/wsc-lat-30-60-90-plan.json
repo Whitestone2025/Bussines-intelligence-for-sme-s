@@ -1,0 +1,349 @@
+{
+  "plan_id": "wsc-lat-30-60-90-plan",
+  "company_id": "wsc-lat",
+  "plan_horizon": "30-60-90",
+  "objective": "Entender con precision que negocio visible existe hoy, que promesa comercial hace la web y que decision estrategica convendria validar primero.",
+  "milestones": [
+    {
+      "milestone_id": "day-30",
+      "name": "Alinear problema, tesis y alcance de ruta de cu\u00f1a comercial ai lab + Validar la ruta de cu\u00f1a comercial ai lab en el mercado",
+      "timeframe": "Dias 1-30",
+      "owner": "Fundador",
+      "dependencies": [
+        "wsc-lat-viability-memo",
+        "initiative-problem-structuring"
+      ],
+      "success_metric": "Tesis, problema del comprador y propuesta de entrada alineados en un solo memo ejecutivo. / La ruta elegida genera una senal mas fuerte que al menos una alternativa en velocidad y calidad de aprendizaje.",
+      "learning_goal": "Si la tesis sigue cambiando en cada conversacion, el caso aun no esta listo para ir al mercado. / Es la unica ruta con monetizacion publica concreta hoy (La unica monetizacion publica concreta hoy es la suscripcion del AI Lab de 1,500 USD al mes por 6 meses, pero convive con un portafolio visible de unidades activas mucho mas amplio que esa oferta comercial.) y por eso reduce mas rapido la ambiguedad entre lo que el sitio inspira y lo que realmente puede venderse primero.",
+      "risk_watchouts": [
+        "Agrega al menos 2 fuentes distintas para subir la confianza de lectura.",
+        "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa."
+      ]
+    },
+    {
+      "milestone_id": "day-60",
+      "name": "Defender economia, precio y condiciones de conversion",
+      "timeframe": "Dias 31-60",
+      "owner": "Fundador",
+      "dependencies": [
+        "initiative-route-validation"
+      ],
+      "success_metric": "Precio, alcance y prueba visible quedan defendibles frente al comprador real.",
+      "learning_goal": "Si precio y prueba no se sostienen juntos, la ruta debe refinarse antes de escalar.",
+      "risk_watchouts": [
+        "Agrega al menos 2 fuentes distintas para subir la confianza de lectura.",
+        "Aclara mejor la oferta antes de recomendar ejecucion."
+      ]
+    },
+    {
+      "milestone_id": "day-90",
+      "name": "Decidir escala, ajuste o cambio de ruta",
+      "timeframe": "Dias 61-90",
+      "owner": "Fundador",
+      "dependencies": [
+        "initiative-economics-proof"
+      ],
+      "success_metric": "Existe una decision documentada de escalar, ajustar o redirigir basada en evidencia comparada.",
+      "learning_goal": "Si las condiciones what-must-be-true no se cumplen, la siguiente decision no es escalar sino reencuadrar.",
+      "risk_watchouts": [
+        "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa.",
+        "La cu\u00f1a AI Lab puede encoger demasiado la lectura del negocio si la identidad hibrida de venture capital era la puerta correcta."
+      ]
+    }
+  ],
+  "workstreams": [
+    {
+      "name": "Alineacion estrategica",
+      "focus": "Alinear problema, tesis y alcance de ruta de cu\u00f1a comercial ai lab",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Validacion de demanda",
+      "focus": "Validar la ruta de cu\u00f1a comercial ai lab en el mercado",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Economia y propuesta",
+      "focus": "Defender economia, precio y condiciones de conversion",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Gobierno de decision",
+      "focus": "Decidir escala, ajuste o cambio de ruta",
+      "owner": "Fundador"
+    }
+  ],
+  "initiative_roadmap": [
+    {
+      "initiative_id": "initiative-problem-structuring",
+      "name": "Alinear problema, tesis y alcance de ruta de cu\u00f1a comercial ai lab",
+      "workstream": "Alineacion estrategica",
+      "objective": "Traducir la recomendacion a una tesis operativa entendible por el fundador y por el comprador.",
+      "owner": "Fundador",
+      "timeframe": "Dias 1-30",
+      "dependencies": [
+        "wsc-lat-viability-memo"
+      ],
+      "leading_indicator": "Narrativa comercial y criterios de decision entendidos por el fundador sin contradicciones internas.",
+      "lagging_indicator": "Oferta, objeciones y entregables sintetizados en una sola lectura ejecutiva consistente.",
+      "success_metric": "Tesis, problema del comprador y propuesta de entrada alineados en un solo memo ejecutivo.",
+      "stage_gate": "Gate 1",
+      "stage_gate_question": "La ruta elegida esta lo bastante clara como para probarse sin interpretaciones distintas dentro del equipo?",
+      "key_risks": [
+        "Agrega al menos 2 fuentes distintas para subir la confianza de lectura.",
+        "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa."
+      ],
+      "risk_mitigation": [
+        "Valida mejor quien compra, como compra y que objecion aparece primero.",
+        "Aterriza mejor la oferta y explica con claridad como se entrega el servicio.",
+        "Separar hechos, inferencias y supuestos antes de mover recursos."
+      ],
+      "decision_trigger": "Si la tesis sigue cambiando en cada conversacion, el caso aun no esta listo para ir al mercado.",
+      "exit_criteria": "Existe una lectura unica del problema, de la oferta de entrada y de la senal que confirmaria o invalidaria la ruta."
+    },
+    {
+      "initiative_id": "initiative-route-validation",
+      "name": "Validar la ruta de cu\u00f1a comercial ai lab en el mercado",
+      "workstream": "Validacion de demanda",
+      "objective": "Usar el AI Lab como cu\u00f1a comercial dominante de WS Capital, tratando la narrativa hibrida de venture capital y la plataforma abierta como apuestas de segundo plano hasta que exista una prueba publica mas fuerte.",
+      "owner": "Fundador",
+      "timeframe": "Dias 1-30",
+      "dependencies": [
+        "initiative-problem-structuring"
+      ],
+      "leading_indicator": "Senales tempranas de respuesta calificada en el canal escogido.",
+      "lagging_indicator": "Conversaciones comerciales con una objecion dominante mas clara y menos friccion de entrada.",
+      "success_metric": "La ruta elegida genera una senal mas fuerte que al menos una alternativa en velocidad y calidad de aprendizaje.",
+      "stage_gate": "Gate 2",
+      "stage_gate_question": "La ruta recomendada ya demuestra una ventaja real frente a las rutas alternativas?",
+      "key_risks": [
+        "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa.",
+        "La cu\u00f1a AI Lab puede encoger demasiado la lectura del negocio si la identidad hibrida de venture capital era la puerta correcta.",
+        "Agrega al menos 2 fuentes distintas para subir la confianza de lectura."
+      ],
+      "risk_mitigation": [
+        "Valida mejor quien compra, como compra y que objecion aparece primero.",
+        "Aterriza mejor la oferta y explica con claridad como se entrega el servicio.",
+        "Separar hechos, inferencias y supuestos antes de escalar la recomendacion.",
+        "Definir una senal temprana que invalide o refuerce la ruta elegida."
+      ],
+      "decision_trigger": "Es la unica ruta con monetizacion publica concreta hoy (La unica monetizacion publica concreta hoy es la suscripcion del AI Lab de 1,500 USD al mes por 6 meses, pero convive con un portafolio visible de unidades activas mucho mas amplio que esa oferta comercial.) y por eso reduce mas rapido la ambiguedad entre lo que el sitio inspira y lo que realmente puede venderse primero.",
+      "exit_criteria": "Existe evidencia suficiente para sostener que el canal y la entrada elegidos merecen una segunda ronda de inversion operativa."
+    },
+    {
+      "initiative_id": "initiative-economics-proof",
+      "name": "Defender economia, precio y condiciones de conversion",
+      "workstream": "Economia y propuesta",
+      "objective": "Confirmar que la ruta recomendada puede sostener margen, credibilidad y una entrega repetible.",
+      "owner": "Fundador",
+      "timeframe": "Dias 31-60",
+      "dependencies": [
+        "initiative-route-validation"
+      ],
+      "leading_indicator": "Objeciones de precio y alcance se vuelven mas especificas y menos frecuentes.",
+      "lagging_indicator": "Rango de precio defendible y criterios de cierre mejoran sin erosionar margen.",
+      "success_metric": "Precio, alcance y prueba visible quedan defendibles frente al comprador real.",
+      "stage_gate": "Gate 3",
+      "stage_gate_question": "La economia del caso ya aguanta escalar esta ruta sin destruir margen o credibilidad?",
+      "key_risks": [
+        "Agrega al menos 2 fuentes distintas para subir la confianza de lectura.",
+        "Aclara mejor la oferta antes de recomendar ejecucion."
+      ],
+      "risk_mitigation": [
+        "Aterriza mejor la oferta y explica con claridad como se entrega el servicio.",
+        "Separar hechos, inferencias y supuestos antes de escalar la recomendacion.",
+        "Revisar riesgos y senales lider al cierre de cada ciclo de feedback."
+      ],
+      "decision_trigger": "Si precio y prueba no se sostienen juntos, la ruta debe refinarse antes de escalar.",
+      "exit_criteria": "Existe una combinacion defendible de precio, alcance, narrativa y prueba para sostener la oferta."
+    },
+    {
+      "initiative_id": "initiative-scale-or-pivot",
+      "name": "Decidir escala, ajuste o cambio de ruta",
+      "workstream": "Gobierno de decision",
+      "objective": "Usar la evidencia de los primeros 90 dias para sostener, refinar o reemplazar la ruta elegida.",
+      "owner": "Fundador",
+      "timeframe": "Dias 61-90",
+      "dependencies": [
+        "initiative-economics-proof"
+      ],
+      "leading_indicator": "Los indicadores lider y las condiciones what-must-be-true evolucionan a favor de la tesis.",
+      "lagging_indicator": "La ruta mantiene conversion, economia y facilidad de ejecucion mejores que sus alternativas.",
+      "success_metric": "Existe una decision documentada de escalar, ajustar o redirigir basada en evidencia comparada.",
+      "stage_gate": "Gate 4",
+      "stage_gate_question": "La evidencia acumulada confirma la tesis o obliga a cambiar de ruta?",
+      "key_risks": [
+        "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa.",
+        "La cu\u00f1a AI Lab puede encoger demasiado la lectura del negocio si la identidad hibrida de venture capital era la puerta correcta.",
+        "Agrega al menos 2 fuentes distintas para subir la confianza de lectura.",
+        "Aclara mejor la oferta antes de recomendar ejecucion.",
+        "Define mejor a quien compras antes de elegir canal o precio.",
+        "Fortalece la confianza en el canal antes de ejecutar.",
+        "La confianza en mercado, precio y canal sigue siendo demasiado baja."
+      ],
+      "risk_mitigation": [
+        "Comparar la ruta recomendada contra las alternativas con los mismos criterios de decision.",
+        "Valida mejor quien compra, como compra y que objecion aparece primero.",
+        "Aterriza mejor la oferta y explica con claridad como se entrega el servicio.",
+        "Separar hechos, inferencias y supuestos antes de escalar la recomendacion."
+      ],
+      "decision_trigger": "Si las condiciones what-must-be-true no se cumplen, la siguiente decision no es escalar sino reencuadrar.",
+      "exit_criteria": "La empresa sabe que ruta sostener, que ruta descartar y que aprendizaje se incorpora al siguiente ciclo."
+    }
+  ],
+  "decision_checkpoints": [
+    "Comprobar si la ruta recomendada sigue ganando frente a las alternativas en calidad de aprendizaje y capacidad de ejecucion.",
+    "Revisar periodicamente si los riesgos de invalidacion siguen siendo tolerables o ya cambiaron la tesis.",
+    "No escalar hasta que precio, prueba y conversion se sostengan al mismo tiempo.",
+    "Cerrar cada gate con una decision explicita: sostener, ajustar o redirigir la ruta."
+  ],
+  "no_regret_moves": [
+    "Valida mejor quien compra, como compra y que objecion aparece primero.",
+    "Aterriza mejor la oferta y explica con claridad como se entrega el servicio.",
+    "Separar hechos, inferencias y supuestos antes de escalar la recomendacion.",
+    "Definir una senal temprana que invalide o refuerce la ruta elegida."
+  ],
+  "strategic_alternatives": [
+    {
+      "alternative_id": "ai-lab-wedge",
+      "label": "Ruta de cu\u00f1a comercial AI Lab",
+      "thesis": "Usar el AI Lab como cu\u00f1a comercial dominante de WS Capital, tratando la narrativa hibrida de venture capital y la plataforma abierta como apuestas de segundo plano hasta que exista una prueba publica mas fuerte.",
+      "route_type": "where_to_play",
+      "why_this_route": "Es la unica ruta con monetizacion publica concreta hoy (La unica monetizacion publica concreta hoy es la suscripcion del AI Lab de 1,500 USD al mes por 6 meses, pero convive con un portafolio visible de unidades activas mucho mas amplio que esa oferta comercial.) y por eso reduce mas rapido la ambiguedad entre lo que el sitio inspira y lo que realmente puede venderse primero.",
+      "criteria_fit": "Velocidad para obtener aprendizaje creible de mercado.",
+      "key_bets": [
+        "El mercado puede entender primero una oferta concreta antes que una arquitectura completa de identidades.",
+        "La cu\u00f1a AI Lab puede producir aprendizaje comercial sin negar la ambicion mas amplia del negocio."
+      ],
+      "key_risks": [
+        "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa.",
+        "La cu\u00f1a AI Lab puede encoger demasiado la lectura del negocio si la identidad hibrida de venture capital era la puerta correcta."
+      ],
+      "what_must_be_true": [
+        "El AI Lab debe ser suficientemente comprable y explicable como oferta inicial.",
+        "La narrativa abierta y venture puede quedar subordinada sin romper la credibilidad general del caso."
+      ],
+      "recommended": true
+    },
+    {
+      "alternative_id": "proof-before-scale",
+      "label": "Ruta de prueba antes de expansion",
+      "thesis": "Congelar temporalmente la amplitud narrativa y usar el sitio solo para demostrar como opera el modelo 80/20, que resultados produce y en que tipo de cliente ya funciona.",
+      "route_type": "how_to_win",
+      "why_this_route": "Sirve cuando la mayor friccion no es la falta de vision sino la falta de prueba visible para creer la vision.",
+      "criteria_fit": "Ajuste con la capacidad real de ejecucion del fundador.",
+      "key_bets": [
+        "Una prueba publica clara puede ordenar despues cualquiera de las identidades visibles.",
+        "La credibilidad perdida por ambiguedad se recupera mejor con evidencia que con mas manifiesto."
+      ],
+      "key_risks": [
+        "Puede retrasar demasiado la venta si se convierte en una espera indefinida de prueba perfecta.",
+        "La web publica por si sola no confirma quien compra realmente."
+      ],
+      "what_must_be_true": [
+        "Existe una forma realista de mostrar implementacion sin revelar informacion sensible.",
+        "La ausencia de prueba es hoy un freno mayor que la ausencia de awareness."
+      ],
+      "recommended": false
+    },
+    {
+      "alternative_id": "open-intel-platform",
+      "label": "Ruta de plataforma de inteligencia abierta",
+      "thesis": "Tomar la promesa de inteligencia abierta como producto lider, tratando el AI Lab como servicio de acompa\u00f1amiento y dejando la narrativa venture como capa posterior.",
+      "route_type": "where_to_play",
+      "why_this_route": "Aprovecha una tesis visible de democratizacion de inteligencia que podria escalar mejor que una oferta de servicio artesanal.",
+      "criteria_fit": "Confianza suficiente en canal y claridad de oferta.",
+      "key_bets": [
+        "La promesa publica 'McKinsey-Level Data for All' puede atraer un mercado mas amplio que el AI Lab.",
+        "El ecosistema de codigo abierto puede servir como motor de distribucion y credibilidad.",
+        "La promesa publica 'AI Lab & Venture Capital Hybrid.' puede funcionar como cu\u00f1a de distribucion si se vuelve mas concreta."
+      ],
+      "key_risks": [
+        "La plataforma todavia parece mas manifiesto que producto listo para liderar una venta.",
+        "Puede abrir un frente demasiado grande sin comprador ni economia visible."
+      ],
+      "what_must_be_true": [
+        "La plataforma abierta debe resolver un trabajo concreto y repetible para un comprador real.",
+        "El negocio debe poder explicar como conviven codigo abierto, servicio y captura de valor."
+      ],
+      "recommended": false
+    },
+    {
+      "alternative_id": "venture-hybrid-holdco",
+      "label": "Ruta hibrida de venture capital como tesis principal",
+      "thesis": "Ordenar a WS Capital primero como venture builder o holdco regional, tratando el AI Lab y la plataforma abierta como capacidades internas para originar, operar e invertir en Latinoamerica.",
+      "route_type": "right_to_win",
+      "why_this_route": "Convierte la mezcla actual de unidades, infraestructura y capital en una historia mas coherente si el negocio de verdad quiere jugar como plataforma de construccion e inversion.",
+      "criteria_fit": "Economia suficientemente sana para justificar la prueba.",
+      "key_bets": [
+        "La mezcla de unidades activas y narrativa de infraestructura realmente responde a una tesis de portafolio y no solo a un problema de copy.",
+        "El mercado correcto valora mas el acceso a capacidades y capital que una oferta puntual de servicio."
+      ],
+      "key_risks": [
+        "La web mezcla al menos tres identidades visibles: AI Lab operativo, plataforma abierta de inteligencia y vehiculo de venture capital, sin dejar claro cual es la cu\u00f1a comercial dominante hoy.",
+        "Es la ruta mas dificil de creer hoy porque la prueba publica de derecho a ganar sigue siendo limitada."
+      ],
+      "what_must_be_true": [
+        "Debe existir evidencia suficiente de capacidad para operar, seleccionar e invertir mejor que alternativas mas simples.",
+        "La audiencia prioritaria debe entender y comprar una tesis hibrida de venture capital desde la web publica."
+      ],
+      "recommended": false
+    }
+  ],
+  "validation_agenda": [
+    "Agrega al menos 2 fuentes distintas para subir la confianza de lectura.",
+    "Aclara mejor la oferta antes de recomendar ejecucion.",
+    "Define mejor a quien compras antes de elegir canal o precio.",
+    "Fortalece la confianza en el canal antes de ejecutar.",
+    "La confianza en mercado, precio y canal sigue siendo demasiado baja."
+  ],
+  "sequence_rationale": [
+    "Primero se alinea la tesis y se traduce a una lectura operativa comun para evitar ejecucion incoherente.",
+    "Despues se valida la ruta elegida en mercado antes de invertir en ajustes mas profundos de economia.",
+    "Luego se defiende precio, alcance y prueba para que la ruta tenga soporte economico y comercial.",
+    "Solo al final se decide si conviene escalar, ajustar o cambiar de ruta con base en evidencia comparada."
+  ],
+  "options_considered": [
+    {
+      "label": "Ruta de cu\u00f1a comercial AI Lab",
+      "summary": "Usar el AI Lab como cu\u00f1a comercial dominante de WS Capital, tratando la narrativa hibrida de venture capital y la plataforma abierta como apuestas de segundo plano hasta que exista una prueba publica mas fuerte.",
+      "recommended": true,
+      "criteria_fit": "Velocidad para obtener aprendizaje creible de mercado."
+    },
+    {
+      "label": "Ruta de prueba antes de expansion",
+      "summary": "Congelar temporalmente la amplitud narrativa y usar el sitio solo para demostrar como opera el modelo 80/20, que resultados produce y en que tipo de cliente ya funciona.",
+      "recommended": false,
+      "criteria_fit": "Ajuste con la capacidad real de ejecucion del fundador."
+    },
+    {
+      "label": "Ruta de plataforma de inteligencia abierta",
+      "summary": "Tomar la promesa de inteligencia abierta como producto lider, tratando el AI Lab como servicio de acompa\u00f1amiento y dejando la narrativa venture como capa posterior.",
+      "recommended": false,
+      "criteria_fit": "Confianza suficiente en canal y claridad de oferta."
+    },
+    {
+      "label": "Ruta hibrida de venture capital como tesis principal",
+      "summary": "Ordenar a WS Capital primero como venture builder o holdco regional, tratando el AI Lab y la plataforma abierta como capacidades internas para originar, operar e invertir en Latinoamerica.",
+      "recommended": false,
+      "criteria_fit": "Economia suficientemente sana para justificar la prueba."
+    }
+  ],
+  "decision_refs": [
+    "wsc-lat-viability-memo"
+  ],
+  "risk_refs": [
+    "wsc-lat-risk-1",
+    "wsc-lat-risk-2",
+    "wsc-lat-risk-3",
+    "wsc-lat-risk-4",
+    "wsc-lat-risk-5"
+  ],
+  "status": "inferred",
+  "confidence": 0.72,
+  "source_origin": "planner",
+  "evidence_refs": [],
+  "source_refs": [],
+  "created_at": "2026-03-18T22:09:50",
+  "updated_at": "2026-03-18T22:09:50"
+}

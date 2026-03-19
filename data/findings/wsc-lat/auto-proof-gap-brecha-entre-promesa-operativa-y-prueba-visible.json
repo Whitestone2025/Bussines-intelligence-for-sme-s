@@ -1,0 +1,21 @@
+{
+  "finding_id": "auto-proof-gap-brecha-entre-promesa-operativa-y-prueba-visible",
+  "company_id": "wsc-lat",
+  "category": "proof_gap",
+  "title": "Brecha entre promesa operativa y prueba visible",
+  "statement": "La web promete un cerebro operativo 80/20 y un recorrido de autonomia para clientes, pero todavia no muestra prueba publica de implementacion ni resultados observables que sostengan esa promesa.",
+  "status": "inferred",
+  "confidence": 0.82,
+  "evidence_refs": [
+    "2026-03-18-wsc-ai-lab-offer",
+    "2026-03-18-wsc-agentic-ratio",
+    "2026-03-18-wsc-problem-latam"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Antes de escalar narrativa, muestra evidencia concreta de implementacion, resultados o casos.",
+  "reasoning_kind": "web_only_case_specific",
+  "uncertainty_note": ""
+}

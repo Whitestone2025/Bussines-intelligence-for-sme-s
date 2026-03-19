@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-outcome-resultado-esperado-les-preocupa-pagar-por-materi",
+  "company_id": "public-case-real-estate-studio",
+  "category": "outcome",
+  "title": "Resultado esperado: Les preocupa pagar por material visual que no se actua",
+  "statement": "Les preocupa pagar por material visual que no se actualice rapido, que no conecte con ventas o que se vuelva decorativo sin ayudar a filtrar prospectos.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Valida si este resultado pesa de verdad en la compra.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

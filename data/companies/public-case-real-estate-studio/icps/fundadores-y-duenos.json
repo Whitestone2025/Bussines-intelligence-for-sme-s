@@ -1,0 +1,21 @@
+{
+  "icp_id": "fundadores-y-duenos",
+  "company_id": "public-case-real-estate-studio",
+  "label": "Fundadores y duenos",
+  "pains": [],
+  "desired_outcomes": [
+    "El founder detecta que los renders arquitectonicos se piden como pieza visual aislada, pero el comprador comercial quiere un paquete que tambien sirva para landing, WhatsApp, sala de ventas y seguimiento con brokers.",
+    "Matterport presenta recorridos 3D para inmobiliario como una forma de aumentar interacciones, generar confianza remota y crear activos como fotografia 2D, planos y experiencias 3D desde un mismo levantamiento."
+  ],
+  "common_objections": [],
+  "status": "needs_validation",
+  "confidence": 0.46,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Todavia no veo suficiente evidencia para fijar el comprador principal. Quien compra realmente hoy o quien quieres que compre primero?"
+  ]
+}

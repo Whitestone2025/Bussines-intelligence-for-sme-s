@@ -18,8 +18,24 @@ Cuando uses Ws B-I a traves de Codex, Codex debe:
 6. construir tu caso paso a paso,
 7. y detenerse solo cuando puedas revisar tu negocio en el frontend.
 
+## Que deberias esperar del sistema
+
+Ws B-I no esta hecho para darte solo una respuesta bonita.
+Deberia ayudarte a pasar de informacion suelta a una lectura de negocio mas util.
+
+Eso significa:
+
+- ordenar lo que hoy esta disperso,
+- mostrar que entiende del cliente y del mercado,
+- dejar visible que sigue siendo hipotesis,
+- recomendar un siguiente movimiento,
+- y enseñarte cuanta evidencia sostiene esa recomendacion.
+
+Si el sistema no puede explicarte para que sirve cada bloque o si todo suena demasiado generico, hay que corregir el caso o el motor, no solo seguir avanzando.
+
 ## Orden recomendado
 
+0. [Guia publica paso a paso en PDF](assets/wsbi-public-guide.pdf)
 1. [Instalacion limpia en otra computadora](05-instalacion-limpia.md)
 2. [Prepara tu informacion](01-preparar-informacion.md)
 3. [Trabaja con Codex](02-trabajar-con-codex.md)

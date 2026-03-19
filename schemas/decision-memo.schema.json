@@ -7,6 +7,7 @@
     "company_id",
     "decision_type",
     "recommended_action",
+    "strategic_stack",
     "status",
     "confidence",
     "source_origin",
@@ -25,6 +26,93 @@
     "recommended_action": {"type": "string"},
     "decision_summary": {"type": "string"},
     "why_now": {"type": "string"},
+    "strategic_stack": {
+      "type": "object",
+      "required": [
+        "problem_statement",
+        "case_for_change",
+        "where_to_play",
+        "how_to_win",
+        "right_to_win",
+        "strategic_alternatives",
+        "what_must_be_true",
+        "no_regret_moves",
+        "recommended_route"
+      ],
+      "properties": {
+        "problem_statement": {
+          "type": "object",
+          "required": ["headline", "situation", "complication", "decision_tension", "key_question"],
+          "properties": {
+            "headline": {"type": "string"},
+            "situation": {"type": "string"},
+            "complication": {"type": "string"},
+            "decision_tension": {"type": "string"},
+            "key_question": {"type": "string"}
+          }
+        },
+        "case_for_change": {
+          "type": "object",
+          "required": ["why_change", "cost_of_inaction", "transformation_story"],
+          "properties": {
+            "why_change": {"type": "string"},
+            "cost_of_inaction": {"type": "string"},
+            "transformation_story": {"type": "string"}
+          }
+        },
+        "where_to_play": {
+          "type": "object",
+          "required": ["primary_segment", "primary_channel", "geographic_focus"],
+          "properties": {
+            "primary_segment": {"type": "string"},
+            "primary_channel": {"type": "string"},
+            "geographic_focus": {"type": "string"}
+          }
+        },
+        "how_to_win": {
+          "type": "object",
+          "required": ["value_thesis", "differentiation", "proof"],
+          "properties": {
+            "value_thesis": {"type": "string"},
+            "differentiation": {"type": "string"},
+            "proof": {"type": "string"}
+          }
+        },
+        "right_to_win": {"type": "array", "items": {"type": "string"}},
+        "strategic_alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["alternative_id", "label", "thesis", "route_type", "why_this_route", "criteria_fit", "key_bets", "key_risks", "what_must_be_true", "recommended"],
+            "properties": {
+              "alternative_id": {"type": "string"},
+              "label": {"type": "string"},
+              "thesis": {"type": "string"},
+              "route_type": {"type": "string"},
+              "why_this_route": {"type": "string"},
+              "criteria_fit": {"type": "string"},
+              "key_bets": {"type": "array", "items": {"type": "string"}},
+              "key_risks": {"type": "array", "items": {"type": "string"}},
+              "what_must_be_true": {"type": "array", "items": {"type": "string"}},
+              "recommended": {"type": "boolean"}
+            }
+          }
+        },
+        "what_must_be_true": {"type": "array", "items": {"type": "string"}},
+        "no_regret_moves": {"type": "array", "items": {"type": "string"}},
+        "recommended_route": {
+          "type": "object",
+          "required": ["alternative_id", "label", "thesis", "why_this_route_wins", "invalidation_conditions"],
+          "properties": {
+            "alternative_id": {"type": "string"},
+            "label": {"type": "string"},
+            "thesis": {"type": "string"},
+            "why_this_route_wins": {"type": "string"},
+            "invalidation_conditions": {"type": "array", "items": {"type": "string"}}
+          }
+        }
+      }
+    },
     "alternative_actions": {"type": "array", "items": {"type": "string"}},
     "key_risks": {"type": "array", "items": {"type": "string"}},
     "next_steps": {"type": "array", "items": {"type": "string"}},

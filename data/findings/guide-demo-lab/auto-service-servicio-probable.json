@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-service-servicio-probable",
+  "company_id": "guide-demo-lab",
+  "category": "service",
+  "title": "Servicio probable",
+  "statement": "We help founder-led service businesses explain complex offers clearly so buyers trust the service faster.",
+  "status": "needs_validation",
+  "confidence": 0.52,
+  "evidence_refs": [
+    "2026-03-18-founder-says-agencies-never-explain-the-service"
+  ],
+  "source_refs": [
+    "2026-03-18-homepage-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Valida si esta descripcion refleja con precision la oferta central.",
+  "reasoning_kind": "seed_plus_support",
+  "uncertainty_note": ""
+}

@@ -1,0 +1,47 @@
+{
+  "profile_id": "public-case-real-estate-studio-intake",
+  "company_id": "public-case-real-estate-studio",
+  "intake_mode": "existing",
+  "seed_summary": "Estudio que arma renders, video corto, recorrido 360 y landing de preventa para desarrolladoras residenciales boutique que necesitan vender antes de terminar obra.",
+  "primary_goal": "Definir la primera jugada comercial de mayor confianza para vender un paquete flagship de preventa visual en Mexico.",
+  "website": "",
+  "geography_focus": [
+    "Ciudad de Mexico",
+    "Queretaro",
+    "Riviera Maya"
+  ],
+  "currency_code": "MXN",
+  "competitors": [
+    "Shot 360",
+    "Tour 360",
+    "estudios de renders arquitectonicos"
+  ],
+  "available_sources": [
+    "referencias publicas de categoria",
+    "notas sinteticas de ventas",
+    "objeciones de comprador",
+    "supuestos de precio"
+  ],
+  "known_constraints": [],
+  "workspace_mode": "in_place_business_folder",
+  "existing_material_summary": "Caso compuesto basado en referencias publicas de Matterport Mexico, Shot 360 y Tour 360, mas notas sinteticas de ventas y objeciones de desarrolladoras residenciales boutique.",
+  "existing_file_manifest": [
+    "matterport-mx-notes.md",
+    "shot360-notes.md",
+    "tour360-notes.md",
+    "founder-sales-notes.md",
+    "pricing-assumptions.md"
+  ],
+  "open_assumptions": [],
+  "research_stage": "ready_for_experiments",
+  "status": "validated",
+  "confidence": 0.68,
+  "source_origin": "existing_folder_seed",
+  "evidence_refs": [],
+  "source_refs": [],
+  "readiness_score": 100.0,
+  "open_questions_count": 0,
+  "next_step": "Corre el primer experimento.",
+  "created_at": "2026-03-18T17:07:09",
+  "updated_at": "2026-03-18T17:07:09"
+}
