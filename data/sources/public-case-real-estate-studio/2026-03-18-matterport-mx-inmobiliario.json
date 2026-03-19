@@ -1,0 +1,25 @@
+{
+  "source_id": "2026-03-18-matterport-mx-inmobiliario",
+  "company_id": "public-case-real-estate-studio",
+  "source_kind": "public_reference",
+  "origin": "public_web",
+  "title": "Matterport Mexico inmobiliario",
+  "uri_or_path": "https://matterport.mx/inmobiliario/",
+  "status": "normalized",
+  "source_origin": "public_web",
+  "source_refs": [
+    "2026-03-18-matterport-mx-inmobiliario"
+  ],
+  "evidence_refs": [
+    "2026-03-18-confianza-remota-antes-del-showroom"
+  ],
+  "summary": "Referencia publica de categoria. Matterport presenta recorridos 3D para inmobiliario como una forma de aumentar interacciones, generar confianza remota y crear activos como fotografia 2D, planos y experiencias 3D desde un mismo levantamiento.",
+  "body": "Referencia publica de categoria. Matterport presenta recorridos 3D para inmobiliario como una forma de aumentar interacciones, generar confianza remota y crear activos como fotografia 2D, planos y experiencias 3D desde un mismo levantamiento.",
+  "tags": [
+    "categoria",
+    "tour-360",
+    "confianza-remota"
+  ],
+  "created_at": "2026-03-18T17:07:09",
+  "updated_at": "2026-03-18T17:07:10"
+}

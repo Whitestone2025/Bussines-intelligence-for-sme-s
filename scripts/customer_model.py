@@ -13,18 +13,18 @@ from workspace import WorkspaceLayout, slugify_id
 
 
 ICP_KEYWORDS = {
-    "Founder-led service businesses": {"founder", "owner", "ceo", "principal"},
-    "Marketing leads at SMBs": {"marketing", "brand", "growth", "demand"},
-    "Sales-led operators": {"sales", "pipeline", "closer", "revenue"},
-    "Operations-focused teams": {"operations", "ops", "delivery", "process"},
+    "Fundadores y duenos de negocios de servicio": {"founder", "owner", "ceo", "principal", "fundador", "dueno"},
+    "Lideres de marketing en PyMEs": {"marketing", "brand", "growth", "demand", "marca", "demanda"},
+    "Lideres comerciales": {"sales", "pipeline", "closer", "revenue", "ventas", "comercial"},
+    "Lideres de operaciones": {"operations", "ops", "delivery", "process", "operaciones", "entrega"},
 }
 
 FORBIDDEN_PHRASES = {
-    "growth partner",
-    "end-to-end solution",
-    "results-driven",
-    "full-service",
-    "scale to the next level",
+    "partner de crecimiento",
+    "solucion integral",
+    "orientado a resultados",
+    "servicio full-service",
+    "llevar al siguiente nivel",
 }
 
 
@@ -47,25 +47,73 @@ def unique_preserve(items: list[str]) -> list[str]:
     return result
 
 
-def infer_icp_label(target_customer: str, evidence_items: list[dict]) -> str:
-    if target_customer.strip():
-        return target_customer.strip()
-    haystack = " ".join(
+def evidence_haystack(evidence_items: list[dict]) -> str:
+    return " ".join(
         [
             str(item.get("summary", "")) + " " + " ".join(item.get("quotes", [])) + " " + " ".join(item.get("observations", []))
             for item in evidence_items
         ]
     ).lower()
+
+
+def infer_icp_label(target_customer: str, evidence_items: list[dict]) -> tuple[str, int]:
+    if target_customer.strip():
+        return target_customer.strip(), 4
+    haystack = evidence_haystack(evidence_items)
     scores = {}
     for label, keywords in ICP_KEYWORDS.items():
         scores[label] = sum(1 for keyword in keywords if keyword in haystack)
     best = max(scores.items(), key=lambda item: item[1])
-    return best[0] if best[1] else "Founder-led service businesses"
+    if best[1]:
+        return best[0], best[1]
+    return "Comprador principal por validar", 0
 
 
 def top_phrases(values: list[str], limit: int = 3) -> list[str]:
     counter = Counter(unique_preserve(values))
     return [item for item, _ in counter.most_common(limit)]
+
+
+def first_present(values: list[str], fallback: str) -> str:
+    for value in values:
+        normalized = " ".join(str(value).split()).strip()
+        if normalized:
+            return normalized
+    return fallback
+
+
+def build_core_promise(label: str, uncertain_icp: bool, main_pain: str, core_outcome: str, mechanism: str) -> str:
+    if uncertain_icp:
+        return (
+            "Aclarar que se entrega, como funciona y por que eso reduce el riesgo percibido antes de prometer resultados."
+        )
+    return (
+        f"Ayudar a {label.lower()} a pasar de {main_pain.lower()} a {core_outcome.lower()} "
+        f"con {mechanism.lower()}."
+    )
+
+
+def build_headline(service_name: str, label: str, uncertain_icp: bool, main_pain: str, trust_signals: list[str]) -> str:
+    trust_signal = first_present(trust_signals, "pruebas claras del servicio")
+    if uncertain_icp:
+        return "Todavia estamos afinando para quien es esta oferta y que prueba necesita ver primero."
+    return (
+        f"{service_name}: menos {main_pain.lower()} y mas claridad para {label.lower()} "
+        f"con {trust_signal.lower()}."
+    )
+
+
+def build_subheadline(uncertain_icp: bool, mechanism: str, objections: list[str], supporting_quotes: list[str]) -> str:
+    if supporting_quotes:
+        return f'El mensaje debe responder a una senal real del comprador: "{supporting_quotes[0]}".'
+    if objections:
+        return (
+            f"El sistema detecta que una objecion importante es '{objections[0]}', por eso el mensaje debe explicar "
+            f"{mechanism.lower()} antes de empujar una promesa."
+        )
+    if uncertain_icp:
+        return "Todavia hace falta validar mejor a quien compra, que duda tiene y que evidencia necesita ver primero."
+    return f"El mensaje principal debe mostrar {mechanism.lower()} antes de pedir confianza."
 
 
 def build_customer_outputs(payload: dict) -> dict:
@@ -83,14 +131,19 @@ def build_customer_outputs(payload: dict) -> dict:
     source_refs = unique_preserve([evidence.get("source_id", "") for evidence in evidence_items if evidence.get("source_id")])[:6]
     timestamp = now_iso()
 
-    label = infer_icp_label(str(payload.get("target_customer", "")), evidence_items)
+    label, icp_signal_score = infer_icp_label(str(payload.get("target_customer", "")), evidence_items)
     icp_id = slugify_id(label)
-    confidence = round(min(0.9, 0.45 + 0.06 * len(evidence_refs) + 0.03 * len(source_refs)), 2)
+    uncertain_icp = label == "Comprador principal por validar"
+    confidence = round(min(0.92, 0.28 + 0.06 * len(evidence_refs) + 0.03 * len(source_refs) + 0.05 * icp_signal_score), 2)
+    icp_status = "needs_validation" if uncertain_icp or confidence < 0.65 else "inferred"
 
-    service_name = str(payload.get("service_name", "")).strip() or "Core Offer"
-    core_outcome = outcomes[0] if outcomes else "buy with more confidence"
-    main_pain = pains[0] if pains else "confusion about what gets done"
-    mechanism = str(payload.get("mechanism_hint", "")).strip() or "a transparent process that explains exactly what gets done and why"
+    service_name = str(payload.get("service_name", "")).strip() or "Oferta principal por validar"
+    core_outcome = first_present(outcomes, "entender con mas claridad que se entrega antes de comprar")
+    main_pain = first_present(pains, "no entender con claridad que se hace y que se entrega")
+    mechanism = (
+        str(payload.get("mechanism_hint", "")).strip()
+        or "un proceso visible que muestra que se hace, como se hace y que puede esperar el comprador"
+    )
 
     icp_record = {
         "icp_id": icp_id,
@@ -100,7 +153,7 @@ def build_customer_outputs(payload: dict) -> dict:
         "desired_outcomes": outcomes,
         "common_objections": objections,
         "trust_signals": trust_signals,
-        "status": "inferred",
+        "status": icp_status,
         "confidence": confidence,
         "source_origin": "customer_model_engine",
         "evidence_refs": evidence_refs,
@@ -112,16 +165,19 @@ def build_customer_outputs(payload: dict) -> dict:
     }
 
     offer_id = f"{company_id}-{slugify_id(service_name)}-offer"
+    audience_phrase = label.lower() if not uncertain_icp else "el comprador mas probable identificado hasta ahora"
+    offer_status = "needs_validation" if uncertain_icp else "inferred"
+
     offer_record = {
         "offer_id": offer_id,
         "company_id": company_id,
         "service_id": slugify_id(service_name),
         "name": service_name,
-        "core_promise": f"Help {label.lower()} avoid {main_pain.lower()} and reach {core_outcome.lower()}.",
+        "core_promise": build_core_promise(label, uncertain_icp, main_pain, core_outcome, mechanism),
         "mechanism": mechanism,
-        "proof_points": trust_signals or ["clear process", "specific deliverables"],
+        "proof_points": trust_signals or ["proceso claro", "entregables especificos"],
         "anti_claims": sorted(FORBIDDEN_PHRASES),
-        "status": "inferred",
+        "status": offer_status,
         "confidence": confidence,
         "source_origin": "customer_model_engine",
         "evidence_refs": evidence_refs,
@@ -130,8 +186,8 @@ def build_customer_outputs(payload: dict) -> dict:
         "updated_at": timestamp,
     }
 
-    headline = f"Clarity-first support for {label.lower()} who are tired of vague promises."
-    subheadline = f"We use {mechanism} so buyers understand the work before they are asked to trust the result."
+    headline = build_headline(service_name, label, uncertain_icp, main_pain, trust_signals)
+    subheadline = build_subheadline(uncertain_icp, mechanism, objections, supporting_quotes)
     messaging_record = {
         "brief_id": f"{offer_id}-messaging",
         "company_id": company_id,
@@ -139,10 +195,10 @@ def build_customer_outputs(payload: dict) -> dict:
         "audience_label": label,
         "headline": headline,
         "subheadline": subheadline,
-        "proof_points": trust_signals or ["Specific process", "Visible proof", "Human language"],
-        "objection_handlers": objections or ["Explain what gets done before promising outcomes."],
+        "proof_points": trust_signals or ["proceso visible", "prueba concreta", "lenguaje humano"],
+        "objection_handlers": objections or ["Explica que se hace antes de prometer resultados."],
         "forbidden_phrases": sorted(FORBIDDEN_PHRASES),
-        "status": "inferred",
+        "status": offer_status,
         "confidence": confidence,
         "source_origin": "customer_model_engine",
         "evidence_refs": evidence_refs,

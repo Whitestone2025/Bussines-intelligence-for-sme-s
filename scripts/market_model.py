@@ -25,10 +25,10 @@ def round_money(value: float) -> float:
 
 def market_fact_base(geography: list[str], total_customers: float, reachable_customers: float, annual_price: float, currency_code: str) -> list[str]:
     return [
-        f"Geography under analysis: {', '.join(geography)}.",
-        f"Total addressable customers currently modeled: {int(total_customers)}.",
-        f"Known reachable customers currently modeled: {int(reachable_customers)}.",
-        f"Annual revenue per customer anchor: {currency_code} {annual_price:,.2f}.",
+        f"Geografia analizada: {', '.join(geography)}.",
+        f"Clientes totales hoy modelados: {int(total_customers)}.",
+        f"Clientes alcanzables hoy modelados: {int(reachable_customers)}.",
+        f"Ingreso anual de referencia por cliente: {currency_code} {annual_price:,.2f}.",
     ]
 
 
@@ -37,9 +37,9 @@ def market_scenarios(annual_price: float, serviceable_customers: float, obtainab
     base_customers = max(reachable_customers * close_rate, obtainable_customers)
     upside_customers = max(base_customers * 1.4, serviceable_customers * 0.18)
     return [
-        {"label": "conservative", "customer_count": round_money(conservative_customers), "value": round_money(conservative_customers * annual_price)},
+        {"label": "conservador", "customer_count": round_money(conservative_customers), "value": round_money(conservative_customers * annual_price)},
         {"label": "base", "customer_count": round_money(base_customers), "value": round_money(base_customers * annual_price)},
-        {"label": "upside", "customer_count": round_money(upside_customers), "value": round_money(upside_customers * annual_price)},
+        {"label": "expansivo", "customer_count": round_money(upside_customers), "value": round_money(upside_customers * annual_price)},
     ]
 
 
@@ -48,7 +48,7 @@ def build_market_models(payload: dict) -> list[dict]:
     if not company_id:
         raise ValueError("company_id is required")
 
-    segment_name = str(payload.get("segment_name", "")).strip() or "core-market"
+    segment_name = str(payload.get("segment_name", "")).strip() or "mercado-principal"
     geography = [str(item).strip() for item in payload.get("geography", []) if str(item).strip()] or ["Mexico"]
     currency_code = str(payload.get("currency_code", "")).strip() or "MXN"
     annual_price = float(payload.get("annual_price_per_customer", 0) or 0)
@@ -74,18 +74,24 @@ def build_market_models(payload: dict) -> list[dict]:
     channel_access_score = float(payload.get("channel_access_score", 5) or 5)
     attractiveness_score = round(((11 - competition_intensity) + urgency_score + budget_fit_score + channel_access_score) / 4, 2)
     assumptions = [
-        f"Annual price per customer assumed at {currency_code} {annual_price:,.2f}.",
-        f"Target customer ratio set at {target_ratio:.0%} of the total addressable customer base.",
-        f"Serviceable customer ratio set at {serviceable_ratio:.0%} of target customers.",
-        f"Obtainable customer ratio set at {obtainable_ratio:.0%} of serviceable customers.",
-        f"Bottom-up model uses {int(reachable_customers)} reachable customers and {close_rate:.0%} expected close rate.",
+        f"Se asume un ingreso anual por cliente de {currency_code} {annual_price:,.2f}.",
+        f"Se asume que el {target_ratio:.0%} del mercado total entra al segmento objetivo.",
+        f"Se asume que el {serviceable_ratio:.0%} del segmento objetivo es realmente atendible.",
+        f"Se asume que el {obtainable_ratio:.0%} del segmento atendible es capturable en el corto plazo.",
+        f"El modelo bottom-up usa {int(reachable_customers)} clientes alcanzables y una tasa de cierre esperada de {close_rate:.0%}.",
     ]
     facts = market_fact_base(geography, total_customers, reachable_customers, annual_price, currency_code)
     scenarios = market_scenarios(annual_price, serviceable_customers, obtainable_customers, reachable_customers, close_rate)
-    entry_posture = "focused pilot" if attractiveness_score >= 7 else "validation-first niche test" if attractiveness_score >= 5 else "defer and gather stronger evidence"
+    entry_posture = (
+        "piloto enfocado"
+        if attractiveness_score >= 7
+        else "prueba de nicho con validacion primero"
+        if attractiveness_score >= 5
+        else "esperar y reunir evidencia mas fuerte"
+    )
     implementation_risks = unique_risks = [
-        "Top-down demand may look larger than what a founder can actually reach in the first 90 days.",
-        "Market attractiveness can degrade quickly if trust-building channels underperform.",
+        "La demanda top-down puede verse mas grande de lo que un founder realmente puede alcanzar en los primeros 90 dias.",
+        "El atractivo del mercado puede caer rapido si los canales que construyen confianza rinden por debajo de lo esperado.",
     ]
     timestamp = now_iso()
     common = {
@@ -95,7 +101,7 @@ def build_market_models(payload: dict) -> list[dict]:
         "segment_name": segment_name,
         "fact_base": facts,
         "growth_rate_assumption": float(payload.get("growth_rate_assumption", 0.12) or 0.12),
-        "methodology_summary": "Blended market model using top-down demand assumptions and bottom-up reachable-customer heuristics.",
+        "methodology_summary": "Modelo de mercado combinado que junta supuestos top-down de demanda con heuristicas bottom-up sobre clientes realmente alcanzables.",
         "key_assumptions": assumptions,
         "assumptions": assumptions,
         "scenarios": scenarios,
@@ -146,12 +152,12 @@ def build_market_models(payload: dict) -> list[dict]:
             "bottom_up_value": attractiveness_score,
             "blended_value": attractiveness_score,
             "methodology_summary": (
-                "Attractiveness score balances competitive pressure, urgency of the problem, budget fit, and channel accessibility."
+                "El puntaje de atractivo balancea presion competitiva, urgencia del problema, ajuste de presupuesto y facilidad real de acceso al canal."
             ),
             "key_assumptions": assumptions
             + [
-                f"Competition intensity scored at {competition_intensity}/10.",
-                f"Urgency scored at {urgency_score}/10, budget fit at {budget_fit_score}/10, and channel access at {channel_access_score}/10.",
+                f"La intensidad competitiva se estima en {competition_intensity}/10.",
+                f"La urgencia se estima en {urgency_score}/10, el ajuste de presupuesto en {budget_fit_score}/10 y el acceso al canal en {channel_access_score}/10.",
             ],
         },
     ]

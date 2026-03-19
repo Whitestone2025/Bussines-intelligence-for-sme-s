@@ -1,0 +1,41 @@
+{
+  "profile_id": "wsc-lat-intake",
+  "company_id": "wsc-lat",
+  "intake_mode": "existing",
+  "seed_summary": "Firma que se presenta como AI Lab y Venture Capital Hybrid para Latinoamerica, con foco en infraestructura agentic e inteligencia abierta.",
+  "primary_goal": "Entender con precision que negocio visible existe hoy, que promesa comercial hace la web y que decision estrategica convendria validar primero.",
+  "website": "https://wsc.lat/",
+  "geography_focus": [
+    "Latinoamerica",
+    "Mexico"
+  ],
+  "currency_code": "USD",
+  "competitors": [],
+  "available_sources": [
+    "website"
+  ],
+  "known_constraints": [
+    "Solo se usa la web publica como fuente inicial.",
+    "No hay entrevistas, pricing interno ni evidencia operativa privada."
+  ],
+  "workspace_mode": "clean_bootstrap",
+  "existing_material_summary": "Fuente inicial unica: sitio publico wsc.lat capturado el 2026-03-18.",
+  "existing_file_manifest": [],
+  "open_assumptions": [
+    "La web publica por si sola no confirma quien compra realmente.",
+    "La web publica por si sola no confirma conversion, economia unitaria ni traccion comercial.",
+    "La oferta visible puede mezclar varias identidades del negocio y todavia requiere validacion.",
+    "Todavia falta evidencia externa o interna para distinguir narrativa, prueba operativa y capacidad real."
+  ],
+  "research_stage": "validating",
+  "status": "draft",
+  "confidence": 0.35,
+  "source_origin": "user_seed",
+  "evidence_refs": [],
+  "source_refs": [],
+  "readiness_score": 16.7,
+  "open_questions_count": 4,
+  "next_step": "Responde la siguiente pregunta de validacion.",
+  "created_at": "2026-03-18T20:11:01",
+  "updated_at": "2026-03-18T20:11:01"
+}

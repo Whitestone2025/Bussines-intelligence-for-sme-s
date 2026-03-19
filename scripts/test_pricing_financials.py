@@ -27,11 +27,14 @@ def main() -> int:
     assert pricing_model["recommended_tier"] == "Base"
     assert pricing_model["recommendation_logic"], "Expected recommendation logic"
     assert pricing_model["implementation_risks"], "Expected implementation risks"
+    assert pricing_model["fact_base"][0].startswith("Ancla de costo mensual"), "Pricing fact base should be in Spanish"
 
     snapshot = build_financial_snapshot(payload, pricing_model)
     assert snapshot["estimated_ltv"] > 0
     assert snapshot["gross_margin_ratio"] > 0
     assert snapshot["ltv_cac_ratio"] > 0
+    if snapshot["viability_warning"]:
+        assert "Low evidence" not in snapshot["viability_warning"]
 
     with TemporaryDirectory() as temp_dir:
         pricing_path = persist_pricing_model(Path(temp_dir), payload)

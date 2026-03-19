@@ -1,0 +1,90 @@
+{
+  "decision_id": "public-case-real-estate-studio-go-to-market-memo",
+  "company_id": "public-case-real-estate-studio",
+  "decision_type": "go_to_market",
+  "decision_question": "Cual es el siguiente movimiento de mayor confianza para que una desarrolladora residencial boutique compre un paquete flagship de preventa visual?",
+  "recommended_action": "Lanzar una pagina de aterrizaje flagship para el Paquete de preventa visual, con un recorrido 360 de muestra, alcance de rondas visible y salida directa a WhatsApp comercial.",
+  "decision_summary": "Validar un paquete flagship de preventa visual que ayude a desarrolladoras residenciales boutique a vender con mas claridad y menos visitas improductivas.",
+  "why_now": "La evidencia ya apunta a una friccion muy concreta: material visual bonito pero poco util para preventa, combinado con miedo a cambios, rondas y falta de integracion con ventas.",
+  "decision_criteria": [
+    "Velocidad para generar confianza previa a la visita y filtrar mejor prospectos.",
+    "Ajuste con la capacidad real del estudio para entregar y actualizar material sin desgaste operativo.",
+    "Capacidad de demostrar valor comercial, no solo valor visual.",
+    "Economia suficientemente sana para vender un paquete flagship sin caer en descuentos por pieza."
+  ],
+  "fact_base": [
+    "Evidencias disponibles: 7.",
+    "Fuentes distintas disponibles: 5.",
+    "Comprador principal definido: si.",
+    "Oferta definida: si."
+  ],
+  "assumptions": [
+    "Confianza en mercado estimada en 74%.",
+    "Confianza en precio estimada en 71%.",
+    "Confianza en canal estimada en 79%."
+  ],
+  "options": [
+    {
+      "label": "Opcion enfocada en oferta flagship",
+      "summary": "Lanzar una pagina de aterrizaje flagship para el Paquete de preventa visual, con un recorrido 360 de muestra, alcance de rondas visible y salida directa a WhatsApp comercial.",
+      "recommended": true,
+      "criteria_fit": "Velocidad para generar confianza previa a la visita y filtrar mejor prospectos."
+    },
+    {
+      "label": "Opcion enfocada en pricing",
+      "summary": "Probar primero un paquete mas pequeno de render + brochure antes de vender la version completa.",
+      "recommended": false,
+      "criteria_fit": "Ajuste con la capacidad real del estudio para entregar y actualizar material sin desgaste operativo."
+    },
+    {
+      "label": "Opcion enfocada en referidos",
+      "summary": "Entrar solo por brokers o contactos de arquitectos antes de construir una oferta flagship visible.",
+      "recommended": false,
+      "criteria_fit": "Capacidad de demostrar valor comercial, no solo valor visual."
+    }
+  ],
+  "alternative_actions": [
+    "Probar primero un paquete mas pequeno de render + brochure antes de vender la version completa.",
+    "Entrar solo por brokers o contactos de arquitectos antes de construir una oferta flagship visible."
+  ],
+  "key_risks": [
+    "El estudio puede prometer integracion comercial pero quedarse corto si no define bien alcance, rondas y handoff con ventas.",
+    "Si la pagina flagship se ve demasiado visual y poco comercial, la propuesta volvera a sonar como un estudio de renders mas."
+  ],
+  "implementation_risks": [
+    "La ejecucion puede fallar si la oferta sigue sonando mas abstracta que concreta.",
+    "La hipotesis de canal todavia debe validarse con datos tempranos de conversion."
+  ],
+  "validation_gaps": [
+    "Todavia hay que validar si el buyer principal compra desde direccion comercial, marketing o direccion general segun tamano del desarrollo.",
+    "Hace falta medir si WhatsApp comercial convierte mejor que una llamada agendada desde la landing."
+  ],
+  "next_steps": [
+    "Lanzar una pagina de aterrizaje flagship para el Paquete de preventa visual, con un recorrido 360 de muestra, alcance de rondas visible y salida directa a WhatsApp comercial.",
+    "Probar el precio objetivo con alcance visible, numero de rondas y SLA de actualizacion claros.",
+    "Medir durante 30 dias la calidad de lead, la velocidad de respuesta y las objeciones sobre alcance."
+  ],
+  "status": "inferred",
+  "confidence": 0.8,
+  "source_origin": "decision_engine",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-buyer-objections-board",
+    "2026-03-18-tour360-recorridos"
+  ],
+  "assumption_refs": [
+    "public-case-real-estate-studio-decision-assumption-readiness"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10"
+}

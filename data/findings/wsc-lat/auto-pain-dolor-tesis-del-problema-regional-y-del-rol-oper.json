@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-pain-dolor-tesis-del-problema-regional-y-del-rol-oper",
+  "company_id": "wsc-lat",
+  "category": "pain",
+  "title": "Dolor: Tesis del problema regional y del rol operativo El sit",
+  "statement": "Tesis del problema regional y del rol operativo El sitio define el problema como un retraso estructural de Latinoamerica y presenta a WS Capital como el cerebro operativo que elimina ruido administrativo para que expertos se concentren en su trabajo de mayor valor.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-wsc-problem-latam"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este dolor se repite lo suficiente como para importar.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-confianza-remota-antes-del-showroom",
+  "evidence_id": "2026-03-18-confianza-remota-antes-del-showroom",
+  "source_id": "2026-03-18-matterport-mx-inmobiliario",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "La confianza remota importa antes del showroom",
+  "evidence_type": "artifact",
+  "source_type": "public_reference",
+  "channel": "landing-page",
+  "date": "2026-03-18",
+  "tags": [
+    "confianza",
+    "tour-360",
+    "experiencia-remota"
+  ],
+  "summary": "La categoria vende recorridos 3D y activos derivados porque ayudan a que el comprador se visualice en el espacio y llegue con mas confianza a la conversacion comercial.",
+  "verbatim_quotes": [
+    "\"Permita que los clientes se visualicen en el espacio, dandoles mayor confianza al tomar decisiones de compra.\""
+  ],
+  "quotes": [
+    "\"Permita que los clientes se visualicen en el espacio, dandoles mayor confianza al tomar decisiones de compra.\""
+  ],
+  "observations": [
+    "La confianza remota es especialmente valiosa cuando la obra aun no esta terminada.",
+    "Un solo levantamiento puede alimentar varios activos comerciales."
+  ],
+  "candidate_pains": [
+    "Cuando la obra no esta terminada, al comprador le cuesta confiar solo con brochure y renders sueltos."
+  ],
+  "candidate_outcomes": [
+    "Dar confianza remota antes de llevar al prospecto al showroom."
+  ],
+  "candidate_objections": [
+    "No quieren invertir en un activo visual si no se reutiliza en mas de un canal."
+  ],
+  "trust_signals": [
+    "Un solo levantamiento puede alimentar varios activos comerciales."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-confianza-remota-antes-del-showroom"
+  ],
+  "source_refs": [
+    "2026-03-18-matterport-mx-inmobiliario"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-confianza-remota-antes-del-showroom.md"
+}

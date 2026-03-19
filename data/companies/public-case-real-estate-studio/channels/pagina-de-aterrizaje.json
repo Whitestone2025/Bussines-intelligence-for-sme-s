@@ -1,0 +1,29 @@
+{
+  "channel_id": "pagina-de-aterrizaje",
+  "company_id": "public-case-real-estate-studio",
+  "name": "Pagina de aterrizaje",
+  "asset_focus": "mensaje principal de la pagina y captura de leads de preventa",
+  "primary_goal": "explicar el paquete, bajar objeciones y mandar prospectos mejor preparados a WhatsApp o llamada",
+  "status": "validated",
+  "confidence": 0.82,
+  "source_origin": "validated_case_design",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-tour360-recorridos",
+    "2026-03-18-matterport-mx-inmobiliario",
+    "2026-03-18-buyer-objections-board",
+    "2026-03-18-buyer-objections-board"
+  ],
+  "unresolved_questions": [
+    "Validar si la pagina debe priorizar captacion directa o agendar una llamada con comercial."
+  ]
+}

@@ -1,0 +1,89 @@
+Initialized run wsbi-wsc-webproof-v1.
+Context:
+- El sistema ya fue endurecido para pensar mejor en estrategia, deliverables y UI.
+- Ahora toca una prueba real usando solo `https://wsc.lat/` como fuente publica inicial.
+- Este run debe servir para validar si Ws B-I realmente sabe trabajar con evidencia limitada, preservar incertidumbre y evitar recomendaciones genericas o demasiado estrechas.
+
+Execution intent:
+- Tomar la web de WS Capital como caso real de prueba.
+- Forzar al sistema a extraer evidencia, estructurar el problema, generar alternativas, construir deliverables y mostrar una lectura ejecutiva util sin inventar datos.
+- Usar el caso para detectar y corregir cualquier logica restante que siga produciendo humo, genericidad o falsa seguridad.
+
+Open risks:
+- El sitio puede no ofrecer suficiente informacion para cerrar definiciones fuertes de buyer, precio o ruta de go-to-market.
+- La mezcla de identidad entre AI lab, venture hybrid y open-source platform puede empujar al sistema a conclusiones demasiado simplificadas.
+- Si el sistema no maneja bien la ambiguedad, puede producir documentos elegantes pero epistemicamente flojos.
+
+Completed story: W1
+- Se creo el caso `wsc-lat` usando solo `https://wsc.lat/` como fuente publica inicial.
+- Se capturaron seis evidencias trazables de la homepage: posicionamiento hibrido, tesis del problema regional, modelo 80/20, promesa de plataforma abierta, oferta visible del AI Lab y unidades activas.
+- Se corrigio una inconsistencia de `source_id` para dejar canonico `2026-03-18-ws-capital-homepage` en fuente, evidencias, findings y validaciones relacionadas.
+- Se agrego `scripts/test_wsc_traceability.py` para bloquear regresiones de grounding y verificar frases clave del sitio, indexacion y referencias a fuente.
+- Validaciones corridas: `python3 scripts/test_wsc_traceability.py`, `python3 -m compileall scripts`, `python3 scripts/test_schema_contracts.py`.
+
+Completed story: W2
+- Se endurecio `scripts/intake.py` para marcar casos `website`-only desde el seed, agregando una restriccion explicita cuando la unica fuente inicial es la web publica.
+- Se endurecio `scripts/serve_ui.py` con deteccion de caso `web-only`, supuestos abiertos explicitos, poda de conocimiento auto-generado debil y reglas mas estrictas para materializar servicio, ICP y canal.
+- Los findings de ICP ahora exigen mas soporte en modo web-only y el canal ya no se infiere solo por la existencia de una homepage.
+- Las preguntas de validacion en modo web-only ahora fuerzan aclaracion abierta en servicio e ICP en vez de confirmar demasiado pronto una opcion sugerida por el sistema.
+- Se agregaron `scripts/test_wsc_no_hallucination.py` y `scripts/test_wsc_ambiguity_preservation.py`.
+- Se refresco `wsc-lat` con la logica nueva y el caso quedo en estado mas cauto: `service_defined=false`, `icp_defined=false`, `channel_defined=false`, con supuestos abiertos en `data/research/wsc-lat/profile.json`.
+- Validaciones corridas: `python3 scripts/test_wsc_no_hallucination.py`, `python3 scripts/test_wsc_ambiguity_preservation.py`, `python3 scripts/test_reasoning_quality.py`, `python3 scripts/test_schema_contracts.py`, `python3 scripts/test_discovery_flow.py`, `python3 -m compileall scripts`.
+
+Completed story: W3
+- Se corrigio `text_fragments_for_company()` para separar semilla, fuente, resumen, quotes y observaciones en lugar de colapsarlo todo en un solo bloque de texto.
+- La inferencia de ICP en modo web-only ahora usa solo fragmentos directos (`quote` y `source`) para evitar que resúmenes interpretativos empujen un comprador falso.
+- La inferencia de canal dejo de dispararse por substrings debiles como `dm` dentro de palabras como `admin`, y ahora usa regex con bordes de palabra.
+- Se agregaron tres hallazgos especificos de `wsc.lat` en `scripts/serve_ui.py`: `strategic_tension`, `offer_anchor` y `proof_gap`.
+- `wsc-lat` ya no colapsa en `WhatsApp` ni en `Fundadores y duenos` como hallazgos principales desde la homepage; en cambio refleja mezcla de identidades, ancla comercial visible y brecha de prueba.
+- Se agrego `scripts/test_wsc_site_specificity.py` para exigir esas tensiones reales del sitio.
+- Validaciones corridas: `python3 scripts/test_wsc_site_specificity.py`, `python3 scripts/test_non_generic_outputs.py`, `python3 scripts/test_wsc_no_hallucination.py`, `python3 scripts/test_wsc_ambiguity_preservation.py`, `python3 scripts/test_reasoning_quality.py`, `python3 -m compileall scripts`.
+
+Completed story: W4
+- Se agrego una rama explicita `web_only_payload()` en `scripts/decision_engine.py` para estructurar problemas cuando solo existe una web publica y la identidad comercial sigue ambigua.
+- `strategic_problem_statement()`, `strategic_case_for_change()`, `strategic_where_to_play()` y `strategic_how_to_win()` ahora aceptan tensiones, brechas de prueba, ancla comercial y desconocidos clave del caso web-only.
+- `build_decision_memo()` ahora arrastra `validated_fact_lines`, `assumption_lines`, `public_claims`, `offer_anchor` y `known_unknowns` al memo cuando el caso es web-only.
+- `scripts/render_report.py` ahora incorpora `fact_base` y `assumptions` del `decision_memo` dentro de los entregables, en lugar de depender solo del bundle externo.
+- `scripts/test_problem_structuring_quality.py` ahora incluye un escenario WSC web-only y exige que el problema estructurado hable de identidad comercial, ancla de oferta, brecha de prueba y desconocidos clave.
+- Validaciones corridas: `python3 scripts/test_problem_structuring_quality.py`, `python3 scripts/test_decision_engine.py`, `python3 scripts/test_corporate_deliverables_quality.py`, `python3 scripts/test_wsc_ambiguity_preservation.py`, `python3 scripts/test_wsc_site_specificity.py`, `python3 -m compileall scripts`.
+
+Completed story: W5
+- `scripts/decision_engine.py` ahora tiene una rama de alternativas estrategicas especifica para casos `web-only`, en lugar de reutilizar rutas genericas de foco comercial.
+- Para `wsc.lat`, el sistema ahora produce cuatro rutas reales y diferenciadas: cuña comercial AI Lab, prueba antes de expansion, plataforma de inteligencia abierta y venture hybrid como tesis principal.
+- La ruta recomendada ya no nace de una tarea tactica, sino de la unica monetizacion publica visible hoy: el AI Lab como cuña comercial provisional mientras el resto de identidades queda subordinado.
+- Se agrego `scripts/test_wsc_strategic_breadth.py` para exigir amplitud estrategica real, referencias al AI Lab, la plataforma abierta y la tesis venture, y para bloquear placeholders o plantillas en las rutas.
+- Se persistio el memo real del caso en `data/decisions/wsc-lat/wsc-lat-viability-memo.json`, dejando trazada la recomendacion provisional y las tres rutas alternativas del caso.
+- Validaciones corridas: `python3 scripts/test_case_specific_decision.py`, `python3 scripts/test_no_single_action_collapse.py`, `python3 scripts/test_wsc_strategic_breadth.py`, `python3 -m compileall scripts`.
+
+Completed story: W6
+- `scripts/render_report.py` ahora añade una capa explicita de utilidad en cada entregable con `## Para que sirve este documento`, para que el founder sepa que decision puede tomar con cada memo.
+- Los entregables ahora muestran `## Limites de evidencia hoy`, usando restricciones del caso y vacios de validacion en vez de aparentar certeza corporativa donde solo existe evidencia web publica.
+- Se ajusto el render de opciones para que la ruta recomendada conserve su nombre y no se esconda detras de un heading generico.
+- Se agrego `scripts/test_wsc_case_usefulness.py` para validar que el caso `wsc-lat` produzca documentos utiles, con advertencias de evidencia insuficiente y sin perder el enfoque estrategico del caso.
+- Se persistio un plan real para el caso en `data/plans/wsc-lat/wsc-lat-30-60-90-plan.json` y la suite completa de deliverables en `data/deliverables/wsc-lat/`.
+- Validaciones corridas: `python3 scripts/test_corporate_deliverables_quality.py`, `python3 scripts/test_wsc_case_usefulness.py`, `python3 -m compileall scripts`.
+
+Completed story: W7
+- `scripts/serve_ui.py` ahora separa mejor `ruta actual` y `siguiente validacion` en el `war_room`, en lugar de tratar la decision provisional como si ya fuera una orden de ejecucion.
+- El payload ejecutivo ahora expone `recommendation_label`, `next_validation_step`, `evidence_limits` y `confidence_note`, para que la UI muestre con claridad lo que se sabe, lo que falta validar y cuan provisional sigue siendo la lectura.
+- `ui/app.js` ahora refleja esa jerarquia: la portada ejecutiva y el capitulo de decision muestran la ruta provisional, la siguiente validacion y los limites de evidencia del caso.
+- Se endurecieron `scripts/test_case_view_model.py` y `scripts/test_ui_workspace_flow.py` para exigir esos nuevos campos y evitar que la UI vuelva a sobrerrepresentar certeza.
+- Se verifico ademas una lectura real de `wsc-lat` desde `build_case_payload()`, confirmando que la UI ya muestra `Ruta de cuña comercial AI Lab`, el siguiente paso de validacion y los limites clave de evidencia.
+- Validaciones corridas: `node --check ui/app.js`, `python3 scripts/test_case_view_model.py`, `python3 scripts/test_ui_workspace_flow.py`.
+
+Completed story: W8
+- Se uso `wsc-lat` como stress test real para detectar residuos de genericidad y de mezcla de idioma en la capa ejecutiva, especialmente en `scripts/decision_engine.py`, `scripts/planner.py`, `scripts/render_report.py` y `scripts/serve_ui.py`.
+- `list_sources()` en `scripts/serve_ui.py` se endurecio para leer solo la carpeta de una empresa concreta cuando `company_id` viene filtrado, evitando fragilidad entre tests y casos `web-only`.
+- Se limpiaron salidas visibles del motor: `founder`, `economics`, `unit economics`, `open source`, `right to win` y frases mixtas dejaron de filtrarse en deliverables publicos; tambien se tradujo mejor la narrativa `venture hybrid` a una formulacion mas clara en espanol cuando no es una cita literal.
+- Se corrigio la capa de entregables para distinguir mejor entre `ruta provisional recomendada` y `siguiente validacion necesaria`, evitando que el memo ejecutivo colapse otra vez en una tarea operativa generica cuando el caso sigue bloqueado por evidencia insuficiente.
+- Se regeneraron desde el motor actual los artefactos reales de `wsc-lat`: `data/decisions/wsc-lat/wsc-lat-viability-memo.json`, `data/plans/wsc-lat/wsc-lat-30-60-90-plan.json` y toda la carpeta `data/deliverables/wsc-lat/`.
+- Se alinearon los contratos de prueba con la nueva semantica ejecutiva, actualizando `scripts/test_deliverable_generator.py`, `scripts/test_problem_structuring_quality.py` y `scripts/test_wsc_strategic_breadth.py`.
+- El stress test mostro que todavia existen IDs tecnicos heredados como `initiative-economics-proof` dentro del plan JSON, pero ya no contaminan la lectura publica del caso ni los entregables visibles.
+- Validaciones corridas: `python3 scripts/test_reasoning_quality.py`, `python3 scripts/test_wsc_no_hallucination.py`, `python3 scripts/test_wsc_case_usefulness.py`, `python3 scripts/test_deliverable_generator.py`, `python3 scripts/test_problem_structuring_quality.py`, `python3 scripts/test_wsc_strategic_breadth.py`, `python3 -m compileall scripts`.
+
+Completed story: W9
+- Se regenero y valido el caso `wsc-lat` como prueba seria del sistema usando la capa actual de decisiones, roadmap y deliverables, sin agregar evidencia fuera de la web publica.
+- El caso final ya conserva problema, opciones, criterios, ruta provisional recomendada, siguiente validacion necesaria y roadmap por gates en lugar de colapsar en una sola tarea.
+- Se genero un reporte final propio del caso en `data/reports/wsc-lat/2026-03-18-validacion-final-wsc.md`, dejando explicito por que este caso sirve como prueba dura, que detecta el sistema, que no afirma todavia como verdad y por que el resultado ya es util.
+- La validacion final confirma que `wsc-lat` funciona como caso de referencia para Ws B-I: mantiene cautela epistemica, evita alucinacion de buyer/canal y conserva amplitud estrategica real.
+- Validaciones corridas: `python3 scripts/test_wsc_traceability.py`, `python3 scripts/test_wsc_site_specificity.py`, `python3 scripts/test_wsc_strategic_breadth.py`, `python3 scripts/test_wsc_case_usefulness.py`.

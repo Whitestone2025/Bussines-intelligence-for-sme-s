@@ -1,0 +1,47 @@
+Initialized run wsbi-public-case-v2.
+Context:
+- El caso publico actual `guide-demo-lab` sigue siendo demasiado abstracto y todavia contamina la guia con un ejemplo debil.
+- El usuario quiere que la guia publica pruebe que el sistema puede pensar con mayor especificidad, no solo mostrar una UI bonita.
+- El nuevo caso debe ser compuesto, verosimil y publicable, apoyado en referencias publicas cuando haga falta.
+
+Execution intent:
+- Auditar el caso actual antes de reemplazarlo.
+- Construir un caso nuevo de servicio concreto y buyer concreto.
+- Regenerar el frontend, las capturas y la guia desde ese caso.
+- Usar el caso como prueba fuerte de idioma, utilidad y no genericidad.
+
+Open risks:
+- Un caso nuevo mal elegido puede seguir produciendo outputs blandos aunque este mejor documentado.
+- Si el corpus nuevo es demasiado sintetico, la guia seguira sonando a demo y no a lectura ejecutiva.
+
+Completed story: P1
+- Auditado el caso publico anterior `guide-demo-lab`; se confirmo que era demasiado abstracto, con rastro del nombre `Service Clarity Demo` en la guia y con una empresa poco creible para una demo publica.
+- La auditoria mostro que el problema no era solo la guia: el caso viejo contaminaba la lectura con una narrativa demasiado autocontenida y poco especifica.
+
+Completed story: P2
+- Disenado un nuevo caso compuesto publicable: `Luma Preventa Studio`.
+- Se definio como estudio de preventa visual para desarrolladoras residenciales boutique en Mexico, basado en referencias publicas reales de categoria y notas sinteticas de ventas.
+
+Completed story: P3
+- Construido un corpus nuevo bajo `public-case-real-estate-studio` con fuentes, evidencias, competidores, pricing, mercado, decision y plan propios.
+- Se enriquecieron pains, outcomes, objections y trust signals para que el caso no colapsara en una lectura generica.
+
+Completed story: P4
+- Ajustadas las pistas de inferencia en `scripts/serve_ui.py` para reconocer mejor lenguaje comercial en espanol y reducir genericidad en el caso nuevo.
+- Se reforzaron pruebas publicas para exigir `caso compuesto`, especificidad de industria y ausencia del caso viejo en la guia publica.
+
+Completed story: P5
+- Regenerado el caso ejecutivo completo de `Luma Preventa Studio` con oferta, mercado, precio, viabilidad, decision y plan 30/60/90 coherentes.
+- Verificado el payload ejecutivo real para asegurar que dolores, objeciones y decision ya no aparezcan vacios ni genericos.
+
+Completed story: P6
+- Rehechas las capturas reales del frontend con Playwright desde el caso vivo y copiadas a `output/playwright/`.
+- Se reemplazaron las pantallas dudosas anteriores por capturas correctas de overview, customer, market, pricing, decision y audit.
+
+Completed story: P7
+- Reescrita por completo la guia corta en `output/pdf/wsbi-founder-guide-understanding.md` alrededor del nuevo caso compuesto.
+- Regenerado el PDF con las capturas nuevas y revisado visualmente por paginas para comprobar legibilidad, orden y cortes razonables.
+
+Completed story: P8
+- Ejecutada la bateria reforzada incluyendo idioma, utilidad founder, especificidad del caso publico, no genericidad y gate de release.
+- El reporte final quedo en `data/reports/release-readiness/2026-03-18-173536-release-readiness.md` con 26 checks pasados y 0 fallidos.

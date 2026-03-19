@@ -1,0 +1,86 @@
+{
+  "company_id": "public-case-real-estate-studio",
+  "geography": [
+    "Ciudad de Mexico",
+    "Queretaro",
+    "Riviera Maya"
+  ],
+  "currency_code": "MXN",
+  "segment_name": "Servicios de preventa visual para desarrolladoras residenciales boutique",
+  "fact_base": [
+    "Geografia analizada: Ciudad de Mexico, Queretaro, Riviera Maya.",
+    "Clientes totales hoy modelados: 1200.",
+    "Clientes alcanzables hoy modelados: 85.",
+    "Ingreso anual de referencia por cliente: MXN 420,000.00."
+  ],
+  "growth_rate_assumption": 0.11,
+  "methodology_summary": "Modelo de mercado combinado que junta supuestos top-down de demanda con heuristicas bottom-up sobre clientes realmente alcanzables.",
+  "key_assumptions": [
+    "Se asume un ingreso anual por cliente de MXN 420,000.00.",
+    "Se asume que el 18% del mercado total entra al segmento objetivo.",
+    "Se asume que el 42% del segmento objetivo es realmente atendible.",
+    "Se asume que el 8% del segmento atendible es capturable en el corto plazo.",
+    "El modelo bottom-up usa 85 clientes alcanzables y una tasa de cierre esperada de 16%."
+  ],
+  "assumptions": [
+    "Se asume un ingreso anual por cliente de MXN 420,000.00.",
+    "Se asume que el 18% del mercado total entra al segmento objetivo.",
+    "Se asume que el 42% del segmento objetivo es realmente atendible.",
+    "Se asume que el 8% del segmento atendible es capturable en el corto plazo.",
+    "El modelo bottom-up usa 85 clientes alcanzables y una tasa de cierre esperada de 16%."
+  ],
+  "scenarios": [
+    {
+      "label": "conservador",
+      "customer_count": 9.52,
+      "value": 3998400.0
+    },
+    {
+      "label": "base",
+      "customer_count": 13.6,
+      "value": 5712000.0
+    },
+    {
+      "label": "expansivo",
+      "customer_count": 19.04,
+      "value": 7996800.0
+    }
+  ],
+  "recommended_entry_posture": "prueba de nicho con validacion primero",
+  "implementation_risks": [
+    "La demanda top-down puede verse mas grande de lo que un founder realmente puede alcanzar en los primeros 90 dias.",
+    "El atractivo del mercado puede caer rapido si los canales que construyen confianza rinden por debajo de lo esperado."
+  ],
+  "status": "inferred",
+  "confidence": 0.9,
+  "source_origin": "market_model_engine",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-matterport-mx-inmobiliario",
+    "2026-03-18-tour360-recorridos",
+    "2026-03-18-shot360-articulo"
+  ],
+  "assumption_refs": [
+    "Servicios de preventa visual para desarrolladoras residenciales boutique-assumption-1",
+    "Servicios de preventa visual para desarrolladoras residenciales boutique-assumption-2",
+    "Servicios de preventa visual para desarrolladoras residenciales boutique-assumption-3",
+    "Servicios de preventa visual para desarrolladoras residenciales boutique-assumption-4",
+    "Servicios de preventa visual para desarrolladoras residenciales boutique-assumption-5"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "market_model_id": "public-case-real-estate-studio-servicios-de-preventa-visual-para-desarrolladoras-residenciales-boutique-tam",
+  "market_type": "tam",
+  "top_down_value": 90720000.0,
+  "bottom_up_value": 35700000.0,
+  "blended_value": 63210000.0
+}

@@ -1,0 +1,85 @@
+{
+  "decision_id": "guide-demo-lab-go-to-market-memo",
+  "company_id": "guide-demo-lab",
+  "decision_type": "go_to_market",
+  "decision_question": "What is the highest-confidence next move to improve conversion quality for founder-led service sales?",
+  "recommended_action": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+  "decision_summary": "Improve conversion quality for founder-led service sales",
+  "why_now": "The system has enough evidence and confidence to recommend a focused next move.",
+  "decision_criteria": [
+    "Speed to credible market learning.",
+    "Fit with founder execution capacity.",
+    "Confidence in channel and offer clarity.",
+    "Economics strong enough to justify execution."
+  ],
+  "fact_base": [
+    "Evidence entries available: 6.",
+    "Distinct sources available: 3.",
+    "ICP defined: yes.",
+    "Offer defined: yes."
+  ],
+  "assumptions": [
+    "Market confidence assumed at 72%.",
+    "Pricing confidence assumed at 66%.",
+    "Channel confidence assumed at 75%."
+  ],
+  "options": [
+    {
+      "label": "Focused execution option",
+      "summary": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+      "recommended": true,
+      "criteria_fit": "Speed to credible market learning."
+    },
+    {
+      "label": "Option 2",
+      "summary": "Test the target pricing tier with explicit scope and proof.",
+      "recommended": false,
+      "criteria_fit": "Fit with founder execution capacity."
+    },
+    {
+      "label": "Measurement-first option",
+      "summary": "Measure conversion quality, not just lead volume, for 30 days.",
+      "recommended": false,
+      "criteria_fit": "Confidence in channel and offer clarity."
+    }
+  ],
+  "alternative_actions": [
+    "Test the target pricing tier with explicit scope and proof.",
+    "Measure conversion quality, not just lead volume, for 30 days."
+  ],
+  "key_risks": [
+    "Execution may still fail if the offer is not explained with enough specificity.",
+    "Channel assumptions should be validated with early conversion data."
+  ],
+  "implementation_risks": [
+    "Execution may still fail if the offer is not explained with enough specificity.",
+    "Channel assumptions should be validated with early conversion data."
+  ],
+  "validation_gaps": [
+    "Execution may still fail if the offer is not explained with enough specificity.",
+    "Channel assumptions should be validated with early conversion data."
+  ],
+  "next_steps": [
+    "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+    "Test the target pricing tier with explicit scope and proof.",
+    "Measure conversion quality, not just lead volume, for 30 days."
+  ],
+  "status": "inferred",
+  "confidence": 0.78,
+  "source_origin": "decision_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-clarity",
+    "2026-03-14-owner-proof"
+  ],
+  "source_refs": [
+    "2026-03-14-interview",
+    "2026-03-14-sales-notes"
+  ],
+  "assumption_refs": [
+    "guide-demo-lab-decision-assumption-readiness"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

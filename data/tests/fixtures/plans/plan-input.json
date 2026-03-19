@@ -2,16 +2,79 @@
   "company_id": "acme-mx",
   "decision_memo": {
     "decision_id": "acme-mx-go-to-market-memo",
-    "recommended_action": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
-    "decision_summary": "Improve conversion quality for founder-led service sales",
+    "recommended_action": "Entrar por WhatsApp con un sprint de claridad comercial acotado para aprender mas rapido sin dispersar la ejecucion.",
+    "decision_summary": "Mejorar la calidad de conversion en ventas de servicios lideradas por el founder",
     "key_risks": [
-      "Execution may still fail if the offer is not explained with enough specificity.",
-      "Channel assumptions should be validated with early conversion data."
+      "La oferta puede seguir sonando abstracta si el alcance no se vuelve mas visible.",
+      "La hipotesis de canal debe validarse con datos tempranos de conversion."
+    ],
+    "validation_gaps": [
+      "Falta comprobar si WhatsApp realmente vence a referidos en velocidad de aprendizaje.",
+      "Todavia no esta claro si el precio actual resiste objeciones reales."
     ],
     "next_steps": [
-      "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
-      "Test the target pricing tier with explicit scope and proof.",
-      "Measure conversion quality, not just lead volume, for 30 days."
-    ]
+      "Definir el mensaje inicial de entrada y el criterio de senal que confirmaria la ruta.",
+      "Probar el precio objetivo con alcance y prueba explicitos.",
+      "Medir calidad de conversion y razones de perdida durante 30 dias."
+    ],
+    "options": [
+      {
+        "label": "Ruta de foco comercial",
+        "summary": "Entrar por WhatsApp con una oferta acotada y aprender rapido.",
+        "recommended": true,
+        "criteria_fit": "Velocidad para obtener aprendizaje creible de mercado."
+      },
+      {
+        "label": "Ruta de prueba y credibilidad",
+        "summary": "Fortalecer primero la prueba visible y luego empujar adquisicion.",
+        "recommended": false,
+        "criteria_fit": "Confianza suficiente en canal y claridad de oferta."
+      }
+    ],
+    "strategic_stack": {
+      "no_regret_moves": [
+        "Separar hechos, inferencias y supuestos antes de escalar la recomendacion.",
+        "Definir una senal temprana que invalide o refuerce la ruta elegida."
+      ],
+      "what_must_be_true": [
+        "WhatsApp debe producir una senal mas clara que los referidos.",
+        "El sprint debe poder explicarse con alcance y entregables concretos."
+      ],
+      "recommended_route": {
+        "label": "Ruta de foco comercial",
+        "thesis": "Entrar por WhatsApp con un sprint de claridad comercial acotado para aprender mas rapido sin dispersar la ejecucion.",
+        "why_this_route_wins": "Concentra el aprendizaje en un canal operable por el founder y obliga a volver la oferta mas concreta.",
+        "invalidation_conditions": [
+          "WhatsApp genera ruido pero no conversaciones calificadas.",
+          "La oferta sigue siendo dificil de creer aun con mayor especificidad."
+        ]
+      },
+      "strategic_alternatives": [
+        {
+          "alternative_id": "focus-wedge",
+          "label": "Ruta de foco comercial",
+          "thesis": "Entrar por WhatsApp con una oferta acotada para aprender rapido.",
+          "route_type": "where_to_play",
+          "why_this_route": "Reduce dispersion y facilita aprendizaje temprano.",
+          "criteria_fit": "Velocidad para obtener aprendizaje creible de mercado.",
+          "key_bets": ["WhatsApp puede generar senal util con bajo costo inicial."],
+          "key_risks": ["La calidad de respuesta puede ser baja si la oferta sigue abstracta."],
+          "what_must_be_true": ["WhatsApp debe producir conversaciones calificadas en menos de 30 dias."],
+          "recommended": true
+        },
+        {
+          "alternative_id": "proof-first",
+          "label": "Ruta de prueba y credibilidad",
+          "thesis": "Fortalecer primero la prueba visible y luego empujar adquisicion.",
+          "route_type": "how_to_win",
+          "why_this_route": "Sube confianza antes de ampliar esfuerzo comercial.",
+          "criteria_fit": "Confianza suficiente en canal y claridad de oferta.",
+          "key_bets": ["Una mejor prueba visible puede subir conversion sin cambiar de canal."],
+          "key_risks": ["Puede retrasar aprendizaje de demanda demasiado tiempo."],
+          "what_must_be_true": ["La falta de prueba visible es el principal cuello de botella."],
+          "recommended": false
+        }
+      ]
+    }
   }
 }

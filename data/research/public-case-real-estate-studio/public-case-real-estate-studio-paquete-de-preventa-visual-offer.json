@@ -1,0 +1,41 @@
+{
+  "offer_id": "public-case-real-estate-studio-paquete-de-preventa-visual-offer",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": "paquete-de-preventa-visual",
+  "name": "Paquete de preventa visual",
+  "core_promise": "Ayudar a desarrolladoras residenciales boutique a pasar de material bonito pero poco vendedor a una preventa mas clara, filtrada y confiable con renders, video, recorrido 360 y landing de captacion conectados al flujo comercial.",
+  "mechanism": "paquete unificado de renders, video corto, recorrido 360 y landing de captacion con rondas claras, actualizacion rapida y entregables listos para pauta, WhatsApp y sala de ventas",
+  "proof_points": [
+    "Rondas y alcance visibles desde la propuesta",
+    "Actualizacion rapida cuando cambian tipologias o amenidades",
+    "Activos listos para landing, WhatsApp y sala de ventas",
+    "Recorrido 360 para filtrar visitas y aumentar confianza previa"
+  ],
+  "anti_claims": [
+    "llevar al siguiente nivel",
+    "orientado a resultados",
+    "partner de crecimiento",
+    "servicio full-service",
+    "solucion integral"
+  ],
+  "status": "validated",
+  "confidence": 0.88,
+  "source_origin": "customer_model_engine",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-tour360-recorridos",
+    "2026-03-18-matterport-mx-inmobiliario",
+    "2026-03-18-buyer-objections-board",
+    "2026-03-18-shot360-articulo"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10"
+}

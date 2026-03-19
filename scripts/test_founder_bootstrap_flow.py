@@ -16,9 +16,13 @@ def main() -> int:
     assert onboarding.get("headline"), "Expected onboarding headline"
     assert onboarding.get("summary"), "Expected onboarding summary"
     assert onboarding.get("github_repo_url") == "https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s"
-    assert "carpeta nueva" in onboarding.get("starter_prompt", "").lower(), "Starter prompt should support a clean-folder bootstrap"
-    assert "github.com" in onboarding.get("starter_prompt", "").lower(), "Starter prompt should include the repository URL"
+    starter_prompt = onboarding.get("starter_prompt", "").lower()
+    assert "carpeta nueva" in starter_prompt, "Starter prompt should support a clean-folder bootstrap"
+    assert "esta carpeta ya tiene informacion de mi negocio" in starter_prompt, "Starter prompt should support the in-place business-folder bootstrap"
+    assert "analizala detenidamente antes de preguntarme cosas" in starter_prompt, "Starter prompt should require analysis before questions"
+    assert "github.com" in starter_prompt, "Starter prompt should include the repository URL"
     assert onboarding.get("steps"), "Expected guided startup steps"
+    assert any("revisa primero" in step.lower() or "analiza" in step.lower() for step in onboarding.get("steps", [])), "Guided steps should emphasize analysis before questions"
     assert onboarding.get("clean_install_steps"), "Expected clean-install steps"
     assert onboarding.get("success_state"), "Expected founder success criteria"
 

@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-objection-objecion-founder-says-agencies-never-explain-the",
+  "company_id": "guide-demo-lab",
+  "category": "objection",
+  "title": "Objecion: Founder says agencies never explain the service A foun",
+  "statement": "Founder says agencies never explain the service A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+  "status": "needs_validation",
+  "confidence": 0.55,
+  "evidence_refs": [
+    "2026-03-18-founder-says-agencies-never-explain-the-service"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si esta objecion bloquea ventas de forma repetida.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

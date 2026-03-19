@@ -1,0 +1,88 @@
+{
+  "pricing_model_id": "guide-demo-lab-founder-led-service-businesses-pricing",
+  "company_id": "guide-demo-lab",
+  "currency_code": "MXN",
+  "pricing_strategy": "hybrid",
+  "target_segment": "Founder-led service businesses",
+  "fact_base": [
+    "Ancla de costo mensual de entrega: MXN 14,000.00.",
+    "Ancla de precio de competidores: MXN 28,000.00.",
+    "Ancla de valor percibido: MXN 34,000.00."
+  ],
+  "price_floor": 36842.11,
+  "price_target": 36842.11,
+  "price_ceiling": 49736.84,
+  "tier_summaries": [
+    {
+      "name": "Inicial",
+      "price": 27631.58,
+      "value_summary": "Diagnostico enfocado y guia rapida de implementacion."
+    },
+    {
+      "name": "Base",
+      "price": 36842.11,
+      "value_summary": "Oferta central completa con claridad de proceso y apoyo en mensaje comercial."
+    },
+    {
+      "name": "Expandido",
+      "price": 49736.84,
+      "value_summary": "Acompanamiento mas cercano con implementacion y optimizacion."
+    }
+  ],
+  "pricing_options": [
+    {
+      "name": "Inicial",
+      "price": 27631.58,
+      "fit": "Validacion rapida con menor alcance y menor carga de confianza.",
+      "tradeoff": "Menor ingreso por cliente y menos margen para acompanamiento cercano.",
+      "recommended": false
+    },
+    {
+      "name": "Base",
+      "price": 36842.11,
+      "fit": "Mejor balance de confianza, margen y claridad para la primera oferta en Mexico.",
+      "tradeoff": "Todavia necesita un alcance explicito para no sentirse abstracta.",
+      "recommended": true
+    },
+    {
+      "name": "Expandido",
+      "price": 49736.84,
+      "fit": "Util cuando ya existen pruebas y demanda suficiente por una implementacion mas amplia.",
+      "tradeoff": "Exige mas confianza y mas complejidad operativa.",
+      "recommended": false
+    }
+  ],
+  "recommended_tier": "Base",
+  "recommendation_logic": "Se recomienda empezar por Base porque balancea mejor confianza, alcance de entrega y proteccion de margen que Inicial o Expandido.",
+  "margin_assumptions": [
+    "Se asume un costo mensual de entrega de MXN 14,000.00.",
+    "Se asume un margen bruto deseado de 62%.",
+    "Se asume un precio ancla de competidores de MXN 28,000.00.",
+    "Se asume un ancla de valor de MXN 34,000.00."
+  ],
+  "implementation_risks": [
+    "El nivel objetivo puede fallar si el alcance no se vuelve concreto durante la venta.",
+    "Un precio por encima de la prueba visible puede generar friccion de confianza aunque la economia se vea fuerte."
+  ],
+  "status": "inferred",
+  "confidence": 0.6,
+  "source_origin": "pricing_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-clarity",
+    "2026-03-14-owner-proof"
+  ],
+  "source_refs": [
+    "2026-03-14-interview",
+    "2026-03-14-sales-notes"
+  ],
+  "assumption_refs": [
+    "guide-demo-lab-pricing-assumption-1",
+    "guide-demo-lab-pricing-assumption-2",
+    "guide-demo-lab-pricing-assumption-3",
+    "guide-demo-lab-pricing-assumption-4"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

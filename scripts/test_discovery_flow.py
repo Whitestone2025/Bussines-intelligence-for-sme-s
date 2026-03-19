@@ -81,6 +81,9 @@ def main() -> int:
                 "website": "https://example.test",
                 "industry": "service clarity",
                 "seed_summary": "We help founders explain complex services clearly so buyers trust the offer faster.",
+                "workspace_mode": "in_place_business_folder",
+                "existing_material_summary": "This folder already contains homepage notes and sales notes.",
+                "existing_file_manifest": ["homepage-notes.md", "sales-notes.txt"],
                 "competitors": ["Generic Growth Agency", "Polished Messaging Studio"],
                 "available_sources": ["website", "sales notes", "call transcripts"],
             },
@@ -234,6 +237,8 @@ def main() -> int:
 
         workspace = request("/api/workspace")
         assert any(company["company_id"] == COMPANY_ID for company in workspace["companies"]), "Workspace did not include test company."
+        research_profiles = request(f"/api/research?company_id={COMPANY_ID}")["items"]
+        assert research_profiles and research_profiles[0]["workspace_mode"] == "in_place_business_folder", "Expected research profile to preserve workspace mode."
         print("Discovery flow test passed.")
         return 0
     finally:

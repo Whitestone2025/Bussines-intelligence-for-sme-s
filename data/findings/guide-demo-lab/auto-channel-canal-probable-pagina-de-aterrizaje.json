@@ -1,0 +1,15 @@
+{
+  "finding_id": "auto-channel-canal-probable-pagina-de-aterrizaje",
+  "company_id": "guide-demo-lab",
+  "category": "channel",
+  "title": "Canal probable: Pagina de aterrizaje",
+  "statement": "Pagina de aterrizaje",
+  "status": "needs_validation",
+  "confidence": 0.58,
+  "evidence_refs": [],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "",
+  "reasoning_kind": "inference",
+  "uncertainty_note": "Tener sitio web solo sugiere este canal; no lo confirma por si mismo."
+}

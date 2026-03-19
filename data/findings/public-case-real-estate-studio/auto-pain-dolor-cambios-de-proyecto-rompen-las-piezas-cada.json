@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-pain-dolor-cambios-de-proyecto-rompen-las-piezas-cada",
+  "company_id": "public-case-real-estate-studio",
+  "category": "pain",
+  "title": "Dolor: Cambios de proyecto rompen las piezas Cada cambio de m",
+  "statement": "Cambios de proyecto rompen las piezas Cada cambio de metraje o amenidad deja varios dias sin material comercial actualizado y eso frena la preventa.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este dolor se repite lo suficiente como para importar.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

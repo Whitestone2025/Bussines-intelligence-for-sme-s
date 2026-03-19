@@ -1,0 +1,34 @@
+{
+  "service_id": "paquete-de-preventa-visual",
+  "company_id": "public-case-real-estate-studio",
+  "name": "Paquete de preventa visual",
+  "one_sentence_description": "Paquete de renders, video corto, recorrido 360 y landing de captacion para desarrolladoras residenciales boutique.",
+  "core_outcome": "Filtrar mejor prospectos, acelerar confianza previa a la visita y mantener el material comercial alineado cuando cambia el proyecto.",
+  "pricing_model": "proyecto con opcion de acompanamiento por fase",
+  "sales_cycle": "3 a 8 semanas",
+  "status": "validated",
+  "confidence": 0.88,
+  "source_origin": "customer_model_engine",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-tour360-recorridos",
+    "2026-03-18-matterport-mx-inmobiliario",
+    "2026-03-18-buyer-objections-board",
+    "2026-03-18-shot360-articulo"
+  ],
+  "supporting_quotes": [
+    "No necesito otro render bonito; necesito que el prospecto llegue entendiendo tipologias, amenidades y esquema de pago.",
+    "Si la landing, el video y el brochure salen de equipos distintos, el mensaje se rompe."
+  ],
+  "unresolved_questions": [
+    "Validar si el paquete debe venderse como proyecto cerrado o como retainer por fase."
+  ]
+}

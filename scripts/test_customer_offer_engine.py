@@ -33,7 +33,11 @@ def main() -> int:
 
     assert messaging["headline"], "Messaging brief should have a headline"
     assert messaging["subheadline"], "Messaging brief should have a subheadline"
-    assert "growth partner" in [phrase.lower() for phrase in messaging["forbidden_phrases"]]
+    forbidden = [phrase.lower() for phrase in messaging["forbidden_phrases"]]
+    assert "partner de crecimiento" in forbidden
+    whitespace = json.dumps(outputs, ensure_ascii=False).lower()
+    assert "clarity-first" not in whitespace
+    assert "growth partner" not in whitespace
 
     with TemporaryDirectory() as temp_dir:
         result = persist_customer_outputs(Path(temp_dir), payload)

@@ -42,11 +42,11 @@ def build_financial_snapshot(payload: dict, pricing_model: dict) -> dict:
 
     warning = ""
     if len(evidence_refs) < 2:
-        warning = "Low evidence depth: viability estimate is highly assumption-driven."
+        warning = "Poca profundidad de evidencia: la estimacion de viabilidad depende demasiado de supuestos."
     elif ltv_cac_ratio and ltv_cac_ratio < 3:
-        warning = "LTV:CAC appears weak and may require pricing or channel changes."
+        warning = "La relacion LTV:CAC se ve debil y puede exigir cambios en precio o canal."
     elif gross_margin_ratio < 0.45:
-        warning = "Gross margin looks thin for a founder-led service business."
+        warning = "El margen bruto se ve delgado para un negocio de servicios liderado por el founder."
 
     timestamp = now_iso()
     confidence = round(min(0.9, 0.35 + 0.06 * len(evidence_refs) + 0.04 * len(source_refs)), 2)

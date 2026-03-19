@@ -1,0 +1,21 @@
+{
+  "finding_id": "auto-channel-canal-probable-whatsapp",
+  "company_id": "public-case-real-estate-studio",
+  "category": "channel",
+  "title": "Canal probable: WhatsApp",
+  "statement": "WhatsApp",
+  "status": "inferred",
+  "confidence": 0.79,
+  "evidence_refs": [
+    "2026-03-18-el-material-debe-servir-para-whatsapp",
+    "2026-03-18-preventa-necesita-material-que-si-venda"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes",
+    "2026-03-18-shot360-articulo"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "",
+  "reasoning_kind": "inference",
+  "uncertainty_note": ""
+}

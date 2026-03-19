@@ -1,0 +1,91 @@
+{
+  "plan_id": "guide-demo-lab-30-60-90-plan",
+  "company_id": "guide-demo-lab",
+  "plan_horizon": "30-60-90",
+  "objective": "Improve conversion quality for founder-led service sales",
+  "milestones": [
+    {
+      "milestone_id": "day-30",
+      "name": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+      "timeframe": "Dias 1-30",
+      "owner": "Fundador",
+      "dependencies": [
+        "acme-mx-go-to-market-memo"
+      ],
+      "success_metric": "Primera ejecucion lanzada con mensaje claro y seguimiento activo.",
+      "learning_goal": "Aprender si el movimiento de entrada recomendado produce senal creible del comprador con rapidez.",
+      "risk_watchouts": [
+        "Execution may still fail if the offer is not explained with enough specificity."
+      ]
+    },
+    {
+      "milestone_id": "day-60",
+      "name": "Test the target pricing tier with explicit scope and proof.",
+      "timeframe": "Dias 31-60",
+      "owner": "Fundador",
+      "dependencies": [
+        "day-30"
+      ],
+      "success_metric": "Oferta, precio y objeciones actualizados con retroalimentacion real.",
+      "learning_goal": "Usar objeciones y primeras victorias para afinar alcance, prueba y logica de precio.",
+      "risk_watchouts": [
+        "Channel assumptions should be validated with early conversion data."
+      ]
+    },
+    {
+      "milestone_id": "day-90",
+      "name": "Measure conversion quality, not just lead volume, for 30 days.",
+      "timeframe": "Dias 61-90",
+      "owner": "Fundador",
+      "dependencies": [
+        "day-60"
+      ],
+      "success_metric": "Calidad de conversion medida y siguiente decision de canal documentada.",
+      "learning_goal": "Decidir si conviene escalar, refinar o descartar la jugada actual.",
+      "risk_watchouts": [
+        "Execution may still fail if the offer is not explained with enough specificity."
+      ]
+    }
+  ],
+  "workstreams": [
+    {
+      "name": "Validacion de demanda",
+      "focus": "Launch the first Mexico-first acquisition experiment on the best-fit channel.",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Refinamiento de oferta y precio",
+      "focus": "Test the target pricing tier with explicit scope and proof.",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Revision de decision",
+      "focus": "Measure conversion quality, not just lead volume, for 30 days.",
+      "owner": "Fundador"
+    }
+  ],
+  "validation_agenda": [
+    "Execution may still fail if the offer is not explained with enough specificity.",
+    "Channel assumptions should be validated with early conversion data."
+  ],
+  "sequence_rationale": [
+    "Empieza por la accion de mayor confianza antes de ampliar alcance.",
+    "Usa retroalimentacion real del mercado para afinar precio y promesa de entrega.",
+    "Escala solo cuando entiendas la calidad de conversion y la friccion de implementacion."
+  ],
+  "options_considered": [],
+  "decision_refs": [
+    "acme-mx-go-to-market-memo"
+  ],
+  "risk_refs": [
+    "guide-demo-lab-risk-1",
+    "guide-demo-lab-risk-2"
+  ],
+  "status": "inferred",
+  "confidence": 0.72,
+  "source_origin": "planner",
+  "evidence_refs": [],
+  "source_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

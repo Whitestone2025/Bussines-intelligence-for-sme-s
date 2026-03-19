@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-objection-objecion-buyers-want-clarity-before-hype-and-wan",
+  "company_id": "guide-demo-lab",
+  "category": "objection",
+  "title": "Objecion: Buyers want clarity before hype and want to see proof ",
+  "statement": "Buyers want clarity before hype and want to see proof of process.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-homepage-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si esta objecion bloquea ventas de forma repetida.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

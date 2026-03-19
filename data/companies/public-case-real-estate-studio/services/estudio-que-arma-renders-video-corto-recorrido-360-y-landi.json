@@ -1,0 +1,15 @@
+{
+  "service_id": "estudio-que-arma-renders-video-corto-recorrido-360-y-landi",
+  "company_id": "public-case-real-estate-studio",
+  "name": "Estudio que arma renders, video corto, recorrido 360 y landing de preventa para ",
+  "one_sentence_description": "Estudio que arma renders, video corto, recorrido 360 y landing de preventa para desarrolladoras residenciales boutique que necesitan vender antes de terminar obra.",
+  "core_outcome": "",
+  "status": "needs_validation",
+  "confidence": 0.54,
+  "evidence_refs": [],
+  "source_refs": [],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Revise el material disponible, pero la descripcion del servicio sigue poco clara. Como explicarias en una o dos frases lo que realmente haces?"
+  ]
+}

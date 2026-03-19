@@ -37,6 +37,67 @@ def first_non_empty(*values: str) -> str:
     return ""
 
 
+def normalize_public_text(text: str) -> str:
+    normalized = str(text or "")
+    replacements = [
+        ("founder", "fundador"),
+        ("Founder", "Fundador"),
+        ("economics", "economia"),
+        ("Economics", "Economia"),
+        ("open source", "codigo abierto"),
+        ("Open source", "Codigo abierto"),
+        ("venture hybrid", "hibrido de venture capital"),
+        ("Venture hybrid", "Hibrido de venture capital"),
+        ("right to win", "derecho a ganar"),
+        ("Right to win", "Derecho a ganar"),
+        ("go-to-market", "salida al mercado"),
+        ("Go-to-market", "Salida al mercado"),
+        ("buyer problem", "problema del comprador"),
+        ("Buyer problem", "Problema del comprador"),
+        ("unit economics", "economia unitaria"),
+        ("Unit economics", "Economia unitaria"),
+        ("proof", "prueba"),
+        ("Proof", "Prueba"),
+    ]
+    for old, new in replacements:
+        normalized = normalized.replace(old, new)
+    return normalized
+
+
+def document_purpose(document_id: str) -> str:
+    purposes = {
+        "executive-memo": "Te sirve para entender la tesis actual del caso en una sola lectura y decidir si vale la pena profundizar, corregir o pausar la ruta recomendada.",
+        "business-diagnosis": "Te sirve para separar lo que hoy sabemos del negocio, lo que seguimos infiriendo y lo que todavia necesita validacion antes de mover recursos.",
+        "problem-structuring-memo": "Te sirve para ordenar el caso antes de discutir tacticas, dejando claro cual es el problema central, que tension lo explica y que preguntas siguen abiertas.",
+        "strategic-options-memo": "Te sirve para comparar rutas reales entre si y evitar que el caso colapse demasiado pronto en una sola accion.",
+        "decision-document": "Te sirve para documentar la decision provisional, por que gana hoy y bajo que condiciones deberia cambiarse.",
+        "initiative-roadmap": "Te sirve para convertir la tesis elegida en una secuencia de gates, indicadores y riesgos, no solo en una lista de tareas.",
+        "founder-narrative": "Te sirve para explicar el caso sin sobreprometer, manteniendo coherencia entre problema, ruta elegida y lo que todavia no esta probado.",
+        "deck-outline": "Te sirve para estructurar una conversacion ejecutiva o una presentacion sin perder la logica del caso.",
+        "risk-memo": "Te sirve para revisar donde el caso puede fallar y que senales deberian disparar una correccion de rumbo.",
+    }
+    return purposes.get(document_id, "Te sirve para leer el caso con una logica mas util para decidir.")
+
+
+def evidence_limits(bundle: dict) -> list[str]:
+    company = bundle.get("company", {})
+    decision = bundle.get("decision_memo", {})
+    limits = [str(item).strip() for item in company.get("known_constraints", []) if str(item).strip()]
+    for item in decision.get("validation_gaps", []):
+        normalized = str(item).strip()
+        if normalized and (
+            normalized.lower().startswith("agrega")
+            or normalized.lower().startswith("aclara")
+            or normalized.lower().startswith("define")
+            or normalized.lower().startswith("fortalece")
+            or "confianza" in normalized.lower()
+        ):
+            limits.append(normalized)
+    if not limits:
+        limits.append("La evidencia actual sigue siendo insuficiente para convertir esta lectura en una verdad cerrada.")
+    return unique_preserve(limits)
+
+
 def decision_question(bundle: dict) -> str:
     company = bundle["company"]
     offer = bundle["offer"]
@@ -53,8 +114,11 @@ def current_thesis(bundle: dict) -> str:
     icp = bundle["icp"]
     offer = bundle["offer"]
     decision = bundle["decision_memo"]
+    stack = canonical_strategic_stack(bundle)
+    route = stack.get("recommended_route", {})
     return first_non_empty(
         bundle.get("current_thesis", ""),
+        route.get("thesis", ""),
         (
             f"{company['name']} debe liderar con {offer['name']} para {icp['label']} porque los compradores responden a "
             "claridad, una entrega transparente y un primer experimento de adquisicion enfocado."
@@ -71,8 +135,10 @@ def fact_base(bundle: dict) -> list[str]:
     pricing = bundle["pricing_model"]
     decision = bundle["decision_memo"]
     facts = [str(item).strip() for item in bundle.get("validated_facts", []) if str(item).strip()]
+    facts.extend(str(item).strip() for item in decision.get("fact_base", []) if str(item).strip())
+    facts = unique_preserve(facts)
     if facts:
-        return unique_preserve(facts)
+        return facts
     facts.extend(
         [
             company.get("seed_summary", ""),
@@ -92,7 +158,9 @@ def fact_base(bundle: dict) -> list[str]:
 def assumptions(bundle: dict) -> list[str]:
     market = bundle["market_model"]
     pricing = bundle["pricing_model"]
+    decision = bundle["decision_memo"]
     assumption_lines = [str(item).strip() for item in bundle.get("assumptions", []) if str(item).strip()]
+    assumption_lines.extend(str(item).strip() for item in decision.get("assumptions", []) if str(item).strip())
     assumption_lines.extend(str(item).strip() for item in market.get("key_assumptions", []) if str(item).strip())
     assumption_lines.extend(str(item).strip() for item in pricing.get("margin_assumptions", []) if str(item).strip())
     if not assumption_lines:
@@ -119,12 +187,110 @@ def contrary_evidence(bundle: dict) -> list[str]:
     return unique_preserve(items)
 
 
+def canonical_strategic_stack(bundle: dict) -> dict:
+    decision = bundle["decision_memo"]
+    stack = decision.get("strategic_stack", {})
+    if stack:
+        return stack
+    return {
+        "problem_statement": {
+            "headline": decision_question(bundle),
+            "situation": bundle["company"].get("seed_summary", ""),
+            "complication": first_non_empty(*decision.get("validation_gaps", [])),
+            "decision_tension": decision.get("why_now", ""),
+            "key_question": decision_question(bundle),
+        },
+        "case_for_change": {
+            "why_change": decision.get("why_now", ""),
+            "cost_of_inaction": first_non_empty(*contrary_evidence(bundle)),
+            "transformation_story": "El caso necesita una recomendacion mas clara que una simple lista de tareas.",
+        },
+        "where_to_play": {
+            "primary_segment": bundle["icp"].get("label", ""),
+            "primary_channel": bundle.get("channel", {}).get("name", ""),
+            "geographic_focus": bundle["company"].get("primary_country", "Mexico"),
+        },
+        "how_to_win": {
+            "value_thesis": bundle["offer"].get("core_promise", ""),
+            "differentiation": bundle["offer"].get("mechanism", ""),
+            "proof": first_non_empty(*bundle["offer"].get("proof_points", [])),
+        },
+        "right_to_win": unique_preserve(bundle["offer"].get("proof_points", []) + bundle["icp"].get("desired_outcomes", []))[:4],
+        "strategic_alternatives": build_options(bundle),
+        "what_must_be_true": unique_preserve(validation_gaps(bundle))[:4],
+        "no_regret_moves": unique_preserve(decision.get("next_steps", []))[:3],
+        "recommended_route": {
+            "label": "Ruta recomendada",
+            "thesis": decision.get("recommended_action", ""),
+        },
+    }
+
+
+def strategic_alternative_lines(bundle: dict) -> list[str]:
+    lines: list[str] = []
+    for option in canonical_strategic_stack(bundle).get("strategic_alternatives", []):
+        label = option.get("label", "Alternativa")
+        thesis = option.get("thesis") or option.get("summary", "")
+        prefix = "Recomendada" if option.get("recommended") else "Alternativa"
+        lines.append(f"{prefix}: {label} -> {thesis}")
+        for item in option.get("what_must_be_true", [])[:2]:
+            lines.append(f"  Debe ser cierto: {item}")
+        for item in option.get("key_risks", [])[:2]:
+            lines.append(f"  Riesgo: {item}")
+    return lines
+
+
 def validation_gaps(bundle: dict) -> list[str]:
     items = [str(item).strip() for item in bundle.get("validation_gaps", []) if str(item).strip()]
     items.extend(contrary_evidence(bundle))
     if not items:
         items.append("Valida primero la calidad de conversion antes de escalar gasto en canal o alcance de entrega.")
     return unique_preserve(items)
+
+
+def problem_structuring_map(bundle: dict) -> dict:
+    stack = canonical_strategic_stack(bundle)
+    problem = stack.get("problem_statement", {})
+    case_for_change = stack.get("case_for_change", {})
+    route = stack.get("recommended_route", {})
+    recommendation = first_non_empty(route.get("thesis", ""), bundle["decision_memo"].get("recommended_action", ""))
+    return {
+        "problem_headline": first_non_empty(problem.get("headline", ""), decision_question(bundle)),
+        "facts": fact_base(bundle),
+        "inferences": inferred_points(bundle),
+        "assumptions": assumptions(bundle),
+        "contrary_evidence": contrary_evidence(bundle),
+        "recommendation": recommendation,
+        "what_must_be_true": unique_preserve(
+            stack.get("what_must_be_true", []) + validation_gaps(bundle)
+        )[:6],
+        "case_for_change": [
+            f"Por que cambiar: {case_for_change.get('why_change', '')}",
+            f"Costo de no hacer nada: {case_for_change.get('cost_of_inaction', '')}",
+        ],
+    }
+
+
+def route_thesis(bundle: dict) -> str:
+    stack = canonical_strategic_stack(bundle)
+    route = stack.get("recommended_route", {})
+    return first_non_empty(route.get("thesis", ""), bundle["decision_memo"].get("recommended_action", ""))
+
+
+def route_rationale(bundle: dict) -> str:
+    stack = canonical_strategic_stack(bundle)
+    route = stack.get("recommended_route", {})
+    return first_non_empty(route.get("why_this_route_wins", ""), bundle["decision_memo"].get("why_now", ""))
+
+
+def next_validation_step(bundle: dict) -> str:
+    decision = bundle["decision_memo"]
+    route_text = route_thesis(bundle)
+    for item in decision.get("next_steps", []):
+        normalized = str(item).strip()
+        if normalized and normalized != route_text:
+            return normalized
+    return first_non_empty(*decision.get("validation_gaps", []))
 
 
 def inferred_points(bundle: dict) -> list[str]:
@@ -210,6 +376,17 @@ def build_options(bundle: dict) -> list[dict]:
     return options
 
 
+def roadmap_lines(bundle: dict) -> list[str]:
+    plan = bundle["execution_plan"]
+    lines: list[str] = []
+    for initiative in plan.get("initiative_roadmap", []):
+        lines.append(f"{initiative['stage_gate']}: {initiative['name']} -> {initiative['objective']}")
+        lines.append(f"  Indicador lider: {initiative.get('leading_indicator', '')}")
+        lines.append(f"  Indicador rezagado: {initiative.get('lagging_indicator', '')}")
+        lines.append(f"  Trigger de decision: {initiative.get('decision_trigger', '')}")
+    return lines
+
+
 def option_lines(bundle: dict) -> list[str]:
     lines: list[str] = []
     for option in build_options(bundle):
@@ -234,12 +411,297 @@ def traceability_lines(bundle: dict) -> list[str]:
     return unique_preserve(refs)
 
 
+def problem_structuring_memo(bundle: dict) -> str:
+    stack = canonical_strategic_stack(bundle)
+    problem = stack.get("problem_statement", {})
+    structuring = problem_structuring_map(bundle)
+    return "\n".join(
+        [
+            "# Memo de Problema Estructurado",
+            "",
+            "## Para que sirve este documento",
+            "",
+            document_purpose("problem-structuring-memo"),
+            "",
+            "## Pregunta que estamos resolviendo",
+            "",
+            decision_question(bundle),
+            "",
+            "## Problema central",
+            "",
+            structuring["problem_headline"],
+            "",
+            "## Situacion",
+            "",
+            problem.get("situation", "Sin situacion."),
+            "",
+            "## Complicacion",
+            "",
+            problem.get("complication", "Sin complicacion."),
+            "",
+            "## Tension de decision",
+            "",
+            problem.get("decision_tension", "Sin tension de decision."),
+            "",
+            "## Hechos validados",
+            "",
+            bullet_lines(structuring["facts"]),
+            "",
+            "## Inferencias principales",
+            "",
+            bullet_lines(structuring["inferences"]),
+            "",
+            "## Supuestos de trabajo",
+            "",
+            bullet_lines(structuring["assumptions"]),
+            "",
+            "## Lo que tendria que ser cierto",
+            "",
+            bullet_lines(structuring["what_must_be_true"]),
+            "",
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
+        ]
+    )
+
+
+def strategic_options_memo(bundle: dict) -> str:
+    stack = canonical_strategic_stack(bundle)
+    recommended_id = stack.get("recommended_route", {}).get("alternative_id", "")
+    lines = [
+        "# Memo de Opciones Estrategicas",
+        "",
+        "## Para que sirve este documento",
+        "",
+        document_purpose("strategic-options-memo"),
+        "",
+        "## Criterios de decision",
+        "",
+        bullet_lines(decision_criteria(bundle)),
+        "",
+    ]
+    for option in stack.get("strategic_alternatives", []):
+        is_recommended = bool(option.get("recommended")) or (
+            recommended_id and option.get("alternative_id") == recommended_id
+        )
+        label = option.get("label", "Alternativa")
+        prefix = f"## Ruta recomendada - {label}" if is_recommended else f"## {label}"
+        lines.extend(
+            [
+                prefix,
+                "",
+                option.get("thesis", ""),
+                "",
+                "### Por que considerar esta ruta",
+                "",
+                option.get("why_this_route", ""),
+                "",
+                "### Apuestas clave",
+                "",
+                bullet_lines(option.get("key_bets", [])),
+                "",
+                "### Riesgos clave",
+                "",
+                bullet_lines(option.get("key_risks", [])),
+                "",
+                "### Lo que tendria que ser cierto",
+                "",
+                bullet_lines(option.get("what_must_be_true", [])),
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def initiative_roadmap_memo(bundle: dict) -> str:
+    plan = bundle["execution_plan"]
+    lines = [
+        "# Roadmap de Iniciativas",
+        "",
+        "## Para que sirve este documento",
+        "",
+        document_purpose("initiative-roadmap"),
+        "",
+        "## Objetivo del roadmap",
+        "",
+        plan.get("objective", "Sin objetivo."),
+        "",
+        "## Checkpoints de decision",
+        "",
+        bullet_lines(plan.get("decision_checkpoints", [])),
+        "",
+    ]
+    for initiative in plan.get("initiative_roadmap", []):
+        lines.extend(
+            [
+                f"## {initiative.get('stage_gate', 'Gate')} - {initiative.get('name', 'Iniciativa')}",
+                "",
+                initiative.get("objective", ""),
+                "",
+                "### Workstream y dependencias",
+                "",
+                bullet_lines(
+                    [
+                        f"Workstream: {initiative.get('workstream', '')}",
+                        f"Owner: {initiative.get('owner', '')}",
+                        f"Timeframe: {initiative.get('timeframe', '')}",
+                    ]
+                    + [f"Dependency: {item}" for item in initiative.get("dependencies", [])]
+                ),
+                "",
+                "### Indicadores y gates",
+                "",
+                bullet_lines(
+                    [
+                        f"Indicador lider: {initiative.get('leading_indicator', '')}",
+                        f"Indicador rezagado: {initiative.get('lagging_indicator', '')}",
+                        f"Stage gate question: {initiative.get('stage_gate_question', '')}",
+                        f"Decision trigger: {initiative.get('decision_trigger', '')}",
+                        f"Exit criteria: {initiative.get('exit_criteria', '')}",
+                    ]
+                ),
+                "",
+                "### Riesgos y mitigacion",
+                "",
+                bullet_lines(initiative.get("key_risks", []) + initiative.get("risk_mitigation", [])),
+                "",
+            ]
+        )
+    lines.extend(
+        [
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def founder_narrative(bundle: dict) -> str:
+    company = bundle["company"]
+    offer = bundle["offer"]
+    stack = canonical_strategic_stack(bundle)
+    route = stack.get("recommended_route", {})
+    route_message = route.get("thesis", bundle["decision_memo"].get("recommended_action", ""))
+    route_reason = route.get("why_this_route_wins", bundle["decision_memo"].get("why_now", ""))
+    return "\n".join(
+        [
+            "# Narrativa del Founder",
+            "",
+            "## Para que sirve este documento",
+            "",
+            document_purpose("founder-narrative"),
+            "",
+            "## Como explicar el problema",
+            "",
+            f"Hoy en {company['name']} estamos resolviendo este problema: {stack.get('problem_statement', {}).get('headline', decision_question(bundle))}",
+            "",
+            "## Como explicar la ruta elegida",
+            "",
+            f"La ruta que estamos recomendando es esta: {route_message}",
+            "",
+            "## Por que esta ruta y no otra",
+            "",
+            route_reason,
+            "",
+            "## Que decir en conversaciones",
+            "",
+            bullet_lines(
+                [
+                    f"No presentamos {offer['name']} como una verdad cerrada; la usamos para validar si {offer.get('core_promise', '').lower()}.",
+                    "La prioridad no es escalar rapido sino encontrar la ruta con mejor aprendizaje y mejor economia.",
+                    "Si una condicion clave no se cumple, cambiamos de ruta en lugar de forzar la narrativa.",
+                ]
+            ),
+            "",
+            "## Que no sobreprometer",
+            "",
+            bullet_lines(
+                [
+                    "No presentar la recomendacion como verdad final si todavia depende de supuestos importantes.",
+                    "No vender escala antes de demostrar conversion, economia y capacidad de entrega.",
+                    "No esconder los riesgos principales cuando el comprador necesita entender el proceso.",
+                ]
+            ),
+            "",
+            "## La siguiente conversacion correcta",
+            "",
+            bullet_lines(bundle["execution_plan"].get("decision_checkpoints", [])[:3]),
+            "",
+            "## Lo que todavia no podemos prometer",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
+        ]
+    )
+
+
+def decision_document(bundle: dict) -> str:
+    stack = canonical_strategic_stack(bundle)
+    route = stack.get("recommended_route", {})
+    return "\n".join(
+        [
+            "# Documento de Decision",
+            "",
+            "## Para que sirve este documento",
+            "",
+            document_purpose("decision-document"),
+            "",
+            "## Decision central",
+            "",
+            route.get("thesis", bundle["decision_memo"].get("recommended_action", "")),
+            "",
+            "## Por que gana esta ruta",
+            "",
+            route.get("why_this_route_wins", bundle["decision_memo"].get("why_now", "")),
+            "",
+            "## Condiciones de invalidez",
+            "",
+            bullet_lines(route.get("invalidation_conditions", bundle["decision_memo"].get("key_risks", []))),
+            "",
+            "## Opciones descartadas por ahora",
+            "",
+            bullet_lines([item.get("thesis", "") for item in stack.get("strategic_alternatives", []) if not item.get("recommended")]),
+            "",
+            "## Proximo gate",
+            "",
+            first_non_empty(*bundle["execution_plan"].get("decision_checkpoints", [])),
+            "",
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
+        ]
+    )
+
+
 def executive_memo(bundle: dict) -> str:
     company = bundle["company"]
     decision = bundle["decision_memo"]
+    stack = canonical_strategic_stack(bundle)
+    problem = stack.get("problem_statement", {})
+    case_for_change = stack.get("case_for_change", {})
+    where_to_play = stack.get("where_to_play", {})
+    how_to_win = stack.get("how_to_win", {})
+    structuring = problem_structuring_map(bundle)
     return "\n".join(
         [
             "# Memo Ejecutivo",
+            "",
+            "## Para que sirve este documento",
+            "",
+            document_purpose("executive-memo"),
             "",
             "## Empresa",
             "",
@@ -249,41 +711,86 @@ def executive_memo(bundle: dict) -> str:
             "",
             decision_question(bundle),
             "",
-            "## Tesis actual",
+            "## Problema estructurado",
             "",
-            current_thesis(bundle),
+            structuring["problem_headline"],
             "",
-            "## Base de hechos",
+            bullet_lines(
+                [
+                    f"Situacion: {problem.get('situation', '')}",
+                    f"Complicacion: {problem.get('complication', '')}",
+                    f"Tension de decision: {problem.get('decision_tension', '')}",
+                ]
+            ),
             "",
-            bullet_lines(fact_base(bundle)),
+            "## Hechos validados",
             "",
-            "## Supuestos clave",
+            bullet_lines(structuring["facts"]),
             "",
-            bullet_lines(assumptions(bundle)),
+            "## Inferencias principales",
+            "",
+            bullet_lines(structuring["inferences"]),
+            "",
+            "## Supuestos de trabajo",
+            "",
+            bullet_lines(structuring["assumptions"]),
+            "",
+            "## Caso para cambiar",
+            "",
+            bullet_lines(
+                structuring["case_for_change"]
+                + [f"Historia del cambio: {case_for_change.get('transformation_story', '')}"]
+            ),
             "",
             "## Opciones consideradas",
             "",
-            bullet_lines(option_lines(bundle)),
+            bullet_lines(strategic_alternative_lines(bundle)),
+            "",
+            "## Donde jugar y como ganar",
+            "",
+            bullet_lines(
+                [
+                    f"Donde jugar: {where_to_play.get('primary_segment', '')} via {where_to_play.get('primary_channel', '')} en {where_to_play.get('geographic_focus', '')}.",
+                    f"Como ganar: {how_to_win.get('value_thesis', '')}",
+                    f"Derecho a ganar: {first_non_empty(*stack.get('right_to_win', []))}",
+                ]
+            ),
             "",
             "## Criterios de recomendacion",
             "",
             bullet_lines(decision_criteria(bundle)),
             "",
-            "## Recomendacion",
+            "## Ruta provisional recomendada",
             "",
-            decision["recommended_action"],
+            route_thesis(bundle),
             "",
-            "## Por que importa",
+            "## Por que gana hoy esta ruta",
             "",
-            decision["why_now"],
+            route_rationale(bundle),
+            "",
+            "## Siguiente validacion necesaria",
+            "",
+            next_validation_step(bundle),
             "",
             "## Riesgos y evidencia en contra",
             "",
             bullet_lines(contrary_evidence(bundle)),
             "",
-            "## Traceability",
+            "## Lo que tendria que ser cierto",
+            "",
+            bullet_lines(structuring["what_must_be_true"]),
+            "",
+            "## Movimientos sin arrepentimiento",
+            "",
+            bullet_lines(stack.get("no_regret_moves", [])),
+            "",
+            "## Trazabilidad",
             "",
             bullet_lines(traceability_lines(bundle)),
+            "",
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
             "",
             "## Siguientes acciones inmediatas",
             "",
@@ -300,13 +807,28 @@ def business_diagnosis(bundle: dict) -> str:
     market = bundle["market_model"]
     pricing = bundle["pricing_model"]
     decision = bundle["decision_memo"]
+    stack = canonical_strategic_stack(bundle)
+    problem = stack.get("problem_statement", {})
+    structuring = problem_structuring_map(bundle)
     return "\n".join(
         [
             "# Diagnostico de Negocio",
             "",
+            "## Para que sirve este documento",
+            "",
+            document_purpose("business-diagnosis"),
+            "",
             "## Problema central",
             "",
-            company["seed_summary"],
+            structuring["problem_headline"],
+            "",
+            bullet_lines(
+                [
+                    f"Situacion: {problem.get('situation', company['seed_summary'])}",
+                    f"Complicacion: {problem.get('complication', '')}",
+                    f"Pregunta clave: {problem.get('key_question', decision_question(bundle))}",
+                ]
+            ),
             "",
             "## Tesis actual",
             "",
@@ -314,11 +836,15 @@ def business_diagnosis(bundle: dict) -> str:
             "",
             "## Lo que sabemos",
             "",
-            bullet_lines(fact_base(bundle)),
+            bullet_lines(structuring["facts"]),
             "",
             "## Lo que inferimos",
             "",
-            bullet_lines(inferred_points(bundle)),
+            bullet_lines(structuring["inferences"]),
+            "",
+            "## Supuestos de trabajo",
+            "",
+            bullet_lines(structuring["assumptions"]),
             "",
             "## Lo que aun necesita validacion",
             "",
@@ -342,7 +868,15 @@ def business_diagnosis(bundle: dict) -> str:
             "",
             "## Opciones estrategicas",
             "",
-            bullet_lines(option_lines(bundle)),
+            bullet_lines(strategic_alternative_lines(bundle)),
+            "",
+            "## Recomendacion actual",
+            "",
+            structuring["recommendation"],
+            "",
+            "## Lo que tendria que ser cierto",
+            "",
+            bullet_lines(structuring["what_must_be_true"]),
             "",
             "## Realidades de ejecucion",
             "",
@@ -352,6 +886,10 @@ def business_diagnosis(bundle: dict) -> str:
             "",
             bullet_lines(decision.get("key_risks", [])),
             "",
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
         ]
     )
 
@@ -360,6 +898,10 @@ def deck_outline(bundle: dict) -> str:
     plan = bundle["execution_plan"]
     lines = [
         "# Estructura de Presentacion",
+        "",
+        "## Para que sirve este documento",
+        "",
+        document_purpose("deck-outline"),
         "",
         "1. Tesis y pregunta de decision",
         "2. Problema central y restricciones",
@@ -400,6 +942,10 @@ def risk_memo(bundle: dict) -> str:
         [
             "# Memo de Riesgos",
             "",
+            "## Para que sirve este documento",
+            "",
+            document_purpose("risk-memo"),
+            "",
             "## Evidencia en contra y alertas",
             "",
             bullet_lines(contrary_evidence(bundle)),
@@ -412,17 +958,27 @@ def risk_memo(bundle: dict) -> str:
             "",
             bullet_lines(mitigations),
             "",
+            "## Limites de evidencia hoy",
+            "",
+            bullet_lines(evidence_limits(bundle)),
+            "",
         ]
     )
 
 
 def render_bundle(bundle: dict) -> dict[str, str]:
-    return {
+    rendered = {
         "executive-memo": executive_memo(bundle),
         "business-diagnosis": business_diagnosis(bundle),
+        "problem-structuring-memo": problem_structuring_memo(bundle),
+        "strategic-options-memo": strategic_options_memo(bundle),
+        "decision-document": decision_document(bundle),
+        "initiative-roadmap": initiative_roadmap_memo(bundle),
+        "founder-narrative": founder_narrative(bundle),
         "deck-outline": deck_outline(bundle),
         "risk-memo": risk_memo(bundle),
     }
+    return {key: normalize_public_text(value) for key, value in rendered.items()}
 
 
 def persist_bundle(root: Path, company_id: str, bundle: dict) -> dict[str, Path]:

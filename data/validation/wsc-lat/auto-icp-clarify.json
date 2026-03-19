@@ -1,0 +1,16 @@
+{
+  "question_id": "auto-icp-clarify",
+  "company_id": "wsc-lat",
+  "target_entity_type": "icp",
+  "prompt": "Aun no hay suficiente evidencia para inferir el comprador principal. Quien compra realmente hoy o quien quieres que compre primero?",
+  "question_type": "free_text",
+  "candidate_options": [],
+  "recommended_answer": "",
+  "status": "open",
+  "answer": "",
+  "why_it_matters": "Sin esta respuesta el sistema tendera a suposiciones demasiado genericas.",
+  "resolution": {
+    "action": "upsert_icp"
+  },
+  "created_at": "2026-03-18T23:09:13"
+}

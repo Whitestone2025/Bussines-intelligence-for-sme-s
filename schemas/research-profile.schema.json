@@ -29,9 +29,12 @@
     "website": {"type": "string"},
     "geography_focus": {"type": "array", "items": {"type": "string"}},
     "currency_code": {"type": "string", "enum": ["MXN", "USD"]},
+    "workspace_mode": {"type": "string", "enum": ["clean_bootstrap", "in_place_business_folder"]},
     "competitors": {"type": "array", "items": {"type": "string"}},
     "available_sources": {"type": "array", "items": {"type": "string"}},
     "known_constraints": {"type": "array", "items": {"type": "string"}},
+    "existing_material_summary": {"type": "string"},
+    "existing_file_manifest": {"type": "array", "items": {"type": "string"}},
     "open_assumptions": {"type": "array", "items": {"type": "string"}},
     "research_stage": {
       "type": "string",

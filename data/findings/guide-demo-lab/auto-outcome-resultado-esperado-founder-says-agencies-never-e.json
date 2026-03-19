@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-outcome-resultado-esperado-founder-says-agencies-never-e",
+  "company_id": "guide-demo-lab",
+  "category": "outcome",
+  "title": "Resultado esperado: Founder says agencies never explain the service A foun",
+  "statement": "Founder says agencies never explain the service A founder says agencies sound polished but never explain the service clearly enough for buyers to trust it.",
+  "status": "needs_validation",
+  "confidence": 0.55,
+  "evidence_refs": [
+    "2026-03-18-founder-says-agencies-never-explain-the-service"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Valida si este resultado pesa de verdad en la compra.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

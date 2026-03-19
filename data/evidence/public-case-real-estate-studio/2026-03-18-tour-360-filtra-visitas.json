@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-tour-360-filtra-visitas",
+  "evidence_id": "2026-03-18-tour-360-filtra-visitas",
+  "source_id": "2026-03-18-tour360-recorridos",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "El tour 360 filtra visitas improductivas",
+  "evidence_type": "artifact",
+  "source_type": "public_reference",
+  "channel": "landing-page",
+  "date": "2026-03-18",
+  "tags": [
+    "tour-360",
+    "eficiencia-comercial",
+    "categoria"
+  ],
+  "summary": "Los recorridos virtuales ayudan a reducir visitas presenciales improductivas y dejan llegar mejor preparados a los prospectos con interes real.",
+  "verbatim_quotes": [
+    "\"Reduce tus visitas presenciales tan solo a aquellos clientes que ya conocen la propiedad de manera virtual.\""
+  ],
+  "quotes": [
+    "\"Reduce tus visitas presenciales tan solo a aquellos clientes que ya conocen la propiedad de manera virtual.\""
+  ],
+  "observations": [
+    "La promesa de eficiencia comercial es concreta y facil de explicar.",
+    "El valor no es solo visual; tambien ahorra tiempo del equipo comercial."
+  ],
+  "candidate_pains": [
+    "Hay demasiadas visitas presenciales improductivas en preventa."
+  ],
+  "candidate_outcomes": [
+    "Filtrar visitas y priorizar solo prospectos con interes real."
+  ],
+  "candidate_objections": [
+    "Dudan si el tour 360 realmente ayuda a ventas o solo se ve moderno."
+  ],
+  "trust_signals": [
+    "Promesa concreta de eficiencia comercial."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-tour-360-filtra-visitas"
+  ],
+  "source_refs": [
+    "2026-03-18-tour360-recorridos"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-tour-360-filtra-visitas.md"
+}

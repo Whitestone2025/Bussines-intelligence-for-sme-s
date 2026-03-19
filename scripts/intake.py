@@ -20,6 +20,37 @@ def _normalize_list(value) -> list[str]:
     return []
 
 
+def _normalize_workspace_mode(payload: dict) -> str:
+    explicit = str(payload.get("workspace_mode", "")).strip().lower()
+    if explicit in {"clean_bootstrap", "in_place_business_folder"}:
+        return explicit
+    existing_material_summary = str(payload.get("existing_material_summary", "")).strip()
+    existing_file_manifest = _normalize_list(payload.get("existing_file_manifest"))
+    if payload.get("existing_business_material") or existing_material_summary or existing_file_manifest:
+        return "in_place_business_folder"
+    return "clean_bootstrap"
+
+
+def _is_website_only_seed(website: str, available_sources: list[str]) -> bool:
+    normalized = {item.strip().lower() for item in available_sources if item.strip()}
+    return bool(website.strip()) and bool(normalized) and normalized <= {"website"}
+
+
+def _web_only_constraints(existing: list[str]) -> list[str]:
+    marker = "Por ahora solo hay una web publica como fuente inicial; no confirma comprador, canal, economics ni traccion."
+    if any(item.strip().lower() == marker.lower() for item in existing):
+        return existing
+    return existing + [marker]
+
+
+def _web_only_open_assumptions() -> list[str]:
+    return [
+        "La web publica por si sola no confirma quien compra realmente.",
+        "La web publica por si sola no confirma traccion, economics ni conversion.",
+        "La identidad comercial puede seguir siendo ambigua hasta reunir evidencia adicional.",
+    ]
+
+
 def normalize_intake_payload(payload: dict) -> dict:
     company_name = str(payload.get("company_name", "")).strip()
     if not company_name:
@@ -29,10 +60,18 @@ def normalize_intake_payload(payload: dict) -> dict:
     intake_mode = raw_mode if raw_mode in {"idea", "existing"} else "idea"
     company_id = slugify_id(str(payload.get("company_id") or company_name))
     timestamp = now_iso()
+    workspace_mode = _normalize_workspace_mode(payload)
     geography_focus = _normalize_list(payload.get("geography_focus")) or ["Mexico"]
     available_sources = _normalize_list(payload.get("available_sources")) or ["notes"]
     competitors = _normalize_list(payload.get("competitors"))
     known_constraints = _normalize_list(payload.get("known_constraints"))
+    existing_file_manifest = _normalize_list(payload.get("existing_file_manifest"))
+    existing_material_summary = str(payload.get("existing_material_summary", "")).strip()
+
+    website = str(payload.get("website", "")).strip()
+    web_only_seed = _is_website_only_seed(website, available_sources)
+    if web_only_seed:
+        known_constraints = _web_only_constraints(known_constraints)
 
     primary_goal = str(payload.get("primary_goal", "")).strip()
     if not primary_goal:
@@ -50,7 +89,7 @@ def normalize_intake_payload(payload: dict) -> dict:
         "primary_goal": primary_goal,
         "industry": str(payload.get("industry", "")).strip(),
         "business_model": str(payload.get("business_model", "")).strip(),
-        "website": str(payload.get("website", "")).strip(),
+        "website": website,
         "seed_summary": str(payload.get("seed_summary", "")).strip() or f"{company_name} business in Mexico.",
         "current_state_summary": str(payload.get("current_state_summary", "")).strip(),
         "geography_focus": geography_focus,
@@ -58,6 +97,9 @@ def normalize_intake_payload(payload: dict) -> dict:
         "competitors": competitors,
         "available_sources": available_sources,
         "known_constraints": known_constraints,
+        "workspace_mode": workspace_mode,
+        "existing_material_summary": existing_material_summary,
+        "existing_file_manifest": existing_file_manifest,
         "created_at": timestamp,
         "updated_at": timestamp,
     }
@@ -94,6 +136,9 @@ def intake_summary_markdown(session: dict) -> str:
             f"- Competitors: {render_list(session['competitors'])}",
             f"- Available sources: {render_list(session['available_sources'])}",
             f"- Known constraints: {render_list(session['known_constraints'])}",
+            f"- Workspace mode: {session.get('workspace_mode') or '[not provided]'}",
+            f"- Existing files: {render_list(session.get('existing_file_manifest', []))}",
+            f"- Existing material summary: {session.get('existing_material_summary') or '[not provided]'}",
             "",
         ]
     )
@@ -116,10 +161,10 @@ def company_seed_record(session: dict) -> dict:
         "forbidden_phrases": [],
         "status": "draft",
         "confidence": 0.35,
-        "source_origin": "user_seed",
+        "source_origin": "existing_folder_seed" if session.get("workspace_mode") == "in_place_business_folder" else "user_seed",
         "evidence_refs": [],
         "source_refs": [],
-        "notes": "",
+        "notes": session.get("existing_material_summary", ""),
         "created_at": session["created_at"],
         "updated_at": session["updated_at"],
     }
@@ -138,16 +183,25 @@ def research_profile_seed_record(session: dict) -> dict:
         "competitors": session.get("competitors", []),
         "available_sources": session.get("available_sources", []),
         "known_constraints": session.get("known_constraints", []),
-        "open_assumptions": [],
+        "workspace_mode": session.get("workspace_mode", "clean_bootstrap"),
+        "existing_material_summary": session.get("existing_material_summary", ""),
+        "existing_file_manifest": session.get("existing_file_manifest", []),
+        "open_assumptions": _web_only_open_assumptions() if _is_website_only_seed(session.get("website", ""), session.get("available_sources", [])) else [],
         "research_stage": "seeded",
         "status": "draft",
         "confidence": 0.35,
-        "source_origin": "user_seed",
+        "source_origin": "existing_folder_seed" if session.get("workspace_mode") == "in_place_business_folder" else "user_seed",
         "evidence_refs": [],
         "source_refs": [],
         "readiness_score": 0,
         "open_questions_count": 0,
-        "next_step": "Add at least one source asset.",
+        "next_step": (
+            "Registra evidencia adicional antes de fijar comprador, canal o economics."
+            if _is_website_only_seed(session.get("website", ""), session.get("available_sources", []))
+            else "Inspect the existing business files first."
+            if session.get("workspace_mode") == "in_place_business_folder"
+            else "Add at least one source asset."
+        ),
         "created_at": session["created_at"],
         "updated_at": session["updated_at"],
     }

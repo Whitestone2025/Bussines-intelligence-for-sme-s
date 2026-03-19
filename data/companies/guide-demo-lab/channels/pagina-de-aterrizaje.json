@@ -1,0 +1,15 @@
+{
+  "channel_id": "pagina-de-aterrizaje",
+  "company_id": "guide-demo-lab",
+  "name": "Pagina de aterrizaje",
+  "asset_focus": "mensaje principal de la pagina",
+  "primary_goal": "aclarar el servicio antes de promesas abstractas",
+  "status": "needs_validation",
+  "confidence": 0.58,
+  "evidence_refs": [],
+  "source_refs": [],
+  "source_origin": "finding",
+  "unresolved_questions": [
+    "Que canal deberia mejorar primero el sistema?"
+  ]
+}

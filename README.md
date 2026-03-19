@@ -9,6 +9,7 @@ Su objetivo es tomar contexto real del negocio, convertirlo en evidencia, genera
 
 Empieza aqui:
 
+- [Guia publica paso a paso en PDF](docs/founder/assets/wsbi-public-guide.pdf)
 - [Guia para founders](docs/founder/README.md)
 - [Instalacion limpia en otra computadora](docs/founder/05-instalacion-limpia.md)
 - [Prepara tu informacion](docs/founder/01-preparar-informacion.md)
@@ -36,12 +37,31 @@ Empieza aqui:
 - genera salidas de mercado, precio, decision, plan y entregables,
 - y sirve un frontend local para revisar el caso.
 
+## Como ayuda de verdad a un emprendedor
+
+Ws B-I no esta pensado como dashboard ornamental.
+Sirve para convertir informacion dispersa del negocio en una lectura mas util para decidir.
+
+En la practica, deberia ayudarte a:
+
+- entender que sabe hoy el sistema y que todavia no sabe,
+- ver si el problema comercial esta bien formulado,
+- revisar si la recomendacion actual tiene sustento o no,
+- discutir precio, mercado y siguiente movimiento con mas contexto,
+- y evitar actuar solo con intuicion parcial o mensajes demasiado genericos.
+
 ## Prompt recomendado para founders
 
 Si vas a usar Codex como dueno de negocio, empieza con este mensaje:
 
 ```text
-Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s, preparalo en una carpeta nueva, guiame paso a paso, hazme solo las preguntas necesarias sobre mi empresa, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
+Quiero usar Ws B-I para mi negocio. Toma el repositorio desde https://github.com/Whitestone2025/Bussines-intelligence-for-sme-s. Si esta carpeta ya tiene informacion de mi negocio, analizala detenidamente antes de preguntarme cosas. Si no, prepara el repo en una carpeta nueva. Guiame paso a paso, hazme solo las preguntas necesarias despues de revisar lo que ya exista, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
+```
+
+Tambien puedes usar una variante mas corta si ya estas parado dentro de una carpeta con material real:
+
+```text
+Quiero usar Ws B-I para mi negocio. En esta carpeta esta toda la informacion de mi negocio. Analiza cada archivo antes de hacerme preguntas, hazme solo las preguntas necesarias, carga mi caso y abre el frontend cuando este listo. No soy tecnico, asi que hazte cargo de los comandos y explicame solo lo necesario.
 ```
 
 ## Fuentes de verdad del producto

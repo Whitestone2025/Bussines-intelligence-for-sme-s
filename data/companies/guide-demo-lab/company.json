@@ -1,0 +1,29 @@
+{
+  "company_id": "guide-demo-lab",
+  "name": "Service Clarity Demo",
+  "business_mode": "existing",
+  "primary_country": "MX",
+  "primary_region": "Ciudad de Mexico",
+  "currency_code": "MXN",
+  "industry": "Service messaging and commercial clarity",
+  "website": "https://example-demo.mx",
+  "seed_summary": "We help founder-led service businesses explain complex offers clearly so buyers trust the service faster.",
+  "current_state_summary": "",
+  "known_constraints": [],
+  "tone_constraints": [],
+  "forbidden_phrases": [],
+  "status": "needs_validation",
+  "confidence": 0.83,
+  "source_origin": "existing_folder_seed",
+  "evidence_refs": [
+    "2026-03-18-founder-says-agencies-never-explain-the-service",
+    "2026-03-18-prospect-wants-clarity-before-outcome-promises",
+    "2026-03-18-buyer-asks-for-proof-and-examples",
+    "2026-03-18-founder-wants-qualified-conversations",
+    "2026-03-18-prospect-worries-about-sounding-generic"
+  ],
+  "source_refs": [],
+  "notes": "This demo folder contains sales notes, buyer objections and sample web copy.",
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-preventa-necesita-material-que-si-venda",
+  "evidence_id": "2026-03-18-preventa-necesita-material-que-si-venda",
+  "source_id": "2026-03-18-founder-sales-notes",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Preventa necesita material que si venda",
+  "evidence_type": "artifact",
+  "source_type": "sales_call",
+  "channel": "call",
+  "date": "2026-03-18",
+  "tags": [
+    "preventa",
+    "claridad",
+    "ventas"
+  ],
+  "summary": "El director comercial no quiere otro render bonito; necesita material que explique tipologias, amenidades y esquema de pago antes de la visita al showroom.",
+  "verbatim_quotes": [
+    "\"No necesito otro render bonito; necesito que el prospecto llegue entendiendo tipologias, amenidades y esquema de pago.\""
+  ],
+  "quotes": [
+    "\"No necesito otro render bonito; necesito que el prospecto llegue entendiendo tipologias, amenidades y esquema de pago.\""
+  ],
+  "observations": [
+    "El material actual luce bien pero no ayuda a vender con menos friccion.",
+    "Ventas quiere piezas que funcionen en landing, WhatsApp y sala de ventas."
+  ],
+  "candidate_pains": [
+    "El material actual luce bien pero no ayuda a vender con menos friccion."
+  ],
+  "candidate_outcomes": [
+    "Llegar a la visita con prospectos mejor preparados y con menos preguntas basicas."
+  ],
+  "candidate_objections": [
+    "Ya pagamos renders antes y ventas no los uso para cerrar mejor."
+  ],
+  "trust_signals": [
+    "Piezas listas para landing, WhatsApp y sala de ventas."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-preventa-necesita-material-que-si-venda.md"
+}

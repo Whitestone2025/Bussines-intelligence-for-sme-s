@@ -1,0 +1,110 @@
+{
+  "plan_id": "public-case-real-estate-studio-30-60-90-plan",
+  "company_id": "public-case-real-estate-studio",
+  "plan_horizon": "30-60-90",
+  "objective": "Validar un paquete flagship de preventa visual que ayude a desarrolladoras residenciales boutique a vender con mas claridad y menos visitas improductivas.",
+  "milestones": [
+    {
+      "milestone_id": "day-30",
+      "name": "Lanzar una pagina de aterrizaje flagship para el Paquete de preventa visual, con un recorrido 360 de muestra, alcance de rondas visible y salida directa a WhatsApp comercial.",
+      "timeframe": "Dias 1-30",
+      "owner": "Fundador",
+      "dependencies": [
+        "public-case-real-estate-studio-go-to-market-memo"
+      ],
+      "success_metric": "Primera ejecucion lanzada con mensaje claro y seguimiento activo.",
+      "learning_goal": "Aprender si el movimiento de entrada recomendado produce senal creible del comprador con rapidez.",
+      "risk_watchouts": [
+        "Todavia hay que validar si el buyer principal compra desde direccion comercial, marketing o direccion general segun tamano del desarrollo."
+      ]
+    },
+    {
+      "milestone_id": "day-60",
+      "name": "Probar el precio objetivo con alcance visible, numero de rondas y SLA de actualizacion claros.",
+      "timeframe": "Dias 31-60",
+      "owner": "Fundador",
+      "dependencies": [
+        "day-30"
+      ],
+      "success_metric": "Oferta, precio y objeciones actualizados con retroalimentacion real.",
+      "learning_goal": "Usar objeciones y primeras victorias para afinar alcance, prueba y logica de precio.",
+      "risk_watchouts": [
+        "Hace falta medir si WhatsApp comercial convierte mejor que una llamada agendada desde la landing."
+      ]
+    },
+    {
+      "milestone_id": "day-90",
+      "name": "Medir durante 30 dias la calidad de lead, la velocidad de respuesta y las objeciones sobre alcance.",
+      "timeframe": "Dias 61-90",
+      "owner": "Fundador",
+      "dependencies": [
+        "day-60"
+      ],
+      "success_metric": "Calidad de conversion medida y siguiente decision de canal documentada.",
+      "learning_goal": "Decidir si conviene escalar, refinar o descartar la jugada actual.",
+      "risk_watchouts": [
+        "El estudio puede prometer integracion comercial pero quedarse corto si no define bien alcance, rondas y handoff con ventas."
+      ]
+    }
+  ],
+  "workstreams": [
+    {
+      "name": "Validacion de demanda",
+      "focus": "Lanzar una pagina de aterrizaje flagship para el Paquete de preventa visual, con un recorrido 360 de muestra, alcance de rondas visible y salida directa a WhatsApp comercial.",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Refinamiento de oferta y precio",
+      "focus": "Probar el precio objetivo con alcance visible, numero de rondas y SLA de actualizacion claros.",
+      "owner": "Fundador"
+    },
+    {
+      "name": "Revision de decision",
+      "focus": "Medir durante 30 dias la calidad de lead, la velocidad de respuesta y las objeciones sobre alcance.",
+      "owner": "Fundador"
+    }
+  ],
+  "validation_agenda": [
+    "Todavia hay que validar si el buyer principal compra desde direccion comercial, marketing o direccion general segun tamano del desarrollo.",
+    "Hace falta medir si WhatsApp comercial convierte mejor que una llamada agendada desde la landing."
+  ],
+  "sequence_rationale": [
+    "Primero se valida una oferta flagship visible y facil de comprar antes de ampliar canales o inventar mas piezas.",
+    "Despues se afina precio y alcance con objeciones reales sobre rondas, tiempos de actualizacion y material util para preventa.",
+    "Solo entonces se decide si conviene escalar a otros formatos o geografias."
+  ],
+  "options_considered": [
+    {
+      "label": "Opcion enfocada en oferta flagship",
+      "summary": "Lanzar una pagina de aterrizaje flagship para el Paquete de preventa visual, con un recorrido 360 de muestra, alcance de rondas visible y salida directa a WhatsApp comercial.",
+      "recommended": true,
+      "criteria_fit": "Velocidad para generar confianza previa a la visita y filtrar mejor prospectos."
+    },
+    {
+      "label": "Opcion enfocada en pricing",
+      "summary": "Probar primero un paquete mas pequeno de render + brochure antes de vender la version completa.",
+      "recommended": false,
+      "criteria_fit": "Ajuste con la capacidad real del estudio para entregar y actualizar material sin desgaste operativo."
+    },
+    {
+      "label": "Opcion enfocada en referidos",
+      "summary": "Entrar solo por brokers o contactos de arquitectos antes de construir una oferta flagship visible.",
+      "recommended": false,
+      "criteria_fit": "Capacidad de demostrar valor comercial, no solo valor visual."
+    }
+  ],
+  "decision_refs": [
+    "public-case-real-estate-studio-go-to-market-memo"
+  ],
+  "risk_refs": [
+    "public-case-real-estate-studio-risk-1",
+    "public-case-real-estate-studio-risk-2"
+  ],
+  "status": "inferred",
+  "confidence": 0.72,
+  "source_origin": "planner",
+  "evidence_refs": [],
+  "source_refs": [],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10"
+}

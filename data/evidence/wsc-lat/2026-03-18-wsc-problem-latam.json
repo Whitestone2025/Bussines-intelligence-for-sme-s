@@ -1,0 +1,51 @@
+{
+  "entry_id": "2026-03-18-wsc-problem-latam",
+  "evidence_id": "2026-03-18-wsc-problem-latam",
+  "source_id": "2026-03-18-ws-capital-homepage",
+  "company_id": "wsc-lat",
+  "service_id": [],
+  "icp_id": [],
+  "title": "Tesis del problema regional y del rol operativo",
+  "evidence_type": "claim",
+  "source_type": "website",
+  "channel": "website",
+  "date": "2026-03-18",
+  "tags": [
+    "problem-frame",
+    "latam",
+    "operations"
+  ],
+  "summary": "El sitio define el problema como un retraso estructural de Latinoamerica y presenta a WS Capital como el cerebro operativo que elimina ruido administrativo para que expertos se concentren en su trabajo de mayor valor.",
+  "verbatim_quotes": [
+    "\"Latin America remains underdeveloped due to an obsolete educational system and a lack of competitive infrastructure.\"",
+    "\"We handle the noise\u2014Legal, Accounting, Admin\u2014leveraging our agentic tools. We are the operational brain of our partners.\""
+  ],
+  "quotes": [
+    "\"Latin America remains underdeveloped due to an obsolete educational system and a lack of competitive infrastructure.\"",
+    "\"We handle the noise\u2014Legal, Accounting, Admin\u2014leveraging our agentic tools. We are the operational brain of our partners.\""
+  ],
+  "observations": [
+    "La promesa visible combina una lectura macro de infraestructura con una propuesta operativa concreta: quitar ruido legal, contable y administrativo.",
+    "Todavia no se muestra evidencia publica de como se implementa esa operacion en clientes reales."
+  ],
+  "candidate_pains": [
+    "El sitio define el problema como un retraso estructural de Latinoamerica y presenta a WS Capital como el cerebro operativo que elimina ruido administrativo para que expertos se concentren en su trabajo de mayor valor."
+  ],
+  "candidate_outcomes": [],
+  "candidate_objections": [],
+  "trust_signals": [
+    "Todavia no se muestra evidencia publica de como se implementa esa operacion en clientes reales."
+  ],
+  "status": "confirmed",
+  "confidence": 0.9,
+  "source_origin": "public_web_capture",
+  "evidence_refs": [
+    "2026-03-18-wsc-problem-latam"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "created_at": "2026-03-18T20:11:02",
+  "updated_at": "2026-03-18T20:11:02",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/wsc-lat/2026-03-18-wsc-problem-latam.md"
+}

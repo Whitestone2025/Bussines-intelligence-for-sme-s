@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-buyer-quiere-paquete-unificado",
+  "evidence_id": "2026-03-18-buyer-quiere-paquete-unificado",
+  "source_id": "2026-03-18-buyer-objections-board",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "El comprador quiere un paquete unificado",
+  "evidence_type": "artifact",
+  "source_type": "buyer_notes",
+  "channel": "call",
+  "date": "2026-03-18",
+  "tags": [
+    "mensaje",
+    "unificacion",
+    "trust"
+  ],
+  "summary": "Cuando la landing, el video y el brochure salen de equipos distintos, el mensaje se rompe y ventas pierde confianza para cerrar.",
+  "verbatim_quotes": [
+    "\"Si la landing, el video y el brochure salen de equipos distintos, el mensaje se rompe.\""
+  ],
+  "quotes": [
+    "\"Si la landing, el video y el brochure salen de equipos distintos, el mensaje se rompe.\""
+  ],
+  "observations": [
+    "El buyer valora un proveedor que piense en el flujo comercial completo.",
+    "La consistencia del mensaje es un diferenciador frente a estudios puramente visuales."
+  ],
+  "candidate_pains": [
+    "El mensaje se rompe cuando landing, brochure y video salen de equipos distintos."
+  ],
+  "candidate_outcomes": [
+    "Tener una historia comercial consistente en todos los puntos de contacto."
+  ],
+  "candidate_objections": [
+    "Creen que un estudio visual no entiende el flujo comercial completo."
+  ],
+  "trust_signals": [
+    "Proveedor que piensa en el flujo comercial y no solo en la pieza visual."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-buyer-quiere-paquete-unificado"
+  ],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-buyer-quiere-paquete-unificado.md"
+}

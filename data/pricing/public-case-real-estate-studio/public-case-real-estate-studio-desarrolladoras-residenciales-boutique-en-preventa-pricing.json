@@ -1,0 +1,93 @@
+{
+  "pricing_model_id": "public-case-real-estate-studio-desarrolladoras-residenciales-boutique-en-preventa-pricing",
+  "company_id": "public-case-real-estate-studio",
+  "currency_code": "MXN",
+  "pricing_strategy": "hybrid",
+  "target_segment": "Desarrolladoras residenciales boutique en preventa",
+  "fact_base": [
+    "Ancla de costo mensual de entrega: MXN 43,000.00.",
+    "Ancla de precio de competidores: MXN 95,000.00.",
+    "Ancla de valor percibido: MXN 135,000.00."
+  ],
+  "price_floor": 102380.95,
+  "price_target": 117619.05,
+  "price_ceiling": 158785.71,
+  "tier_summaries": [
+    {
+      "name": "Inicial",
+      "price": 88214.29,
+      "value_summary": "Diagnostico enfocado y guia rapida de implementacion."
+    },
+    {
+      "name": "Base",
+      "price": 117619.05,
+      "value_summary": "Oferta central completa con claridad de proceso y apoyo en mensaje comercial."
+    },
+    {
+      "name": "Expandido",
+      "price": 158785.71,
+      "value_summary": "Acompanamiento mas cercano con implementacion y optimizacion."
+    }
+  ],
+  "pricing_options": [
+    {
+      "name": "Inicial",
+      "price": 88214.29,
+      "fit": "Validacion rapida con menor alcance y menor carga de confianza.",
+      "tradeoff": "Menor ingreso por cliente y menos margen para acompanamiento cercano.",
+      "recommended": false
+    },
+    {
+      "name": "Base",
+      "price": 117619.05,
+      "fit": "Mejor balance de confianza, margen y claridad para la primera oferta en Mexico.",
+      "tradeoff": "Todavia necesita un alcance explicito para no sentirse abstracta.",
+      "recommended": true
+    },
+    {
+      "name": "Expandido",
+      "price": 158785.71,
+      "fit": "Util cuando ya existen pruebas y demanda suficiente por una implementacion mas amplia.",
+      "tradeoff": "Exige mas confianza y mas complejidad operativa.",
+      "recommended": false
+    }
+  ],
+  "recommended_tier": "Base",
+  "recommendation_logic": "Se recomienda empezar por Base porque combina alcance suficientemente comercial, margen sano y una promesa mas defendible que vender piezas visuales sueltas.",
+  "margin_assumptions": [
+    "Se asume un costo mensual de entrega de MXN 43,000.00.",
+    "Se asume un margen bruto deseado de 58%.",
+    "Se asume un precio ancla de competidores de MXN 95,000.00.",
+    "Se asume un ancla de valor de MXN 135,000.00."
+  ],
+  "implementation_risks": [
+    "El nivel objetivo puede fallar si el alcance no se vuelve concreto durante la venta.",
+    "Un precio por encima de la prueba visible puede generar friccion de confianza aunque la economia se vea fuerte."
+  ],
+  "status": "inferred",
+  "confidence": 0.88,
+  "source_origin": "pricing_engine",
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas",
+    "2026-03-18-tour-360-filtra-visitas",
+    "2026-03-18-confianza-remota-antes-del-showroom",
+    "2026-03-18-buyer-quiere-paquete-unificado",
+    "2026-03-18-objecion-sobre-alcance-y-rondas"
+  ],
+  "source_refs": [
+    "2026-03-18-buyer-objections-board",
+    "2026-03-18-shot360-articulo",
+    "2026-03-18-tour360-recorridos"
+  ],
+  "assumption_refs": [
+    "public-case-real-estate-studio-pricing-assumption-1",
+    "public-case-real-estate-studio-pricing-assumption-2",
+    "public-case-real-estate-studio-pricing-assumption-3",
+    "public-case-real-estate-studio-pricing-assumption-4"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10"
+}

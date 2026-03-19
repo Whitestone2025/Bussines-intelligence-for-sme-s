@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-pain-dolor-el-material-actual-luce-bien-pero-no-ayuda",
+  "company_id": "public-case-real-estate-studio",
+  "category": "pain",
+  "title": "Dolor: El material actual luce bien pero no ayuda a vender co",
+  "statement": "El material actual luce bien pero no ayuda a vender con menos friccion.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este dolor se repite lo suficiente como para importar.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

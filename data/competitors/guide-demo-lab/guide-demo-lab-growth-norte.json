@@ -1,0 +1,45 @@
+{
+  "competitor_id": "guide-demo-lab-growth-norte",
+  "company_id": "guide-demo-lab",
+  "name": "Growth Norte",
+  "website": "https://growthnorte.example",
+  "competitor_type": "direct",
+  "geography": [
+    "Mexico"
+  ],
+  "positioning_summary": "Growth agency for SMBs that promises more qualified leads.",
+  "pricing_summary": "Monthly retainer from MXN 45,000.",
+  "channels": [
+    "website",
+    "linkedin",
+    "sales calls"
+  ],
+  "strengths": [
+    "strong sales language",
+    "visible testimonials"
+  ],
+  "weaknesses": [
+    "generic process description",
+    "high entry price"
+  ],
+  "trust_signals": [
+    "case studies",
+    "client logos"
+  ],
+  "status": "inferred",
+  "confidence": 0.58,
+  "source_origin": "competitor_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-wants-clarity"
+  ],
+  "source_refs": [
+    "2026-03-14-founder-interview"
+  ],
+  "assumption_refs": [
+    "guide-demo-lab-growth-norte-assumption-positioning"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}

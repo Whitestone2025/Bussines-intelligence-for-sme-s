@@ -1,0 +1,26 @@
+{
+  "source_id": "2026-03-18-founder-sales-notes",
+  "company_id": "public-case-real-estate-studio",
+  "source_kind": "sales_notes",
+  "origin": "composite_case",
+  "title": "Notas sinteticas de founder y ventas",
+  "uri_or_path": "",
+  "status": "normalized",
+  "source_origin": "composite_case",
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "evidence_refs": [
+    "2026-03-18-preventa-necesita-material-que-si-venda",
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas"
+  ],
+  "summary": "Notas sinteticas de un estudio que vende paquetes de preventa visual a desarrolladoras boutique. El founder detecta que los renders arquitectonicos se piden como pieza visual aislada, pero el comprador comercial quiere un paquete que tambien sirva para landing, WhatsApp, sala de",
+  "body": "Notas sinteticas de un estudio que vende paquetes de preventa visual a desarrolladoras boutique. El founder detecta que los renders arquitectonicos se piden como pieza visual aislada, pero el comprador comercial quiere un paquete que tambien sirva para landing, WhatsApp, sala de ventas y seguimiento con brokers.",
+  "tags": [
+    "ventas",
+    "founder",
+    "oferta"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10"
+}

@@ -1,0 +1,8 @@
+entry_id	date	source_type	channel	service_id	icp_id	tags	title
+2026-03-18-buyer-quiere-paquete-unificado	2026-03-18	buyer_notes	call	[]	[]	mensaje|unificacion|trust	El comprador quiere un paquete unificado
+2026-03-18-cambios-de-proyecto-rompen-las-piezas	2026-03-18	sales_notes	ops	[]	[]	operacion|rondas|entrega	Cambios de proyecto rompen las piezas
+2026-03-18-confianza-remota-antes-del-showroom	2026-03-18	public_reference	landing-page	[]	[]	confianza|tour-360|experiencia-remota	La confianza remota importa antes del showroom
+2026-03-18-el-material-debe-servir-para-whatsapp	2026-03-18	public_reference	whatsapp	[]	[]	whatsapp|video|captacion	El material debe servir para WhatsApp y pauta
+2026-03-18-objecion-sobre-alcance-y-rondas	2026-03-18	buyer_notes	call	[]	[]	precio|rondas|alcance	Objecion sobre alcance y rondas
+2026-03-18-preventa-necesita-material-que-si-venda	2026-03-18	sales_call	call	[]	[]	preventa|claridad|ventas	Preventa necesita material que si venda
+2026-03-18-tour-360-filtra-visitas	2026-03-18	public_reference	landing-page	[]	[]	tour-360|eficiencia-comercial|categoria	El tour 360 filtra visitas improductivas

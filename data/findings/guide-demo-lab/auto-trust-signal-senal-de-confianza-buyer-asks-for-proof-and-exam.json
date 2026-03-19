@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-buyer-asks-for-proof-and-exam",
+  "company_id": "guide-demo-lab",
+  "category": "trust_signal",
+  "title": "Senal de confianza: Buyer asks for proof and examples The buyer wants proo",
+  "statement": "Buyer asks for proof and examples The buyer wants proof, examples and a transparent mechanism because they have already wasted money on agencies.",
+  "status": "needs_validation",
+  "confidence": 0.55,
+  "evidence_refs": [
+    "2026-03-18-buyer-asks-for-proof-and-examples"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

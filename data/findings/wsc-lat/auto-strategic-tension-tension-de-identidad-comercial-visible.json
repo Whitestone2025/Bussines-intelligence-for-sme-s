@@ -1,0 +1,21 @@
+{
+  "finding_id": "auto-strategic-tension-tension-de-identidad-comercial-visible",
+  "company_id": "wsc-lat",
+  "category": "strategic_tension",
+  "title": "Tension de identidad comercial visible",
+  "statement": "La web mezcla al menos tres identidades visibles: AI Lab operativo, plataforma abierta de inteligencia y vehiculo de venture capital, sin dejar claro cual es la cu\u00f1a comercial dominante hoy.",
+  "status": "inferred",
+  "confidence": 0.84,
+  "evidence_refs": [
+    "2026-03-18-wsc-positioning-hybrid",
+    "2026-03-18-wsc-open-intel-platform",
+    "2026-03-18-wsc-active-units"
+  ],
+  "source_refs": [
+    "2026-03-18-ws-capital-homepage"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Aclara si el negocio quiere vender primero un servicio, una plataforma o una tesis de venture hybrid.",
+  "reasoning_kind": "web_only_case_specific",
+  "uncertainty_note": ""
+}

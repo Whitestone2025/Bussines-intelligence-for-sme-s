@@ -1,0 +1,7 @@
+entry_id	date	source_type	channel	service_id	icp_id	tags	title
+2026-03-18-wsc-active-units	2026-03-18	website	website	[]	[]	research-units|portfolio|focus-areas	Unidades activas y areas de inversion visibles
+2026-03-18-wsc-agentic-ratio	2026-03-18	website	website	[]	[]	operating-model|agentic|human-loop	Modelo operativo 80% agentic y 20% human
+2026-03-18-wsc-ai-lab-offer	2026-03-18	website	website	[]	[]	offer|pricing-visible|capacity	Oferta visible del AI Lab con capacidad y precio publicados
+2026-03-18-wsc-open-intel-platform	2026-03-18	website	website	[]	[]	open-source|intel|research	Promesa de plataforma abierta de inteligencia
+2026-03-18-wsc-positioning-hybrid	2026-03-18	website	website	[]	[]	positioning|manifesto|homepage	Posicionamiento visible: AI Lab y Venture Capital Hybrid
+2026-03-18-wsc-problem-latam	2026-03-18	website	website	[]	[]	problem-frame|latam|operations	Tesis del problema regional y del rol operativo

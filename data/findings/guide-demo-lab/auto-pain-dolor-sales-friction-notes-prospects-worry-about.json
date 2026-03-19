@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-pain-dolor-sales-friction-notes-prospects-worry-about",
+  "company_id": "guide-demo-lab",
+  "category": "pain",
+  "title": "Dolor: Sales friction notes Prospects worry about vague promi",
+  "statement": "Sales friction notes Prospects worry about vague promises.",
+  "status": "needs_validation",
+  "confidence": 0.51,
+  "evidence_refs": [],
+  "source_refs": [
+    "2026-03-18-sales-friction-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si este dolor se repite lo suficiente como para importar.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

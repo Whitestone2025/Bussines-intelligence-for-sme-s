@@ -1,0 +1,19 @@
+{
+  "finding_id": "auto-objection-objecion-la-objecion-recurrente-es-cuantas-ronda",
+  "company_id": "public-case-real-estate-studio",
+  "category": "objection",
+  "title": "Objecion: La objecion recurrente es cuantas rondas incluye el pa",
+  "statement": "La objecion recurrente es cuantas rondas incluye el paquete y que tan rapido responde el estudio.",
+  "status": "needs_validation",
+  "confidence": 0.59,
+  "evidence_refs": [
+    "2026-03-18-cambios-de-proyecto-rompen-las-piezas"
+  ],
+  "source_refs": [
+    "2026-03-18-founder-sales-notes"
+  ],
+  "supporting_quotes": [],
+  "suggested_action": "Confirma si esta objecion bloquea ventas de forma repetida.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

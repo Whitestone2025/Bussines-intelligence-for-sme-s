@@ -1,0 +1,17 @@
+{
+  "finding_id": "auto-trust-signal-senal-de-confianza-agency-fatigue-is-real",
+  "company_id": "guide-demo-lab",
+  "category": "trust_signal",
+  "title": "Senal de confianza: Agency fatigue is real.",
+  "statement": "Agency fatigue is real.",
+  "status": "needs_validation",
+  "confidence": 0.4,
+  "evidence_refs": [
+    "2026-03-18-buyer-asks-for-proof-and-examples"
+  ],
+  "source_refs": [],
+  "supporting_quotes": [],
+  "suggested_action": "Promociona esto si repetidamente baja el escepticismo.",
+  "reasoning_kind": "evidence_pattern",
+  "uncertainty_note": "Esta senal aparece en el material, pero todavia puede ser aislada."
+}

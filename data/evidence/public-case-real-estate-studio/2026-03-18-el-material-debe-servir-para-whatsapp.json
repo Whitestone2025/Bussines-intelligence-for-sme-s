@@ -1,0 +1,53 @@
+{
+  "entry_id": "2026-03-18-el-material-debe-servir-para-whatsapp",
+  "evidence_id": "2026-03-18-el-material-debe-servir-para-whatsapp",
+  "source_id": "2026-03-18-shot360-articulo",
+  "company_id": "public-case-real-estate-studio",
+  "service_id": [],
+  "icp_id": [],
+  "title": "El material debe servir para WhatsApp y pauta",
+  "evidence_type": "artifact",
+  "source_type": "public_reference",
+  "channel": "whatsapp",
+  "date": "2026-03-18",
+  "tags": [
+    "whatsapp",
+    "video",
+    "captacion"
+  ],
+  "summary": "El contenido visual de alto impacto no solo mejora percepcion; tambien necesita ser reutilizable en anuncios, redes, WhatsApp y seguimiento comercial.",
+  "verbatim_quotes": [
+    "\"Tus fotos no son un gasto, son tu carta de presentacion.\""
+  ],
+  "quotes": [
+    "\"Tus fotos no son un gasto, son tu carta de presentacion.\""
+  ],
+  "observations": [
+    "La categoria compite con fuerza visual pero rara vez conecta esa fuerza con el recorrido comercial completo.",
+    "Hay oportunidad en vender un paquete que ya nazca pensando en captacion y seguimiento."
+  ],
+  "candidate_pains": [
+    "El contenido visual suele quedarse en branding y no aterriza en captacion ni seguimiento comercial."
+  ],
+  "candidate_outcomes": [
+    "Reutilizar el mismo material en anuncios, WhatsApp y seguimiento con brokers."
+  ],
+  "candidate_objections": [
+    "No quieren pagar contenido vistoso que luego no ayude a convertir mejor."
+  ],
+  "trust_signals": [
+    "Activos reutilizables desde pauta hasta seguimiento comercial."
+  ],
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "composite_case",
+  "evidence_refs": [
+    "2026-03-18-el-material-debe-servir-para-whatsapp"
+  ],
+  "source_refs": [
+    "2026-03-18-shot360-articulo"
+  ],
+  "created_at": "2026-03-18T17:07:10",
+  "updated_at": "2026-03-18T17:07:10",
+  "raw_path": "/Users/pablomeneses/Documents/codex/Bussines-intelligence-for-sme-s/data/corpus/raw/public-case-real-estate-studio/2026-03-18-el-material-debe-servir-para-whatsapp.md"
+}

@@ -1,0 +1,34 @@
+{
+  "snapshot_id": "guide-demo-lab-founder-led-service-businesses-financials",
+  "company_id": "guide-demo-lab",
+  "currency_code": "MXN",
+  "customer_lifetime_months": 7.0,
+  "average_monthly_revenue_per_customer": 32000.0,
+  "gross_margin_ratio": 0.56,
+  "estimated_cac": 9000.0,
+  "estimated_ltv": 126000.0,
+  "ltv_cac_ratio": 14.0,
+  "payback_months": 0.5,
+  "break_even_customers": 1.22,
+  "viability_warning": "",
+  "status": "inferred",
+  "confidence": 0.55,
+  "source_origin": "financials_engine",
+  "evidence_refs": [
+    "2026-03-14-founder-clarity",
+    "2026-03-14-owner-proof"
+  ],
+  "source_refs": [
+    "2026-03-14-interview",
+    "2026-03-14-sales-notes"
+  ],
+  "assumption_refs": [
+    "guide-demo-lab-financial-assumption-lifetime",
+    "guide-demo-lab-financial-assumption-cac",
+    "guide-demo-lab-financial-assumption-costs"
+  ],
+  "finding_refs": [],
+  "validated_fact_refs": [],
+  "created_at": "2026-03-18T15:03:03",
+  "updated_at": "2026-03-18T15:03:03"
+}
